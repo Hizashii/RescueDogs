@@ -4,9 +4,7 @@ import Dashboard from '../layouts/default.vue';
 import Users from '../pages/Users.vue';
 import Statistics from '../pages/Statistics.vue';
 import Blog from '../pages/Blog.vue';
-import Donation from '../pages/Donations.vue';
 import Report from '../pages/Report.vue';
-import Email from '../pages/Email.vue';
 import Settings from '../pages/Settings.vue';
 import add from '../pages/dogs/add.vue';
 const routes: Array<RouteRecordRaw> = [
@@ -15,9 +13,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/users', name: 'Users', component: Users, meta: { requiresAuth: true } },
   { path: '/statistics', name: 'Statistics', component: Statistics, meta: { requiresAuth: true } },
   { path: '/blog', name: 'Blog', component: Blog, meta: { requiresAuth: true } },
-  { path: '/donation', name: 'Donation', component: Donation, meta: { requiresAuth: true } },
   { path: '/report', name: 'Report', component: Report, meta: { requiresAuth: true } },
-  { path: '/email', name: 'Email', component: Email, meta: { requiresAuth: true } },
   { path: '/settings', name: 'Settings', component: Settings, meta: { requiresAuth: true } },
   { path: '/dogs/add', name: 'add', component: add, meta: { requiresAuth: true } },
 ];
