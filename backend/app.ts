@@ -31,9 +31,7 @@ import dogRoutes from './routes/dog.routes';
 import userRoutes from './routes/user.routes';
 import statisticsRoutes from './routes/statistics.routes';
 import blogRoutes from './routes/blog.routes';
-import donationRoutes from './routes/donation.routes';
 import reportRoutes from './routes/report.routes';
-import emailRoutes from './routes/email.routes';
 import settingsRoutes from './routes/settings.routes';
 
 // Mount the API routes
@@ -42,9 +40,7 @@ app.use('/api/dogs', dogRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/statistics', statisticsRoutes);
 app.use('/api/blog', blogRoutes);
-app.use('/api/donation', donationRoutes);
 app.use('/api/report', reportRoutes);
-app.use('/api/email', emailRoutes);
 app.use('/api/settings', settingsRoutes);
 
 // Start the server

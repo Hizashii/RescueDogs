@@ -1,26 +1,79 @@
 <template>
-    <aside class="w-64 bg-gray-200 dark:bg-gray-700 p-4 min-h-screen">
-      <nav>
-        <ul class="space-y-2">
-          <li><NuxtLink to="/">Dashboard</NuxtLink></li>
-          <li><NuxtLink to="/dogs/add">dogs</NuxtLink></li>
-          <li><NuxtLink to="/users">Users</NuxtLink></li>
-          <li><NuxtLink to="/statistics">Statistics</NuxtLink></li>
-          <li><NuxtLink to="/blog">Blog</NuxtLink></li>
-          <li><NuxtLink to="/donations">Donation</NuxtLink></li>
-          <li><NuxtLink to="/report">Report</NuxtLink></li>
-          <li><NuxtLink to="/email">Email</NuxtLink></li>
-          <li><NuxtLink to="/settings">Settings</NuxtLink></li>
-        </ul>
-      </nav>
-    </aside>
-  </template>
+  <aside class="w-64 bg-white border-r border-gray-200 p-6 min-h-screen flex flex-col">
+    <nav class="flex-grow">
+      <ul class="space-y-1">
+        <li>
+          <NuxtLink 
+            to="/" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Dashboard
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/dogs/add" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Dogs
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/users" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Users
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/statistics" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Statistics
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/Blog" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Blog
+          </NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink 
+            to="/report" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Report
+          </NuxtLink>
+        </li>
   
-  <script setup lang="ts">
-  // No special logic needed yet
-  </script>
-  
-  <style scoped>
-  /* Add any extra styling if needed */
-  </style>
-  
+      </ul>
+    </nav>
+    <div class="mt-auto pt-4 border-t border-gray-200">
+      <NuxtLink 
+        to="/settings" 
+        class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+      >
+        Settings
+      </NuxtLink>
+    </div>
+  </aside>
+</template>
+
+<script setup lang="ts">
+// No special logic needed yet
+</script>
+
+<style scoped>
+/* NuxtLink that is active */
+.router-link-active {
+  color: #1446A0;
+  background-color: rgba(20, 70, 160, 0.1);
+  font-weight: 600;
+}
+</style>
