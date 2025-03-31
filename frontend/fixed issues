@@ -1,0 +1,23 @@
+List of issues I have fixed and what worked:
+
+LANGUAGE ========================================================================================================
+
+1.
+PROBLEM: german and hungarian languages toggle just fine, but when I click on the english translation it does not work.
+FIX: 
+I swapped   window.location.href = newPath; with await router.push(newPath); 
+WHY THIS WORKED:
+The previous command reloads the entire page which resets the application state and "breaks" the page so the translations didn't work.
+
+2.
+PROBLEM: when I translate a page, and than switch to another subpage, the lanaguage resets 
+FIX: added useLocalePath to the code.
+
+3.
+PROBLEM: The tab path in default.vue stopped working after adding language translation.
+FIX: updated the locale path again.
+
+4. 
+PROBLEM: Nuxt is trying to find my .json files for language locales inside /i18n/locales/
+FIX: Updated the nuxt.config.ts langDir to ../locales
+
