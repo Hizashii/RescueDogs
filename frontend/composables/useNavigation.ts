@@ -1,17 +1,39 @@
+import path from "path";
+
 export default function useNavigation() {
     const navItems = [
         {
-            title: 'Home',
-            path: '/',
+            title: 'Up for adoption',
+            path: 'up-for-adoption',
         },
         {
-            title: 'Blog',
-            path: '/blog',
+            title: 'All animals',
+            path: '/all-animals',
         },
         {
-            title: 'About',
-            path: '/about',
+            title: 'Support us',
+            path: '/support',
         },
+        {
+            title: 'About us',
+            path: '#',
+            children: [
+                {
+                    title: 'About us',
+                    path: '/about-us',
+                },
+                {
+                    title: 'Blog',
+                    path: '/blog',
+                },
+                
+            ]
+        },
+        {
+            title: 'Report a stray',
+            path: '/report-stray',
+        }
+       
     ];
 
     return { navItems };
