@@ -37,4 +37,98 @@
           </div>
     </div>
     <!-- END OF CARDS -->
+     <!-- INTRODUCTION -->
+      <!-- TODO: Make the intro section responsive -->
+       <!-- TODO: add the read more button -->
+     <div class="flex flex-col md:flex-row items-center justify-start bg-[#FFFADF] md:h-[700px] h-auto pb-8 md:pb-0">
+       <img src="/img/intro-dog.png" alt="Dog icon" class="w-auto md:h-[700px] h-[300px] object-contain">
+       <div class="hidden md:block ml-4"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="700" fill="none"><path stroke="gold" stroke-dasharray="10 10" stroke-width="5" d="M3 0v655"/></svg></div>
+       <div class="flex flex-col items-center md:items-start justify-center md:ml-8 px-4 md:px-0">
+        <h1 class="text-[24px] md:text-[32px] font-bold py-4 text-center md:text-left">Introducing the <span class="text-[#3D4836]"> PawsSave Animal Protection Association</span></h1>
+        <p class="text-[16px] md:text-[20px] py-8 max-w-[500px] text-center md:text-left">Our association was founded in November 2021 because we have helped individually where we could, but we have always believed that we can be more effective by working together, as there are many stray/stray animals and animals living in poor conditions in the area. </p>
+       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+        <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Support our work</button>
+        <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Apply to volunteer</button>
+       </div>
+    </div>
+     </div>
+     <!-- END OF INTRODUCTION -->
+        <!-- ANIMALS IN OUR CARE SECTION -->
+        <div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-[450px] md:h-screen">
+            <h1 class="text-3xl md:text-[32px] font-bold text-center text-[#3D4836] pb-8 md:pb-[100px]">Animals in our care</h1>
+            <div class="flex flex-row items-center justify-center gap-12 md:gap-0 w-full px-4">
+
+                <div class="flex flex-col items-center justify-center">
+                    <img src="/img/yellow-dog-icon.png" alt="Dog icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14">
+                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">4699</h1>
+                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Dogs altogether</p>
+                </div>
+
+                <div class="flex flex-col items-center justify-center">
+                    <img src="/img/yellow-paw-icon.png" alt="Paw icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14 md:px-16 lg:px-32 xl:px-[300px]">
+                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">2699</h1>
+                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Dogs to adopt</p>
+                </div>
+
+                <div class="flex flex-col items-center justify-center">
+                    <img src="/img/yellow-trophy-icon.png" alt="Trophy icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14">
+                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">999</h1>
+                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Adopted dogs</p>
+                </div>
+
+            </div>
+        </div>
+        <!-- END OF ANIMALS IN OUR CARE SECTION -->
+        <!-- QUOTE -->
+         <div class="bg-[#FFE86B] h-[400px] w-full flex flex-row items-center md:justify-around justify-between gap-4 md:gap-8 py-8 md:py-0">
+
+             <div class="md:hidden block mt-[-450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
+             <div class="hidden md:block mt-[-400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
+
+             <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 px-4 md:px-0">
+                  <img src="/img/black-dog.png" alt="Quote icon" class="w-32 md:w-64 h-auto">
+                  <h2 class="text-lg md:text-[24px] text-center md:text-start">"Don't just love, <span class="text-[#3D6625] font-bold">protect them</span>.<br>And save them from the dogcatcher."</h2>
+             </div>
+
+             <div class="hidden md:block mt-[400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
+             <div class="md:hidden block mt-[450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
+             
+         </div>
+         <!-- END OF QUOTE -->
+          <!-- LATEST NEWS SECTION -->
+          <div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10">
+           <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">SEE OUR LATEST <span class="text-logo-yellow font-bold">NEWS AND <br>EVENTS!</span></h2>
+
+           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 w-[90%] md:w-auto">
+            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
+                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
+                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
+                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
+                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
+                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
+                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
+                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
+                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
+                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
+                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
+                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
+                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
+                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
+                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
+                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
+                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
+            </div>
+           </div>
+
+          </div>
+          <!-- END OF LATEST NEWS SECTION -->
 </template>
