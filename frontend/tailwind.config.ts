@@ -19,6 +19,7 @@ module.exports = {
         extend: {
             colors: {
                 'custom-primary': '#000000',
+                'logo-yellow': '#FFD700',
             },
             screens: {
                 lg: '800px',

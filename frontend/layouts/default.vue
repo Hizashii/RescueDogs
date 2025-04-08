@@ -7,7 +7,7 @@
 <script setup lang="ts">
 
 
-//TAB TITLE
+
 const route = useRoute();
 const { navItems } = useNavigation();
 const localePath = useLocalePath();
@@ -26,5 +26,5 @@ useHead({
     return titleChunk ? `${titleChunk} — Mancsmento` : 'Mancsmento';
   },
 });
-//END TAB TITLE
+
 </script>
