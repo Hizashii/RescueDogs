@@ -43,9 +43,9 @@
 }
 
 .hero-title {
-  font-weight: bold;
+  font-weight: 600;
   color: white; 
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .hero-image {
