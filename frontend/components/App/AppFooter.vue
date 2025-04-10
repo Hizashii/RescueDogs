@@ -30,6 +30,7 @@
             <!------------------------------------------------------------------ RIGHT SIDE OF INFO ------------------------------------------------------------------ -->
             <div class="text-white text-center md:text-right">
                 <h2 class="font-semibold text-xl mb-4 font-poppins">CONTACT US:</h2>
+                <!-- TODO: Add mailto: to the email address and phone number-->
                 <a href="mailto:info@mancsmentő.hu" class="block text-base hover:underline">info@mancsmentő.hu</a>
                 <a href="tel:+36209183117" class="block text-base hover:underline">+36 20 918 3117</a>
                 

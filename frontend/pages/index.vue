@@ -128,7 +128,37 @@
                 <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
             </div>
            </div>
-
+           <a href="/blogs" class="font-semibold underline text-[24px]">See more articles...</a>
           </div>
           <!-- END OF LATEST NEWS SECTION -->
+           <!-- LOCATION AND MAP SECTION -->
+           <div class="w-full bg-[#FAF8ED]">
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row items-stretch justify-between gap-8">
+                    <div class="w-full md:w-1/2 flex flex-col justify-center">
+                        <div class="flex flex-col gap-6">
+                           <h2 class="text-2xl md:text-3xl font-bold text-[#3D4836] uppercase tracking-wide">Visit us<br>in person!</h2>
+                           <div class="flex flex-col gap-4 mt-4">
+                               <div>
+                                   <p class="text-[16px] font-semibold text-[#3D6625]">Opening hours:</p>
+                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">Monday - Sunday: 10:00 - 14:00</p>
+                               </div>
+                               <div>
+                                   <p class="text-[16px] font-semibold text-[#3D6625]">Place of organisation:</p>
+                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">4163 Hajdú-Bihar, Szerep, Keményi út 13</p>
+                               </div>
+                               <div>
+                                   <p class="text-[16px] font-semibold text-[#3D6625]">Arrange a meeting:</p>
+                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">+36 20 918 3117</p>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 h-[300px] md:h-[400px]">
+                        <img src="/img/map-placeholder.png" alt="Map location of the animal shelter" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+           </div>
+           <!-- END OF LOCATION AND MAP SECTION -->
 </template>
