@@ -4,7 +4,7 @@ export default function useNavigation() {
     const navItems = [
         {
             title: 'Up for adoption',
-            path: 'up-for-adoption',
+            path: '/up-for-adoption',
         },
         {
             title: 'All animals',
@@ -26,14 +26,12 @@ export default function useNavigation() {
                     title: 'Blog',
                     path: '/blog',
                 },
-                
             ]
         },
         {
             title: 'Report a stray',
             path: '/report-stray',
         }
-       
     ];
 
     return { navItems };
