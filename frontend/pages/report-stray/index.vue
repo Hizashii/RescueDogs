@@ -28,6 +28,7 @@
             <div class="flex flex-wrap -mx-3 mb-4">
                  <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                 <label class="block md:text-xl text-base font-bold mb-2" for="dog-city">
+                    <!-- TODO: make this a dropdown with 10 cities -->
                     City where is reported dog
                 </label>
                 <input class="appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dog-city" type="text">
