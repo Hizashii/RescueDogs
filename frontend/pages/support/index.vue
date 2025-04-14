@@ -114,6 +114,7 @@
           
         </div>
       </div>
+      <!-- TODO: Make the load more button functional -->
       <div class="flex flex-col justify-center items-center gap-2 mt-6 md:mt-0">
           <h2 class="text-center text-sm md:text-[17px] font-regular text-[#3D4836]">Load more</h2>
           <button><img src="/img/load-more.png" alt="Load more"></button>
