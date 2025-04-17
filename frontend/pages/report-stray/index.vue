@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col items-center bg-[#FFE86B]">
     <h1 class="text-3xl font-bold mb-8 text-black mt-32">Report a stray</h1>
-    
+
     <!-- Success message -->
     <div
       v-if="submitSuccess"
@@ -10,7 +10,7 @@
       <p class="font-bold">Thank you for your report!</p>
       <p>Your information has been submitted and our team will review it shortly.</p>
     </div>
-    
+
     <!-- Error message -->
     <div
       v-if="submitError"
@@ -19,12 +19,15 @@
       <p class="font-bold">There was a problem submitting your report.</p>
       <p>{{ errorMessage }}</p>
     </div>
-    
+
     <!-- Loading indicator -->
-    <div v-if="isSubmitting" class="w-full max-w-[400px] md:max-w-[700px] mb-8 flex justify-center">
+    <div
+      v-if="isSubmitting"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-8 flex justify-center"
+    >
       <Loader />
     </div>
-    
+
     <form
       v-if="!submitSuccess && !isSubmitting"
       class="w-full max-w-[400px] md:max-w-[700px] mb-32"
@@ -65,10 +68,15 @@
         </div>
       </div>
 
-      <!-- Dog city & Picture -->
+      <!-- Dog city & Picture (kept from HugeIpdate) -->
       <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label for="dog-city" class="block md:text-xl text-base font-bold mb-2">City where dog is</label>
+          <label
+            for="dog-city"
+            class="block md:text-xl text-base font-bold mb-2"
+          >
+            City where dog is
+          </label>
           <input
             id="dog-city"
             type="text"
@@ -78,7 +86,12 @@
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <label for="dog-picture" class="block md:text-xl text-base font-bold mb-2">Picture of a dog</label>
+          <label
+            for="dog-picture"
+            class="block md:text-xl text-base font-bold mb-2"
+          >
+            Picture of a dog
+          </label>
           <div class="flex items-center space-x-4">
             <label
               class="cursor-pointer border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-center text-black"
@@ -92,14 +105,19 @@
                 @change="handleFileUpload"
               />
             </label>
-            <span class="text-sm font-bold">{{ fileName || 'Max. file size: 32 MB.' }}</span>
+            <span class="text-sm font-bold"
+              >{{ fileName || 'Max. file size: 32 MB.' }}</span
+            >
           </div>
         </div>
       </div>
 
       <!-- Reporter city -->
       <div class="mb-4">
-        <label for="reporter-city" class="block md:text-xl text-base font-bold mb-2">
+        <label
+          for="reporter-city"
+          class="block md:text-xl text-base font-bold mb-2"
+        >
           Which city is the report coming from?
         </label>
         <input
@@ -113,7 +131,9 @@
 
       <!-- Comments -->
       <div class="mb-6">
-        <label for="comments" class="block md:text-xl text-base font-bold mb-2">Further information</label>
+        <label for="comments" class="block md:text-xl text-base font-bold mb-2"
+          >Further information</label
+        >
         <textarea
           id="comments"
           v-model="formData.comments"
@@ -156,32 +176,32 @@ const formData = reactive<ReportForm>({
 })
 
 const dogPicture = ref<File | null>(null)
-const fileName = ref('')
+const fileName   = ref('')
 const isSubmitting = ref(false)
 const submitSuccess = ref(false)
-const submitError = ref(false)
-const errorMessage = ref('')
+const submitError   = ref(false)
+const errorMessage  = ref('')
 
-const config = useRuntimeConfig()
+const config  = useRuntimeConfig()
 const apiBase = config.public.apiBase || 'http://localhost:5000'
 
-function handleFileUpload(e: Event) {
+function handleFileUpload (e: Event) {
   const files = (e.target as HTMLInputElement).files
   if (!files?.length) return
   const file = files[0]
   if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large. Maximum 32 MB.')
+    alert('File is too large. Maximum 32 MB.')
     return
   }
   dogPicture.value = file
-  fileName.value = file.name
+  fileName.value   = file.name
 }
 
-async function submitReport() {
+async function submitReport () {
   isSubmitting.value = true
-  submitError.value = false
+  submitError.value  = false
 
-  // build FormData
+  /* build FormData */
   const data = new FormData()
   data.append('name', formData.name)
   data.append('phone', formData.phone)
@@ -189,9 +209,7 @@ async function submitReport() {
   data.append('dogCity', formData.dogCity)
   data.append('reporterCity', formData.reporterCity)
   data.append('comments', formData.comments ?? '')
-  if (dogPicture.value) {
-    data.append('dogPicture', dogPicture.value)
-  }
+  if (dogPicture.value) data.append('dogPicture', dogPicture.value)
 
   try {
     const res = await fetch(`${apiBase}/api/reports`, {
@@ -203,7 +221,7 @@ async function submitReport() {
       throw new Error(err?.message || 'Failed to submit report')
     }
     submitSuccess.value = true
-    // reset
+    /* reset */
     Object.assign(formData, {
       name: '',
       phone: '',
@@ -213,7 +231,7 @@ async function submitReport() {
       comments: ''
     })
     dogPicture.value = null
-    fileName.value = ''
+    fileName.value   = ''
   } catch (err: any) {
     submitError.value = true
     errorMessage.value = err.message || 'Unknown error'
