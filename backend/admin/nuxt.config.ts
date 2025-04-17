@@ -1,18 +1,16 @@
-// nuxt.config.ts
+// backend/admin/nuxt.config.ts
 export default defineNuxtConfig({
-  // Nuxt devtools or other settings
-  compatibilityDate: '2025-03-27',
-  devtools: { enabled: false },
+  modules: ['@nuxtjs/tailwindcss'],
 
-  // Keep your modules array to enable Tailwind
-  modules: [
-    '@nuxtjs/tailwindcss'
-  ],
+  nitro: {
+    devProxy: { '/api/**': 'http://localhost:5000' }
+  },
 
-  // Add your runtimeConfig
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:5000'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:5000'
     }
-  }
+  },
+
+  compatibilityDate: '2025-04-17'
 })

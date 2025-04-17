@@ -1,15 +1,31 @@
-import { Schema, model, Document } from 'mongoose';
+// backend/models/User.ts
+import { Schema, model, Document } from 'mongoose'
+import bcrypt from 'bcrypt'
 
-export interface IUser extends Document {
-  username: string;
-  password: string;
-  role: string;
+interface IUser extends Document {
+  email:   string
+  password:string
+  role:    string
+  name?:   string
+  comparePassword(candidate: string): Promise<boolean>
 }
 
-const UserSchema = new Schema<IUser>({
-  username: { type: String, required: true, unique: true },
+const userSchema = new Schema<IUser>({
+  email:    { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  role: { type: String, default: 'admin' }
-});
+  role:     { type: String, required: true, default: 'admin' },
+  name:     { type: String }
+})
 
-export default model<IUser>('User', UserSchema);
+// Hash password before saving
+userSchema.pre('save', async function() {
+  if (!this.isModified('password')) return
+  this.password = await bcrypt.hash(this.password, 10)
+})
+
+// Instance method to compare password
+userSchema.methods.comparePassword = function(candidate: string) {
+  return bcrypt.compare(candidate, this.password)
+}
+
+export default model<IUser>('User', userSchema)

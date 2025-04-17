@@ -1,49 +1,51 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import path from 'path';
-import cors from 'cors';
+// backend/app.ts
+import express from 'express'
+import cors    from 'cors'
+import path    from 'path'
+import dotenv  from 'dotenv'
+import mongoose from 'mongoose'
+import authRoutes from './routes/auth.routes'
 
-dotenv.config();
+import dogRoutes    from './routes/dog.routes'
+import reportRoutes from './routes/report.routes'
 
-const app = express();
-const port = process.env.PORT || 5000;
+dotenv.config()
 
-// Middleware to parse JSON bodies and handle CORS
-app.use(express.json());
-app.use(cors());
+async function bootstrap() {
+  // 1️⃣ Make sure you actually use the same env var name:
+  const uri = process.env.MONGODB_URI
+  if (!uri) {
+    console.error('❌  MONGODB_URI is not set in .env')
+    process.exit(1)
+  }
 
-// Serve static files (so uploaded images are accessible)
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+  // 2️⃣ Connect to MongoDB
+  await mongoose.connect(uri, { autoIndex: true })
+  console.log('✅  MongoDB connected')
 
-// Connect to MongoDB (Mongoose v6+ does not require useNewUrlParser or useUnifiedTopology)
-mongoose.connect(process.env.MONGODB_URI as string)
-  .then(() => {
-    console.log('Connected to MongoDB');
+  // 3️⃣ Start Express
+  const app = express()
+  app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true
+  }))
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+  app.use('/api/auth', authRoutes)
+
+  app.use('/api/dogs',    dogRoutes)
+  app.use('/api/reports', reportRoutes)
+
+  app.get('/health', (_req, res) => res.json({ status: 'ok' }))
+
+  const port = Number(process.env.PORT) || 5000
+  app.listen(port, () => {
+    console.log(`🚀  Server running on http://localhost:${port}`)
   })
-  .catch((err) => {
-    console.error('Error connecting to MongoDB', err);
-  });
+}
 
-// Import routes
-import authRoutes from './routes/auth.routes';
-import dogRoutes from './routes/dog.routes';
-import userRoutes from './routes/user.routes';
-import statisticsRoutes from './routes/statistics.routes';
-import blogRoutes from './routes/blog.routes';
-import reportRoutes from './routes/report.routes';
-import settingsRoutes from './routes/settings.routes';
-
-// Mount the API routes
-app.use('/api/auth', authRoutes);
-app.use('/api/dogs', dogRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/statistics', statisticsRoutes);
-app.use('/api/blog', blogRoutes);
-app.use('/api/report', reportRoutes);
-app.use('/api/settings', settingsRoutes);
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+bootstrap().catch(err => {
+  console.error('🔥  Startup error:', err)
+  process.exit(1)
+})

@@ -12,6 +12,22 @@
         <div style="height: 300px;">
           <BarChart :chart-data="chartData" :chart-options="chartOptions" />
         </div>
+        
+        <!-- Dog Statistics Summary Cards -->
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <div class="bg-green-50 p-3 rounded border border-green-100">
+            <div class="flex flex-col">
+              <span class="text-sm text-green-600">Total Dogs Adopted</span>
+              <span class="text-2xl font-bold text-green-800">{{ totalAdopted }}</span>
+            </div>
+          </div>
+          <div class="bg-purple-50 p-3 rounded border border-purple-100">
+            <div class="flex flex-col">
+              <span class="text-sm text-purple-600">Success Rate</span>
+              <span class="text-2xl font-bold text-purple-800">{{ adoptionRate }}%</span>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Donation Statistics -->
@@ -65,7 +81,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import BarChart from '~/components/BarChart.vue'
+import BarChart from '../components/BarChart.vue'
 import LineChart from '../components/LineChart.vue'
 import type { ChartData, ChartOptions } from 'chart.js'
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js'
@@ -117,6 +133,26 @@ const chartOptions = ref<ChartOptions<'bar'>>({
 const chartData = ref<ChartData<'bar', number[], unknown>>({
   labels: [],
   datasets: []
+})
+
+// Dog statistics computations
+const totalAdopted = computed(() => {
+  if (!chartData.value.datasets || chartData.value.datasets.length === 0) return 0
+  
+  // Sum all values in the "Adopted" dataset (first dataset)
+  return chartData.value.datasets[0].data.reduce((sum, value) => sum + (value || 0), 0)
+})
+
+const totalReceived = computed(() => {
+  if (!chartData.value.datasets || chartData.value.datasets.length < 2) return 0
+  
+  // Sum all values in the "Received" dataset (second dataset)
+  return chartData.value.datasets[1].data.reduce((sum, value) => sum + (value || 0), 0)
+})
+
+const adoptionRate = computed(() => {
+  if (totalReceived.value === 0) return 0
+  return Math.round((totalAdopted.value / totalReceived.value) * 100)
 })
 
 // Donation statistics with proper typing
