@@ -1,9 +1,21 @@
-import { Router } from 'express';
-import { getReports } from '../controllers/report.controller';
-import { authenticateJWT } from '../middlewares/auth.middleware';
+import { Router } from 'express'
+import {
+  getReports,
+  createReport,
+  getReportById,
+  updateReportStatus
+} from '../controllers/report.controller'
+import { authenticateJWT } from '../middlewares/auth.middleware'
 
-const router = Router();
+const router = Router()
 
-router.get('/', authenticateJWT, getReports);
+//  ---------- public ----------
+router.post('/', createReport)
+router.get('/', getReports)
 
-export default router;
+//  ---------- protected ----------
+router.get('/',           authenticateJWT, getReports)
+router.get('/:id',        authenticateJWT, getReportById)
+router.patch('/:id/status', authenticateJWT, updateReportStatus)
+
+export default router       

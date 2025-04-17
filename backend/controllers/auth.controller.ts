@@ -1,21 +1,36 @@
-import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
-import { jwtSecret, jwtOptions } from '../config/jwt.config';
+// backend/controllers/auth.controller.ts
+import { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
+import User from '../models/User'
+import { jwtConfig } from '../jwtConfig/jwt.config'
 
-// For demonstration, a hardcoded admin user. In production, verify against your database.
-const demoAdmin = {
-  id: '1',
-  username: 'admin',
-  password: 'password'
-};
+export const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email })
+  if (!user) return res.status(401).json({ message: 'Invalid credentials' })
 
-export const login = (req: Request, res: Response) => {
-  const { username, password } = req.body;
-  
-  if (username === demoAdmin.username && password === demoAdmin.password) {
-    const token = jwt.sign({ id: demoAdmin.id, username: demoAdmin.username }, jwtSecret, jwtOptions);
-    return res.json({ token });
-  }
-  
-  res.status(401).json({ message: 'Invalid credentials' });
-};
+  const valid = await user.comparePassword(password)
+  if (!valid) return res.status(401).json({ message: 'Invalid credentials' })
+
+  const token = jwt.sign(
+    { sub: user._id, email: user.email, role: user.role },
+    jwtConfig.secret,
+    { expiresIn: jwtConfig.expiresIn }
+  )
+  res.json({
+    token,
+    user: {
+      id:    user._id,
+      email: user.email,
+      role:  user.role,
+      name:  user.name
+    }
+  })
+}
+
+export const profile = async (req: Request, res: Response) => {
+  // authenticateJWT sets req.userId
+  const user = await User.findById(req.userId).select('-password')
+  if (!user) return res.status(404).json({ message: 'Not found' })
+  res.json(user)
+}

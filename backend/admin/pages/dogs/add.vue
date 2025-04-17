@@ -4,6 +4,19 @@
       <h2 class="text-3xl font-bold text-center mb-6 text-[#1446A0]">
         Add New Dog
       </h2>
+      
+      <!-- Error Alert -->
+      <div v-if="error" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <p class="font-bold">Error</p>
+        <p>{{ errorMessage }}</p>
+      </div>
+      
+      <!-- Success Alert -->
+      <div v-if="success" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+        <p class="font-bold">Success!</p>
+        <p>Dog added successfully.</p>
+      </div>
+      
       <form @submit.prevent="submitDog" enctype="multipart/form-data">
         <!-- Basic Fields -->
         <div class="mb-4">
@@ -38,7 +51,7 @@
           />
         </div>
 
-        <!-- New Filter Fields -->
+        <!-- Filter Fields -->
         <div class="mb-4">
           <label class="block mb-2 font-medium text-black" for="dogLocation">Location</label>
           <input
@@ -81,6 +94,7 @@
           >
             <option value="">Any</option>
             <option value="puppy">Puppy</option>
+            <option value="young">Young</option>
             <option value="adult">Adult</option>
             <option value="senior">Senior</option>
           </select>
@@ -133,8 +147,9 @@
         <button
           type="submit"
           class="w-full bg-[#1446A0] hover:bg-[#0d3580] text-white font-bold py-3 px-4 rounded transition duration-200 ease-in-out"
+          :disabled="isSubmitting"
         >
-          Submit
+          {{ isSubmitting ? 'Submitting...' : 'Submit' }}
         </button>
       </form>
     </div>
@@ -145,13 +160,11 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import { useRuntimeConfig } from '#app'
 
+// Form data
 const name = ref('')
 const description = ref('')
 const imageFile = ref<File | null>(null)
-
-// New fields
 const location = ref('')
 const breed = ref('')
 const size = ref('')
@@ -159,8 +172,16 @@ const age = ref('')
 const gender = ref('')
 const goodWith = ref<string[]>([])
 
+// Form state
+const isSubmitting = ref(false)
+const error = ref(false)
+const success = ref(false)
+const errorMessage = ref('')
+
+// Backend URL - HARDCODED to your backend
+const BACKEND_URL = 'http://localhost:3000'
+
 const router = useRouter()
-const config = useRuntimeConfig()
 
 const handleFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -170,31 +191,93 @@ const handleFileUpload = (event: Event) => {
 }
 
 const submitDog = async () => {
-  if (!imageFile.value) return
+  if (!imageFile.value) {
+    error.value = true
+    errorMessage.value = 'Please select an image file'
+    return
+  }
+
+  isSubmitting.value = true
+  error.value = false
+  success.value = false
+  errorMessage.value = ''
 
   const formData = new FormData()
   formData.append('name', name.value)
   formData.append('description', description.value)
   formData.append('image', imageFile.value)
 
-  // Append new fields
+  // Append filter fields
   formData.append('location', location.value)
   formData.append('breed', breed.value)
   formData.append('size', size.value)
   formData.append('age', age.value)
   formData.append('gender', gender.value)
-  // For "goodWith", we join array or handle it in your backend
-  goodWith.value.forEach((val) => formData.append('goodWith', val))
+  
+  // For "goodWith", append each value separately
+  goodWith.value.forEach(val => formData.append('goodWith', val))
 
   try {
-    await axios.post(`${config.public.apiBase}/api/dogs/upload`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+    // Get authentication token from localStorage
+    const token = localStorage.getItem('adminToken')
+    
+    // Log the exact URL we're using
+    const url = `${BACKEND_URL}/dogs`
+    console.log('Submitting to backend URL:', url)
+    
+    // Make the API call with the absolute URL to the backend
+    const response = await axios.post(url, formData, {
+      headers: { 
+        'Content-Type': 'multipart/form-data',
+        // Include auth token if available
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      }
     })
-    alert('Dog added successfully!')
-    router.push('/dogs')
-  } catch (error) {
-    console.error(error)
-    alert('Failed to add dog.')
+    
+    console.log('Response from backend:', response.data)
+    
+    // Show success message
+    success.value = true
+    
+    // Reset form after success
+    setTimeout(() => {
+      name.value = ''
+      description.value = ''
+      imageFile.value = null
+      location.value = ''
+      breed.value = ''
+      size.value = ''
+      age.value = ''
+      gender.value = ''
+      goodWith.value = []
+      
+      // Reset file input
+      const fileInput = document.getElementById('dogImage') as HTMLInputElement
+      if (fileInput) {
+        fileInput.value = ''
+      }
+      
+      // Navigate after a brief delay - use absolute path not relative
+      router.push('/dogs')
+    }, 2000)
+    
+  } catch (err: any) {
+    console.error('Error submitting dog:', err)
+    
+    // Handle different error types
+    if (err.code === 'ERR_NETWORK') {
+      errorMessage.value = `Cannot connect to ${BACKEND_URL}. Make sure your backend server is running.`
+    } else if (err.response?.status === 401) {
+      errorMessage.value = 'Authentication required. Please log in again.'
+    } else if (err.response?.status === 404) {
+      errorMessage.value = `API endpoint not found at ${BACKEND_URL}/dogs/upload`
+    } else {
+      errorMessage.value = err.response?.data?.message || 'Failed to add dog. Please try again.'
+    }
+    
+    error.value = true
+  } finally {
+    isSubmitting.value = false
   }
 }
 </script>
