@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-[#FDF6E9] py-4">
+  <nav class="bg-[#FDF6E9] py-4 z-50">
     <div class="w-full px-4">
       <!------------------------------------- MAIN NAV BAR FOR PHONE AND DESKTOP ------------------------------------>
       <div class="flex items-center justify-between">
@@ -26,7 +26,7 @@
 
               <!------------------------------------- ABOUT US DROPDOWN ------------------------------------>
               <template v-else>
-                <div class="relative group">
+                <div class="relative group z-50">
                   <button class="text-black hover:text-gray-600 inline-flex items-center">
                     {{ item.title }}
                     <span class="ml-1">›</span>
