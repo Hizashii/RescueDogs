@@ -1,122 +1,150 @@
 <template>
-    <div>
-      <!-- This section assumes you already have a NavBar component imported -->
-      <NavBar />
-  
-      <div class="flex flex-col md:flex-row">
-        <!-- Sidebar Filter Component -->
-        <FilterSidebar 
-          :filters="filters" 
-          :breeds="breeds" 
-          :locations="locations"
-          @update-filter="updateFilter"
-          @clear-filters="clearAllFilters"
+  <div>
+    <!-- NavBar -->
+    <NavBar />
+
+    <div class="flex flex-col md:flex-row">
+      <!-- Sidebar Filter Component -->
+      <FilterSidebar
+        :filters="filters"
+        :breeds="breeds"
+        :locations="locations"
+        @update-filter="updateFilter"
+        @clear-filters="clearAllFilters"
+      />
+
+      <!-- Main Content Area -->
+      <div class="flex-1 p-6">
+        <h1 class="text-[#3D6625] text-3xl font-bold">
+          {{ $t('adoption.title') }}
+        </h1>
+        <p class="mt-2">
+          {{ totalDogs.toLocaleString() }}
+          {{ $t('adoption.dogsUp') }}
+        </p>
+
+        <!-- Separator -->
+        <div class="h-1 bg-[#FFD700] my-4"></div>
+
+        <!-- Loading State -->
+        <div v-if="loading" class="flex justify-center items-center h-64">
+          <div
+            class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"
+          ></div>
+        </div>
+
+        <!-- Error State -->
+        <ErrorState
+          v-else-if="apiError"
+          :title="$t('adoption.error.title')"
+          :message="$t('adoption.error.message')"
+          @retry="fetchDogs"
         />
-  
-        <!-- Main Content Area -->
-        <div class="flex-1 p-6">
-          <h1 class="text-[#3D6625] text-3xl font-bold">UP FOR ADOPTION</h1>
-          <p class="mt-2">{{ totalDogs.toLocaleString() }} Dogs up for adoption</p>
-          
-          <!-- Separator -->
-          <div class="h-1 bg-[#FFD700] my-4"></div>
-  
-          <!-- Loading State -->
-          <div v-if="loading" class="flex justify-center items-center h-64">
-            <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"></div>
-          </div>
-  
-          <!-- Error State -->
-          <ErrorState 
-            v-else-if="apiError" 
-            title="Failed to load dogs"
-            message="We couldn't load the dogs at this time. Please try again later."
-            @retry="fetchDogs"
+
+        <!-- Dog Grid -->
+        <div
+          v-else-if="dogs.length > 0"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6"
+        >
+          <DogCard
+            v-for="dog in dogs"
+            :key="dog.id"
+            :dog="dog"
+            @click="viewDogDetails"
           />
-  
-          <!-- Dog Grid -->
-          <div v-else-if="dogs.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-            <DogCard 
-              v-for="dog in dogs" 
-              :key="dog.id" 
-              :dog="dog" 
-              @click="viewDogDetails" 
-            />
-          </div>
-  
-          <!-- Empty State -->
-          <div v-else class="text-center py-12">
-            <p class="text-xl">No dogs found matching your criteria.</p>
-            <button @click="clearAllFilters" class="mt-4 bg-[#3D6625] text-white px-6 py-2 rounded">
-              Clear Filters
-            </button>
-          </div>
-  
-          <!-- Pagination -->
-          <div v-if="!loading && dogs.length > 0" class="flex justify-center mt-8 space-x-2">
-            <button 
-              @click="goToPage(currentPage - 1)" 
-              :disabled="currentPage === 1"
-              :class="[currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
-            >
-              &lt;
-            </button>
-            
-            <button 
-              v-for="page in paginationPages" 
-              :key="page" 
-              @click="goToPage(page)"
-              :class="[
-                'px-3 py-1 border', 
-                currentPage === page ? 'bg-black text-white' : ''
-              ]"
-            >
-              {{ page }}
-            </button>
-            
-            <span v-if="showEllipsis" class="px-3 py-1">...</span>
-            
-            <button 
-              v-if="showLastPages"
-              v-for="page in lastPages" 
-              :key="`last-${page}`" 
-              @click="goToPage(page)"
-              :class="[
-                'px-3 py-1 border', 
-                currentPage === page ? 'bg-black text-white' : ''
-              ]"
-            >
-              {{ page }}
-            </button>
-            
-            <button 
-              @click="goToPage(currentPage + 1)" 
-              :disabled="currentPage === totalPages"
-              :class="[currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
-            >
-              &gt;
-            </button>
-          </div>
-  
-          <!-- Donation Section -->
-          <div class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-            <div class="flex-1">
-              <h3 class="font-bold">Can't adopt?</h3>
-              <p>Make a donation to support animals in our care.</p>
-              <div class="flex space-x-4 mt-4">
-                <button @click="makeDonation(500)" class="bg-white px-4 py-2 hover:bg-gray-100">500 Ft</button>
-                <button @click="makeDonation(1000)" class="bg-white px-4 py-2 hover:bg-gray-100">1000 Ft</button>
-                <button @click="makeDonation(3000)" class="bg-white px-4 py-2 hover:bg-gray-100">3000 Ft</button>
-              </div>
+        </div>
+
+        <!-- Empty State -->
+        <div v-else class="text-center py-12">
+          <p class="text-xl">{{ $t('adoption.empty.message') }}</p>
+          <button
+            @click="clearAllFilters"
+            class="mt-4 bg-[#3D6625] text-white px-6 py-2 rounded"
+          >
+            {{ $t('adoption.empty.clear') }}
+          </button>
+        </div>
+
+        <!-- Pagination -->
+        <div
+          v-if="!loading && dogs.length > 0"
+          class="flex justify-center mt-8 space-x-2"
+        >
+          <button
+            @click="goToPage(currentPage - 1)"
+            :disabled="currentPage === 1"
+            :class="[currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
+          >
+            &lt;
+          </button>
+
+          <button
+            v-for="page in paginationPages"
+            :key="page"
+            @click="goToPage(page)"
+            :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+          >
+            {{ page }}
+          </button>
+
+          <span v-if="showEllipsis" class="px-3 py-1">...</span>
+
+          <button
+            v-if="showLastPages"
+            v-for="page in lastPages"
+            :key="`last-${page}`"
+            @click="goToPage(page)"
+            :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+          >
+            {{ page }}
+          </button>
+
+          <button
+            @click="goToPage(currentPage + 1)"
+            :disabled="currentPage === totalPages"
+            :class="[currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
+          >
+            &gt;
+          </button>
+        </div>
+
+        <!-- Donation Section -->
+        <div
+          class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4"
+        >
+          <div class="flex-1">
+            <h3 class="font-bold">{{ $t('donation.title') }}</h3>
+            <p>{{ $t('donation.subtitle') }}</p>
+            <div class="flex space-x-4 mt-4">
+              <button
+                @click="makeDonation(500)"
+                class="bg-white px-4 py-2 hover:bg-gray-100"
+              >
+                500 Ft
+              </button>
+              <button
+                @click="makeDonation(1000)"
+                class="bg-white px-4 py-2 hover:bg-gray-100"
+              >
+                1000 Ft
+              </button>
+              <button
+                @click="makeDonation(3000)"
+                class="bg-white px-4 py-2 hover:bg-gray-100"
+              >
+                3000 Ft
+              </button>
             </div>
-            <div class="w-full md:w-1/3">
-              
-            </div>
+          </div>
+          <div class="w-full md:w-1/3">
+            <!-- optional image or graphic -->
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
   <script setup lang="ts">
   import { ref, computed, onMounted, watch } from 'vue';
@@ -151,7 +179,6 @@
     goodWith: string;
   }
   
-  // Use the dog API composable
   const { 
     fetchDogs, 
     fetchFilterOptions, 
@@ -236,7 +263,7 @@
   
   const updateFilter = (key: keyof DogFilters, value: string) => {
     filters.value[key] = value;
-    currentPage.value = 1; // Reset to first page when filter changes
+    currentPage.value = 1; 
     fetchDogsData();
   };
   
@@ -247,7 +274,6 @@
   };
   
   const viewDogDetails = (dogId: string) => {
-    // Navigate to dog details page
     navigateTo(`/dog/${dogId}`);
   };
   

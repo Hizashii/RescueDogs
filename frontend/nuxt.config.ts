@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   i18n: {
     bundle: { optimizeTranslationDirective: false },
     lazy: true,
-    langDir: resolve(__dirname, '../locales'),
+    langDir: resolve(__dirname, '../frontend/locales'),
     strategy: 'prefix_except_default',
     defaultLocale: 'en-GB',
     locales: [

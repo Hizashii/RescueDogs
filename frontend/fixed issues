@@ -20,3 +20,4 @@ FIX: updated the locale path again.
 4. 
 PROBLEM: Nuxt is trying to find my .json files for language locales inside /i18n/locales/
 FIX: Updated the nuxt.config.ts langDir to ../locales
+

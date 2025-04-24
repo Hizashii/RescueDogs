@@ -1,14 +1,16 @@
 <template>
   <div class="min-h-screen flex flex-col items-center bg-[#FFE86B]">
-    <h1 class="text-3xl font-bold mb-8 text-black mt-32">Report a stray</h1>
+    <h1 class="text-3xl font-bold mb-8 text-black mt-32">
+      {{ $t('report.title') }}
+    </h1>
 
     <!-- Success message -->
     <div
       v-if="submitSuccess"
       class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
     >
-      <p class="font-bold">Thank you for your report!</p>
-      <p>Your information has been submitted and our team will review it shortly.</p>
+      <p class="font-bold">{{ $t('report.success.heading') }}</p>
+      <p>{{ $t('report.success.body') }}</p>
     </div>
 
     <!-- Error message -->
@@ -16,7 +18,7 @@
       v-if="submitError"
       class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
     >
-      <p class="font-bold">There was a problem submitting your report.</p>
+      <p class="font-bold">{{ $t('report.error.heading') }}</p>
       <p>{{ errorMessage }}</p>
     </div>
 
@@ -35,7 +37,9 @@
     >
       <!-- Name -->
       <div class="mb-4">
-        <label for="name" class="block md:text-xl text-base font-bold mb-2">Name</label>
+        <label for="name" class="block md:text-xl text-base font-bold mb-2">
+          {{ $t('report.form.name.label') }}
+        </label>
         <input
           id="name"
           type="text"
@@ -48,7 +52,9 @@
       <!-- Phone & Email -->
       <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label for="phone" class="block md:text-xl text-base font-bold mb-2">Phone</label>
+          <label for="phone" class="block md:text-xl text-base font-bold mb-2">
+            {{ $t('report.form.phone.label') }}
+          </label>
           <input
             id="phone"
             type="tel"
@@ -58,7 +64,9 @@
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <label for="email" class="block md:text-xl text-base font-bold mb-2">Email</label>
+          <label for="email" class="block md:text-xl text-base font-bold mb-2">
+            {{ $t('report.form.email.label') }}
+          </label>
           <input
             id="email"
             type="email"
@@ -68,14 +76,11 @@
         </div>
       </div>
 
-      <!-- Dog city & Picture (kept from HugeIpdate) -->
+      <!-- Dog city & Picture -->
       <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label
-            for="dog-city"
-            class="block md:text-xl text-base font-bold mb-2"
-          >
-            City where dog is
+          <label for="dog-city" class="block md:text-xl text-base font-bold mb-2">
+            {{ $t('report.form.dogCity.label') }}
           </label>
           <input
             id="dog-city"
@@ -86,17 +91,14 @@
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <label
-            for="dog-picture"
-            class="block md:text-xl text-base font-bold mb-2"
-          >
-            Picture of a dog
+          <label for="dog-picture" class="block md:text-xl text-base font-bold mb-2">
+            {{ $t('report.form.dogPicture.label') }}
           </label>
           <div class="flex items-center space-x-4">
             <label
               class="cursor-pointer border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-center text-black"
             >
-              Upload
+              {{ $t('report.form.dogPicture.upload') }}
               <input
                 id="dog-picture"
                 type="file"
@@ -105,20 +107,17 @@
                 @change="handleFileUpload"
               />
             </label>
-            <span class="text-sm font-bold"
-              >{{ fileName || 'Max. file size: 32 MB.' }}</span
-            >
+            <span class="text-sm font-bold">
+              {{ fileName || $t('report.form.dogPicture.hint') }}
+            </span>
           </div>
         </div>
       </div>
 
       <!-- Reporter city -->
       <div class="mb-4">
-        <label
-          for="reporter-city"
-          class="block md:text-xl text-base font-bold mb-2"
-        >
-          Which city is the report coming from?
+        <label for="reporter-city" class="block md:text-xl text-base font-bold mb-2">
+          {{ $t('report.form.reporterCity.label') }}
         </label>
         <input
           id="reporter-city"
@@ -131,9 +130,9 @@
 
       <!-- Comments -->
       <div class="mb-6">
-        <label for="comments" class="block md:text-xl text-base font-bold mb-2"
-          >Further information</label
-        >
+        <label for="comments" class="block md:text-xl text-base font-bold mb-2">
+          {{ $t('report.form.comments.label') }}
+        </label>
         <textarea
           id="comments"
           v-model="formData.comments"
@@ -147,11 +146,12 @@
         :disabled="isSubmitting"
         class="border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-black"
       >
-        {{ isSubmitting ? 'Submitting...' : 'Submit Report' }}
+        {{ isSubmitting ? $t('report.form.submit.loading') : $t('report.form.submit.default') }}
       </button>
     </form>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
