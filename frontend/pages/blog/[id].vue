@@ -18,6 +18,7 @@
         >
           All blogs
         </router-link>
+        
       </div>
     </div>
     
