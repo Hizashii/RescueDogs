@@ -1,5 +1,178 @@
 {
-    "landingPage": "Startseite",
-    "blogPage": "Blogseite",
-    "aboutPage": "Über uns Seite"
-}
+    "home": {
+      "title": "MancsMentő",
+      "subtitle": "Tierschutzverein",
+      "adoptButton": "Adoptieren",
+      "donateButton": "Spenden",
+      
+      "reportCard": {
+        "title": "STREUNENDEN HUND MELDEN",
+        "description": "Wenn Sie einen streunenden Hund in einer der 10 Städte sehen, in denen wir aktiv sind, melden Sie ihn uns und wir kommen so schnell wie möglich. Helfen Sie uns, ihnen zu helfen.",
+        "button": "MELDEN"
+      },
+      
+      "adoptCard": {
+        "title": "ADOPTIEREN",
+        "description": "Erwägen Sie, ein Tier aus einem Tierheim zu adoptieren und geben Sie ihm die Chance auf ein neues, liebevolles Leben! Sie könnten der Schlüssel zu einer liebevollen Familie sein.",
+        "button": "ADOPTIEREN"
+      },
+      
+      "donateCard": {
+        "title": "SPENDEN",
+        "description": "Unterstützen Sie unsere Arbeit bei der Hilfe für Streuner und andere Tiere. Denken Sie auch an die 1% Steuer.",
+        "button": "SPENDEN"
+      },
+      
+      "intro": {
+        "title": {
+          "part1": "Wir stellen vor:",
+          "part2": "PawsSave Tierschutzverein"
+        },
+        "description": "Unser Verein wurde im November 2021 gegründet, weil wir zwar individuell geholfen haben, wo wir konnten, aber immer geglaubt haben, dass wir gemeinsam effektiver sein können, da es viele streunende Tiere und Tiere gibt, die in schlechten Verhältnissen in der Gegend leben.",
+        "supportButton": "Unterstützen Sie unsere Arbeit",
+        "volunteerButton": "Als Freiwilliger bewerben"
+      },
+      
+      "stats": {
+        "title": "Tiere in unserer Obhut",
+        "totalDogs": "Hunde insgesamt",
+        "adoptableDogs": "Adoptierbare Hunde",
+        "adoptedDogs": "Adoptierte Hunde"
+      },
+      
+      "quote": {
+        "part1": "\"Liebe sie nicht nur,",
+        "part2": "beschütze sie",
+        "part3": "Und rette sie vor dem Hundefänger.\""
+      },
+      
+      "news": {
+        "title": {
+          "part1": "SEHEN SIE UNSERE NEUESTEN",
+          "part2": "NACHRICHTEN UND VERANSTALTUNGEN!"
+        },
+        "article1": {
+          "title": "Kostenlose Kastration in der Stadt",
+          "excerpt": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről ....."
+        },
+        "readMore": "Weiterlesen",
+        "seeMore": "Mehr Artikel ansehen..."
+      },
+      
+      "location": {
+        "title": "Besuchen Sie uns persönlich!",
+        "openingHoursLabel": "Öffnungszeiten",
+        "openingHours": "Montag - Sonntag: 10:00 - 14:00",
+        "addressLabel": "Ort der Organisation",
+        "address": "4163 Hajdú-Bihar, Szerep, Keményi út 13",
+        "contactLabel": "Termin vereinbaren",
+        "phone": "+36 20 918 3117",
+        "mapAlt": "Kartenstandort des Tierheims"
+      }
+      
+    },
+    "adoption": {
+        "title":       "Zur Adoption",
+        "dogsUp":      "Hunde zur Adoption",
+        "error": {
+          "title":     "Hunde konnten nicht geladen werden",
+          "message":   "Wir konnten die Hunde gerade nicht laden. Bitte versuche es später erneut."
+        },
+        "empty": {
+          "message":   "Keine Hunde gefunden, die Ihren Kriterien entsprechen.",
+          "clear":     "Filter zurücksetzen"
+        }
+      },
+      "donation": {
+        "title":       "Kannst du nicht adoptieren?",
+        "subtitle":    "Spende, um unsere Tiere zu unterstützen."
+      },
+      
+        "report": {
+          "title": "Melde einen Streuner",
+          "success": {
+            "heading": "Danke für deine Meldung!",
+            "body": "Deine Angaben wurden übermittelt und unser Team prüft sie in Kürze."
+          },
+          "error": {
+            "heading": "Beim Absenden der Meldung ist ein Fehler aufgetreten."
+          },
+          "form": {
+            "name": {
+              "label": "Name"
+            },
+            "phone": {
+              "label": "Telefon"
+            },
+            "email": {
+              "label": "E-Mail (optional)"
+            },
+            "dogCity": {
+              "label": "Stadt, in der der Hund ist"
+            },
+            "dogPicture": {
+              "label": "Bild des Hundes",
+              "upload": "Hochladen",
+              "hint": "Max. Dateigröße: 32 MB."
+            },
+            "reporterCity": {
+              "label": "Aus welcher Stadt stammt die Meldung?"
+            },
+            "comments": {
+              "label": "Weitere Informationen (optional)"
+            },
+            "submit": {
+              "default": "Meldung absenden",
+              "loading": "Wird gesendet..."
+            }
+          } 
+     },
+     "support": {
+        "pageTitle":         "UNTERSTÜTZE UNSERE ARBEIT!",
+        "intro": {
+          "line1":           "UNTERSTÜTZE UNS BEI DER VERSORGUNG VON STREUNERHUNDEN,",
+          "line2":           "MEDIZINISCHE VERSORGUNG, REHABILITATION UND UNTERKUNFT."
+        },
+        "body": {
+          "p1":              "Der Mancsmentő-Verein rettet streunende oder verletzte Hunde aus 14 Städten in Ostungarn. Unser Ziel ist es, ihnen so schnell wie möglich ein gutes Zuhause zu bieten, doch der Weg dorthin ist oft lang, schwierig und teuer.",
+          "p2":              "Die Hunde müssen geimpft, entwurmt und kastriert werden. 70–80 % der Hunde der Region leiden an Herzwürmern – die Behandlung ist lebenswichtig, aber kostspielig. Ohne Impfungen ist Parvovirus weit verbreitet und führt zu schweren Erkrankungen und Todesfällen. Die Krankenhausversorgung für verletzte oder misshandelte Hunde belastet uns zusätzlich. Da wir keine Aufnahme- oder Adoptionsgebühren erheben, sind wir auf kontinuierliche Unterstützung angewiesen.",
+          "p3":              "Kürzlich nehmen wir monatlich 25–30 Hunde auf. Zusammen mit unseren Beständen versuchen wir, so viele wie möglich zu vermitteln – doch die Mittel sind erschöpft und uns fehlen Ressourcen. Wir benötigen Hilfe! Unser Traum ist es, genügend regelmäßige Unterstützer zu gewinnen, damit wir jeden Monat planen können und sicher wissen, dass 1,5 Mio. HUF auf unserem Konto eingehen – genug, um die Tierarztkosten zu decken!",
+          "p4":              "Hilf uns, den Hoffnungslosen eine Chance zu geben! Spende jetzt – schon ein paar Tausend Forint zählen! Die größte Wirkung erzielen regelmäßige Spenden, da sie die Versorgung planbar machen. Eine monatliche Gabe von 2 000–3 000 HUF bedeutet Leben!"
+        },
+        "tiers": [
+          { "amount": "2000 Ft", "description": "40 % des Preises für einen Chip oder eine Impfung" },
+          { "amount": "3000 Ft", "description": "60 % des Preises für einen Chip oder eine Impfung" },
+          { "amount": "5000 Ft", "description": "Preis für einen CHIP und Kombi-Impfung" },
+          { "amount": "10 000 Ft", "description": "Preis für zwei Kombi-Impfungen" },
+          { "amount": "20 000 Ft", "description": "Preis für alle Impfungen eines Hundes" },
+          { "amount": "Eigenbetrag", "description": "" }
+        ],
+        "tax": {
+          "imageAlt":        "Info zur Steuer-Spende",
+          "line1":           "BIE T 1 % DEINER STEUER, UM JEDES TIER IN NOT ZU HELFEN!",
+          "line2":           "STEUERNUMMER:",
+          "number":          "19317988-1-09"
+        },
+        "charity": {
+          "title":           "UNSERE WOHLTÄTIGEN ARTIKEL!",
+          "button":          "Bestellen",
+          "loadMore":        "Mehr laden",
+          "loadMoreAlt":     "Weitere Artikel laden"
+        },
+        "other": {
+          "imageAlt":        "Hund Illustration",
+          "titleLine1":      "WEITERE UNTERSTÜTZUNG",
+          "titleLine2":      "INFORMATIONEN:",
+
+          "bank": {
+            "label":       "Bankspende:",
+            "lines": [
+              "Mancsmentő Állatvédő Egyesület",
+              "Konto: 50436604-10003671",
+              "IBAN: HU42504366041000367100000000",
+              "SWIFT: MKKBHUHB"
+            ]
+          }
+        }
+      }
+  }

@@ -1,164 +1,125 @@
 <template>
     <div class="bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat md:h-screen h-[60vh] w-full">
-        <!-- LANDING PAGE BUTTONS AND TEXT -->
-        <div class="flex flex-col items-center justify-center md:h-full h-full">
-            <img src="/img/logo_white.png" alt="Mancsmento logo" class="md:w-24 w-16 h-auto">
-            <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">MancsMentő</h1>
-            <h1 class="md:text-4xl text-sm text-white md:pt-5 pt-2 text-center">Animal protection association</h1>
-            <div class="flex flex-wrap justify-center md:gap-16 gap-4 md:pt-24 pt-8">
-                <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Adopt</button>
-                <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Donate</button>
-            </div>
+      <!-- LANDING PAGE BUTTONS AND TEXT -->
+      <div class="flex flex-col items-center justify-center md:h-full h-full">
+        <img src="/img/logo_white.png" alt="Mancsmento logo" class="md:w-24 w-16 h-auto">
+        <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">
+          {{ $t('home.title') }}
+        </h1>
+        <h2 class="md:text-4xl text-sm text-white md:pt-5 pt-2 text-center">
+          {{ $t('home.subtitle') }}
+        </h2>
+        <div class="flex flex-wrap justify-center md:gap-16 gap-4 md:pt-24 pt-8">
+          <nuxt-link to="/up-for-adoption">
+            <button class="btn-primary">
+              {{ $t('home.adoptButton') }}
+            </button>
+          </nuxt-link>
+          <nuxt-link to="/support">
+            <button class="btn-primary">
+              {{ $t('home.donateButton') }}
+            </button>
+          </nuxt-link>
         </div>
-        <!-- END OF LANDING PAGE BUTTONS AND TEXT -->
-       
+      </div>
+      <!-- END LANDING -->
+  
     </div>
-     <!-- CARDS -->
-     <div class="flex flex-row flex-wrap justify-center items-center bg-[#FFE65E] md:h-[420px] h-auto pb-8 md:pb-0">
-          <div class="md:mt-[-200px] mt-[-50px] flex flex-row flex-wrap justify-center items-center gap-y-8 md:gap-y-0">
-            <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
-            <img src="/img/dog_icon.png" alt="Dog icon" class="md:w-24 w-16 h-auto mt-4">
-            <h1 class="text-2xl font-bold py-4">REPORT A STRAY</h1>
-            <p class="text-sm py-8 max-w-52 text-center">If you see a stray dog in the 10 cities we are connected to, report them to us and we'll be on our way asap. Help us help them.</p>
-            <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">REPORT</button>
-           </div>
-           <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
-            <img src="/img/dog_icon.png" alt="Dog icon" class="md:w-24 w-16 h-auto mt-4">
-            <h1 class="text-2xl font-bold py-4">ADOPT</h1>
-            <p class="text-sm py-8 max-w-52 text-center">Consider adopting a pet from a shelter and give them a chance for a new,  loving life! You may be their key to having a loving family.</p>
-            <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">ADOPT</button>
-           </div>
-           <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
-            <img src="/img/dog_icon.png" alt="Dog icon" class="md:w-24 w-16 h-auto mt-4">
-            <h1 class="text-2xl font-bold py-4">DONATE</h1>
-            <p class="text-sm py-8 max-w-52 text-center">Consider supporting our work in helping strays and other animals. uhhh placeholder text here. Consider the 1% of tax as well. </p>
-            <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">DONATE</button>
-           </div>
-          </div>
-    </div>
-    <!-- END OF CARDS -->
-     <!-- INTRODUCTION -->
-      <!-- TODO: Make the intro section responsive -->
-       <!-- TODO: add the read more button -->
-     <div class="flex flex-col md:flex-row items-center justify-start bg-[#FFFADF] md:h-[700px] h-auto pb-8 md:pb-0">
-       <img src="/img/intro-dog.png" alt="Dog icon" class="w-auto md:h-[700px] h-[300px] object-contain">
-       <div class="hidden md:block ml-4"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="700" fill="none"><path stroke="gold" stroke-dasharray="10 10" stroke-width="5" d="M3 0v655"/></svg></div>
-       <div class="flex flex-col items-center md:items-start justify-center md:ml-8 px-4 md:px-0">
-        <h1 class="text-[24px] md:text-[32px] font-bold py-4 text-center md:text-left">Introducing the <span class="text-[#3D4836]"> PawsSave Animal Protection Association</span></h1>
-        <p class="text-[16px] md:text-[20px] py-8 max-w-[500px] text-center md:text-left">Our association was founded in November 2021 because we have helped individually where we could, but we have always believed that we can be more effective by working together, as there are many stray/stray animals and animals living in poor conditions in the area. </p>
-       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-        <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Support our work</button>
-        <button class="bg-white text-black font-bold text-sm border-logo-yellow md:border-4 border-2 md:w-52 md:min-h-14 w-40 min-h-10">Apply to volunteer</button>
-       </div>
-    </div>
-     </div>
-     <!-- END OF INTRODUCTION -->
-        <!-- ANIMALS IN OUR CARE SECTION -->
-        <div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-[450px] md:h-screen">
-            <h1 class="text-3xl md:text-[32px] font-bold text-center text-[#3D4836] pb-8 md:pb-[100px]">Animals in our care</h1>
-            <div class="flex flex-row items-center justify-center gap-12 md:gap-0 w-full px-4">
-
-                <div class="flex flex-col items-center justify-center">
-                    <img src="/img/yellow-dog-icon.png" alt="Dog icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14">
-                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">4699</h1>
-                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Dogs altogether</p>
-                </div>
-
-                <div class="flex flex-col items-center justify-center">
-                    <img src="/img/yellow-paw-icon.png" alt="Paw icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14 md:px-16 lg:px-32 xl:px-[300px]">
-                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">2699</h1>
-                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Dogs to adopt</p>
-                </div>
-
-                <div class="flex flex-col items-center justify-center">
-                    <img src="/img/yellow-trophy-icon.png" alt="Trophy icon" class="w-12 md:w-auto h-auto pb-8 md:pb-14">
-                    <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625]">999</h1>
-                    <p class="text-[11px] md:text-[20px] font-semibold text-center">Adopted dogs</p>
-                </div>
-
-            </div>
+  
+    <!-- CARDS -->
+    <section class="cards-section">
+      <div class="cards-wrapper">
+        <Card
+          icon="/img/dog_icon.png"
+          titleKey="home.reportCard.title"
+          descKey="home.reportCard.description"
+          btnKey="home.reportCard.button"
+          to="/report-stray"
+        />
+        <Card
+          icon="/img/dog_icon.png"
+          titleKey="home.adoptCard.title"
+          descKey="home.adoptCard.description"
+          btnKey="home.adoptCard.button"
+          to="/up-for-adoption"
+        />
+        <Card
+          icon="/img/dog_icon.png"
+          titleKey="home.donateCard.title"
+          descKey="home.donateCard.description"
+          btnKey="home.donateCard.button"
+          to="/support"
+        />
+      </div>
+    </section>
+    <!-- END CARDS -->
+  
+    <!-- INTRODUCTION -->
+    <section class="intro-section">
+      <img src="/img/intro-dog.png" alt="Dog icon" class="intro-img">
+      <div class="intro-content">
+        <h2>
+          {{ $t('home.intro.title.part1') }}
+          <span class="highlight">{{ $t('home.intro.title.part2') }}</span>
+        </h2>
+        <p>{{ $t('home.intro.description') }}</p>
+        <div class="intro-actions">
+          <nuxt-link to="/support">
+            <button class="btn-secondary">{{ $t('home.intro.supportButton') }}</button>
+          </nuxt-link>
+          <nuxt-link to="/volunteer">
+            <button class="btn-secondary">{{ $t('home.intro.volunteerButton') }}</button>
+          </nuxt-link>
         </div>
-        <!-- END OF ANIMALS IN OUR CARE SECTION -->
-        <!-- QUOTE -->
-         <div class="bg-[#FFE86B] h-[400px] w-full flex flex-row items-center md:justify-around justify-between gap-4 md:gap-8 py-8 md:py-0">
-
-             <div class="md:hidden block mt-[-450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
-             <div class="hidden md:block mt-[-400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
-
-             <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 px-4 md:px-0">
-                  <img src="/img/black-dog.png" alt="Quote icon" class="w-32 md:w-64 h-auto">
-                  <h2 class="text-lg md:text-[24px] text-center md:text-start">"Don't just love, <span class="text-[#3D6625] font-bold">protect them</span>.<br>And save them from the dogcatcher."</h2>
-             </div>
-
-             <div class="hidden md:block mt-[400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
-             <div class="md:hidden block mt-[450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
-             
-         </div>
-         <!-- END OF QUOTE -->
-          <!-- LATEST NEWS SECTION -->
-          <div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10">
-           <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">SEE OUR LATEST <span class="text-logo-yellow font-bold">NEWS AND <br>EVENTS!</span></h2>
-
-           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 w-[90%] md:w-auto">
-            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
-                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
-                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
-                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
-                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
-            </div>
-
-            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
-                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
-                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
-                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
-                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
-            </div>
-
-            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
-                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
-                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
-                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
-                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
-            </div>
-
-            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
-                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
-                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
-                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
-                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
-            </div>
-           </div>
-           <a href="/blogs" class="font-semibold underline text-[24px]">See more articles...</a>
-          </div>
-          <!-- END OF LATEST NEWS SECTION -->
-           <!-- LOCATION AND MAP SECTION -->
-           <div class="w-full bg-[#FAF8ED]">
-            <div class="container mx-auto">
-                <div class="flex flex-col md:flex-row items-stretch justify-between gap-8">
-                    <div class="w-full md:w-1/2 flex flex-col justify-center">
-                        <div class="flex flex-col gap-6">
-                           <h2 class="text-2xl md:text-3xl font-bold text-[#3D4836] uppercase tracking-wide">Visit us<br>in person!</h2>
-                           <div class="flex flex-col gap-4 mt-4">
-                               <div>
-                                   <p class="text-[16px] font-semibold text-[#3D6625]">Opening hours:</p>
-                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">Monday - Sunday: 10:00 - 14:00</p>
-                               </div>
-                               <div>
-                                   <p class="text-[16px] font-semibold text-[#3D6625]">Place of organisation:</p>
-                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">4163 Hajdú-Bihar, Szerep, Keményi út 13</p>
-                               </div>
-                               <div>
-                                   <p class="text-[16px] font-semibold text-[#3D6625]">Arrange a meeting:</p>
-                                   <p class="text-[16px] font-normal text-[#3D4836] mt-1">+36 20 918 3117</p>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 h-[300px] md:h-[400px]">
-                        <img src="/img/map-placeholder.png" alt="Map location of the animal shelter" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-           </div>
-           <!-- END OF LOCATION AND MAP SECTION -->
-</template>
+      </div>
+    </section>
+    <!-- END INTRO -->
+  
+    <!-- STATS -->
+    <section class="stats-section">
+      <h2>{{ $t('home.stats.title') }}</h2>
+      <div class="stats-grid">
+        <Stat icon="/img/yellow-dog-icon.png" number="4699" labelKey="home.stats.totalDogs" />
+        <Stat icon="/img/yellow-paw-icon.png" number="2699" labelKey="home.stats.adoptableDogs" />
+        <Stat icon="/img/yellow-trophy-icon.png" number="999"  labelKey="home.stats.adoptedDogs" />
+      </div>
+    </section>
+    <!-- END STATS -->
+  
+    <!-- QUOTE -->
+    <section class="quote-section">
+      <Quote
+        img="/img/black-dog.png"
+        parts="part1,part2,part3"
+        :prefix="'home.quote.'"
+      />
+    </section>
+    <!-- END QUOTE -->
+  
+    <!-- NEWS -->
+    <section class="news-section">
+      <h2>
+        {{ $t('home.news.title.part1') }}
+        <span class="highlight">{{ $t('home.news.title.part2') }}</span>
+      </h2>
+      <div class="news-grid">
+        <NewsCard index="1" />
+        <!-- repeat <NewsCard index="2" /> etc. -->
+      </div>
+      <nuxt-link to="/blogs">{{ $t('home.news.seeMore') }}</nuxt-link>
+    </section>
+    <!-- END NEWS -->
+  
+    <!-- LOCATION -->
+    <section class="location-section">
+      <h2>{{ $t('home.location.title') }}</h2>
+      <div class="location-details">
+        <LabelledText labelKey="home.location.openingHoursLabel" textKey="home.location.openingHours" />
+        <LabelledText labelKey="home.location.addressLabel"      textKey="home.location.address" />
+        <LabelledText labelKey="home.location.contactLabel"      textKey="home.location.phone" />
+      </div>
+      <img src="/img/map-placeholder.png" :alt="$t('home.location.mapAlt')" />
+    </section>
+    <!-- END LOCATION -->
+  </template>
+  
