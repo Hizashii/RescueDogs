@@ -70,7 +70,7 @@ interface Report {
 }
 
 const api = useApi()
-const reports = await api<Report[]>('/api/reports')
+const reports = ref<Report[]>([])
 const loading = ref(true)
 
 function formatDate(iso: string) {

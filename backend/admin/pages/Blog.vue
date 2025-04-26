@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="post in blogPosts" :key="post.id" class="border-b hover:bg-gray-50">
+            <tr v-for="post in blogPosts" :key="post._id" class="border-b hover:bg-gray-50">
               <td class="py-3 px-4">
                 <div class="flex items-center">
                   <div v-if="post.featuredImage" class="w-12 h-12 mr-3 bg-gray-200 rounded overflow-hidden">
@@ -204,7 +204,7 @@
 import { ref, reactive } from 'vue'
 
 interface BlogPost {
-  id: number;
+  _id: string;
   title: string;
   content: string;
   excerpt: string;
@@ -229,7 +229,7 @@ const loading = ref(true),
   editor = ref<HTMLElement | null>(null);
 
 const emptyPost: BlogPost = {
-  id: 0,
+  _id: '',
   title: '',
   content: '',
   excerpt: '',
@@ -248,7 +248,7 @@ function formatDate(d: string) {
 async function fetchBlogPosts() {
   loading.value = true;
   try {
-    const response = await fetch('http://localhost:5000/api/blog-posts');
+    const response = await fetch('http://localhost:5000/api/blog/${post._id}');
     if (!response.ok) throw new Error('Failed to fetch');
     blogPosts.value = await response.json();
   } catch (e) {
@@ -282,19 +282,33 @@ async function savePost() {
   try {
     const isNew = !selectedPost.value;
     editingPost.updatedAt = new Date().toISOString();
-    if (isNew) editingPost.createdAt = new Date().toISOString();
-    console.log(`${isNew ? 'Creating' : 'Updating'} post:`, editingPost);
-    const savedPost = { ...editingPost };
-    if (isNew) {
-      savedPost.id = blogPosts.value.length + 1;
-      blogPosts.value.push(savedPost);
-    } else {
-      const idx = blogPosts.value.findIndex(p => p.id === savedPost.id);
-      if (idx !== -1) blogPosts.value[idx] = savedPost;
+    if (isNew) editingPost.createdAt = editingPost.updatedAt;
+
+    const url = isNew
+      ? 'http://localhost:5000/api/blogs'
+      : `http://localhost:5000/api/blogs/${editingPost._id}`;
+    const method = isNew ? 'POST' : 'PUT';
+
+    const res = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editingPost),
+    });
+    if (!res.ok) throw new Error(res.statusText);
+    const saved = await res.json();
+
+    // update local list so UI refreshes
+    if (isNew) blogPosts.value.unshift(saved);
+    else {
+      const idx = blogPosts.value.findIndex(p => p._id === saved._id);
+      if (idx > -1) blogPosts.value[idx] = saved;
     }
+
     activeView.value = 'list';
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     alert(`Failed to ${selectedPost.value ? 'update' : 'create'} post.`);
   }
 }
@@ -307,9 +321,10 @@ function confirmDeletePost(post: BlogPost) {
 async function deletePost() {
   if (!postToDelete.value) return;
   try {
-    blogPosts.value = blogPosts.value.filter(p => p.id !== postToDelete.value?.id);
+    blogPosts.value = blogPosts.value.filter(p => p._id !== postToDelete.value?._id);
     showDeleteModal.value = false;
     postToDelete.value = null;
+    
   } catch (e) {
     console.error(e);
     alert('Failed to delete post.');

@@ -20,6 +20,10 @@ module.exports = {
             colors: {
                 'custom-primary': '#000000',
                 'logo-yellow': '#FFD700',
+                'cards-yellow':   '#FFE65E',
+                'light-yellow':   '#FFFADF',
+                'quote-yellow':   '#FFE86B',
+                'primary-green':  '#3D6625',
             },
             screens: {
                 lg: '800px',

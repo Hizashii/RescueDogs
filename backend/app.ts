@@ -5,7 +5,7 @@ import path    from 'path'
 import dotenv  from 'dotenv'
 import mongoose from 'mongoose'
 import authRoutes from './routes/auth.routes'
-
+import blogRoutes from './routes/blog.routes';
 import dogRoutes    from './routes/dog.routes'
 import reportRoutes from './routes/report.routes'
 
@@ -36,6 +36,7 @@ async function bootstrap() {
 
   app.use('/api/dogs',    dogRoutes)
   app.use('/api/reports', reportRoutes)
+  app.use('/api/blogs', blogRoutes);
 
   app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
