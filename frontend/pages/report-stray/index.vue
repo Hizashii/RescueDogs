@@ -2,7 +2,7 @@
     <div class="min-h-screen flex flex-col items-center bg-[#FFE86B]">
         <h1 class="text-3xl font-bold mb-8 text-black mt-32">Report a stray</h1>
         <form class="w-full max-w-[400px] md:max-w-[700px] mb-32">
-            
+            <!-- TODO: add the description text on the form -->
             <div class="mb-4">
                 <label class="block md:text-xl text-base font-bold mb-2" for="name">
                     Name
