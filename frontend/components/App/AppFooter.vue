@@ -1,5 +1,5 @@
 <template>
-    <footer class="flex justify-center items-center bg-[#3D4836] w-full py-12 px-4 md:px-8">
+    <footer class="flex justify-center items-center bg-[#3D4836]  py-12 px-4 md:px-8 ">
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             <!------------------------------------------------------------------ LEFT SIDE OF INFO ------------------------------------------------------------------ -->
             <div class="text-white text-center md:text-left">
@@ -62,3 +62,4 @@ useHead({
     ]
 })
 </script>
+

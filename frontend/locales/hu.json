@@ -1,5 +1,179 @@
 {
-    "landingPage": "főoldal",
-    "blogPage": "blog oldal",
-    "aboutPage": "rólunk oldal"
-}
+    "home": {
+      "title": "MancsMentő",
+      "subtitle": "Állatvédő egyesület",
+      "adoptButton": "Örökbefogadás",
+      "donateButton": "Adományozás",
+      
+      "reportCard": {
+        "title": "KÓBOR ÁLLAT BEJELENTÉSE",
+        "description": "Ha kóbor kutyát lát a 10 általunk ellátott városban, jelentse nekünk és azonnal indulunk. Segítsen, hogy segíthessünk nekik.",
+        "button": "BEJELENTÉS"
+      },
+      
+      "adoptCard": {
+        "title": "ÖRÖKBEFOGADÁS",
+        "description": "Fontolja meg egy menhelyi állat örökbefogadását és adjon nekik esélyt egy új, szerető életre! Ön lehet a kulcs egy szerető családhoz.",
+        "button": "ÖRÖKBEFOGADÁS"
+      },
+      
+      "donateCard": {
+        "title": "ADOMÁNYOZÁS",
+        "description": "Támogassa munkánkat a kóbor és más állatok megsegítésében. Gondoljon az adója 1%-ára is.",
+        "button": "ADOMÁNYOZÁS"
+      },
+      
+      "intro": {
+        "title": {
+          "part1": "Bemutatjuk a",
+          "part2": "PawsSave Állatvédő Egyesületet"
+        },
+        "description": "Egyesületünk 2021 novemberében alakult, mert bár egyénileg is segítettünk ahol tudtunk, mindig is hittük, hogy közösen hatékonyabbak lehetünk, hiszen sok kóbor/gazdátlan állat él a környéken és sokan rossz körülmények között tartják őket.",
+        "supportButton": "Támogasd munkánkat",
+        "volunteerButton": "Jelentkezz önkéntesnek"
+      },
+      
+      "stats": {
+        "title": "Gondozásunkban lévő állatok",
+        "totalDogs": "Összes kutya",
+        "adoptableDogs": "Örökbefogadható kutyák",
+        "adoptedDogs": "Örökbefogadott kutyák"
+      },
+      
+      "quote": {
+        "part1": "\"Ne csak szeresd,",
+        "part2": "védd meg őket",
+        "part3": "És mentsd meg őket a gyepmestertől.\""
+      },
+      
+      "news": {
+        "title": {
+          "part1": "NÉZD MEG A LEGÚJABB",
+          "part2": "HÍREINKET ÉS ESEMÉNYEINKET!"
+        },
+        "article1": {
+          "title": "Ingyenes ivartalanítás a városban",
+          "excerpt": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről ....."
+        },
+        "readMore": "Tovább",
+        "seeMore": "További cikkek..."
+      },
+      
+      "location": {
+        "title": "Látogass meg minket!",
+        "openingHoursLabel": "Nyitvatartás",
+        "openingHours": "Hétfő - Vasárnap: 10:00 - 14:00",
+        "addressLabel": "Szervezet székhelye",
+        "address": "4163 Hajdú-Bihar, Szerep, Keményi út 13",
+        "contactLabel": "Találkozó egyeztetése",
+        "phone": "+36 20 918 3117",
+        "mapAlt": "Az állatmenhely térképes elhelyezkedése"
+      }
+      
+    },
+    "adoption": {
+        "title":       "Örökbefogadásra várók",
+        "dogsUp":      "Örökbefogadható kutyák",
+        "error": {
+          "title":     "Nem sikerült betölteni a kutyákat",
+          "message":   "Jelenleg nem tudjuk betölteni a kutyákat. Kérjük, próbáld meg később."
+        },
+        "empty": {
+          "message":   "Nincs a kritériumaidnak megfelelő kutya.",
+          "clear":     "Szűrők törlése"
+        }
+      },
+      "donation": {
+        "title":       "Nem tudsz örökbefogadni?",
+        "subtitle":    "Támogasd adományoddal gondozásunk alatt álló állatokat."
+      },
+      
+        "report": {
+          "title": "Suttyán kutya bejelentése",
+          "success": {
+            "heading": "Köszönjük a bejelentést!",
+            "body": "Az adataidat elküldtük, csapatunk hamarosan áttekinti azokat."
+          },
+          "error": {
+            "heading": "Hiba történt a bejelentés elküldésekor."
+          },
+          "form": {
+            "name": {
+              "label": "Név"
+            },
+            "phone": {
+              "label": "Telefonszám"
+            },
+            "email": {
+              "label": "E-mail (nem kötelező)"
+            },
+            "dogCity": {
+              "label": "A kutya tartózkodási városa"
+            },
+            "dogPicture": {
+              "label": "Kutyáról készült fénykép",
+              "upload": "Feltöltés",
+              "hint": "Max. fájlméret: 32 MB."
+            },
+            "reporterCity": {
+              "label": "Melyik városból érkezik a bejelentés?"
+            },
+            "comments": {
+              "label": "További információk (nem kötelező)"
+            },
+            "submit": {
+              "default": "Bejelentés elküldése",
+              "loading": "Küldés folyamatban…"
+            }
+          }   
+        },
+        
+            "support": {
+              "pageTitle":         "TÁMOGASD A MUNKÁNKAT!",
+              "intro": {
+                "line1":           "SEGÍTS MINKET A KÓBOR KUTYÁK GONDOZÁSÁBAN,",
+                "line2":           "ORVOSI ELLÁTÁSUK, REHABILITÁCIÓ ÉS MENEDÉK BIZTOSÍTÁSÁBAN."
+              },
+              "body": {
+                "p1":              "A Mancsmentő Egyesület 14 kelet-magyarországi településről menti az utcán kóborló vagy sérült kutyákat. Fő célunk, hogy minél hamarabb szerető gazdához juttassuk őket, de az odáig vezető út gyakran hosszú, nehéz és költséges.",
+                "p2":              "A kutyáknak oltáson, féreghajtáson és ivartalanításon kell átesniük. A régió kutyáinak 70–80 %-a szívférges – a kezelés létfontosságú, de nagyon drága. Az oltások hiánya parvovírus-járványhoz vezet, amely súlyos megbetegedéseket és halálozást okoz. A balesetet szenvedett vagy bántalmazott kutyák kórházi ellátása további terhet ró ránk. Mivel nincs átvételi vagy örökbefogadási díj, folyamatos támogatásra szorulunk.",
+                "p3":              "Az utóbbi időben havonta 25–30 kutyát fogadunk be. A meglévő állományunkkal együtt igyekszünk minél többet örökbe adni – sajnos elfogytak az erőforrásaink. Segíts! Az álmunk, hogy elegendő rendszeres támogatót találjunk, hogy minden hónapban tudjuk, 1,5 millió Ft érkezik a számlánkra – ennyi kell az orvosi költségek fedezéséhez!",
+                "p4":              "Segíts, hogy az esélyteleneknek is adjunk esélyt! Adományozz most – már pár ezer forint is számít! A legnagyobb hatás a rendszeres támogatásból fakad, mert kiszámíthatóvá teszi az ellátást. Havi 2 000–3 000 Ft rendszeres adomány életet jelent!"
+              },
+              "tiers": [
+                { "amount": "2000 Ft", "description": "Egy chip vagy oltás 40 %-a" },
+                { "amount": "3000 Ft", "description": "Egy chip vagy oltás 60 %-a" },
+                { "amount": "5000 Ft", "description": "Chip és kombinált oltás ára" },
+                { "amount": "10 000 Ft", "description": "Két kombinált oltás ára" },
+                { "amount": "20 000 Ft", "description": "Egy kutya összes oltásának ára" },
+                { "amount": "Egyéni összeg", "description": "" }
+              ],
+              "tax": {
+                "imageAlt":        "Adó 1 % támogatás info",
+                "line1":           "FELAJÁNLHATOD ADÓD 1 %-ÁT, HOGY MINDEN ÁLLATOT SEGÍTHESSÜNK!",
+                "line2":           "ADÓSZÁM:",
+                "number":          "19317988-1-09"
+              },
+              "charity": {
+                "title":           "NÉZD MEG JÓTÉKONYSÁGI TÁRGYAINKAT!",
+                "button":          "Rendelés",
+                "loadMore":        "Több betöltése",
+                "loadMoreAlt":     "További termékek betöltése"
+              },
+              "other": {
+                "imageAlt":        "Kutya illusztráció",
+                "titleLine1":      "EGYÉB TÁMOGATÁSI",
+                "titleLine2":      "INFORMÁCIÓ:",
+
+                "bank": {
+                  "label":       "Bankszámla adomány:",
+                  "lines": [
+                    "Mancsmentő Állatvédő Egyesület",
+                    "Számlaszám: 50436604-10003671",
+                    "IBAN: HU42504366041000367100000000",
+                    "SWIFT: MKKBHUHB"
+                  ]
+                }
+              }
+            }
+  }

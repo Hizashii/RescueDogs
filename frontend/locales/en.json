@@ -1,5 +1,176 @@
 {
-    "landingPage": "landing page",
-    "blogPage": "blog page",
-    "aboutPage": "about page"
-}
+    "home": {
+      "title": "MancsMentő",
+      "subtitle": "Animal protection association",
+      "adoptButton": "Adopt",
+      "donateButton": "Donate",
+      
+      "reportCard": {
+        "title": "REPORT A STRAY",
+        "description": "If you see a stray dog in the 10 cities we are connected to, report them to us and we'll be on our way asap. Help us help them.",
+        "button": "REPORT"
+      },
+      
+      "adoptCard": {
+        "title": "ADOPT",
+        "description": "Consider adopting a pet from a shelter and give them a chance for a new, loving life! You may be their key to having a loving family.",
+        "button": "ADOPT"
+      },
+      
+      "donateCard": {
+        "title": "DONATE",
+        "description": "Consider supporting our work in helping strays and other animals. Consider the 1% of tax as well.",
+        "button": "DONATE"
+      },
+      
+      "intro": {
+        "title": {
+          "part1": "Introducing the",
+          "part2": "PawsSave Animal Protection Association"
+        },
+        "description": "Our association was founded in November 2021 because we have helped individually where we could, but we have always believed that we can be more effective by working together, as there are many stray/stray animals and animals living in poor conditions in the area.",
+        "supportButton": "Support our work",
+        "volunteerButton": "Apply to volunteer"
+      },
+      
+      "stats": {
+        "title": "Animals in our care",
+        "totalDogs": "Dogs altogether",
+        "adoptableDogs": "Dogs to adopt",
+        "adoptedDogs": "Adopted dogs"
+      },
+      
+      "quote": {
+        "part1": "\"Don't just love,",
+        "part2": "protect them",
+        "part3": "And save them from the dogcatcher.\""
+      },
+      
+      "news": {
+        "title": {
+          "part1": "SEE OUR LATEST",
+          "part2": "NEWS AND EVENTS!"
+        },
+        "article1": {
+          "title": "Free neutering in City",
+          "excerpt": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről ....."
+        },
+        "readMore": "Read more",
+        "seeMore": "See more articles..."
+      },
+      
+      "location": {
+        "title": "Visit us in person!",
+        "openingHoursLabel": "Opening hours",
+        "openingHours": "Monday - Sunday: 10:00 - 14:00",
+        "addressLabel": "Place of organisation",
+        "address": "4163 Hajdú-Bihar, Szerep, Keményi út 13",
+        "contactLabel": "Arrange a meeting",
+        "phone": "+36 20 918 3117",
+        "mapAlt": "Map location of the animal shelter"
+      }
+    },
+        "adoption": {
+          "title":       "Up for Adoption",
+          "dogsUp":      "Dogs up for adoption",
+          "error": {
+            "title":     "Failed to load dogs",
+            "message":   "We couldn't load the dogs at this time. Please try again later."
+          },
+          "empty": {
+            "message":   "No dogs found matching your criteria.",
+            "clear":     "Clear Filters"
+          }
+        },
+        "donation": {
+          "title":       "Can’t adopt?",
+          "subtitle":    "Make a donation to support animals in our care."
+        },
+        "report": {
+            "title": "Report a stray",
+            "success": {
+              "heading": "Thank you for your report!",
+              "body": "Your information has been submitted and our team will review it shortly."
+            },
+            "error": {
+              "heading": "There was a problem submitting your report."
+            },
+            "form": {
+              "name": {
+                "label": "Name"
+              },
+              "phone": {
+                "label": "Phone"
+              },
+              "email": {
+                "label": "Email (optional)"
+              },
+              "dogCity": {
+                "label": "City where dog is"
+              },
+              "dogPicture": {
+                "label": "Picture of a dog",
+                "upload": "Upload",
+                "hint": "Max. file size: 32 MB."
+              },
+              "reporterCity": {
+                "label": "Which city is the report coming from?"
+              },
+              "comments": {
+                "label": "Further information (optional)"
+              },
+              "submit": {
+                "default": "Submit Report",
+                "loading": "Submitting..."
+              }
+            }
+        },
+        "support": {
+            "pageTitle":         "SUPPORT OUR WORK!",
+            "intro": {
+              "line1":           "HELP US TAKE CARE OF STRAY DOGS, SUPPORT THEIR",
+              "line2":           "MEDICAL CARE, REHABILITATION AND SHELTER."
+            },
+            "body": {
+              "p1":              "The Mancsmentő Association rescues stray or injured dogs from 14 towns in Eastern Hungary. Our goal is to find them good homes as quickly as possible, but the journey is often long, difficult, and costly.",
+              "p2":              "Dogs must go through vaccination, de-worming, and spay/neuter programs. 70–80% of the region’s dogs suffer from heartworm—treatment is vital but expensive. Parvovirus is rampant without vaccinations, causing severe illness and death. Hospital care for injured or abused dogs adds further strain. Since we charge no intake or adoption fees, we rely heavily on ongoing support.",
+              "p3":              "Recently we intake 25–30 dogs per month. Alongside our existing residents, we strive to place as many as possible—but funds have run dry and we’re out of resources to sell. We need help! Our dream is to secure enough regular supporters so we can plan each month knowing 1.5 million HUF arrives in our account—enough to cover medical bills!",
+              "p4":              "Help us give the hopeless a chance! Donate now—every few thousand forints counts! The greatest impact comes from regular support, making care predictable. A monthly gift of 2,000–3,000 HUF means life!"
+            },
+            "tiers": [
+              { "amount": "2000 Ft", "description": "40% of the price of a chip or vaccine" },
+              { "amount": "3000 Ft", "description": "60% of the price of a chip or vaccine" },
+              { "amount": "5000 Ft", "description": "The price of a chip and combined vaccine" },
+              { "amount": "10 000 Ft", "description": "The price of two combined vaccines" },
+              { "amount": "20 000 Ft", "description": "The price for all of the vaccines of a dog" },
+              { "amount": "Custom amount", "description": "" }
+            ],
+            "tax": {
+              "imageAlt":        "Tax donation info",
+              "line1":           "OFFER 1% OF YOUR TAX, SO THAT WE CAN HELP EVERY ANIMAL IN NEED!",
+              "line2":           "TAX NUMBER:",
+              "number":          "19317988-1-09"
+            },
+            "charity": {
+              "title":           "CHECK OUT OUR CHARITY ITEMS!",
+              "button":          "Order",
+              "loadMore":        "Load more",
+              "loadMoreAlt":     "Load more items"
+            },
+            "other": {
+              "imageAlt":        "Dog illustration",
+              "titleLine1":      "OTHER SUPPORT",
+              "titleLine2":      "INFORMATION:",
+
+              "bank": {
+                "label":       "Bank donation:",
+                "lines": [
+                  "Mancsmentő Állatvédő Egyesület",
+                  "Account: 50436604-10003671",
+                  "IBAN: HU42504366041000367100000000",
+                  "SWIFT: MKKBHUHB"
+                ]
+              }
+            }
+        }
+  }
