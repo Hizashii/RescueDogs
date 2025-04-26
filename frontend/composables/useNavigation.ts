@@ -3,12 +3,18 @@ import path from "path";
 export default function useNavigation() {
     const navItems = [
         {
-            title: 'Up for adoption',
-            path: '/up-for-adoption',
-        },
-        {
-            title: 'All animals',
-            path: '/all-animals',
+            title: 'Our dogs',
+            path: '#',
+            children: [
+                {
+                    title: 'Up for adoption',
+                    path: '/up-for-adoption',
+                },
+                {
+                    title: 'All animals',
+                    path: '/all-animals',
+                },
+            ]
         },
         {
             title: 'Support us',
