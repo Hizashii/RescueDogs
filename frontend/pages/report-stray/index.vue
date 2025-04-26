@@ -96,7 +96,7 @@
           </label>
           <div class="flex items-center space-x-4">
             <label
-              class="cursor-pointer border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-center text-black"
+              class="cursor-pointer border border-black text-[14px] font-bold py-2 px-4 w-36 text-center text-black"
             >
               {{ $t('report.form.dogPicture.upload') }}
               <input
