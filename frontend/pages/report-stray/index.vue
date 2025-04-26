@@ -190,7 +190,7 @@ function handleFileUpload (e: Event) {
   if (!files?.length) return
   const file = files[0]
   if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large. Maximum 32 MB.')
+    alert('File is too large. Maximum 32 MB.')
     return
   }
   dogPicture.value = file

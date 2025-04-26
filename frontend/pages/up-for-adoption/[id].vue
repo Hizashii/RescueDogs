@@ -2,14 +2,14 @@
   <div class="min-h-screen bg-[#FFFADF] py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
       <div class="flex flex-col md:flex-row gap-32">
-        <!-- Left side with main image -->
+        
         <img src="/img/dogbg.png" alt="dog picture" class="w-[320px] h-[400px] object-cover drop-shadow-[20px_20px_0px_#FFD700]" />
 
-        <!-- Right side with details -->
+        
         <div class="w-full">
           <h1 class="text-4xl font-bold text-[#2C3338] mb-8">{{ post.name }}</h1>
           
-          <!-- Details Grid -->
+          
           <div class="grid grid-cols-2 gap-x-12 gap-y-4 mb-8">
             <div class="flex flex-row gap-2">
               <p class="text-black text-sm font-semibold">Status:</p>
@@ -63,7 +63,6 @@
             </div>
           </div>
 
-          <!-- Description -->
           <div class="mb-8">
             <p class="text-black leading-relaxed">{{ post.description }}</p>
           </div>
@@ -71,14 +70,14 @@
             <p class="text-black text-sm font-semibold">More info:</p>
             <p class="text-black leading-relaxed">{{ post.moreInfo }}</p>
           </div>
-          <!-- Send an inquiry button -->
+          
           <button class="text-black px-6 py-5 font-bold border-2 border-[#FFD700] hover:bg-[#FFD700] transition-colors">
             Send an inquiry
           </button>
         </div>
       </div>
 
-      <!-- Thumbnail Images -->
+      
       <div class="mt-8">
         <div class="flex gap-4">
           <NuxtLink 
