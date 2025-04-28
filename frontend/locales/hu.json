@@ -175,5 +175,31 @@
                   ]
                 }
               }
-            }
-  }
+            },
+    "about": {
+      "title": "Kik vagyunk",
+      "description": "A Lorem Ipsum egyszerűen a nyomda- és szedőipar mintaszövege. A Lorem Ipsum az 1500-as évek óta az iparág standard mintaszövege, amikor egy ismeretlen nyomdász egy sor betűtípust összekevert, hogy egy mintakönyvet készítsen. Nemcsak öt évszázadot élt túl, hanem az elektronikus szedésbe való áttörést is, lényegében változatlan maradt. Az 1960-as években népszerűvé vált a Lorem Ipsum részleteket tartalmazó Letraset lapok megjelenésével, és újabban az olyan asztali kiadványszerkesztő szoftverekkel, mint az Aldus PageMaker, beleértve a Lorem Ipsum különböző verzióit is.",
+      "quote": {
+        "line1": "\"Ne csak szeresd,",
+        "line2": "védd meg őket",
+        "line3": "És mentsd meg őket a gyepmestertől.\""
+      },
+      "story": {
+        "title": "Történetünk",
+        "paragraphs": {
+          "p1": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről hozzánk kerülő kutyákat szakemberek segítségével mind fizikailag, mind lelkileg rehabilitálhattuk és gondozhattuk volna, míg megfelelő gazdát nem találunk nekik.",
+          "p2": "Időközben azonban rájöttünk, hogy a környéken működő gyepmesteri telepeken sorra tűnnek el a kutyák, és nem kapunk információt semmiről IDŐBEN. A telephelyre, amit átvettünk, erősen ráfért a felújítás, emellett a körülményeket normalizálni és a férőhelyek számát is bővíteni kellett, hogy biztonságosan és megfelelő szinten tudjuk ellátni a bekerülő kutyákat. De közös erővel sikerül egyre élhetőbbé tenni telepünket.",
+          "p3": "14 településen folyamatosan mentjük a kilátástalan helyzetben lévő kutyákat, ami nagyjából 50.000 fős lakosságot foglal magában, és már több száz életet sikerült megmenteni és jobbá tenni.",
+          "p4": "De mindez kevés: hisszük, hogy ezeken az áldatlan állapotokon lehet és kell is változtatni, ezért a mélyszegény szegregátumok fejlesztése egyik célkitűzésünk, mert amint az állattartói kultúra változásnak és fejlődésnek indul, sokkal kevesebb kutya kerül majd gyepmesteri telepekre, és az egyre szélesebb körben elterjedő ivartalanítási programokkal az úgynevezett felesleges szaporulatok megszületését is csökkenteni lehet.",
+          "p5": "Víziónk része, hogy egy fejlett, haladó szellemű hozzáállást tudjunk meghonosítani és befogadhatóvá tenni minél több itt élő számára, hogy az emberek mihamarabb képessé váljanak harmóniában együtt élni, létezni az őket körülvevő élővilággal, és főként állataikkal. Ennek eléréséhez a különböző hatóságokkal, önkormányzatokkal is igyekszünk kiváló kapcsolatot kiépíteni, mert hosszú távon csak közösen, együttműködve lehet IGAZI változást elérni.",
+          "p6": "Mióta megkezdtük működésünket, rengeteg kutyus fordult meg telepünkön. A jogszabályi előírásoknak megfelelően minden bekerülőt chippel és oltással látunk el, majd bent tartózkodásuk hosszától függően szívféregtesztelésen és ivartalanításon is átesnek. Amennyiben kimutatható a szívférgesség, az előírt kezelést természetesen megkezdjük, és folytatjuk, ameddig csak szükséges.",
+          "p7": "Sok olyan kutyánk van, akik rossz egészségi állapotban, sérülten, alultápláltan kerültek és kerülnek be telepünkre, rengeteg kölyökkutya érkezik immunizálás nélkül, és legtöbbjük nálunk és velünk tapasztalja meg először a szeretetet, a törődést, a reményt.",
+          "p8": "Ezen kívül segítünk más gyepmesteri telepeket is úgymond 'üríteni', hiszen nem csak mi, hanem az egész régió is ugyanezen problémákkal küzd, továbbá ivartalanítási akciókat hirdetünk a környékbeli lakosság számára, ezzel segítve az ott élő kutyák helyzetetét, és nem mellesleg saját működésünk optimalizálását is.",
+          "p9": "Tisztában vagyunk azzal, hogy ez nem egy gyors folyamat, de összefogással, prevenciós és edukációs programokkal apránként egyre több és több emberhez juttathatjuk el üzenetünket.",
+          "p10": "Ám védenceink megmentésével sajnos még nem érnek véget a megpróbáltatások, mivel még így is több a bekerülő, mint amennyien szabadulnak, és nincs elegendő forrás még több kennelt építeni. Habár nem célunk, hogy a kutyákat hosszú ideig kennelben tartsuk, egyelőre még szükség van rájuk.",
+          "p11": "De mindenek ellenére a befogott állatokat minél hamarabb szeretnénk átvevő szervezethez vagy gazdához juttatni, hogy hátralevő életüket biztonságban és boldogan élhessék le.",
+          "p12": "Hiszünk benne, hogy EGYÜTT sikerül!"
+        }
+      }
+    }
+}

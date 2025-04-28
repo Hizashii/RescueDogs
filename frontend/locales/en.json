@@ -172,5 +172,31 @@
                 ]
               }
             }
+        },
+        "about": {
+            "title": "Who we are",
+            "description": "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.",
+            "quote": {
+                "line1": "\"Don't just love,",
+                "line2": "protect them",
+                "line3": "And save them from the dogcatcher.\""
+            },
+            "story": {
+                "title": "Our Story",
+                "paragraphs": {
+                    "p1": "Our primary goal was to create a new animal shelter and dog run where we could rehabilitate and care for dogs that come to us from dogcatcher sites or overcrowded shelters, both physically and mentally, with the help of professionals, until we find them suitable owners.",
+                    "p2": "Meanwhile, we realized that dogs are disappearing one after another from the dogcatcher sites operating in the area, and we don't receive any information about it in TIME. The site we took over needed significant renovation, and we also had to normalize conditions and increase the number of spaces to safely and adequately care for incoming dogs. But with joint effort, we are making our site more livable.",
+                    "p3": "We continuously rescue dogs in hopeless situations from 14 settlements, which covers approximately 50,000 people, and we have already managed to save and improve the lives of hundreds.",
+                    "p4": "But this is not enough: we believe that these unfortunate conditions can and must be changed, which is why one of our goals is the development of deeply impoverished segregated areas, because as animal care culture begins to change and develop, far fewer dogs will end up in dogcatcher sites, and with increasingly widespread sterilization programs, the birth of so-called unnecessary litters can also be reduced.",
+                    "p5": "Part of our vision is to establish and make acceptable a progressive, advanced-minded approach for as many local residents as possible, so that people can become capable of living in harmony with the living world around them, especially with their animals, as soon as possible. To achieve this, we strive to build excellent relationships with various authorities and local governments, because in the long run, REAL change can only be achieved together, through cooperation.",
+                    "p6": "Since we started our operations, many dogs have passed through our site. In accordance with legal requirements, we provide every incoming dog with a chip and vaccinations, and depending on the length of their stay, they also undergo heartworm testing and sterilization. If heartworm is detectable, we naturally begin and continue the prescribed treatment as long as necessary.",
+                    "p7": "We have many dogs who arrived and continue to arrive at our site in poor health, injured, and undernourished, many puppies arrive without immunization, and most of them experience love, care, and hope for the first time with us.",
+                    "p8": "In addition, we help 'empty' other dogcatcher sites, since not only we but the entire region struggles with the same problems, and we also announce sterilization campaigns for the local population, thereby helping the situation of dogs living there, and not least, optimizing our own operations.",
+                    "p9": "We are aware that this is not a quick process, but through cooperation, prevention, and educational programs, we can gradually reach more and more people with our message.",
+                    "p10": "However, the trials do not end with the rescue of our charges, as there are still more incoming than outgoing dogs, and there are not enough resources to build more kennels. Although it is not our goal to keep dogs in kennels for a long time, we still need them for now.",
+                    "p11": "But despite everything, we want to get the rescued animals to a receiving organization or owner as soon as possible, so they can spend the rest of their lives safely and happily.",
+                    "p12": "We believe that TOGETHER we will succeed!"
+                }
+            }
         }
   }

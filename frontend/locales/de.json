@@ -174,5 +174,31 @@
             ]
           }
         }
-      }
-  }
+      },
+    "about": {
+        "title": "Wer wir sind",
+        "description": "Lorem ipsum ist ein Blindtext der Druck- und Satzindustrie. Lorem ipsum ist seit dem 16. Jahrhundert der Standardblindtext der Branche, als ein unbekannter Drucker einen Abzug der Schriften durcheinanderbrachte, um ein Schriftmusterbuch zu erstellen. Es hat nicht nur fünf Jahrhunderte überdauert, sondern auch den Sprung in den elektronischen Schriftsatz im Wesentlichen unverändert überstanden. Es wurde in den 1960er Jahren mit der Veröffentlichung von Letraset-Bögen mit Lorem-ipsum-Abschnitten populär und in jüngerer Zeit durch Desktop-Publishing-Software wie Aldus PageMaker, die Versionen von Lorem ipsum enthält.",
+        "quote": {
+            "line1": "\"Liebe sie nicht nur,",
+            "line2": "beschütze sie",
+            "line3": "Und rette sie vor dem Hundefänger.\""
+        },
+        "story": {
+            "title": "Unsere Geschichte",
+            "paragraphs": {
+                "p1": "Unser Hauptziel war es, ein neues Tierheim und einen Hundeauslauf zu schaffen, wo wir Hunde, die von Hundefänger-Stellen oder überfüllten Tierheimen zu uns kommen, mit Hilfe von Fachleuten sowohl körperlich als auch geistig rehabilitieren und betreuen können, bis wir ihnen geeignete Besitzer finden.",
+                "p2": "Inzwischen haben wir festgestellt, dass Hunde eine nach dem anderen von den in der Gegend tätigen Hundefänger-Stellen verschwinden, und wir erhalten keine Informationen darüber ZEITNAH. Das Gelände, das wir übernommen haben, benötigte eine erhebliche Renovierung, und wir mussten auch die Bedingungen normalisieren und die Anzahl der Plätze erhöhen, um eingehende Hunde sicher und angemessen zu versorgen. Aber mit gemeinsamer Anstrengung machen wir unser Gelände lebenswerter.",
+                "p3": "Wir retten kontinuierlich Hunde in hoffnungslosen Situationen aus 14 Siedlungen, was etwa 50.000 Menschen abdeckt, und wir haben bereits Hunderte von Leben gerettet und verbessert.",
+                "p4": "Aber das ist nicht genug: Wir glauben, dass diese unglücklichen Bedingungen geändert werden können und müssen, weshalb eines unserer Ziele die Entwicklung von tief verarmten, abgesonderten Gebieten ist, denn wenn die Tierpflegekultur beginnt, sich zu ändern und zu entwickeln, werden weit weniger Hunde in Hundefänger-Stellen landen, und mit zunehmend verbreiteten Sterilisationsprogrammen kann auch die Geburt sogenannter unnötiger Würfe reduziert werden.",
+                "p5": "Teil unserer Vision ist es, eine fortschrittliche, modern denkende Einstellung für möglichst viele Einheimische zu etablieren und akzeptabel zu machen, damit die Menschen so schnell wie möglich in der Lage sind, in Harmonie mit der sie umgebenden lebendigen Welt, besonders mit ihren Tieren, zu leben. Um dies zu erreichen, streben wir danach, ausgezeichnete Beziehungen zu verschiedenen Behörden und Kommunen aufzubauen, denn auf lange Sicht kann ECHTER Wandel nur gemeinsam, durch Zusammenarbeit erreicht werden.",
+                "p6": "Seit Beginn unserer Tätigkeit sind viele Hunde durch unsere Einrichtung gegangen. Gemäß den gesetzlichen Anforderungen versehen wir jeden eingehenden Hund mit einem Chip und Impfungen, und je nach Aufenthaltsdauer durchlaufen sie auch Herzfadenwurm-Tests und Sterilisation. Wenn Herzfadenwürmer nachweisbar sind, beginnen und setzen wir die vorgeschriebene Behandlung natürlich so lange fort, wie nötig.",
+                "p7": "Wir haben viele Hunde, die in schlechtem Gesundheitszustand, verletzt und unterernährt bei uns ankamen und weiterhin ankommen, viele Welpen kommen ohne Immunisierung an, und die meisten von ihnen erleben Liebe, Fürsorge und Hoffnung zum ersten Mal bei uns.",
+                "p8": "Darüber hinaus helfen wir dabei, andere Hundefänger-Stellen zu 'leeren', da nicht nur wir, sondern die gesamte Region mit den gleichen Problemen kämpft, und wir kündigen auch Sterilisationskampagnen für die lokale Bevölkerung an, wodurch wir die Situation der dort lebenden Hunde verbessern und nicht zuletzt unsere eigenen Abläufe optimieren.",
+                "p9": "Wir sind uns bewusst, dass dies kein schneller Prozess ist, aber durch Zusammenarbeit, Prävention und Bildungsprogramme können wir nach und nach immer mehr Menschen mit unserer Botschaft erreichen.",
+                "p10": "Die Prüfungen enden jedoch nicht mit der Rettung unserer Schützlinge, da es immer noch mehr eingehende als ausgehende Hunde gibt und nicht genügend Ressourcen vorhanden sind, um mehr Zwinger zu bauen. Obwohl es nicht unser Ziel ist, Hunde lange in Zwingern zu halten, brauchen wir sie vorerst noch.",
+                "p11": "Aber trotz allem wollen wir die geretteten Tiere so schnell wie möglich an eine aufnehmende Organisation oder einen Besitzer vermitteln, damit sie den Rest ihres Lebens sicher und glücklich verbringen können.",
+                "p12": "Wir glauben, dass wir GEMEINSAM erfolgreich sein werden!"
+            }
+        }
+    }
+}
