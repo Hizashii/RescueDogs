@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     devProxy: {
-      '/api/**': 'http://localhost:5000'      // same port again
+      '/api/**':      'http://localhost:5000',
+      '/uploads/**':  'http://localhost:5000'
     }
   },
   runtimeConfig: {

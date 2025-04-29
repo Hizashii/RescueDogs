@@ -82,7 +82,7 @@
               v-for="page in paginationPages"
               :key="page"
               @click="goToPage(page)"
-              :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+              :class="['px-3 py-1 border', currentPage === page ? 'bg-[#FFD700]  text-white' : '']"
             >
               {{ page }}
             </button>
@@ -94,7 +94,7 @@
               v-for="page in lastPages"
               :key="`last-${page}`"
               @click="goToPage(page)"
-              :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+              :class="['px-3 py-1 border', currentPage === page ? 'bg-[#FFD700]  text-white' : '']"
             >
               {{ page }}
             </button>
@@ -155,7 +155,6 @@
     
     import useDogApi from '@/composables/useDogApi';
     
-    // Interface definitions
     interface Dog {
       id: string;
       name: string;
@@ -187,7 +186,6 @@
       error: apiErrorMsg 
     } = useDogApi();
     
-    // Data state
     const loading = ref(false);
     const apiError = ref(false);
     const dogs = ref<Dog[]>([]);
@@ -195,11 +193,9 @@
     const currentPage = ref(1);
     const totalPages = ref(1);
     
-    // Filter options
     const breeds = ref<string[]>([]);
     const locations = ref<string[]>([]);
     
-    // Filter state
     const filters = ref<DogFilters>({
       name: '',
       location: 'Any',
@@ -210,18 +206,15 @@
       goodWith: 'Any'
     });
     
-    // Computed properties for pagination
     const paginationPages = computed(() => {
       if (totalPages.value <= 5) {
         return Array.from({ length: totalPages.value }, (_, i) => i + 1);
       }
       
-      // First 3 pages always shown
       if (currentPage.value <= 3) {
         return [1, 2, 3, 4, 5];
       }
       
-      // Show 2 before and 2 after current page
       return [
         currentPage.value - 2, 
         currentPage.value - 1, 
@@ -247,7 +240,6 @@
       ].filter(page => !paginationPages.value.includes(page) && page > 0);
     });
     
-    // Methods
     const clearAllFilters = () => {
       filters.value = {
         name: '',
@@ -277,7 +269,6 @@
       navigateTo(`/dog/${dogId}`);
     };
     
-    // Fetch dogs from API
     const fetchDogsData = async () => {
       loading.value = true;
       apiError.value = false;
@@ -315,7 +306,6 @@
       }
     };
     
-    // Fetch filter options
     const loadFilterOptions = async () => {
       try {
         const options = await fetchFilterOptions();
@@ -323,19 +313,16 @@
         locations.value = options.locations;
       } catch (err) {
         console.error('Error loading filter options:', err);
-        // Set some default values
         breeds.value = ['Husky', 'German Shepherd', 'Terrier', 'Mix'];
         locations.value = ['Budapest', 'Debrecen', 'Szeged'];
       }
     };
     
-    // Initialize on component mount
     onMounted(async () => {
       await loadFilterOptions();
       fetchDogsData();
     });
     
-    // Watch for route query changes
     watch(() => useRoute().query, (newQuery) => {
       if (newQuery.page) {
         currentPage.value = parseInt(newQuery.page as string) || 1;

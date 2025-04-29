@@ -1,25 +1,32 @@
 import { Request, Response } from 'express';
 import Dog from '../models/Dog';
 import multer, { FileFilterCallback } from 'multer';
+import path from 'path'
+import fs from 'fs'
 
-const fileFilter: multer.Options['fileFilter'] = (req: Request, file, cb: FileFilterCallback) => {
-    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-      cb(null, true);
-    } else {
-      cb(new Error('Invalid file type. Only PNG and JPEG are allowed.') as any, false);
-    }
-  };
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/dogs');
-    },
-    filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + file.originalname;
-      cb(null, uniqueSuffix);
-    }
-  });
-  
-  export const upload = multer({ storage, fileFilter });
+// ensure the directory exists at runtime
+const uploadDir = path.resolve(__dirname, '../uploads/dogs')
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true })
+}
+
+const fileFilter: multer.Options['fileFilter'] = (req, file, cb: FileFilterCallback) => {
+  if (['image/png','image/jpeg'].includes(file.mimetype)) {
+    cb(null, true)
+  } else {
+    cb(new Error('Only PNG & JPEG allowed') as any, false)
+  }
+}
+
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, uploadDir),
+  filename: (_req, file, cb) => {
+    const unique = Date.now() + '-' + file.originalname
+    cb(null, unique)
+  }
+})
+
+export const upload = multer({ storage, fileFilter })
   
 export const getDogs = async (req: Request, res: Response) => {
   try {
@@ -102,3 +109,14 @@ export const createDogWithImage = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to create dog.' });
   }
 };
+export const getDogById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const dog = await Dog.findById(id)
+    if (!dog) return res.status(404).json({ message: 'Dog not found' })
+    res.json(dog)
+  } catch (err) {
+    console.error('Error fetching dog by ID:', err)
+    res.status(500).json({ message: 'Server error' })
+  }
+}

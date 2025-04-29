@@ -21,19 +21,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </div>
-        
-        <!-- Dog details -->
-        <div class="text-sm text-gray-600 mt-2">
-          <p v-if="dog.breed"><span class="font-medium">Breed:</span> {{ dog.breed }}</p>
-          <p v-if="dog.size"><span class="font-medium">Size:</span> {{ formatSize(dog.size) }}</p>
-          <p v-if="dog.age"><span class="font-medium">Age:</span> {{ formatAge(dog.age) }}</p>
-          <p v-if="dog.location"><span class="font-medium">Location:</span> {{ dog.location }}</p>
-          
-          <!-- Good with (if available) -->
-          <p v-if="dog.goodWith && dog.goodWith.length > 0" class="mt-1">
-            <span class="font-medium">Good with:</span> {{ formatGoodWith(dog.goodWith) }}
-          </p>
-        </div>
       </div>
     </div>
   </template>
@@ -56,7 +43,6 @@
     imageError.value = true;
   };
   
-  // Format helpers
   const formatSize = (size) => {
     if (!size) return 'Unknown';
     return size.charAt(0).toUpperCase() + size.slice(1);
