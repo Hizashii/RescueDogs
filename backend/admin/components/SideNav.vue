@@ -18,28 +18,24 @@
             Dogs
           </NuxtLink>
         </li>
-        <li>
-          <NuxtLink 
-            to="/users" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
-          >
-            Users
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink 
-            to="/statistics" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
-          >
-            Statistics
-          </NuxtLink>
-        </li>
+
+      
         <li>
           <NuxtLink 
             to="/Blog" 
             class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
           >
             Blog
+          </NuxtLink>
+        </li>
+
+      
+        <li>
+          <NuxtLink 
+            to="/CharityItems" 
+            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+          >
+            Shop
           </NuxtLink>
         </li>
 
@@ -54,14 +50,7 @@
   
       </ul>
     </nav>
-    <div class="mt-auto pt-4 border-t border-gray-200">
-      <NuxtLink 
-        to="/settings" 
-        class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
-      >
-        Settings
-      </NuxtLink>
-    </div>
+
   </aside>
 </template>
 

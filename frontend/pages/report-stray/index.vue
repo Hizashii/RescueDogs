@@ -201,7 +201,6 @@ async function submitReport () {
   isSubmitting.value = true
   submitError.value  = false
 
-  /* build FormData */
   const data = new FormData()
   data.append('name', formData.name)
   data.append('phone', formData.phone)
@@ -221,7 +220,6 @@ async function submitReport () {
       throw new Error(err?.message || 'Failed to submit report')
     }
     submitSuccess.value = true
-    /* reset */
     Object.assign(formData, {
       name: '',
       phone: '',

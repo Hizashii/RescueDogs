@@ -158,8 +158,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useApi } from '~/composables/useApi'
+
+// initialize your API composable
+const api = useApi()
+const router = useRouter()
 
 // Form data
 const name = ref('')
@@ -178,19 +182,12 @@ const error = ref(false)
 const success = ref(false)
 const errorMessage = ref('')
 
-// Backend URL - HARDCODED to your backend
-const BACKEND_URL = 'http://localhost:3000'
-
-const router = useRouter()
-
-const handleFileUpload = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  if (target.files && target.files.length > 0) {
-    imageFile.value = target.files[0]
-  }
+function handleFileUpload(event: Event) {
+  const files = (event.target as HTMLInputElement).files
+  imageFile.value = files?.[0] ?? null
 }
 
-const submitDog = async () => {
+async function submitDog() {
   if (!imageFile.value) {
     error.value = true
     errorMessage.value = 'Please select an image file'
@@ -202,44 +199,28 @@ const submitDog = async () => {
   success.value = false
   errorMessage.value = ''
 
+  // Build FormData
   const formData = new FormData()
   formData.append('name', name.value)
   formData.append('description', description.value)
   formData.append('image', imageFile.value)
-
-  // Append filter fields
   formData.append('location', location.value)
   formData.append('breed', breed.value)
   formData.append('size', size.value)
   formData.append('age', age.value)
   formData.append('gender', gender.value)
-  
-  // For "goodWith", append each value separately
   goodWith.value.forEach(val => formData.append('goodWith', val))
 
   try {
-    // Get authentication token from localStorage
-    const token = localStorage.getItem('adminToken')
-    
-    // Log the exact URL we're using
-    const url = `${BACKEND_URL}/dogs`
-    console.log('Submitting to backend URL:', url)
-    
-    // Make the API call with the absolute URL to the backend
-    const response = await axios.post(url, formData, {
-      headers: { 
-        'Content-Type': 'multipart/form-data',
-        // Include auth token if available
-        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-      }
+    // call the upload endpoint (no auth headers)
+    await api('/api/dogs/upload', {
+      method: 'POST',
+      body: formData
     })
-    
-    console.log('Response from backend:', response.data)
-    
-    // Show success message
+
     success.value = true
-    
-    // Reset form after success
+
+    // reset form and redirect after a short delay
     setTimeout(() => {
       name.value = ''
       description.value = ''
@@ -250,31 +231,16 @@ const submitDog = async () => {
       age.value = ''
       gender.value = ''
       goodWith.value = []
-      
-      // Reset file input
-      const fileInput = document.getElementById('dogImage') as HTMLInputElement
-      if (fileInput) {
-        fileInput.value = ''
-      }
-      
-      // Navigate after a brief delay - use absolute path not relative
+
+      const fileInput = document.getElementById('dogImage') as HTMLInputElement | null
+      if (fileInput) fileInput.value = ''
+
       router.push('/dogs')
-    }, 2000)
-    
+    }, 1500)
+
   } catch (err: any) {
     console.error('Error submitting dog:', err)
-    
-    // Handle different error types
-    if (err.code === 'ERR_NETWORK') {
-      errorMessage.value = `Cannot connect to ${BACKEND_URL}. Make sure your backend server is running.`
-    } else if (err.response?.status === 401) {
-      errorMessage.value = 'Authentication required. Please log in again.'
-    } else if (err.response?.status === 404) {
-      errorMessage.value = `API endpoint not found at ${BACKEND_URL}/dogs/upload`
-    } else {
-      errorMessage.value = err.response?.data?.message || 'Failed to add dog. Please try again.'
-    }
-    
+    errorMessage.value = err?.data?.message || 'Failed to add dog. Please try again.'
     error.value = true
   } finally {
     isSubmitting.value = false

@@ -21,12 +21,12 @@
           v-html="post.content" 
         />
 
-        <router-link 
+        <NuxtLink
           to="/blog" 
           class="mt-8 text-black font-semibold text-sm md:text-[17px] h-[65px] w-[200px] border-4 border-black flex items-center justify-center"
         >
           All blogs
-        </router-link>
+        </ NuxtLink>
         
       </div>
     </div>
@@ -49,8 +49,7 @@ onMounted(async () => {
   try {
     const data = await fetchBlogById(postId)
     if (!data) {
-      // optionally redirect back if not found
-      // return router.replace('/blog')
+
     }
     post.value = data
   } catch (err) {

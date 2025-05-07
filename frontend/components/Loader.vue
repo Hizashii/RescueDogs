@@ -3,7 +3,6 @@
       <div class="loader-container">
         <svg class="bone-loader" width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg">
           <path d="M20,15 L100,15" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" />
-          
           <circle cx="10" cy="10" r="8" fill="#FBBF24" />
           <circle cx="10" cy="20" r="8" fill="#FBBF24" />
           <circle cx="110" cy="10" r="8" fill="#FBBF24" />

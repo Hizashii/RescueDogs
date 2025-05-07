@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   i18n: {
     bundle: { optimizeTranslationDirective: false },
     lazy: true,
-    langDir: resolve(__dirname, '../frontend/locales'),
+    langDir: '../locales',
     strategy: 'prefix_except_default',
     defaultLocale: 'en-GB',
     locales: [
@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     devProxy: {
-      '/api/**': 'http://localhost:5000'      // same port again
+      '/api/**':      'http://localhost:5000',
+      '/uploads/**':  'http://localhost:5000'
     }
   },
   runtimeConfig: {
