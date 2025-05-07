@@ -3,20 +3,21 @@
         <!-- LANDING PAGE BUTTONS AND TEXT -->
         <div class="flex flex-col items-center justify-center md:h-full h-full">
             <img src="/img/logo_white.png" alt="Mancsmento logo" class="md:w-24 w-16 h-auto">
-            <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">{{ $t('home.title') }}</h1>
-            <h1 class="md:text-4xl text-sm text-white md:pt-5 pt-2 text-center">{{ $t('home.subtitle') }}</h1>
+            <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">MancsMentő</h1>
+            <h1 class="md:text-4xl text-sm text-white md:pt-5 pt-2 text-center">Animal protection association</h1>
             <div class="flex flex-wrap justify-center md:gap-16 gap-4 md:pt-24 pt-8">
                 <nuxt-link to="/up-for-adoption">
-                    <button class="bg-white text-black font-bold text-sm  md:w-52 md:min-h-14 w-40 min-h-10">{{ $t('home.adoptButton') }}</button>
+                    <button class="bg-white text-black font-bold text-sm  md:w-52 md:min-h-14 w-40 min-h-10">Adopt</button>
                 </nuxt-link>
                 <nuxt-link to="/support">
-                    <button class="bg-white text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10">{{ $t('home.donateButton') }}</button>
+                    <button class="bg-white text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10">Donate</button>
                 </nuxt-link>
             </div>
         </div>
         <!-- END OF LANDING PAGE BUTTONS AND TEXT -->
     </div>
 
+<<<<<<< Updated upstream
  <!-- CARDS -->
 <div class="bg-[#FFE65E] px-4 py-16">
   <div class="max-w-6xl mx-auto">
@@ -67,6 +68,64 @@
         </nuxt-link>
       </div>
 
+=======
+    <!-- CARDS -->
+    <div class="flex flex-row flex-wrap justify-center items-center bg-[#FFE65E] md:h-[420px] h-auto pb-8 md:pb-0">
+        <div class="md:mt-[-200px] mt-[-50px] flex flex-row flex-wrap justify-center items-center gap-y-8 md:gap-y-0">
+            <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
+                <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="53" cy="53" r="51.5" fill="#3D6625" stroke="#3D6625" stroke-width="3"/>
+<path d="M67.1818 35C63.14 35 60.6818 35.7631 59.2636 36.4106C57.4436 35.5319 55.3636 35 53 35C50.6364 35 48.5564 35.5319 46.7364 36.4106C45.3182 35.7631 42.86 35 38.8182 35C31.7273 35 27 53.5 27 58.125C27 60.0444 30.12 61.8019 34.4218 62.5187C35.9345 67.6987 43.0727 71.6531 51.8182 72V62.1025C50.4236 61.2469 48.2727 59.6975 48.2727 58.125C48.2727 55.8125 53 55.8125 53 55.8125C53 55.8125 57.7273 55.8125 57.7273 58.125C57.7273 59.6975 55.5764 61.2469 54.1818 62.1025V72C62.9273 71.6531 70.0655 67.6987 71.5782 62.5187C75.88 61.8019 79 60.0444 79 58.125C79 53.5 74.2727 35 67.1818 35ZM34.4455 57.8244C33.2636 57.5469 32.3418 57.2231 31.7273 56.9688C32.3182 50.5631 36.9273 40.55 38.9364 39.625C40.2127 39.625 41.1818 39.7638 42.0564 39.8794C37.0927 45.2213 35.1309 53.5925 34.4455 57.8244ZM45.9091 53.5C45.2822 53.5 44.681 53.2564 44.2377 52.8227C43.7945 52.389 43.5455 51.8008 43.5455 51.1875C43.5455 49.9387 44.6091 48.875 45.9091 48.875C46.536 48.875 47.1372 49.1186 47.5804 49.5523C48.0237 49.986 48.2727 50.5742 48.2727 51.1875C48.2727 52.4825 47.2091 53.5 45.9091 53.5ZM60.0909 53.5C59.464 53.5 58.8628 53.2564 58.4196 52.8227C57.9763 52.389 57.7273 51.8008 57.7273 51.1875C57.7273 49.9387 58.7909 48.875 60.0909 48.875C60.7178 48.875 61.319 49.1186 61.7623 49.5523C62.2055 49.986 62.4545 50.5742 62.4545 51.1875C62.4545 52.4825 61.3909 53.5 60.0909 53.5ZM71.5545 57.8244C70.8691 53.5925 68.9073 45.2213 63.9436 39.8794C64.8182 39.7638 65.7873 39.625 67.0636 39.625C69.0727 40.55 73.6818 50.5631 74.2727 56.9688C73.6818 57.2231 72.76 57.5469 71.5545 57.8244Z" fill="white"/>
+</svg>
+                <h1 class="text-2xl font-bold py-4">REPORT A STRAY</h1>
+                <p class="text-sm py-8 max-w-52 text-center">If you see a stray dog in the 10 cities we are connected to, report them to us and we'll be on our way asap. Help us help them.</p>
+                <nuxt-link to="/report-stray">
+                    <button class=" text-black font-bold text-sm bg-[#3D6625] md:w-52 md:min-h-14 w-40 min-h-10">REPORT</button>
+                </nuxt-link>
+            </div>
+            <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
+                <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="53" cy="53" r="51.5" fill="#3D6625" stroke="#3D6625" stroke-width="3"/>
+<path d="M43.9188 28.8754C47.0163 28.4292 50.2975 31.8154 51.2425 36.4879C52.1875 41.1342 50.4812 45.2817 47.3837 45.7542C44.3125 46.2267 41.005 42.8404 40.0337 38.1679C39.0625 33.5217 40.8212 29.3742 43.9188 28.8754ZM62.6875 28.8754C65.8112 29.3742 67.5437 33.5217 66.625 38.1679C65.6275 42.8404 62.3462 46.2267 59.2487 45.7542C56.125 45.2817 54.4187 41.1342 55.39 36.4879C56.335 31.8154 59.6162 28.4292 62.6875 28.8754ZM29.875 40.9504C32.8675 39.6642 36.9362 42.0004 39.0625 46.0692C41.0575 50.2167 40.375 54.5742 37.4087 55.8604C34.4425 57.1467 30.4 54.8367 28.3262 50.7154C26.2525 46.5942 26.9875 42.2104 29.875 40.9504ZM77.125 40.9504C80.0125 42.2104 80.7475 46.5942 78.6737 50.7154C76.6 54.8367 72.5575 57.1467 69.5912 55.8604C66.625 54.5742 65.9425 50.2167 67.9375 46.0692C70.0637 42.0004 74.1325 39.6642 77.125 40.9504ZM72.7412 69.2479C72.8462 71.7154 70.9563 74.4454 68.6987 75.4692C64 77.6217 58.435 73.1592 53.2113 73.1592C47.9875 73.1592 42.37 77.8054 37.75 75.4692C35.125 74.1829 33.3137 70.7704 33.655 67.9354C34.1275 64.0242 38.8262 61.9242 41.6087 59.0629C45.31 55.3617 47.935 48.4054 53.2113 48.4054C58.4613 48.4054 61.2437 55.2567 64.7875 59.0629C67.7012 62.2654 72.5575 64.9692 72.7412 69.2479Z" fill="white"/>
+</svg>
+                <h1 class="text-2xl font-bold py-4">ADOPT</h1>
+                <p class="text-sm py-8 max-w-52 text-center">Consider adopting a pet from a shelter and give them a chance for a new, loving life! You may be their key to having a loving family.</p>
+                <nuxt-link to="/up-for-adoption">
+                    <button class="bg-[#3D6625] text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10">ADOPT</button>
+                </nuxt-link>
+            </div>
+            <div class="flex flex-col items-center justify-center md:h-[420px] h-auto md:w-80 w-[90%] bg-white border-4 border-black md:mx-8 mx-4 py-8 md:py-0">
+                <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="53" cy="53" r="51.5" fill="#3D6625" stroke="#3D6625" stroke-width="3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M53.5018 25.0769L54.8751 24.0747C54.7186 23.8525 54.5124 23.6714 54.2736 23.5465C54.0348 23.4216 53.7702 23.3564 53.5018 23.3564C53.2334 23.3564 52.9688 23.4216 52.73 23.5465C52.4912 23.6714 52.285 23.8525 52.1286 24.0747L53.5018 25.0769ZM53.5018 25.0769L52.1286 24.0747L52.1213 24.0821L52.1031 24.1044L52.0448 24.1935C51.7023 24.6832 51.3671 25.1782 51.0394 25.6782C50.2163 26.9283 49.4244 28.1994 48.6645 29.4903C47.7693 30.987 46.9617 32.5363 46.2458 34.1301C45.6047 35.5963 45.0437 37.2146 45.0437 38.5769C45.0437 40.919 45.9179 43.1796 47.4952 44.8536C49.0724 46.5276 51.2361 47.489 53.5018 47.489C55.7675 47.489 57.9276 46.5314 59.5085 44.8536C61.0894 43.1758 61.9599 40.919 61.9599 38.5806C61.9599 37.2146 61.399 35.5963 60.7579 34.1264C60.0419 32.5326 59.2343 30.9833 58.3392 29.4866C57.2768 27.6816 56.1492 25.9173 54.9589 24.1972L54.9006 24.1044L54.8824 24.0821L54.8787 24.0784L53.5018 25.0806V25.0769ZM28.0036 42.3295V59.8717C28.0041 61.8404 28.7719 63.7284 30.1382 65.1203L38.1191 73.2529V75.3204H50.2599V64.6526C50.2601 63.5704 50.0511 62.4987 49.6449 61.4988C49.2386 60.4989 48.6431 59.5903 47.8922 58.825L42.6542 53.4873L42.6396 53.4725C42.0627 52.9835 41.323 52.7402 40.5745 52.7931C39.8259 52.846 39.1262 53.191 38.6211 53.7565C38.116 54.3219 37.8444 55.064 37.8629 55.8284C37.8813 56.5928 38.1884 57.3205 38.7202 57.8599L42.0714 61.2748C42.2453 61.446 42.3841 61.6508 42.4795 61.8772C42.575 62.1036 42.6252 62.3472 42.6273 62.5936C42.6294 62.84 42.5833 63.0844 42.4917 63.3125C42.4002 63.5406 42.2649 63.7478 42.0939 63.9221C41.9229 64.0963 41.7196 64.2341 41.4957 64.3274C41.2719 64.4208 41.0321 64.4677 40.7902 64.4656C40.5484 64.4634 40.3094 64.4122 40.0872 64.315C39.865 64.2177 39.664 64.0763 39.496 63.8991L36.1448 60.4842C34.9257 59.2405 34.2367 57.5572 34.2271 55.7994C34.2176 54.0415 34.8883 52.3506 36.0939 51.0932V42.3258C36.0939 41.2321 35.6675 40.1832 34.9085 39.4098C34.1496 38.6365 33.1202 38.202 32.0469 38.202C30.9736 38.202 29.9443 38.6365 29.1853 39.4098C28.4264 40.1832 28 41.2321 28 42.3258L28.0036 42.3295ZM79 59.8717V42.3295C79 41.2358 78.5736 40.1869 77.8147 39.4135C77.0557 38.6402 76.0264 38.2057 74.9531 38.2057C73.8798 38.2057 72.8504 38.6402 72.0915 39.4135C71.3325 40.1869 70.9062 41.2358 70.9062 42.3295V51.0932C72.1139 52.3509 72.786 54.0434 72.7765 55.8031C72.7669 57.5628 72.0765 59.2476 70.8552 60.4916L67.504 63.9028C67.1605 64.2408 66.7004 64.4279 66.2229 64.4237C65.7453 64.4194 65.2885 64.2243 64.9508 63.8802C64.6132 63.5361 64.4216 63.0706 64.4175 62.584C64.4133 62.0973 64.5969 61.6285 64.9286 61.2785L68.2798 57.8636C68.8209 57.3259 69.1358 56.5951 69.158 55.8253C69.1803 55.0555 68.9082 54.307 68.3992 53.7378C67.8902 53.1685 67.1841 52.8231 66.4299 52.7743C65.6757 52.7255 64.9323 52.9771 64.3568 53.4762L64.3422 53.4911L59.1114 58.8213C58.3601 59.5871 57.7643 60.4962 57.3581 61.4968C56.9518 62.4974 56.743 63.5697 56.7437 64.6526V75.3204H68.8809V73.2566L76.8618 65.1203C77.539 64.4314 78.0764 63.6133 78.4433 62.7127C78.8101 61.8122 78.9993 60.8468 79 59.8717Z" fill="white"/>
+</svg>
+                <h1 class="text-2xl font-bold py-4">DONATE</h1>
+                <p class="text-sm py-8 max-w-52 text-center">Consider supporting our work in helping strays and other animals. uhhh placeholder text here. Consider the 1% of tax as well.</p>
+                <nuxt-link to="/support">
+                    <button class="bg-[#3D6625] text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10">DONATE</button>
+                </nuxt-link>
+            </div>
+        </div>
+    </div>
+    <!-- END OF CARDS -->
+
+    <!-- INTRODUCTION -->
+    <div class="flex flex-col md:flex-row items-center justify-start bg-[#FFFADF] md:h-[700px] h-auto pb-8 md:pb-0">
+        <img src="/img/intro-dog.png" alt="Dog icon" class="w-auto md:h-[700px] h-[300px] object-contain">
+        <div class="hidden md:block ml-4"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="700" fill="none"><path stroke="gold" stroke-dasharray="10 10" stroke-width="5" d="M3 0v655"/></svg></div>
+        <div class="flex flex-col items-center md:items-start justify-center md:ml-8 px-4 md:px-0">
+            <h1 class="text-[24px] md:text-[32px] font-bold py-4 text-center md:text-left">Introducing the <span class="text-[#3D4836]"> PawsSave Animal Protection Association</span></h1>
+            <p class="text-[16px] md:text-[20px] py-8 max-w-[500px] text-center md:text-left">Our association was founded in November 2021 because we have helped individually where we could, but we have always believed that we can be more effective by working together, as there are many stray/stray animals and animals living in poor conditions in the area.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+                <nuxt-link to="/support">
+                    <button class="bg-[#FFD700] text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10">Support our work</button>
+                </nuxt-link>
+                <nuxt-link to="/volunteer">
+                    <button class="bg-[#FFD700] text-black font-bold text-sm  md:w-52 md:min-h-14 w-40 min-h-10">Apply to volunteer</button>
+                </nuxt-link>
+            </div>
+        </div>
+>>>>>>> Stashed changes
     </div>
   </div>
 </div>
@@ -116,6 +175,7 @@
 
 
     <!-- ANIMALS IN OUR CARE SECTION -->
+<<<<<<< Updated upstream
 <section class="bg-white py-16">
   <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
     <!-- Section Title -->
@@ -159,6 +219,33 @@
         </p>
       </div>
 
+=======
+    <div class="w-full bg-white flex flex-col items-center justify-center py-13 md:py-0 h-[450px] md:h-screen">
+        <h1 class="text-3xl md:text-[32px] font-bold text-center text-[#3D4836] pb-8 md:pb-[100px]">Animals in our care</h1>
+        <div class="flex flex-row items-center justify-center gap-24  w-full ">
+            <div class="flex flex-col items-center justify-center">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.08164 72.9752V38.1871L2.08464 37.1906C1.41997 36.4658 0.906365 35.6505 0.543819 34.7445C0.181273 33.8386 0 32.9327 0 32.0267C0 31.0604 0.181273 30.1399 0.543819 29.2654C0.906365 28.3885 1.41997 27.6178 2.08464 26.9535L13.958 14.995H28.4599L42.9617 0.5L50.3939 7.92871C52.9317 10.4049 54.8049 13.1977 56.0134 16.3068C57.2218 19.4184 57.8261 22.6049 57.8261 25.8663C57.8261 29.1277 57.2218 32.2985 56.0134 35.3787C54.8049 38.4589 52.9317 41.2673 50.3939 43.8039L42.9617 51.2327V72.9752H3.08164ZM10.3326 65.7277H35.7108V48.243L45.2276 38.7307C46.9799 36.9792 48.3093 34.9704 49.2156 32.7044C50.122 30.4407 50.5752 28.1614 50.5752 25.8663C50.5752 23.5713 50.122 21.3064 49.2156 19.0718C48.3093 16.8371 46.9799 14.8441 45.2276 13.0926L42.9617 10.7371L31.4509 22.2426H16.949L14.8644 24.3262L20.937 30.396C22.6893 32.1475 24.0187 34.1406 24.925 36.3752C25.8314 38.6099 26.2846 40.8747 26.2846 43.1698C26.2846 45.4648 25.8314 47.7454 24.925 50.0114C24.0187 52.2751 22.6893 54.2826 20.937 56.0341L10.3326 45.4346V65.7277Z" fill="#FFD700"/>
+</svg>
+                <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625] pt-7">4699</h1>
+                <p class="text-[11px] md:text-[20px] font-semibold text-center pt-7">Dogs altogether</p>
+            </div>
+            <div class="flex flex-col items-center  justify-center">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.8333 10.0003C31.7667 9.43367 35.9333 13.7337 37.1334 19.667C38.3333 25.567 36.1667 30.8337 32.2333 31.4337C28.3333 32.0337 24.1333 27.7337 22.9 21.8003C21.6667 15.9003 23.9 10.6337 27.8333 10.0003ZM51.6667 10.0003C55.6334 10.6337 57.8334 15.9003 56.6667 21.8003C55.4 27.7337 51.2333 32.0337 47.3 31.4337C43.3333 30.8337 41.1667 25.567 42.4 19.667C43.6 13.7337 47.7667 9.43367 51.6667 10.0003ZM10 25.3337C13.8 23.7003 18.9667 26.667 21.6667 31.8337C24.2 37.1003 23.3333 42.6337 19.5667 44.267C15.8 45.9003 10.6667 42.967 8.03335 37.7337C5.40001 32.5003 6.33335 26.9337 10 25.3337ZM70 25.3337C73.6667 26.9337 74.6 32.5003 71.9667 37.7337C69.3334 42.967 64.2 45.9003 60.4333 44.267C56.6667 42.6337 55.8 37.1003 58.3334 31.8337C61.0333 26.667 66.2 23.7003 70 25.3337ZM64.4333 61.267C64.5667 64.4003 62.1667 67.867 59.3 69.167C53.3334 71.9003 46.2667 66.2337 39.6334 66.2337C33 66.2337 25.8667 72.1337 20 69.167C16.6667 67.5337 14.3667 63.2003 14.8 59.6003C15.4 54.6337 21.3667 51.967 24.9 48.3337C29.6 43.6337 32.9333 34.8003 39.6334 34.8003C46.3 34.8003 49.8333 43.5003 54.3333 48.3337C58.0333 52.4003 64.2 55.8337 64.4333 61.267Z" fill="#FFD700"/>
+</svg>
+                <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625] pt-7">2699</h1>
+                <p class="text-[11px] md:text-[20px] font-semibold text-center pt-7">Dogs to adopt</p>
+            </div>
+            <div class="flex flex-col items-center justify-center">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M55.1111 7.51673H48.2222V0.460938H13.7778V7.51673H6.88889C3.1 7.51673 0 10.6918 0 14.5725V18.1004C0 27.0965 6.61333 34.4346 15.1211 35.5282C17.2911 40.82 21.9411 44.8066 27.5556 45.9708V56.9072H13.7778V63.963H48.2222V56.9072H34.4444V45.9708C40.0589 44.8066 44.7089 40.82 46.8789 35.5282C55.3867 34.4346 62 27.0965 62 18.1004V14.5725C62 10.6918 58.9 7.51673 55.1111 7.51673ZM6.88889 18.1004V14.5725H13.7778V28.0491C9.78222 26.5674 6.88889 22.6867 6.88889 18.1004ZM55.1111 18.1004C55.1111 22.6867 52.2178 26.5674 48.2222 28.0491V14.5725H55.1111V18.1004Z" fill="#FFD700"/>
+</svg>
+                <h1 class="text-2xl md:text-[40px] font-bold text-center text-[#3D6625] pt-7">999</h1>
+                <p class="text-[11px] md:text-[20px] font-semibold text-center pt-7">Adopted dogs</p>
+            </div>
+        </div>
+>>>>>>> Stashed changes
     </div>
   </div>
 </section>
@@ -171,42 +258,31 @@
         <div class="hidden md:block mt-[-400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 px-4 md:px-0">
             <img src="/img/black-dog.png" alt="Quote icon" class="w-32 md:w-64 h-auto">
-            <h2 class="text-lg md:text-[24px] text-center md:text-start">{{ $t('home.quote.part1') }} <span class="text-[#3D6625] font-bold">{{ $t('home.quote.part2') }}</span>.<br>{{ $t('home.quote.part3') }}</h2>
+            <h2 class="text-lg md:text-[24px] text-center md:text-start">"Don't just love, <span class="text-[#3D6625] font-bold">protect them</span>.<br>And save them from the dogcatcher."</h2>
         </div>
         <div class="hidden md:block mt-[400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
         <div class="md:hidden block mt-[450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
     </div>
     <!-- END OF QUOTE -->
 
-<!-- LATEST NEWS SECTION -->
-<div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10">
-  <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">
-    {{ $t('home.news.title.part1') }} <span class="text-logo-yellow font-bold">{{ $t('home.news.title.part2') }}</span>
-  </h2>
+    <!-- LATEST NEWS SECTION -->
+    <div class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10">
+        <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">SEE OUR LATEST <span class="text-logo-yellow font-bold">NEWS AND <br>EVENTS!</span></h2>
 
-  <div v-if="loading" class="text-gray-500">Loading posts…</div>
-  <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 w-[90%] md:w-auto">
-    <div
-      v-for="post in posts"
-      :key="post._id"
-      class="flex flex-col gap-4 w-full max-w-[200px] mx-auto p-4 border rounded hover:shadow"
-    >
-      <div
-        class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"
-      ></div>
-      <h3 class="text-base md:text-[16px] font-semibold text-start">
-        {{ post.title }}
-      </h3>
-      <p class="text-sm md:text-[13px] font-light">
-        {{ post.excerpt }}
-      </p>
-      <nuxt-link
-        :to="`/blog/${post._id}`"
-        class="text-blue-600 hover:underline font-medium text-sm md:text-[13px]"
-      >
-        {{ $t('home.news.readMore') }} →
-      </nuxt-link>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-14 w-[90%] md:w-auto">
+            <div class="flex flex-col gap-4 w-full max-w-[200px] mx-auto">
+                <div class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"></div>
+                <h3 class="text-base md:text-[16px] font-semibold text-start">Free neutering in City</h3>
+                <p class="text-sm md:text-[13px] font-light">Elsődleges célunk egy új <br> állatotthon és kutyafuttató <br> létrehozása volt,  ahol a <br> gyepmesteri telepekről vagy <br> túlterhelt menhelyekről .....  </p>
+                <button class="font-medium text-sm md:text-[13px] border-[#3D6625] border-2 w-[100px] h-[30px]">Read more</button>
+            </div>
+
+            <!-- Add the other news cards here... -->
+
+        </div>
+        <a href="/blogs" class="font-semibold underline text-[24px]">See more articles...</a>
     </div>
+<<<<<<< Updated upstream
   </div>
 
   <nuxt-link to="/blog" class="font-semibold underline text-[24px]">
@@ -249,6 +325,37 @@
               {{ $t('home.location.phone') }}
             </p>
           </div>
+=======
+    <!-- END OF LATEST NEWS SECTION -->
+
+    <!-- LOCATION AND MAP SECTION -->
+    <div class="w-full bg-[#FAF8ED]">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-stretch justify-between gap-8">
+                <div class="w-full md:w-1/2 flex flex-col justify-center">
+                    <div class="flex flex-col gap-6">
+                        <h2 class="text-2xl md:text-3xl font-bold text-[#3D4836] uppercase tracking-wide">Visit us<br>in person!</h2>
+                        <div class="flex flex-col gap-4 mt-4">
+                            <div>
+                                <p class="text-[16px] font-semibold text-[#3D6625]">Opening hours:</p>
+                                <p class="text-[16px] font-normal text-[#3D6625] mt-1">Monday - Sunday: 10:00 - 14:00</p>
+                            </div>
+                            <div>
+                                <p class="text-[16px] font-semibold text-[#3D6625]">Place of organisation:</p>
+                                <p class="text-[16px] font-normal text-[#3D6625] mt-1">4163 Hajdú-Bihar, Szerep, Keményi út 13</p>
+                            </div>
+                            <div>
+                                <p class="text-[16px] font-semibold text-[#3D6625]">Arrange a meeting:</p>
+                                <p class="text-[16px] font-normal text-[#3D6625] mt-1">+36 20 918 3117</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 h-[300px] md:h-[400px]">
+                    <img src="/img/map-placeholder.png" alt="Map location of the animal shelter" class="w-full h-full object-cover">
+                </div>
+            </div>
+>>>>>>> Stashed changes
         </div>
       </div>
 
@@ -272,21 +379,4 @@
 
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { fetchBlogs } from '@/utils/api'
 
-const posts = ref<any[]>([])
-const loading = ref(true)
-
-onMounted(async () => {
-  try {
-    const all = await fetchBlogs()
-    posts.value = all.slice(0, 4)
-  } catch (e) {
-    console.error('could not load blog previews', e)
-  } finally {
-    loading.value = false
-  }
-})
-</script>
