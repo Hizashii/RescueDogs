@@ -43,7 +43,6 @@
     imageError.value = true;
   };
   
-  // Format helpers
   const formatSize = (size) => {
     if (!size) return 'Unknown';
     return size.charAt(0).toUpperCase() + size.slice(1);

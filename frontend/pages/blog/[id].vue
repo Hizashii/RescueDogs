@@ -49,8 +49,7 @@ onMounted(async () => {
   try {
     const data = await fetchBlogById(postId)
     if (!data) {
-      // optionally redirect back if not found
-      // return router.replace('/blog')
+
     }
     post.value = data
   } catch (err) {

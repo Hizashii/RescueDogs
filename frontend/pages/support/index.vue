@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import ImageTitle from '~/components/ImageTitle.vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -31,41 +32,30 @@ const tiers = ref([
   { amount: '5000 Ft', description: t('support.tiers.2.description') },
   { amount: '10 000 Ft', description: t('support.tiers.3.description') },
   { amount: '20 000 Ft', description: t('support.tiers.4.description') },
-  { amount: t('support.tiers.5.amount'), description: '' }
+  { amount: t('support.tiers.5.amount'), description: '' },
 ])
 
-// these names will be changed when we actually implement a shop
+// Charity items
 const charityItems = ref([
-  {
-    img: '/img/charity-item.png',
-    alt: t('support.charity.itemAlt', { number: 1 }),
-    name: t('support.charity.items.1.name'),
-    price: t('support.charity.items.1.price'),
-    desc: t('support.charity.items.1.desc')
-  },
-  {
-    img: '/img/charity-item.png',
-    alt: t('support.charity.itemAlt', { number: 2 }),
-    name: t('support.charity.items.2.name'),
-    price: t('support.charity.items.2.price'),
-    desc: t('support.charity.items.2.desc')
-  },
-  {
-    img: '/img/charity-item.png',
-    alt: t('support.charity.itemAlt', { number: 3 }),
-    name: t('support.charity.items.3.name'),
-    price: t('support.charity.items.3.price'),
-    desc: t('support.charity.items.3.desc')
-  },
-  {
-    img: '/img/charity-item.png',
-    alt: t('support.charity.itemAlt', { number: 4 }),
-    name: t('support.charity.items.4.name'),
-    price: t('support.charity.items.4.price'),
-    desc: t('support.charity.items.4.desc')
-  }
+  { id: 'bandana',      img: '/img/charity-item.png', name: t('support.charity.items.1.name'), price: '2000', desc: t('support.charity.items.1.desc') },
+  { id: 'collar',       img: '/img/charity-item.png', name: t('support.charity.items.2.name'), price: '3000', desc: t('support.charity.items.2.desc') },
+  { id: 'vaccine',      img: '/img/charity-item.png', name: t('support.charity.items.3.name'), price: '5000', desc: t('support.charity.items.3.desc') },
+  { id: 'two-vaccines', img: '/img/charity-item.png', name: t('support.charity.items.4.name'), price: '10000', desc: t('support.charity.items.4.desc') },
 ])
+
+function parseFt(amount: string): number {
+  return parseInt(amount.replace(/\D+/g, ''), 10) || 0
+}
+
+function goToDonation(amountFt: number) {
+  router.push(`/checkout/donation/${amountFt}`)
+}
+
+function goToItem(itemId: string) {
+  router.push(`/checkout/item/${itemId}`)
+}
 </script>
+
 <template>
   <!-- Header -->
   <ImageTitle
@@ -149,15 +139,16 @@ const charityItems = ref([
         {{ $t('support.other.titleLine1') }}<br>
         {{ $t('support.other.titleLine2') }}
       </h1>
-      <p class="text-sm md:text-[20px] py-4 max-w-[500px] text-center md:text-left text-[#3D6625]">
-        <span class="font-semibold">Paypal:</span><br>
+
+      <p class="text-sm md:text-[20px] text-[#3D6625] py-4">
+        <span class="font-semibold">Paypal:</span><br />
         info.mancsmento@gmail.com
       </p>
-      <p class="text-sm md:text-[20px] py-4 max-w-[500px] text-center md:text-left text-[#3D6625]">
-        <span class="font-semibold">Bank donation:</span><br>
-        Mancsmentő Állatvédő Egyesület<br>
-        Számlaszám: 50436604-10003671<br>
-        IBAN: HU42504366041000367100000000<br>
+      <p class="text-sm md:text-[20px] text-[#3D6625]">
+        <span class="font-semibold">Bank donation:</span><br />
+        Mancsmentő Állatvédő Egyesület<br />
+        Számlaszám: 50436604-10003671<br />
+        IBAN: HU42504366041000367100000000<br />
         SWIFT: MKKBHUHB
       </p>
     </div>
