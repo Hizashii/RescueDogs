@@ -1,254 +1,158 @@
 <template>
   <div class="min-h-screen bg-[#FFFADF] py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-32">
-        
-        <img src="/img/dogbg.png" alt="dog picture" class="w-[320px] h-[400px] object-cover drop-shadow-[20px_20px_0px_#FFD700]" />
 
-        
+      <!-- Loading -->
+      <div v-if="loading" class="text-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#3D6625] mx-auto"></div>
+      </div>
+
+      <!-- Not Found -->
+      <div v-else-if="!dog" class="text-center text-gray-700 py-20">
+        <h2 class="text-2xl font-semibold">Dog Not Found</h2>
+        <p>Sorry, we couldn’t locate that pup in our records.</p>
+      </div>
+
+      <!-- Dog Details -->
+      <div v-else class="flex flex-col md:flex-row gap-32">
+        <img
+          :src="API_BASE + dog.image"
+          :alt="dog.name"
+          class="w-[320px] h-[400px] object-cover drop-shadow-[20px_20px_0px_#FFD700]"
+        />
+
         <div class="w-full">
-          <h1 class="text-4xl font-bold text-[#2C3338] mb-8">{{ post.name }}</h1>
-          
-          
+          <h1 class="text-4xl font-bold text-[#2C3338] mb-8">{{ dog.name }}</h1>
+
           <div class="grid grid-cols-2 gap-x-12 gap-y-4 mb-8">
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Status:</p>
-              <p class="font-light text-[15px] text-black">{{ post.status }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Came in:</p>
-              <p class="font-light text-[15px] text-black">{{ post.cameIn }}</p>
-            </div>
-            
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Location:</p>
-              <p class="font-light text-[15px] text-black">{{ post.location }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Looking for owner:</p>
-              <p class="font-light text-[15px] text-black">{{ post.lookingForOwner }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Age:</p>
-              <p class="font-light text-[15px] text-black">{{ post.age }}</p>
-            </div>
-            
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Went out:</p>
-              <p class="font-light text-[15px] text-black">{{ post.wentOut }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Breed:</p>
-              <p class="font-light text-[15px] text-black">{{ post.breed }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Adapted:</p>
-              <p class="font-light text-[15px] text-black">{{ post.adapted }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Size:</p>
-              <p class="font-light text-[15px] text-black">{{ post.size }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Vaccination and chips:</p>
-              <p class="font-light text-[15px] text-black">{{ post.vaccination }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Fur length:</p>
-              <p class="font-light text-[15px] text-black">{{ post.furLength }}</p>
-            </div>
-            <div class="flex flex-row gap-2">
-              <p class="text-black text-sm font-semibold">Relation to people</p>
-              <p class="font-light text-[15px] text-black">{{ post.relationToPeople }}</p>
-            </div>
+            <InfoRow label="Status:"                :value="dog.status          || '—'" />
+            <InfoRow label="Came in:"               :value="dog.cameIn         || '—'" />
+            <InfoRow label="Location:"              :value="dog.location       || '—'" />
+            <InfoRow label="Looking for owner:"     :value="dog.lookingForOwner|| '—'" />
+            <InfoRow label="Age:"                   :value="dog.age             || '—'" />
+            <InfoRow label="Went out:"              :value="dog.wentOut         || '—'" />
+            <InfoRow label="Breed:"                 :value="dog.breed           || '—'" />
+            <InfoRow label="Adapted:"               :value="dog.adapted         || '—'" />
+            <InfoRow label="Size:"                  :value="dog.size            || '—'" />
+            <InfoRow label="Vaccination and chips:" :value="dog.vaccination     || '—'" />
+            <InfoRow label="Fur length:"            :value="dog.furLength       || '—'" />
+            <InfoRow label="Relation to people:"    :value="dog.relationToPeople|| '—'" />
           </div>
 
           <div class="mb-8">
-            <p class="text-black leading-relaxed">{{ post.description }}</p>
+            <p class="text-black leading-relaxed">{{ dog.description || 'No description available.' }}</p>
           </div>
           <div class="mb-8">
             <p class="text-black text-sm font-semibold">More info:</p>
-            <p class="text-black leading-relaxed">{{ post.moreInfo }}</p>
+            <p class="text-black leading-relaxed">{{ dog.moreInfo || '—' }}</p>
           </div>
-          
-          <button class="text-black px-6 py-5 font-bold border-2 border-[#FFD700] hover:bg-[#FFD700] transition-colors">
+
+          <button
+            class="text-black px-6 py-5 font-bold border-2 border-[#FFD700] hover:bg-[#FFD700] transition-colors"
+          >
             Send an inquiry
           </button>
         </div>
       </div>
 
-      
-      <div class="mt-8">
+      <!-- Thumbnails -->
+      <div v-if="dog && dog.thumbnails?.length" class="mt-8">
         <div class="flex gap-4">
-          <NuxtLink 
-            v-for="thumbnail in post.thumbnails" 
-            :key="thumbnail.id"
-            :to="`/up-for-adoption/${thumbnail.id}`"
-            class="w-[150px] h-[190px]  overflow-hidden cursor-pointer "
+          <NuxtLink
+            v-for="thumb in dog.thumbnails"
+            :key="thumb.id"
+            :to="`/up-for-adoption/${thumb.id}`"
+            class="w-[150px] h-[190px] overflow-hidden cursor-pointer"
           >
-            <img 
-              :src="thumbnail.image"
-              :alt="thumbnail.name"
+            <img
+              :src="API_BASE + thumb.image"
+              :alt="thumb.name"
               class="w-full h-full object-cover"
             />
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Separator Line -->
+      <div class="h-[2px] bg-[#FFD700] w-full my-12"></div>
+
+      <!-- Other Doggos -->
+      <h2 class="text-[#3D6625] text-2xl font-bold mb-6">Other Doggos</h2>
+      <div class="flex gap-6">
+        <NuxtLink
+          v-for="other in otherDogs"
+          :key="other.id"
+          :to="`/up-for-adoption/${other.id}`"
+          class="block w-[150px] h-[240px]"
+        >
+          <DogCard :dog="other" />
+        </NuxtLink>
+      </div>
+
+      <!-- Donation Bar -->
+      <div class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+        <div class="flex-1">
+          <h3 class="font-bold">Can’t adopt?</h3>
+          <p>Make a donation to support animals in our care.</p>
+          <div class="flex space-x-4 mt-4">
+            <button class="bg-white px-4 py-2 hover:bg-gray-100">500 Ft</button>
+            <button class="bg-white px-4 py-2 hover:bg-gray-100">1000 Ft</button>
+            <button class="bg-white px-4 py-2 hover:bg-gray-100">2000 Ft</button>
+            <button class="bg-white px-4 py-2 hover:bg-gray-100">3000 Ft</button>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3">
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { useApi } from '~/composables/useApi'
+import { useRuntimeConfig } from '#imports'
+import InfoRow from '~/components/InfoRow.vue'
+import DogCard from '@/components/DogCard.vue'
 
+// Pull API base from runtime config
+const config   = useRuntimeConfig()
+const API_BASE = config.public.apiBase || ''
+
+const api   = useApi()
 const route = useRoute()
-const postId = route.params.id
-const post = ref({})
 
-const fakeBlogPosts = {
-  'habkarika': {
-    name: 'HABKARIKA',
-    status: 'In progress',
-    cameIn: 'Since Sep 15',
-    location: 'Paris',
-    lookingForOwner: 'Yes',
-    age: '2 years',
-    breed: 'Mixed',
-    adapted: 'In progress',
-    size: 'Bigger than most',
-    vaccination: 'In progress',
-    furLength: 'Short',
-    relationToPeople: 'Shy, very curious',
-    description: 'La Habkarika a deux de l\'âge, habite les services offerts pour toutes choses, malgré having habits qui indique un immense top spot sensationnel. Elle est une chienne très gentille qui aime jouer avec les autres chiens. Habite à notre centre pendant que nous préparons pour son adoption.',
-    moreInfo: 'Good with dogs, Good with small children, Came from the streets',
-    mainImage: '/img/dogbg.png',
-    thumbnails: [
-      {
-        id: 'max',
-        name: 'Max',
-        image: '/img/doggo.png'
-      },
-      {
-        id: 'luna',
-        name: 'Luna',
-        image: '/img/intro-dog.png'
-      },
-      {
-        id: 'rocky',
-        name: 'Rocky',
-        image: '/img/doggo.png'
-      }
-    ]
-  },
-  'max': {
-    name: 'MAX',
-    status: 'Available',
-    cameIn: 'Since Aug 20',
-    location: 'Paris',
-    lookingForOwner: 'Yes',
-    age: '3 years',
-    breed: 'German Shepherd',
-    adapted: 'Yes',
-    size: 'Large',
-    vaccination: 'Complete',
-    furLength: 'Medium',
-    relationToPeople: 'Very friendly',
-    description: 'Max is a loving German Shepherd who is great with families and other dogs.',
-    moreInfo: 'Good with dogs, Good with children, Trained',
-    mainImage: '/img/max-main.jpg',
-    thumbnails: [
-      {
-        id: 'habkarika',
-        name: 'Habkarika',
-        image: '/img/dogbg.png'
-      },
-      {
-        id: 'luna',
-        name: 'Luna',
-        image: '/img/intro-dog.png'
-      },
-      {
-        id: 'rocky',
-        name: 'Rocky',
-        image: '/img/doggo.png'
-      }
-    ]
-  },
-  'luna': {
-    name: 'LUNA',
-    status: 'Available',
-    cameIn: 'Since Oct 1',
-    location: 'Paris',
-    lookingForOwner: 'Yes',
-    age: '1 year',
-    breed: 'Labrador Mix',
-    adapted: 'Yes',
-    size: 'Medium',
-    vaccination: 'Complete',
-    furLength: 'Short',
-    relationToPeople: 'Friendly',
-    description: 'Luna is a playful young Labrador mix who loves to run and play fetch.',
-    moreInfo: 'Good with dogs, Good with children, Energetic',
-    mainImage: '/img/luna-main.jpg',
-    thumbnails: [
-      {
-        id: 'habkarika',
-        name: 'Habkarika',
-        image: '/img/dogbg.png'
-      },
-      {
-        id: 'max',
-        name: 'Max',    
-        image: '/img/doggo.png'
-      },
-      {
-        id: 'rocky',
-        name: 'Rocky',
-        image: '/img/doggo.png'
-      }
-    ]
-  },
-  'rocky': {
-    name: 'ROCKY',
-    status: 'Available',
-    cameIn: 'Since Sep 25',
-    location: 'Paris',
-    lookingForOwner: 'Yes',
-    age: '4 years',
-    breed: 'Pitbull Mix',
-    adapted: 'In progress',
-    size: 'Large',
-    vaccination: 'In progress',
-    furLength: 'Short',
-    relationToPeople: 'Friendly with training',
-    description: 'Rocky is a strong and loyal dog who needs an experienced owner.',
-    moreInfo: 'Needs training, Good with experienced owners',
-    mainImage: '/img/rocky-main.jpg',
-    thumbnails: [
-      {
-        id: 'habkarika',
-        name: 'Habkarika',
-        image: '/img/dogbg.png'
-      },
-      {
-        id: 'max',
-        name: 'Max',
-        image: '/img/doggo.png'
-      },
-      {
-        id: 'luna',
-        name: 'Luna',
-        image: '/img/intro-dog.png'
-      }
-    ]
+const dog     = ref<any|null>(null)
+const dogs    = ref<any[]>([])
+const loading = ref(true)
+
+async function fetchDogAndList() {
+  loading.value = true
+  const id = route.params.id as string
+
+  try {
+    // fetch individual
+    dog.value = await api(`/api/dogs/${id}`, { method: 'GET' })
+    // fetch full list
+    dogs.value = await api<any[]>('/api/dogs', { method: 'GET' })
+  } catch {
+    // fallback: just fetch list
+    const all = await api<any[]>('/api/dogs', { method: 'GET' })
+    dogs.value = all
+    dog.value = all.find(d => String(d.id) === id) ?? null
+  } finally {
+    loading.value = false
   }
 }
 
-onMounted(() => {
-  post.value = fakeBlogPosts[postId] || {
-    name: 'Dog Not Found',
-    description: 'Sorry, we couldn\'t find this dog in our database.',
-  }
-})
+// compute other four
+const otherDogs = computed(() =>
+  dogs.value
+    .filter(d => String(d.id) !== String(dog.value?.id))
+    .slice(0, 4)
+)
+
+onMounted(fetchDogAndList)
 </script>

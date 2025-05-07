@@ -82,7 +82,7 @@
               v-for="page in paginationPages"
               :key="page"
               @click="goToPage(page)"
-              :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+              :class="['px-3 py-1 border', currentPage === page ? 'bg-[#FFD700]  text-white' : '']"
             >
               {{ page }}
             </button>
@@ -94,7 +94,7 @@
               v-for="page in lastPages"
               :key="`last-${page}`"
               @click="goToPage(page)"
-              :class="['px-3 py-1 border', currentPage === page ? 'bg-black text-white' : '']"
+              :class="['px-3 py-1 border', currentPage === page ? 'bg-[#FFD700]  text-white' : '']"
             >
               {{ page }}
             </button>
