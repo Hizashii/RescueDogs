@@ -4,7 +4,7 @@
       {{ $t('report.title') }}
     </h1>
 
-    <!-- Success message -->
+    <!-- Success -->
     <div
       v-if="submitSuccess"
       class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
@@ -13,7 +13,7 @@
       <p>{{ $t('report.success.body') }}</p>
     </div>
 
-    <!-- Error message -->
+    <!-- Error -->
     <div
       v-if="submitError"
       class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
@@ -22,7 +22,7 @@
       <p>{{ errorMessage }}</p>
     </div>
 
-    <!-- Loading indicator -->
+    <!-- Loading -->
     <div
       v-if="isSubmitting"
       class="w-full max-w-[400px] md:max-w-[700px] mb-8 flex justify-center"
@@ -76,22 +76,35 @@
         </div>
       </div>
 
-      <!-- Dog city & Picture -->
+      <!-- Dog City & Picture -->
       <div class="flex flex-wrap -mx-3 mb-4">
+        <!-- Dog City Dropdown -->
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label for="dog-city" class="block md:text-xl text-base font-bold mb-2">
+          <label
+            for="dog-city"
+            class="block md:text-xl text-base font-bold mb-2"
+          >
             {{ $t('report.form.dogCity.label') }}
           </label>
-          <input
+          <select
             id="dog-city"
-            type="text"
             v-model="formData.dogCity"
             required
-            class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-          />
+            class="appearance-none w-full py-2 px-3 text-gray-700 bg-white focus:outline-none focus:shadow-outline"
+          >
+            <option value="" disabled>{{ $t('ChooseACity') }}</option>
+            <option v-for="city in dogCities" :key="city" :value="city">
+              {{ city }}
+            </option>
+          </select>
         </div>
+
+        <!-- Picture Upload -->
         <div class="w-full md:w-1/2 px-3">
-          <label for="dog-picture" class="block md:text-xl text-base font-bold mb-2">
+          <label
+            for="dog-picture"
+            class="block md:text-xl text-base font-bold mb-2"
+          >
             {{ $t('report.form.dogPicture.label') }}
           </label>
           <div class="flex items-center space-x-4">
@@ -114,9 +127,12 @@
         </div>
       </div>
 
-      <!-- Reporter city -->
+      <!-- Reporter City -->
       <div class="mb-4">
-        <label for="reporter-city" class="block md:text-xl text-base font-bold mb-2">
+        <label
+          for="reporter-city"
+          class="block md:text-xl text-base font-bold mb-2"
+        >
           {{ $t('report.form.reporterCity.label') }}
         </label>
         <input
@@ -128,16 +144,24 @@
         />
       </div>
 
-      <!-- Comments -->
+      <!-- Comments with 100‑char limit -->
       <div class="mb-6">
-        <label for="comments" class="block md:text-xl text-base font-bold mb-2">
+        <label
+          for="comments"
+          class="block md:text-xl text-base font-bold mb-2"
+        >
           {{ $t('report.form.comments.label') }}
         </label>
         <textarea
           id="comments"
           v-model="formData.comments"
-          class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+          :maxlength="100"
+          rows="4"
+          class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline resize-none"
         ></textarea>
+        <div class="text-right text-sm text-gray-600 mt-1">
+          {{ formData.comments.length }} / 100
+        </div>
       </div>
 
       <!-- Submit -->
@@ -146,12 +170,13 @@
         :disabled="isSubmitting"
         class="border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-black"
       >
-        {{ isSubmitting ? $t('report.form.submit.loading') : $t('report.form.submit.default') }}
+        {{ isSubmitting
+          ? $t('report.form.submit.loading')
+          : $t('report.form.submit.default') }}
       </button>
     </form>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
@@ -166,6 +191,27 @@ interface ReportForm {
   comments: string
 }
 
+const dogCities = [
+  'Báránd',
+  'Bihardancsháza',
+  'Biharnagybajom',
+  'Hosszúhát',
+  'Komádi',
+  'Körösszakál',
+  'Körösszegapáti',
+  'Magyarhomorog',
+  'Mezőpeterd',
+  'Mezősas',
+  'Nádudvar',
+  'Nagyrábé',
+  'Püspökladány',
+  'Sáp',
+  'Sárrétudvari',
+  'Szerep',
+  'Tetétlen',
+  'Zsáka'
+]
+
 const formData = reactive<ReportForm>({
   name: '',
   phone: '',
@@ -176,30 +222,30 @@ const formData = reactive<ReportForm>({
 })
 
 const dogPicture = ref<File | null>(null)
-const fileName   = ref('')
+const fileName = ref('')
 const isSubmitting = ref(false)
 const submitSuccess = ref(false)
-const submitError   = ref(false)
-const errorMessage  = ref('')
+const submitError = ref(false)
+const errorMessage = ref('')
 
-const config  = useRuntimeConfig()
+const config = useRuntimeConfig()
 const apiBase = config.public.apiBase || 'http://localhost:5000'
 
-function handleFileUpload (e: Event) {
+function handleFileUpload(e: Event) {
   const files = (e.target as HTMLInputElement).files
   if (!files?.length) return
   const file = files[0]
   if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large. Maximum 32 MB.')
+    alert('File is too large. Maximum 32 MB.')
     return
   }
   dogPicture.value = file
-  fileName.value   = file.name
+  fileName.value = file.name
 }
 
-async function submitReport () {
+async function submitReport() {
   isSubmitting.value = true
-  submitError.value  = false
+  submitError.value = false
 
   const data = new FormData()
   data.append('name', formData.name)
@@ -229,7 +275,7 @@ async function submitReport () {
       comments: ''
     })
     dogPicture.value = null
-    fileName.value   = ''
+    fileName.value = ''
   } catch (err: any) {
     submitError.value = true
     errorMessage.value = err.message || 'Unknown error'

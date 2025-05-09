@@ -7,10 +7,10 @@ export interface IDog extends Document {
   adopted: boolean;
   location?: string;
   breed?: string;
-  size?: string;    // e.g., "small", "medium", "large"
-  age?: string;     // e.g., "puppy", "adult", "senior"
-  gender?: string;  // e.g., "male", "female"
-  goodWith?: string[];  // e.g., ["children", "cats", "dogs"]
+  size?: string;   
+  age?: string;   
+  gender?: string; 
+  goodWith?: string[]; 
 }
 
 const DogSchema = new Schema<IDog>({
@@ -19,13 +19,12 @@ const DogSchema = new Schema<IDog>({
   image: { type: String, required: true },
   adopted: { type: Boolean, default: false },
   
-  // New fields
   location: { type: String },
   breed: { type: String },
   size: { type: String },
   age: { type: String },
   gender: { type: String },
-  goodWith: [{ type: String }], // array of strings
+  goodWith: [{ type: String }],
 }, { timestamps: true });
 
 export default model<IDog>('Dog', DogSchema);

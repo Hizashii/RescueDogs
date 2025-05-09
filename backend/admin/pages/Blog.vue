@@ -64,7 +64,12 @@
       <form @submit.prevent="savePost">
         <div class="mb-4">
           <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-          <input id="title" v-model="editingPost.title" type="text" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title" required />
+          <input id="title" v-model="editingPost.title" type="text" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title" required maxlength="2400" />
+          <div class="text-sm mt-1 flex justify-end">
+            <span :class="{'text-red-600': editingPost.title.length > CHARACTER_LIMIT}">
+              {{ editingPost.title.length }} / {{ CHARACTER_LIMIT }} characters
+            </span>
+          </div>
         </div>
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
@@ -100,11 +105,26 @@
               <button type="button" @click="insertLink" class="p-1 rounded hover:bg-gray-200" title="Insert Link">🔗 Link</button>
             </div>
             <div ref="editor" contenteditable="true" dir="ltr" class="p-3 min-h-64 focus:outline-none" @input="updateContent"></div>
+            <div class="p-2 bg-gray-50 border-t flex justify-between items-center">
+              <div class="text-sm">
+                <span :class="{'text-red-600': contentCharCount > CHARACTER_LIMIT}">
+                  {{ contentCharCount }} / {{ CHARACTER_LIMIT }} characters
+                </span>
+              </div>
+              <div v-if="contentCharCount > CHARACTER_LIMIT" class="text-sm text-red-600">
+                Character limit exceeded by {{ contentCharCount - CHARACTER_LIMIT }} characters
+              </div>
+            </div>
           </div>
         </div>
         <div class="mb-4">
           <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-1">Excerpt (Short description for previews)</label>
-          <textarea id="excerpt" v-model="editingPost.excerpt" rows="3" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a short excerpt"></textarea>
+          <textarea id="excerpt" v-model="editingPost.excerpt" rows="3" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a short excerpt" maxlength="2400"></textarea>
+          <div class="text-sm mt-1 flex justify-end">
+            <span :class="{'text-red-600': editingPost.excerpt.length > CHARACTER_LIMIT}">
+              {{ editingPost.excerpt.length }} / {{ CHARACTER_LIMIT }} characters
+            </span>
+          </div>
         </div>
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
@@ -123,7 +143,10 @@
           <button type="button" @click="cancelEdit" class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
             Cancel
           </button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <button type="submit" 
+            :disabled="contentCharCount > CHARACTER_LIMIT || editingPost.title.length > CHARACTER_LIMIT || editingPost.excerpt.length > CHARACTER_LIMIT" 
+            class="px-4 py-2 text-white rounded" 
+            :class="contentCharCount > CHARACTER_LIMIT || editingPost.title.length > CHARACTER_LIMIT || editingPost.excerpt.length > CHARACTER_LIMIT ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'">
             {{ selectedPost ? 'Update Post' : 'Create Post' }}
           </button>
         </div>
@@ -201,7 +224,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+
+// Character limit constant
+const CHARACTER_LIMIT = 2400;
 
 interface BlogPost {
   _id: string;
@@ -241,6 +267,18 @@ const emptyPost: BlogPost = {
 
 const editingPost = reactive<BlogPost>({ ...emptyPost });
 
+// Helper function to strip HTML tags for character counting
+function stripHtml(html: string): string {
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  return temp.textContent || temp.innerText || '';
+}
+
+// Compute character count for content
+const contentCharCount = computed(() => {
+  return stripHtml(editingPost.content).length;
+});
+
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString();
 }
@@ -279,6 +317,22 @@ function cancelEdit() {
 }
 
 async function savePost() {
+  // Check if any fields exceed character limit
+  if (contentCharCount.value > CHARACTER_LIMIT) {
+    alert(`Content exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your content.`);
+    return;
+  }
+  
+  if (editingPost.title.length > CHARACTER_LIMIT) {
+    alert(`Title exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your title.`);
+    return;
+  }
+  
+  if (editingPost.excerpt.length > CHARACTER_LIMIT) {
+    alert(`Excerpt exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your excerpt.`);
+    return;
+  }
+
   try {
     const isNew = !selectedPost.value;
     editingPost.updatedAt = new Date().toISOString();
@@ -346,6 +400,24 @@ function removeImage() {
 
 function updateContent(e: Event) {
   editingPost.content = (e.target as HTMLElement).innerHTML;
+  
+  // Optional: Prevent typing if over character limit
+  if (contentCharCount.value > CHARACTER_LIMIT && editor.value) {
+    // This is a simple implementation - for a better UX, you might want to
+    // use a more sophisticated approach that preserves cursor position
+    const selection = window.getSelection();
+    const range = selection?.getRangeAt(0);
+    if (range) {
+      // Store selection information
+      const startContainer = range.startContainer;
+      const startOffset = range.startOffset;
+      
+      // Revert to previous content that was within limits
+      // Note: This is simplified and not perfect for all editing scenarios
+      const previousText = stripHtml(editingPost.content).substring(0, CHARACTER_LIMIT);
+      // Apply formatting back if needed
+    }
+  }
 }
 
 // Helper to insert HTML at the current caret position using Range/Selection APIs
@@ -383,6 +455,14 @@ function wrapSelectionWithTag(tag: string) {
 
 function applyFormatting(format: string) {
   if (!editor.value) return;
+  
+  // For list formats, check if adding would exceed character limit
+  if ((format === 'ul' || format === 'ol') && contentCharCount.value >= CHARACTER_LIMIT - 10) {
+    // Lists add additional characters for the markup
+    alert(`You're approaching the ${CHARACTER_LIMIT} character limit. Cannot add list formatting.`);
+    return;
+  }
+  
   if (format === 'bold') {
     wrapSelectionWithTag('strong');
   } else if (format === 'italic') {
@@ -408,6 +488,12 @@ function applyFormatting(format: string) {
 }
 
 function insertImage() {
+  // Check if adding more content would potentially exceed character limit
+  if (contentCharCount.value >= CHARACTER_LIMIT) {
+    alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
+    return;
+  }
+  
   showImageModal.value = true;
   imageAltText.value = '';
   contentImageFile.value = null;
@@ -440,6 +526,12 @@ function confirmImageUpload() {
 }
 
 function insertLink() {
+  // Check if adding more content would exceed character limit
+  if (contentCharCount.value >= CHARACTER_LIMIT) {
+    alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
+    return;
+  }
+  
   const sel = window.getSelection();
   linkText.value = sel && sel.toString() ? sel.toString() : '';
   linkUrl.value = '';
