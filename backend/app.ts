@@ -1,5 +1,5 @@
 // app.ts
-import 'dotenv/config'              // ← load .env first
+import 'dotenv/config'
 import express from 'express'
 import cors    from 'cors'
 import path    from 'path'
@@ -12,6 +12,7 @@ import dogRoutes            from './routes/dog.routes'
 import reportRoutes         from './routes/report.routes'
 import adminCharityRoutes   from './routes/admin/charityItem.routes'
 import publicCharityRoutes  from './routes/public/charityItem.routes'
+import filterRoutes from './routes/filterRoutes';
 
 // ──────────────────────────────────────────────────────────────
 // 1️⃣ Monkey-patch the DNS TXT lookup to suppress ESERVFAIL
@@ -61,6 +62,7 @@ app.use('/api/charity-items',       publicCharityRoutes)
 app.use('/api/dogs',               dogRoutes)
 app.use('/api/reports',            reportRoutes)
 app.use('/api/blogs',              blogRoutes)
+app.use('/api',                  filterRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
