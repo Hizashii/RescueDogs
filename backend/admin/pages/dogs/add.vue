@@ -1,61 +1,60 @@
 <template>
   <div class="min-h-screen flex justify-center bg-gray-100 p-4">
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl">
+      <h1 class="text-2xl font-bold mb-4 text-[#1446A0]">
+        {{ isEditMode ? 'Edit Dog' : 'Add New Dog' }}
+      </h1>
+
       <form @submit.prevent="submitDog" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
         <div class="space-y-4">
           <div>
             <label class="block font-medium mb-1">Name</label>
             <input v-model="name" type="text" required
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]"/>
+                   class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
             <label class="block font-medium mb-1">Status</label>
             <select v-model="status" required
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select status</option>
               <option v-for="s in statuses" :key="s">{{ s }}</option>
             </select>
           </div>
         </div>
-
         <div class="space-y-4">
           <div>
             <label class="block font-medium mb-1">Breed</label>
             <input v-model="breed" type="text" placeholder="e.g., Labrador"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]"/>
+                   class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
             <label class="block font-medium mb-1">Size</label>
             <select v-model="size"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select size</option>
               <option v-for="sz in sizes" :key="sz">{{ sz }}</option>
             </select>
           </div>
         </div>
-
         <div class="space-y-4">
           <div>
             <label class="block font-medium mb-1">Image</label>
-            <input type="file" @change="handleFileUpload" accept="image/*"
-              class="w-full"/>
+            <input type="file" @change="handleFileUpload" accept="image/*" class="w-full"/>
           </div>
           <div>
             <label class="block font-medium mb-1">Location</label>
             <select v-model="location" required
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select city</option>
               <option v-for="c in dogCities" :key="c">{{ c }}</option>
             </select>
           </div>
         </div>
-
         <div class="space-y-4">
           <div>
             <label class="block font-medium mb-1">Age</label>
             <select v-model="age"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select age</option>
               <option v-for="a in ages" :key="a">{{ a }}</option>
             </select>
@@ -63,24 +62,22 @@
           <div>
             <label class="block font-medium mb-1">Gender</label>
             <select v-model="gender"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select gender</option>
               <option v-for="g in genders" :key="g">{{ g }}</option>
             </select>
           </div>
         </div>
-
         <div class="lg:col-span-2">
           <label class="block font-medium mb-1">Description</label>
           <textarea v-model="description" rows="3" required
-            class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]"></textarea>
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]"></textarea>
         </div>
-
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block font-medium mb-1">Fur Length</label>
             <select v-model="furLength"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select fur length</option>
               <option v-for="f in furLengths" :key="f">{{ f }}</option>
             </select>
@@ -88,29 +85,57 @@
           <div>
             <label class="block font-medium mb-1">Vaccination & Chips</label>
             <select v-model="vaccination"
-              class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select option</option>
               <option v-for="v in vaccinationOptions" :key="v">{{ v }}</option>
             </select>
           </div>
         </div>
-
         <div class="lg:col-span-2">
-          <label class="block font-medium mb-2">Extra Tags</label>
+          <label class="block font-medium mb-2">Good With</label>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <label v-for="tag in extraTags" :key="tag" class="flex items-center">
               <input type="checkbox" :value="tag" v-model="selectedTags"
-                class="h-5 w-5 text-[#1446A0] border-gray-300 rounded"/>
+                     class="h-5 w-5 text-[#1446A0] border-gray-300 rounded"/>
               <span class="ml-2">{{ tag }}</span>
             </label>
           </div>
         </div>
-
+        <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label class="block font-medium mb-1">Came In</label>
+            <input type="date" v-model="cameIn" class="w-full border rounded p-2"/>
+          </div>
+          <div>
+            <label class="block font-medium mb-1">Went Out</label>
+            <input type="date" v-model="wentOut" class="w-full border rounded p-2"/>
+          </div>
+          <div>
+            <label class="block font-medium mb-1">Looking for Owner</label>
+            <input type="date" v-model="lookingForOwner" class="w-full border rounded p-2"/>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-medium mb-1">Adapted</label>
+            <input type="date" v-model="adapted" class="w-full border rounded p-2"/>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-medium mb-1">Relation to People</label>
+            <input type="text" v-model="relationToPeople"
+                   class="w-full border rounded p-2" placeholder="e.g., Friendly"/>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <label class="block font-medium mb-1">More Info</label>
+          <textarea v-model="moreInfo" rows="3"
+                    class="w-full border rounded p-2"></textarea>
+        </div>
         <div class="lg:col-span-2 flex justify-end">
           <button type="submit"
-            :disabled="isSubmitting"
-            class="bg-[#1446A0] text-white font-bold py-2 px-6 rounded hover:bg-[#0d3580]">
-            {{ isSubmitting ? 'Submitting…' : 'Submit' }}
+                  :disabled="isSubmitting"
+                  class="bg-[#1446A0] text-white font-bold py-2 px-6 rounded hover:bg-[#0d3580]">
+            {{ isSubmitting
+                ? (isEditMode ? 'Saving…' : 'Submitting…')
+                : (isEditMode ? 'Save Changes' : 'Submit') }}
           </button>
         </div>
       </form>
@@ -118,14 +143,17 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useApi } from '~/composables/useApi'
 
 const api = useApi()
+const route = useRoute()
 const router = useRouter()
+
+const editId     = computed(() => (route.query.id as string) || '')
+const isEditMode = computed(() => !!editId.value)
 
 const dogCities = [
   'Báránd','Bihardancsháza','Biharnagybajom','Hosszúhát','Komádi',
@@ -137,60 +165,79 @@ const statuses = [
   'Up for adoption','In quarantine','Adopted',
   'Claimed by original owner','Housed by another shelter','Deceased'
 ]
-const sizes = [
+const sizes    = [
   'small','bigger small','smaller mid','mid',
   'bigger mid','smaller big','big'
 ]
-const ages = ['Puppy','Young','Adult','Old']
-const genders = ['Male','Female']
-const furLengths = ['Short','Mid','Long']
+const ages     = ['Puppy','Young','Adult','Old']
+const genders  = ['Male','Female']
+const furLengths         = ['Short','Mid','Long']
 const vaccinationOptions = ['Chipped and vaccinated','In process']
-const extraTags = [
+const extraTags          = [
   'Good with people/kids/cats/dogs','Really friendly','Shy','Curious',
   'Afraid of people','Afraid of other dogs','Agressive with people',
   'Came from the streets','Heartworm positive'
 ]
 
-const name = ref('')
-const description = ref('')
-const imageFile = ref<File|null>(null)
-const location = ref('')
-const status = ref('')
-const breed = ref('')
-const size = ref('')
-const age = ref('')
-const gender = ref('')
-const furLength = ref('')
-const vaccination = ref('')
-const selectedTags = ref<string[]>([])
+const name             = ref('')
+const status           = ref('')
+const breed            = ref('')
+const size             = ref('')
+const age              = ref('')
+const gender           = ref('')
+const furLength        = ref('')
+const vaccination      = ref('')
+const location         = ref('')
+const description      = ref('')
+const imageFile        = ref<File|null>(null)
+const selectedTags     = ref<string[]>([])
+
+const cameIn           = ref('')
+const wentOut          = ref('')
+const lookingForOwner  = ref('')
+const adapted          = ref('')
+const relationToPeople = ref('')
+const moreInfo         = ref('')
 
 const isSubmitting = ref(false)
-const error = ref(false)
-const success = ref(false)
-const errorMessage = ref('')
 
 function handleFileUpload(e: Event) {
-  const files = (e.target as HTMLInputElement).files
-  imageFile.value = files?.[0] ?? null
+  imageFile.value = (e.target as HTMLInputElement).files?.[0] || null
 }
 
-async function submitDog() {
-  if (!imageFile.value) {
-    error.value = true
-    errorMessage.value = 'Please select an image file'
-    return
+onMounted(async () => {
+  if (!isEditMode.value) return
+
+  try {
+    const dog = await api(`/api/dogs/${editId.value}`)
+    const dogData = dog as any
+    name.value        = dogData.name
+    status.value      = dogData.status
+    breed.value       = dogData.breed
+    size.value        = dogData.size
+    age.value         = dogData.age
+    gender.value      = dogData.gender
+    furLength.value   = dogData.furLength
+    vaccination.value = dogData.vaccination
+    location.value    = dogData.location
+    description.value = dogData.description
+    selectedTags.value= dogData.goodWith || []
+    cameIn.value            = dogData.cameIn
+    wentOut.value           = dogData.wentOut
+    lookingForOwner.value   = dogData.lookingForOwner
+    adapted.value           = dogData.adapted
+    relationToPeople.value  = dogData.relationToPeople
+    moreInfo.value          = dogData.moreInfo
+  } catch (err) {
+    console.error('Failed to load dog:', err)
   }
+})
 
+async function submitDog() {
   isSubmitting.value = true
-  error.value = false
-  success.value = false
-  errorMessage.value = ''
-
   const formData = new FormData()
+
   formData.append('name', name.value)
-  formData.append('description', description.value)
-  formData.append('image', imageFile.value)
-  formData.append('location', location.value)
   formData.append('status', status.value)
   formData.append('breed', breed.value)
   formData.append('size', size.value)
@@ -198,40 +245,28 @@ async function submitDog() {
   formData.append('gender', gender.value)
   formData.append('furLength', furLength.value)
   formData.append('vaccination', vaccination.value)
-  selectedTags.value.forEach(tag => formData.append('extraTags', tag))
+  formData.append('location', location.value)
+  formData.append('description', description.value)
+  if (imageFile.value) formData.append('image', imageFile.value)
+  selectedTags.value.forEach(tag => formData.append('goodWith', tag))
 
-  try {
-    await api('/api/dogs/upload', {
-      method: 'POST',
-      body: formData
-    })
+  formData.append('cameIn', cameIn.value)
+  formData.append('wentOut', wentOut.value)
+  formData.append('lookingForOwner', lookingForOwner.value)
+  formData.append('adapted', adapted.value)
+  formData.append('relationToPeople', relationToPeople.value)
+  formData.append('moreInfo', moreInfo.value)
 
-    success.value = true
-    setTimeout(() => {
-      name.value = ''
-      description.value = ''
-      imageFile.value = null
-      location.value = ''
-      status.value = ''
-      breed.value = ''
-      size.value = ''
-      age.value = ''
-      gender.value = ''
-      furLength.value = ''
-      vaccination.value = ''
-      selectedTags.value = []
-
-      const fileInput = document.getElementById('dogImage') as HTMLInputElement|null
-      if (fileInput) fileInput.value = ''
-
-      router.push('/dogs')
-    }, 1500)
-  } catch (err: any) {
-    console.error('Error submitting dog:', err)
-    errorMessage.value = err?.data?.message || 'Failed to add dog. Please try again.'
-    error.value = true
-  } finally {
-    isSubmitting.value = false
+try {
+  if (isEditMode.value) {
+    await api(`/api/dogs/${editId.value}`, { method: 'PUT', body: formData })
+    window.alert('Changes saved successfully!')
+  } else {
+    await api('/api/dogs/upload', { method: 'POST', body: formData })
+    window.alert('Dog created successfully!')
   }
+  await router.push('/')
+} catch (err) {
+}
 }
 </script>

@@ -3,7 +3,10 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
 
   nitro: {
-    devProxy: { '/api/**': 'http://localhost:5000' }
+    devProxy: {
+      '/api/**': 'http://localhost:5000',
+      '/uploads/**': 'http://localhost:5000'
+    }
   },
 
   runtimeConfig: {
@@ -12,5 +15,5 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2025-04-17'
+  compatibilityDate: '2025-05-11'
 })

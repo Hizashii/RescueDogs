@@ -2,18 +2,15 @@
   <div class="min-h-screen bg-[#FFFADF] py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
 
-      <!-- Loading -->
       <div v-if="loading" class="text-center py-20">
         <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#3D6625] mx-auto"></div>
       </div>
 
-      <!-- Not Found -->
       <div v-else-if="!dog" class="text-center text-gray-700 py-20">
         <h2 class="text-2xl font-semibold">Dog Not Found</h2>
         <p>Sorry, we couldn’t locate that pup in our records.</p>
       </div>
 
-      <!-- Dog Details -->
       <div v-else class="flex flex-col md:flex-row gap-32">
         <img
           :src="API_BASE + dog.image"
@@ -55,7 +52,6 @@
         </div>
       </div>
 
-      <!-- Thumbnails -->
       <div v-if="dog && dog.thumbnails?.length" class="mt-8">
         <div class="flex gap-4">
           <NuxtLink
@@ -73,10 +69,8 @@
         </div>
       </div>
 
-      <!-- Separator Line -->
       <div class="h-[2px] bg-[#FFD700] w-full my-12"></div>
 
-      <!-- Other Doggos -->
       <h2 class="text-[#3D6625] text-2xl font-bold mb-6">Other Doggos</h2>
       <div class="flex gap-6">
         <NuxtLink
@@ -89,7 +83,6 @@
         </NuxtLink>
       </div>
 
-      <!-- Donation Bar -->
       <div class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
         <div class="flex-1">
           <h3 class="font-bold">Can’t adopt?</h3>
@@ -117,7 +110,6 @@ import { useRuntimeConfig } from '#imports'
 import InfoRow from '~/components/InfoRow.vue'
 import DogCard from '@/components/DogCard.vue'
 
-// Pull API base from runtime config
 const config   = useRuntimeConfig()
 const API_BASE = config.public.apiBase || ''
 
@@ -133,12 +125,9 @@ async function fetchDogAndList() {
   const id = route.params.id as string
 
   try {
-    // fetch individual
     dog.value = await api(`/api/dogs/${id}`, { method: 'GET' })
-    // fetch full list
     dogs.value = await api<any[]>('/api/dogs', { method: 'GET' })
   } catch {
-    // fallback: just fetch list
     const all = await api<any[]>('/api/dogs', { method: 'GET' })
     dogs.value = all
     dog.value = all.find(d => String(d.id) === id) ?? null
@@ -147,7 +136,6 @@ async function fetchDogAndList() {
   }
 }
 
-// compute other four
 const otherDogs = computed(() =>
   dogs.value
     .filter(d => String(d.id) !== String(dog.value?.id))
