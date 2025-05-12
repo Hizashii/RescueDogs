@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex justify-center bg-gray-100 p-4">
-    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl">
-      <h1 class="text-2xl font-bold mb-4 text-[#1446A0]">
+  <div class="min-h-screen flex justify-center bg-[#F8F6ED] p-4">
+    <div class="bg-white shadow-lg  p-6 w-full max-w-4xl">
+      <h1 class="text-2xl font-bold mb-4 text-[#3D4836]">
         {{ isEditMode ? 'Edit Dog' : 'Add New Dog' }}
       </h1>
 
@@ -10,12 +10,12 @@
           <div>
             <label class="block font-medium mb-1">Name</label>
             <input v-model="name" type="text" required
-                   class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]" />
+                   class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
             <label class="block font-medium mb-1">Status</label>
             <select v-model="status" required
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select status</option>
               <option v-for="s in statuses" :key="s">{{ s }}</option>
             </select>
@@ -25,12 +25,12 @@
           <div>
             <label class="block font-medium mb-1">Breed</label>
             <input v-model="breed" type="text" placeholder="e.g., Labrador"
-                   class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]" />
+                   class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
             <label class="block font-medium mb-1">Size</label>
             <select v-model="size"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select size</option>
               <option v-for="sz in sizes" :key="sz">{{ sz }}</option>
             </select>
@@ -44,7 +44,7 @@
           <div>
             <label class="block font-medium mb-1">Location</label>
             <select v-model="location" required
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select city</option>
               <option v-for="c in dogCities" :key="c">{{ c }}</option>
             </select>
@@ -54,7 +54,7 @@
           <div>
             <label class="block font-medium mb-1">Age</label>
             <select v-model="age"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select age</option>
               <option v-for="a in ages" :key="a">{{ a }}</option>
             </select>
@@ -62,7 +62,7 @@
           <div>
             <label class="block font-medium mb-1">Gender</label>
             <select v-model="gender"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select gender</option>
               <option v-for="g in genders" :key="g">{{ g }}</option>
             </select>
@@ -71,13 +71,13 @@
         <div class="lg:col-span-2">
           <label class="block font-medium mb-1">Description</label>
           <textarea v-model="description" rows="3" required
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0]"></textarea>
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]"></textarea>
         </div>
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block font-medium mb-1">Fur Length</label>
             <select v-model="furLength"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select fur length</option>
               <option v-for="f in furLengths" :key="f">{{ f }}</option>
             </select>
@@ -85,7 +85,7 @@
           <div>
             <label class="block font-medium mb-1">Vaccination & Chips</label>
             <select v-model="vaccination"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
+                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
               <option disabled value="">Select option</option>
               <option v-for="v in vaccinationOptions" :key="v">{{ v }}</option>
             </select>
@@ -96,7 +96,7 @@
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <label v-for="tag in extraTags" :key="tag" class="flex items-center">
               <input type="checkbox" :value="tag" v-model="selectedTags"
-                     class="h-5 w-5 text-[#1446A0] border-gray-300 rounded"/>
+                     class="h-5 w-5 text-[#1446A0] border-gray-300"/>
               <span class="ml-2">{{ tag }}</span>
             </label>
           </div>
@@ -104,35 +104,35 @@
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="block font-medium mb-1">Came In</label>
-            <input type="date" v-model="cameIn" class="w-full border rounded p-2"/>
+            <input type="date" v-model="cameIn" class="w-full border p-2"/>
           </div>
           <div>
             <label class="block font-medium mb-1">Went Out</label>
-            <input type="date" v-model="wentOut" class="w-full border rounded p-2"/>
+            <input type="date" v-model="wentOut" class="w-full border p-2"/>
           </div>
           <div>
             <label class="block font-medium mb-1">Looking for Owner</label>
-            <input type="date" v-model="lookingForOwner" class="w-full border rounded p-2"/>
+            <input type="date" v-model="lookingForOwner" class="w-full border p-2"/>
           </div>
           <div class="md:col-span-2">
             <label class="block font-medium mb-1">Adapted</label>
-            <input type="date" v-model="adapted" class="w-full border rounded p-2"/>
+            <input type="date" v-model="adapted" class="w-full border p-2"/>
           </div>
           <div class="md:col-span-2">
             <label class="block font-medium mb-1">Relation to People</label>
             <input type="text" v-model="relationToPeople"
-                   class="w-full border rounded p-2" placeholder="e.g., Friendly"/>
+                   class="w-full border p-2" placeholder="e.g., Friendly"/>
           </div>
         </div>
         <div class="lg:col-span-2">
           <label class="block font-medium mb-1">More Info</label>
           <textarea v-model="moreInfo" rows="3"
-                    class="w-full border rounded p-2"></textarea>
+                    class="w-full border p-2"></textarea>
         </div>
         <div class="lg:col-span-2 flex justify-end">
           <button type="submit"
                   :disabled="isSubmitting"
-                  class="bg-[#1446A0] text-white font-bold py-2 px-6 rounded hover:bg-[#0d3580]">
+                  class="bg-[#3D6625] text-white font-bold py-2 px-6 hover:bg-[#213D12]">
             {{ isSubmitting
                 ? (isEditMode ? 'Saving…' : 'Submitting…')
                 : (isEditMode ? 'Save Changes' : 'Submit') }}

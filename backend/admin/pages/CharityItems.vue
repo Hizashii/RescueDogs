@@ -1,17 +1,17 @@
 <template>
     <div class="p-6">
-      <h1 class="text-2xl font-bold mb-6">Manage Charity Items</h1>
+      <h1 class="text-2xl font-bold mb-6 text-[#3D4836]">Manage Charity Items</h1>
   
       <button
         @click="openForm()"
-        class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        class="mb-4 px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]"
       >
         Add New Item
       </button>
   
-      <table class="min-w-full bg-white shadow rounded">
+      <table class="min-w-full bg-white shadow">
         <thead>
-          <tr class="bg-gray-100">
+          <tr class="bg-[#F8F6ED]">
             <th class="px-4 py-2 text-left">Name</th>
             <th class="px-4 py-2 text-left">Price (Ft)</th>
             <th class="px-4 py-2 text-left">Image</th>
@@ -28,18 +28,18 @@
             <td class="px-4 py-2">{{ item.name }}</td>
             <td class="px-4 py-2">{{ item.price }}</td>
             <td class="px-4 py-2">
-              <img :src="item.imageUrl" alt="" class="h-12 object-cover rounded" />
+              <img :src="item.imageUrl" alt="" class="h-12 object-cover" />
             </td>
             <td class="px-4 py-2">{{ item.isActive ? 'Yes' : 'No' }}</td>
             <td class="px-4 py-2 space-x-2">
               <button
                 @click="openForm(item)"
-                class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                class="px-2 py-1 bg-blue-500 text-white hover:bg-blue-600"
               >
                 Edit
               </button>
               <button
-                class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                class="px-2 py-1 bg-red-500 text-white hover:bg-red-600"
               >
                 Delete
               </button>
@@ -53,7 +53,7 @@
         v-if="showModal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
       >
-        <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+        <div class="bg-white shadow-lg w-96 p-6">
           <h2 class="text-xl font-semibold mb-4">
             {{ form._id ? 'Edit Item' : 'Add Item' }}
           </h2>
@@ -63,7 +63,7 @@
             <input
               v-model="form.name"
               type="text"
-              class="mt-1 block w-full border rounded px-2 py-1"
+              class="mt-1 block w-full border px-2 py-1"
             />
           </label>
   
@@ -72,7 +72,7 @@
             <input
               v-model.number="form.price"
               type="number"
-              class="mt-1 block w-full border rounded px-2 py-1"
+              class="mt-1 block w-full border px-2 py-1"
             />
           </label>
   
@@ -81,7 +81,7 @@
             <input
               v-model="form.imageUrl"
               type="text"
-              class="mt-1 block w-full border rounded px-2 py-1"
+              class="mt-1 block w-full border px-2 py-1"
             />
           </label>
   
@@ -99,20 +99,20 @@
             <textarea
               v-model="form.description"
               rows="3"
-              class="mt-1 block w-full border rounded px-2 py-1"
+              class="mt-1 block w-full border px-2 py-1"
             ></textarea>
           </label>
   
           <div class="flex justify-end space-x-2">
             <button
               @click="save()"
-              class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
             >
               Save
             </button>
             <button
               @click="showModal = false"
-              class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              class="px-4 py-2 bg-gray-300 hover:bg-gray-400"
             >
               Cancel
             </button>

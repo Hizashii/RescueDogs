@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gray-100 text-black p-8 space-y-6">
-    <h1 class="text-3xl font-bold text-[#1446A0]">Dashboard Home</h1>
+  <div class="min-h-screen bg-[#F8F6ED] text-black p-8 space-y-6">
+    <h1 class="text-3xl font-bold text-[#3D4836]">Dashboard Home</h1>
     <p class="text-lg">
       Welcome to the admin dashboard! Below is a list of our dogs:
     </p>
 
-    <div v-if="loading" class="text-[#1446A0] text-lg font-medium py-4">
+    <div v-if="loading" class="text-[#3D4836] text-lg font-medium py-4">
       Loading dogs...
     </div>
 

@@ -5,7 +5,7 @@
         <li>
           <NuxtLink 
             to="/" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+            class="block py-3 px-4 text-lg font-medium text-[#3D4836] hover:bg-[#FBF8E9] hover:text-[#3D4836] hover:pl-6 transition-all duration-200 ease-in-out"
           >
             Dashboard
           </NuxtLink>
@@ -13,7 +13,7 @@
         <li>
           <NuxtLink 
             to="/dogs/add" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+            class="block py-3 px-4 text-lg font-medium text-[#3D4836] hover:bg-[#FBF8E9] hover:text-[#3D4836] hover:pl-6 transition-all duration-200 ease-in-out"
           >
             Dogs
           </NuxtLink>
@@ -23,7 +23,7 @@
         <li>
           <NuxtLink 
             to="/Blog" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+            class="block py-3 px-4 text-lg font-medium text-[#3D4836] hover:bg-[#FBF8E9] hover:text-[#3D4836] hover:pl-6 transition-all duration-200 ease-in-out"
           >
             Blog
           </NuxtLink>
@@ -33,7 +33,7 @@
         <li>
           <NuxtLink 
             to="/CharityItems" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+            class="block py-3 px-4 text-lg font-medium text-[#3D4836] hover:bg-[#FBF8E9] hover:text-[#3D4836] hover:pl-6 transition-all duration-200 ease-in-out"
           >
             Shop
           </NuxtLink>
@@ -42,7 +42,7 @@
         <li>
           <NuxtLink 
             to="/report" 
-            class="block py-3 px-4 text-lg font-medium text-black hover:bg-blue-50 hover:text-[#1446A0] hover:pl-6 rounded transition-all duration-200 ease-in-out"
+            class="block py-3 px-4 text-lg font-medium text-[#3D4836] hover:bg-[#FBF8E9] hover:text-[#3D4836] hover:pl-6 transition-all duration-200 ease-in-out"
           >
             Report
           </NuxtLink>
@@ -55,14 +55,12 @@
 </template>
 
 <script setup lang="ts">
-// No special logic needed yet
 </script>
 
 <style scoped>
-/* NuxtLink that is active */
 .router-link-active {
-  color: #1446A0;
-  background-color: rgba(20, 70, 160, 0.1);
+  color: black;
+  background-color: #FFFADF;
   font-weight: 600;
 }
 </style>

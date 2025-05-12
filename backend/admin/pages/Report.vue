@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">Found Dog Reports</h1>
+    <h1 class="text-2xl font-bold mb-6 text-[#3D4836]">Found Dog Reports</h1>
 
     <div v-if="loading" class="flex justify-center py-12">
       <Loader />
