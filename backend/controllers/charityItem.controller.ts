@@ -1,30 +1,31 @@
+// controllers/charityItem.controller.ts
 import { Request, Response } from 'express'
-import CharityItem, { ICharityItem } from '../models/CharityItem'
+import CharityItem from '../models/CharityItem'
 
-// GET /api/admin/charity-items
-export const listItems = async (_req: Request, res: Response) => {
-  const items = await CharityItem.find().sort({ createdAt: -1 })
+// GET  /api/CharityItems
+export const getAllItems = async (req: Request, res: Response) => {
+  const items = await CharityItem.find().lean()
   res.json(items)
 }
 
-// POST /api/admin/charity-items
+// POST /api/CharityItems
 export const createItem = async (req: Request, res: Response) => {
-  const { name, price, description, imageUrl } = req.body as Partial<ICharityItem>
-  const newItem = await CharityItem.create({ name, price, description, imageUrl })
-  res.status(201).json(newItem)
+  const newItem = await CharityItem.create(req.body)
+  res.json(newItem)
 }
 
-// PUT /api/admin/charity-items/:id
+// PUT  /api/CharityItems/:id
 export const updateItem = async (req: Request, res: Response) => {
-  const { id } = req.params
-  const updated = await CharityItem.findByIdAndUpdate(id, req.body, { new: true })
-  if (!updated) return res.status(404).json({ message: 'Not found' })
+  const updated = await CharityItem.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  )
   res.json(updated)
 }
 
-// DELETE /api/admin/charity-items/:id
+// DELETE /api/CharityItems/:id
 export const deleteItem = async (req: Request, res: Response) => {
-  const { id } = req.params
-  await CharityItem.findByIdAndDelete(id)
-  res.status(204).end()
+  await CharityItem.findByIdAndDelete(req.params.id)
+  res.sendStatus(204)
 }

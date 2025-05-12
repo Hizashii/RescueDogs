@@ -1,183 +1,492 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import useCharityApi from '../../../backend/admin/composables/useCharityApi'
+import type { CharityItem } from '../../../backend/admin/type/CharityItem'
+
+const { fetchAll, create, update, remove, uploadImage } = useCharityApi() as any
+const items = ref<CharityItem[]>([])
+const showModal = ref(false)
+const form = ref<Partial<CharityItem>>({
+  name: '',
+  price: 0,
+  description: '',
+  imageUrl: '',
+  isActive: true,
+  category: '',
+  stock: 0
+})
+const fileInput = ref<HTMLInputElement | null>(null)
+const selectedFile = ref<File | null>(null)
+const uploadProgress = ref(0)
+const filter = ref('')
+const categoryFilter = ref('')
+const activeFilter = ref<'all'|'active'|'inactive'>('all')
+const sortConfig = ref({ key: 'name', direction: 'asc' })
+const dashboardStats = computed(() => ({
+  totalItems: items.value.length,
+  activeItems: items.value.filter(i => i.isActive).length,
+  totalValue: items.value.reduce((sum, i) => sum + (i.price * i.stock), 0),
+  lowStock: items.value.filter(i => i.stock < 10).length
+}))
+const categories = computed(() => [...new Set(items.value.map(i => i.category))])
+const filteredItems = computed(() =>
+  items.value
+    .filter(i =>
+      i.name.toLowerCase().includes(filter.value.toLowerCase()) ||
+      i.description.toLowerCase().includes(filter.value.toLowerCase())
+    )
+    .filter(i => categoryFilter.value ? i.category === categoryFilter.value : true)
+    .filter(i => {
+      if (activeFilter.value === 'all') return true
+      return activeFilter.value === 'active' ? i.isActive : !i.isActive
+    })
+    .sort((a,b) => {
+      const dir = sortConfig.value.direction === 'asc' ? 1 : -1
+      // @ts-ignore
+      if (a[sortConfig.value.key] < b[sortConfig.value.key]) return -1 * dir
+      // @ts-ignore
+      if (a[sortConfig.value.key] > b[sortConfig.value.key]) return  1 * dir
+      return 0
+    })
+)
+onMounted(async () => {
+  items.value = await fetchAll()
+})
+function openForm(item?: CharityItem) {
+  form.value = item
+    ? { ...item }
+    : { name:'', price:0, description:'', imageUrl:'', isActive:true, category:'', stock:0 }
+  selectedFile.value = null
+  uploadProgress.value = 0
+  showModal.value = true
+}
+function triggerFileInput() {
+  if (fileInput.value) {
+    fileInput.value.click()
+  }
+}
+function handleFileUpload(event: Event) {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length) {
+    selectedFile.value = target.files[0]
+    form.value.imageUrl = URL.createObjectURL(selectedFile.value)
+  }
+}
+async function saveItem() {
+  try {
+    if (selectedFile.value) {
+      const fd = new FormData()
+      fd.append('image', selectedFile.value)
+      const { url } = await uploadImage(
+        fd,
+        (progress: number) => { uploadProgress.value = progress }
+      )
+      form.value.imageUrl = url
+    }
+    if (form.value._id) {
+      await update(form.value._id, form.value as CharityItem)
+    } else {
+      await create(form.value as Omit<CharityItem,'_id'>)
+    }
+    items.value = await fetchAll()
+    showModal.value = false
+  } catch (e) {
+    console.error('Error saving item:', e)
+    alert('Failed to save item. Please check the console for details.')
+  }
+}
+
+
+async function deleteItem(id: string) {
+  if (!confirm('Are you sure you want to delete this item?')) return
+  await remove(id)
+  items.value = await fetchAll()
+}
+function handleSort(key: string) {
+  const dir = sortConfig.value.key === key && sortConfig.value.direction==='asc'
+    ? 'desc'
+    : 'asc'
+  sortConfig.value = { key, direction: dir }
+}
+function getSortIcon(key: string) {
+  if (sortConfig.value.key !== key) return ''
+  return sortConfig.value.direction === 'asc' ? '▲' : '▼'
+}
+</script>
 <template>
-    <div class="p-6">
-      <h1 class="text-2xl font-bold mb-6 text-[#3D4836]">Manage Charity Items</h1>
-  
-      <button
-        @click="openForm()"
-        class="mb-4 px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]"
-      >
-        Add New Item
-      </button>
-  
-      <table class="min-w-full bg-white shadow">
-        <thead>
-          <tr class="bg-[#F8F6ED]">
-            <th class="px-4 py-2 text-left">Name</th>
-            <th class="px-4 py-2 text-left">Price (Ft)</th>
-            <th class="px-4 py-2 text-left">Image</th>
-            <th class="px-4 py-2 text-left">Active</th>
-            <th class="px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in items"
-            :key="item._id"
-            class="border-t hover:bg-gray-50"
+  <div class="bg-yellow-50 min-h-screen">
+    <nav class="bg-green-700 text-white p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Charity Store Management</h1>
+        <div class="flex items-center space-x-4">
+          <button class="px-3 py-1 bg-green-600  hover:bg-green-800 flex items-center">
+            <span class="mr-1">Export</span>
+          </button>
+          <div class="bg-green-800  w-8 h-8 flex items-center justify-center">
+            AD
+          </div>
+        </div>
+      </div>
+    </nav>
+ 
+
+    <div class="container mx-auto p-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white  shadow p-4 flex items-center">
+          <div class=" bg-yellow-100 p-3 mr-4">
+            <span class="text-green-600">📊</span>
+          </div>
+          <div>
+            <p class="text-gray-500 text-sm">Total Products</p>
+            <p class="text-xl font-bold text-green-700">{{ dashboardStats.totalItems }}</p>
+          </div>
+        </div>
+        
+        <div class="bg-white  shadow p-4 flex items-center">
+          <div class=" bg-yellow-100 p-3 mr-4">
+            <span class="text-green-600">✓</span>
+          </div>
+          <div>
+            <p class="text-gray-500 text-sm">Active Products</p>
+            <p class="text-xl font-bold text-green-700">{{ dashboardStats.activeItems }}</p>
+          </div>
+        </div>
+        
+        <div class="bg-white  shadow p-4 flex items-center">
+          <div class=" bg-yellow-100 p-3 mr-4">
+            <span class="text-green-600">💰</span>
+          </div>
+          <div>
+            <p class="text-gray-500 text-sm">Total Inventory Value</p>
+            <p class="text-xl font-bold text-green-700">{{ dashboardStats.totalValue.toLocaleString() }} Ft</p>
+          </div>
+        </div>
+        
+        <div class="bg-white  shadow p-4 flex items-center">
+          <div class=" bg-yellow-100 p-3 mr-4">
+            <span class="text-red-600">⚠️</span>
+          </div>
+          <div>
+            <p class="text-gray-500 text-sm">Low Stock Items</p>
+            <p class="text-xl font-bold text-red-600">{{ dashboardStats.lowStock }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Products Section -->
+      <div class="bg-white  shadow mb-6">
+        <div class="p-4 -b -gray-200">
+          <h2 class="text-lg font-medium text-green-700">Products</h2>
+        </div>
+        
+        <!-- Filters and Actions -->
+        <div class="p-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
+            <!-- Search -->
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                🔍
+              </span>
+              <input
+                v-model="filter"
+                type="text"
+                placeholder="Search products..."
+                class="pl-10 pr-4 py-2   w-full md:w-64"
+              />
+            </div>
+            
+            <!-- Category Filter -->
+            <select 
+              v-model="categoryFilter"
+              class="  px-3 py-2"
+            >
+              <option value="">All Categories</option>
+              <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+            </select>
+            
+            <!-- Status Filter -->
+            <div class="flex   overflow-hidden">
+              <button 
+                class="px-3 py-2"
+                :class="{ 'bg-yellow-100 text-green-700': activeFilter === 'all', 'bg-white text-gray-700': activeFilter !== 'all' }"
+                @click="activeFilter = 'all'"
+              >
+                All
+              </button>
+              <button 
+                class="px-3 py-2"
+                :class="{ 'bg-yellow-100 text-green-700': activeFilter === 'active', 'bg-white text-gray-700': activeFilter !== 'active' }"
+                @click="activeFilter = 'active'"
+              >
+                Active
+              </button>
+              <button 
+                class="px-3 py-2"
+                :class="{ 'bg-yellow-100 text-green-700': activeFilter === 'inactive', 'bg-white text-gray-700': activeFilter !== 'inactive' }"
+                @click="activeFilter = 'inactive'"
+              >
+                Inactive
+              </button>
+            </div>
+          </div>
+          
+          <!-- Add New Button -->
+          <button 
+            @click="openForm()" 
+            class="bg-green-600 text-white px-4 py-2  hover:bg-green-700 flex items-center"
           >
-            <td class="px-4 py-2">{{ item.name }}</td>
-            <td class="px-4 py-2">{{ item.price }}</td>
-            <td class="px-4 py-2">
-              <img :src="item.imageUrl" alt="" class="h-12 object-cover" />
-            </td>
-            <td class="px-4 py-2">{{ item.isActive ? 'Yes' : 'No' }}</td>
-            <td class="px-4 py-2 space-x-2">
-              <button
-                @click="openForm(item)"
-                class="px-2 py-1 bg-blue-500 text-white hover:bg-blue-600"
-              >
-                Edit
-              </button>
-              <button
-                class="px-2 py-1 bg-red-500 text-white hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <!-- Modal -->
-      <div
-        v-if="showModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-      >
-        <div class="bg-white shadow-lg w-96 p-6">
-          <h2 class="text-xl font-semibold mb-4">
-            {{ form._id ? 'Edit Item' : 'Add Item' }}
-          </h2>
-  
-          <label class="block mb-2">
-            <span class="text-gray-700">Name</span>
-            <input
-              v-model="form.name"
-              type="text"
-              class="mt-1 block w-full border px-2 py-1"
-            />
-          </label>
-  
-          <label class="block mb-2">
-            <span class="text-gray-700">Price (Ft)</span>
-            <input
-              v-model.number="form.price"
-              type="number"
-              class="mt-1 block w-full border px-2 py-1"
-            />
-          </label>
-  
-          <label class="block mb-2">
-            <span class="text-gray-700">Image URL</span>
-            <input
-              v-model="form.imageUrl"
-              type="text"
-              class="mt-1 block w-full border px-2 py-1"
-            />
-          </label>
-  
-          <label class="flex items-center mb-4">
-            <input
-              v-model="form.isActive"
-              type="checkbox"
-              class="mr-2"
-            />
-            <span class="text-gray-700">Active</span>
-          </label>
-  
-          <label class="block mb-4">
-            <span class="text-gray-700">Description</span>
-            <textarea
-              v-model="form.description"
-              rows="3"
-              class="mt-1 block w-full border px-2 py-1"
-            ></textarea>
-          </label>
-  
-          <div class="flex justify-end space-x-2">
-            <button
-              @click="save()"
-              class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
-            >
-              Save
-            </button>
-            <button
-              @click="showModal = false"
-              class="px-4 py-2 bg-gray-300 hover:bg-gray-400"
-            >
-              Cancel
-            </button>
+            <span class="mr-1">+</span>
+            Add New Item
+          </button>
+        </div>
+        
+        <!-- Products Table -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full">
+            <thead class="bg-yellow-50 border-b">
+              <tr>
+                <th 
+                  @click="handleSort('name')"
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                >
+                  <div class="flex items-center">
+                    Product Name {{ getSortIcon('name') }}
+                  </div>
+                </th>
+                <th 
+                  @click="handleSort('category')"
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                >
+                  <div class="flex items-center">
+                    Category {{ getSortIcon('category') }}
+                  </div>
+                </th>
+                <th 
+                  @click="handleSort('price')"
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                >
+                  <div class="flex items-center">
+                    Price (Ft) {{ getSortIcon('price') }}
+                  </div>
+                </th>
+                <th 
+                  @click="handleSort('stock')"
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                >
+                  <div class="flex items-center">
+                    Stock {{ getSortIcon('stock') }}
+                  </div>
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
+                  Image
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
+                  Status
+                </th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-green-700 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="item in filteredItems" :key="item._id" class="hover:bg-yellow-50">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="font-medium text-gray-900">{{ item.name }}</div>
+                  <div class="text-sm text-gray-500 truncate max-w-xs">{{ item.description }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 text-xs font-medium bg-yellow-100  text-green-700">
+                    {{ item.category }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                  {{ item.price.toLocaleString() }} Ft
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 text-xs font-medium " :class="{
+                    'bg-red-100 text-red-800': item.stock < 10,
+                    'bg-yellow-100 text-green-800': item.stock >= 10 && item.stock < 20,
+                    'bg-green-100 text-green-800': item.stock >= 20
+                  }">
+                    {{ item.stock }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <img :src="item.imageUrl" :alt="item.name" class="h-12 w-12 object-cover " />
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 text-xs font-medium " :class="{
+                    'bg-green-100 text-green-800': item.isActive,
+                    'bg-red-100 text-red-800': !item.isActive
+                  }">
+                    {{ item.isActive ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <button 
+                    @click="openForm(item)" 
+                    class="text-green-600 hover:text-green-900 mr-3"
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    @click="deleteItem(item._id)" 
+                    class="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div v-if="filteredItems.length === 0" class="text-center py-8 text-gray-500">
+            No items found matching your filters.
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import { useRouter } from 'vue-router'
-  
-  type CharityItem = {
-    _id?: string
-    name: string
-    price: number
-    description: string
-    imageUrl: string
-    isActive: boolean
-  }
-  
-  const items = ref<CharityItem[]>([])
-  const showModal = ref(false)
-  const form = ref<CharityItem>({
-    name: '', price: 0, description: '', imageUrl: '', isActive: true
-  })
-  const router = useRouter()
-  
-  async function fetchItems() {
-    items.value = await $fetch<CharityItem[]>('/api/admin/charity-items')
-  }
-  
-  function openForm(item?: CharityItem) {
-    if (item && item._id) {
-      form.value = { ...item }
-    } else {
-      form.value = { name: '', price: 0, description: '', imageUrl: '', isActive: true }
-    }
-    showModal.value = true
-  }
-  
-  async function save() {
-    if (form.value._id) {
-      await $fetch(`/api/admin/charity-items/${form.value._id}`,
-        { method: 'PUT', body: form.value })
-    } else {
-      await $fetch('/api/admin/charity-items',
-        { method: 'POST', body: form.value })
-    }
-    showModal.value = false
-    await fetchItems()
-  }
-  
-  async function remove(id: string) {
-    if (confirm('Are you sure you want to delete this item?')) {
-      await $fetch(`/api/admin/charity-items/${id}`, { method: 'DELETE' })
-      await fetchItems()
-    }
-  }
-  
-  onMounted(fetchItems)
-  </script>
-  
-  <style scoped>
-  /* optional custom styles */
-  </style>
-  
+    
+    <!-- Modal -->
+    <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white  shadow-xl w-full max-w-2xl p-6 max-h-screen overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold text-green-700">
+            {{ form._id ? 'Edit Item' : 'Add New Item' }}
+          </h2>
+          <button @click="showModal = false" class="text-gray-400 hover:text-gray-600">
+            ✖
+          </button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Product Name
+            </label>
+            <input
+              v-model="form.name"
+              type="text"
+              class="w-full border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+          
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <input
+              v-model="form.category"
+              type="text"
+              list="categories"
+              class="w-full border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <datalist id="categories">
+              <option v-for="category in categories" :key="category" :value="category" />
+            </datalist>
+          </div>
+          
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Price (Ft)
+            </label>
+            <input
+              v-model.number="form.price"
+              type="number"
+              class="w-full border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+          
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Stock Quantity
+            </label>
+            <input
+              v-model.number="form.stock"
+              type="number"
+              class="w-full border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+               <input
+    ref="fileInput"
+    type="file"
+    accept="image/*"
+    class="hidden"
+    @change="handleFileUpload"
+  />
+       <div class="col-span-2">
+    <label class="block mb-2 text-sm font-medium text-gray-700">
+      Image URL
+    </label>
+    <div class="flex">
+      <input
+        v-model="form.imageUrl"
+        type="text"
+        readonly
+        class="w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+        placeholder="Upload or paste URL"
+      />
+      <button
+        type="button"
+        @click="triggerFileInput"
+        class="bg-yellow-100 border border-gray-300 border-l-0 px-3 flex items-center text-gray-600 hover:bg-yellow-200"
+      >
+        📷
+      </button>
+    </div>
+  </div>
+  <div v-if="form.imageUrl" class="col-span-2 mt-2">
+    <p class="text-sm font-medium text-gray-700 mb-2">Image Preview</p>
+    <img :src="form.imageUrl" alt="Preview" class="h-32 object-cover" />
+  </div>
+          <div class="col-span-2">
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Description
+            </label>
+            <textarea
+              v-model="form.description"
+              rows="4"
+              class="w-full border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            ></textarea>
+          </div>
+          
+          <div class="col-span-2">
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input
+                v-model="form.isActive"
+                type="checkbox"
+                class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 "
+              />
+              <span class="text-sm text-gray-700">Product is active and visible in the store</span>
+            </label>
+          </div>
+          
+          <div v-if="form.imageUrl" class="col-span-2 mt-2">
+            <p class="text-sm font-medium text-gray-700 mb-2">Image Preview</p>
+            <img :src="form.imageUrl" alt="Preview" class="h-32 object-cover " />
+          </div>
+        </div>
+        
+        <div class="mt-8 pt-4 border-t flex justify-end space-x-3">
+          <button
+            @click="showModal = false"
+            class="px-4 py-2 border border-gray-300  text-gray-700 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            @click="saveItem"
+            class="px-4 py-2 bg-green-600  text-white hover:bg-green-700"
+            :disabled="!form.name || (form.price || 0) <= 0"
+          >
+            {{ form._id ? 'Update Item' : 'Add Item' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+/* Optional custom styles if needed */
+</style>

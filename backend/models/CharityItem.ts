@@ -1,24 +1,22 @@
-import { Document, Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
 
-export interface ICharityItem extends Document {
-  name: string
-  price: number
-  description: string
-  imageUrl: string
-  isActive: boolean
-  createdAt: Date
-  updatedAt: Date
+export interface CharityItemDoc extends Document {
+  name:       string
+  price:      number
+  description:string
+  imageUrl:   string
+  isActive:   boolean
+  category:   string
+  stock:      number
 }
+const CharityItemSchema = new Schema({
+  name:        { type: String,  required: true },
+  price:       { type: Number,  required: true },
+  description: { type: String,  required: true },
+  imageUrl:    { type: String,  required: true },
+  isActive:    { type: Boolean, default: true },
+  category:    { type: String,  required: true },
+  stock:       { type: Number,  required: true },
+}, { timestamps: true })
 
-const CharityItemSchema = new Schema<ICharityItem>(
-  {
-    name:        { type: String, required: true },
-    price:       { type: Number, required: true },
-    description: { type: String, required: true },
-    imageUrl:    { type: String, default: '' },
-    isActive:    { type: Boolean, default: true },
-  },
-  { timestamps: true }
-)
-
-export default model<ICharityItem>('CharityItem', CharityItemSchema)
+export default model('CharityItem', CharityItemSchema)

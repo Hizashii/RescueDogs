@@ -225,10 +225,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-
-// Character limit constant
 const CHARACTER_LIMIT = 2400;
-
 interface BlogPost {
   _id: string;
   title: string;
@@ -264,25 +261,18 @@ const emptyPost: BlogPost = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 };
-
 const editingPost = reactive<BlogPost>({ ...emptyPost });
-
-// Helper function to strip HTML tags for character counting
 function stripHtml(html: string): string {
   const temp = document.createElement('div');
   temp.innerHTML = html;
   return temp.textContent || temp.innerText || '';
 }
-
-// Compute character count for content
 const contentCharCount = computed(() => {
   return stripHtml(editingPost.content).length;
 });
-
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString();
 }
-
 async function fetchBlogPosts() {
   loading.value = true;
   try {
@@ -295,29 +285,23 @@ async function fetchBlogPosts() {
     loading.value = false;
   }
 }
-
 function createNewPost() {
   Object.assign(editingPost, { ...emptyPost, id: generateTempId() });
   selectedPost.value = null;
   activeView.value = 'editor';
 }
-
 function editPost(post: BlogPost) {
   Object.assign(editingPost, { ...post });
   selectedPost.value = post;
   activeView.value = 'editor';
 }
-
 function generateTempId() {
   return -Math.floor(Math.random() * 1000);
 }
-
 function cancelEdit() {
   activeView.value = 'list';
 }
-
 async function savePost() {
-  // Check if any fields exceed character limit
   if (contentCharCount.value > CHARACTER_LIMIT) {
     alert(`Content exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your content.`);
     return;
@@ -352,39 +336,32 @@ async function savePost() {
     });
     if (!res.ok) throw new Error(res.statusText);
     const saved = await res.json();
-
-    // update local list so UI refreshes
     if (isNew) blogPosts.value.unshift(saved);
     else {
       const idx = blogPosts.value.findIndex(p => p._id === saved._id);
       if (idx > -1) blogPosts.value[idx] = saved;
     }
-
     activeView.value = 'list';
   } catch (err) {
     console.error(err);
     alert(`Failed to ${selectedPost.value ? 'update' : 'create'} post.`);
   }
 }
-
 function confirmDeletePost(post: BlogPost) {
   postToDelete.value = post;
   showDeleteModal.value = true;
 }
-
 async function deletePost() {
   if (!postToDelete.value) return;
   try {
     blogPosts.value = blogPosts.value.filter(p => p._id !== postToDelete.value?._id);
     showDeleteModal.value = false;
-    postToDelete.value = null;
-    
+    postToDelete.value = null;   
   } catch (e) {
     console.error(e);
     alert('Failed to delete post.');
   }
 }
-
 function handleImageUpload(e: Event) {
   const input = e.target as HTMLInputElement;
   if (input.files && input.files[0]) {
@@ -393,34 +370,21 @@ function handleImageUpload(e: Event) {
     input.value = '';
   }
 }
-
 function removeImage() {
   editingPost.featuredImage = null;
 }
-
 function updateContent(e: Event) {
   editingPost.content = (e.target as HTMLElement).innerHTML;
-  
-  // Optional: Prevent typing if over character limit
-  if (contentCharCount.value > CHARACTER_LIMIT && editor.value) {
-    // This is a simple implementation - for a better UX, you might want to
-    // use a more sophisticated approach that preserves cursor position
+    if (contentCharCount.value > CHARACTER_LIMIT && editor.value) {
     const selection = window.getSelection();
     const range = selection?.getRangeAt(0);
     if (range) {
-      // Store selection information
       const startContainer = range.startContainer;
       const startOffset = range.startOffset;
-      
-      // Revert to previous content that was within limits
-      // Note: This is simplified and not perfect for all editing scenarios
       const previousText = stripHtml(editingPost.content).substring(0, CHARACTER_LIMIT);
-      // Apply formatting back if needed
     }
   }
 }
-
-// Helper to insert HTML at the current caret position using Range/Selection APIs
 function insertHtmlAtCaret(html: string) {
   const sel = window.getSelection();
   if (!sel || sel.rangeCount === 0) return;
@@ -436,7 +400,6 @@ function insertHtmlAtCaret(html: string) {
   }
 }
 
-// Helper to wrap the current selection with a given tag
 function wrapSelectionWithTag(tag: string) {
   const sel = window.getSelection();
   if (!sel || sel.rangeCount === 0) return;
@@ -456,9 +419,7 @@ function wrapSelectionWithTag(tag: string) {
 function applyFormatting(format: string) {
   if (!editor.value) return;
   
-  // For list formats, check if adding would exceed character limit
   if ((format === 'ul' || format === 'ol') && contentCharCount.value >= CHARACTER_LIMIT - 10) {
-    // Lists add additional characters for the markup
     alert(`You're approaching the ${CHARACTER_LIMIT} character limit. Cannot add list formatting.`);
     return;
   }
@@ -488,7 +449,6 @@ function applyFormatting(format: string) {
 }
 
 function insertImage() {
-  // Check if adding more content would potentially exceed character limit
   if (contentCharCount.value >= CHARACTER_LIMIT) {
     alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
     return;
@@ -526,7 +486,6 @@ function confirmImageUpload() {
 }
 
 function insertLink() {
-  // Check if adding more content would exceed character limit
   if (contentCharCount.value >= CHARACTER_LIMIT) {
     alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
     return;
