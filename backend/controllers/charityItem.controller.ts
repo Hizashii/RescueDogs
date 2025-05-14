@@ -2,13 +2,11 @@
 import { Request, Response } from 'express'
 import CharityItem from '../models/CharityItem'
 
-// GET  /api/CharityItems
 export const getAllItems = async (req: Request, res: Response) => {
   const items = await CharityItem.find().lean()
   res.json(items)
 }
 
-// POST /api/CharityItems
 export const createItem = async (req: Request, res: Response) => {
   const newItem = await CharityItem.create(req.body)
   res.json(newItem)
