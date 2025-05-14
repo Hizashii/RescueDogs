@@ -177,8 +177,8 @@ import useDogApi from '@/composables/useDogApi'
 interface Dog {
   id: string
   name: string
-  description: string
   image: string
+  description: string
   location?: string
   breed?: string
   size?: string
