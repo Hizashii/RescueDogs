@@ -2,7 +2,10 @@
 import { ref, computed, onMounted } from 'vue'
 import useCharityApi from '../../../backend/admin/composables/useCharityApi'
 import type { CharityItem } from '../../../backend/admin/type/CharityItem'
-
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) {
+  navigateTo('/login')
+}
 const { fetchAll, create, update, remove, uploadImage } = useCharityApi() as any
 const items = ref<CharityItem[]>([])
 const showModal = ref(false)

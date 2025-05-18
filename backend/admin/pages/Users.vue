@@ -6,6 +6,8 @@
   </template>
   
   <script setup lang="ts">
-  // Add any logic if needed
-  </script>
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) {
+  navigateTo('/login')
+}  </script>
   

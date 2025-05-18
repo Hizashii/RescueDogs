@@ -225,7 +225,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-const CHARACTER_LIMIT = 2400;
+const CHARACTER_LIMIT = 4000;
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) {
+  navigateTo('/login')
+}
 interface BlogPost {
   _id: string;
   title: string;
