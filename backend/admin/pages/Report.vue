@@ -13,7 +13,7 @@
     <div v-else class="overflow-x-auto">
       <table class="min-w-full border-collapse table-fixed">
         <thead>
-          <tr class="bg-blue-600 text-white">
+          <tr class="bg-green-700 text-white">
             <th class="border px-3 py-2 w-1/12">Name</th>
             <th class="border px-3 py-2 w-1/12">Phone</th>
             <th class="border px-3 py-2 w-1/5">Email</th>
@@ -59,7 +59,10 @@
 import { ref, onMounted } from 'vue'
 import Loader from '~/components/Loader.vue'
 import { useApi } from '~/composables/useApi'
-
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) {
+  navigateTo('/login')
+}
 interface Report {
   _id: string
   name: string

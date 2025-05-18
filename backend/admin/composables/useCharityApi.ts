@@ -32,6 +32,7 @@ async function uploadImage(
     )
     return { url: axios.defaults.baseURL + res.data.path }
   }
+  
 
   return { fetchAll, create, update, remove, uploadImage }
 }

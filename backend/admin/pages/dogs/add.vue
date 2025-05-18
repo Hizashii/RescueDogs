@@ -147,7 +147,10 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useApi } from '~/composables/useApi'
-
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) {
+  navigateTo('/login')
+}
 const api = useApi()
 const route = useRoute()
 const router = useRouter()
@@ -174,7 +177,7 @@ const genders  = ['Male','Female']
 const furLengths         = ['Short','Mid','Long']
 const vaccinationOptions = ['Chipped and vaccinated','In process']
 const extraTags          = [
-  'Good with people/kids/cats/dogs','Really friendly','Shy','Curious',
+  'Good with people','Good with kids', 'Good with cats', 'Good with dogs','Really friendly','Shy','Curious',
   'Afraid of people','Afraid of other dogs','Agressive with people',
   'Came from the streets','Heartworm positive'
 ]
@@ -201,8 +204,37 @@ const moreInfo         = ref('')
 
 const isSubmitting = ref(false)
 
-function handleFileUpload(e: Event) {
-  imageFile.value = (e.target as HTMLInputElement).files?.[0] || null
+
+function handleFileUpload(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0] || null;
+  if (file) {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const maxSize = 200;
+        const width = img.width;
+        const height = img.height;
+        const scale = Math.min(maxSize / width, maxSize / height);
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              imageFile.value = new File([blob], file.name, { type: 'image/jpeg' });
+            }
+          },
+          'image/jpeg',
+          0.8
+        );
+      }
+      URL.revokeObjectURL(objectUrl);
+    };
+    img.src = objectUrl;
+  }
 }
 
 onMounted(async () => {
