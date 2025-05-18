@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (to.path === '/login') return
+  if (to.path === '/Login') return
 
   if (import.meta.client && !localStorage.getItem('isAdmin')) {
-    return navigateTo('/login')
+    return navigateTo('/Login')
   }
 })

@@ -1,4 +1,3 @@
-// composables/useDogApi.ts
 import { ref, computed } from 'vue';
 
 interface Dog {
@@ -13,7 +12,6 @@ interface Dog {
   gender?: string;
   goodWith?: string[];
 }
-
 interface FilterOptions {
   breeds: string[];
   locations: string[];
@@ -22,7 +20,6 @@ interface FilterOptions {
   genders: string[];
   goodWith: string[];
 }
-
 interface DogFilters {
   name?: string;
   location?: string;
@@ -32,23 +29,16 @@ interface DogFilters {
   gender?: string;
   goodWith?: string;
 }
-
 interface PaginatedResponse {
   dogs: Dog[];
   total: number;
   totalPages: number;
 }
-
 export default function useDogApi() {
   const config = useRuntimeConfig();
   const baseUrl = 'http://localhost:5000/api';  // Hard-coded for now
-  
   const isLoading = ref(false);
   const error = ref<string | null>(null);
-
-  /**
-   * Fetch dogs based on filters and pagination
-   */
   const fetchDogs = async (
     filters: DogFilters = {}, 
     page: number = 1, 
@@ -58,22 +48,16 @@ export default function useDogApi() {
     error.value = null;
     
     try {
-      // Convert filters to format expected by backend
       const params = new URLSearchParams();
-      
       if (filters.name) params.append('name', filters.name);
       if (filters.location && filters.location !== 'Any') params.append('location', filters.location);
       if (filters.breed && filters.breed !== 'Any') params.append('breed', filters.breed);
       if (filters.size && filters.size !== 'Any') params.append('size', filters.size.toLowerCase());
       if (filters.age && filters.age !== 'Any') params.append('age', filters.age.toLowerCase());
       if (filters.gender && filters.gender !== 'Any') params.append('gender', filters.gender.toLowerCase());
-      
-      // Handle goodWith filter
       if (filters.goodWith && filters.goodWith !== 'Any') {
         params.append('goodWith', filters.goodWith.toLowerCase());
       }
-      
-      // Add pagination
       params.append('page', page.toString());
       params.append('limit', limit.toString());
       
@@ -84,9 +68,6 @@ export default function useDogApi() {
       }
       
       const dogs = await response.json();
-      
-      // Since backend doesn't include pagination metadata in response,
-      // we'll estimate total based on results and limit
       const total = Math.max(dogs.length, 100); // Placeholder until proper pagination is implemented
       
       return {
@@ -111,8 +92,6 @@ export default function useDogApi() {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error fetching dogs';
       error.value = errorMessage;
       console.error('Error fetching dogs:', errorMessage);
-      
-      // Return empty result on error
       return {
         dogs: [],
         total: 0,
@@ -122,10 +101,6 @@ export default function useDogApi() {
       isLoading.value = false;
     }
   };
-  
-  /**
-   * Fetch dog details by ID
-   */
   const fetchDogById = async (id: string): Promise<Dog | null> => {
     isLoading.value = true;
     error.value = null;
@@ -162,31 +137,37 @@ export default function useDogApi() {
       isLoading.value = false;
     }
   };
-  
-  /**
-   * Fetch filter options (would be better if the backend provided these)
-   */
   const fetchFilterOptions = async (): Promise<FilterOptions> => {
-    // For now, we'll use hardcoded values
-    // Ideally, backend would provide distinct values for each field
     return {
-      breeds: ['Husky', 'German Shepherd', 'Terrier', 'Mix', 'Labrador', 'Beagle'],
-      locations: ['Budapest', 'Debrecen', 'Szeged', 'Miskolc', 'Pécs'],
+      breeds: [],
+      locations: [
+        'Báránd',
+        'Bihardancsháza',
+        'Biharnagybajom',
+        'Hosszúhát',
+        'Komádi',
+        'Körösszakál',
+        'Körösszegapáti',
+        'Magyarhomorog',
+        'Mezőpeterd',
+        'Mezősas',
+        'Nádudvar',
+        'Nagyrábé',
+        'Püspökladány',
+        'Sáp',
+        'Sárrétudvari',
+        'Szerep',
+        'Tetétlen',
+        'Zsáka'
+      ],
       sizes: ['Small', 'Medium', 'Large'],
       ages: ['Puppy', 'Young', 'Adult', 'Senior'],
       genders: ['Male', 'Female'],
       goodWith: ['Children', 'Dogs', 'Cats']
     };
   };
-  
-  /**
-   * Process a donation (this would need to be implemented in your backend)
-   */
   const processDonation = async (amount: number): Promise<{success: boolean, message: string}> => {
-    // Mock implementation since there's no donation endpoint in the provided backend
     console.log(`Processing donation of ${amount} Ft`);
-    
-    // Return success for now
     return {
       success: true,
       message: `Donation of ${amount} Ft processed successfully`

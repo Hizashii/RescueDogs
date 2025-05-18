@@ -1,64 +1,55 @@
 <template>
-    <div class="loader-container">
-      <!-- Simple dog house with paw print -->
-      <svg class="dog-house" width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-        <!-- House/shelter shape -->
-        <path d="M40,10 L10,35 L10,65 L70,65 L70,35 L40,10 Z" fill="none" stroke="#FFD700" stroke-width="3" />
-        <!-- Door -->
-        <path d="M32,65 L32,45 L48,45 L48,65" fill="none" stroke="#FFD700" stroke-width="3" />
-        
-        <!-- Paw print that moves into the house -->
-        <g class="paw-print">
-          <circle cx="40" cy="80" r="4" fill="#FFD700" />
-          <circle cx="35" cy="76" r="2" fill="#FFD700" />
-          <circle cx="45" cy="76" r="2" fill="#FFD700" />
-          <circle cx="35" cy="84" r="2" fill="#FFD700" />
-          <circle cx="45" cy="84" r="2" fill="#FFD700" />
-        </g>
-      </svg>
-      
-      <!-- Loading text -->
-      <p class="loading-text">Loading...</p>
+    <div class="loader-overlay fixed inset-0 flex items-center justify-center bg-amber-50 z-50">
+      <div class="loader-container">
+        <svg class="bone-loader" width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20,15 L100,15" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" />
+          <circle cx="10" cy="10" r="8" fill="#FBBF24" />
+          <circle cx="10" cy="20" r="8" fill="#FBBF24" />
+          <circle cx="110" cy="10" r="8" fill="#FBBF24" />
+          <circle cx="110" cy="20" r="8" fill="#FBBF24" />
+          
+          <circle class="moving-dot" cx="20" cy="15" r="6" fill="#D97706" />
+        </svg>
+                <p class="mt-6 text-amber-700 font-medium text-center">Loading...</p>
+      </div>
     </div>
   </template>
   
+  <script setup>
+  </script>
+  
   <style scoped>
+  .loader-overlay {
+    background-color: #FFFBEB;
+  }
+  
   .loader-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
   }
   
-  .dog-house {
-    margin-bottom: 1rem;
+  .bone-loader {
+    display: block;
   }
   
-  .loading-text {
-    color: #3D4836;
-    font-weight: 500;
-    font-size: 0.875rem;
+  .moving-dot {
+    animation: moveAlong 2s infinite ease-in-out;
   }
   
-  .paw-print {
-    animation: enterHouse 1.8s infinite ease-in-out;
-  }
-  
-  @keyframes enterHouse {
+  @keyframes moveAlong {
     0% {
-      transform: translateY(0) scale(1);
-      opacity: 0;
+      cx: 20;
+      fill: #D97706;
     }
-    20% {
-      opacity: 1;
-    }
-    70% {
-      transform: translateY(-35px) scale(0.8);
-      opacity: 1;
+    50% {
+      cx: 100;
+      fill: #F59E0B;
     }
     100% {
-      transform: translateY(-50px) scale(0.6);
-      opacity: 0;
+      cx: 20;
+      fill: #D97706;
     }
   }
   </style>

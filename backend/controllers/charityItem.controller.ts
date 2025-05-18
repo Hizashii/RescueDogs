@@ -1,4 +1,3 @@
-// controllers/charityItem.controller.ts
 import { Request, Response } from 'express'
 import CharityItem from '../models/CharityItem'
 
@@ -12,7 +11,6 @@ export const createItem = async (req: Request, res: Response) => {
   res.json(newItem)
 }
 
-// PUT  /api/CharityItems/:id
 export const updateItem = async (req: Request, res: Response) => {
   const updated = await CharityItem.findByIdAndUpdate(
     req.params.id,
@@ -22,7 +20,6 @@ export const updateItem = async (req: Request, res: Response) => {
   res.json(updated)
 }
 
-// DELETE /api/CharityItems/:id
 export const deleteItem = async (req: Request, res: Response) => {
   await CharityItem.findByIdAndDelete(req.params.id)
   res.sendStatus(204)

@@ -1,6 +1,6 @@
 // src/router/index.ts
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import Login       from '@/pages/login.vue'      
+import Login       from '@/pages/Login.vue'      
 import Dashboard   from '@/pages/index.vue'     
 import Users       from '@/pages/Users.vue'
 import Blog        from '@/pages/Blog.vue'
@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/',
-    name: 'Dashboard',
+    name: 'index',  // Changed from 'Dashboard' to 'index'
     component: Dashboard,
     meta: { requiresAuth: true }
   },
@@ -52,9 +52,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isAdmin = !!localStorage.getItem('isAdmin')
+  const isAdmin = localStorage.getItem('isAdmin') === '1' || 
+                 useCookie('isAdmin').value === '1'
+                 
   if (to.meta.requiresAuth && !isAdmin) {
-    return next({ name: 'login' })
+    return next({ name: 'Login' })  
   }
   next()
 })

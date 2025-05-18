@@ -1,4 +1,3 @@
-// backend/controllers/dog.controller.ts
 import { Request, Response } from 'express';
 import Dog from '../models/Dog';
 import multer, { FileFilterCallback } from 'multer';
@@ -6,19 +5,15 @@ import path from 'path';
 import fs from 'fs';
 const uploadDir = path.resolve(__dirname, '../uploads/dogs')
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
-
 const fileFilter: multer.Options['fileFilter'] = (req, file, cb) => {
   if (['image/png','image/jpeg'].includes(file.mimetype)) cb(null, true)
   else cb(new Error('Only PNG & JPEG allowed') as any, false)
 }
-
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, uploadDir),
   filename: (_req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 })
-
 export const upload = multer({ storage, fileFilter })
-
 export const getDogById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -30,7 +25,6 @@ export const getDogById = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
 export const getDogs = async (req: Request, res: Response) => {
   try {
     const query: any = {};
@@ -45,23 +39,19 @@ export const getDogs = async (req: Request, res: Response) => {
     if (req.query.status)        query.status      = req.query.status;
     if (req.query.furLength)     query.furLength   = req.query.furLength;
     if (req.query.vaccination)   query.vaccination = req.query.vaccination;
-
     if (req.query.goodWith) {
       const gw = Array.isArray(req.query.goodWith)
         ? req.query.goodWith
         : [req.query.goodWith];
       query.goodWith = { $all: gw };
     }
-
     const dogs = await Dog.find(query);
     res.status(200).json(dogs);
-
   } catch (error) {
     console.error('Error fetching dogs:', error);
     res.status(500).json({ error: 'Failed to fetch dogs.' });
   }
 };
-
 export const createDogWithImage = async (req: Request, res: Response) => {
   try {
     const {
@@ -77,7 +67,6 @@ export const createDogWithImage = async (req: Request, res: Response) => {
       vaccination,
       goodWith,
     } = req.body;
-
     if (!req.file) {
       return res.status(400).json({ message: 'Image file is required.' });
     }
@@ -87,7 +76,6 @@ export const createDogWithImage = async (req: Request, res: Response) => {
     } else if (typeof goodWith === 'string') {
       goodWithArray = [goodWith];
     }
-
     const newDog = new Dog({
       name,
       description,
@@ -103,17 +91,13 @@ export const createDogWithImage = async (req: Request, res: Response) => {
       furLength,
       vaccination
     });
-
     const savedDog = await newDog.save();
     res.status(201).json(savedDog);
-
   } catch (error) {
     console.error('Error creating dog:', error);
     res.status(500).json({ error: 'Failed to create dog.' });
   }
 };
-
-
 export const getDogFilterOptions = async (_req: Request, res: Response) => {
   try {
     const [
@@ -183,5 +167,19 @@ export const updateDog = async (req: Request, res: Response) => {
   } catch (err) {
     console.error('Error updating dog:', err);
     res.status(500).json({ message: 'Failed to update dog.' });
+  }
+};
+export const getBreeds = async (req: Request, res: Response) => {
+  try {
+    const breeds = await Dog.distinct('breed');
+    
+    const validBreeds = breeds
+      .filter(breed => breed)
+      .sort((a, b) => a.localeCompare(b));
+    
+    res.json(validBreeds);
+  } catch (error) {
+    console.error('Error fetching breeds:', error);
+    res.status(500).json({ message: 'Failed to fetch breeds' });
   }
 };

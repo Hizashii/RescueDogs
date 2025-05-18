@@ -197,9 +197,6 @@
       <h3 class="text-base md:text-[16px] font-semibold text-start">
         {{ post.title }}
       </h3>
-      <p class="text-sm md:text-[13px] font-light">
-        {{ post.excerpt }}
-      </p>
       <nuxt-link
         :to="`/blog/${post._id}`"
         class="text-blue-600 hover:underline font-medium text-sm md:text-[13px]"
