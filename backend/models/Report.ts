@@ -1,10 +1,7 @@
-// backend/models/report.model.js
 import mongoose, { Schema, Document } from 'mongoose';
 
-// Define report status options
 type ReportStatus = 'new' | 'in-progress' | 'resolved' | 'closed';
 
-// Interface for the report document
 export interface IReport extends Document {
   name: string;
   phone: string;
@@ -18,7 +15,6 @@ export interface IReport extends Document {
   updatedAt: Date;
 }
 
-// Create schema for reports
 const ReportSchema: Schema = new Schema(
   {
     name: {
@@ -51,7 +47,8 @@ const ReportSchema: Schema = new Schema(
       trim: true
     },
     dogPicture: {
-      type: String // Path to the uploaded file
+      type: String, 
+      required: false
     },
     status: {
       type: String,
@@ -60,11 +57,10 @@ const ReportSchema: Schema = new Schema(
     }
   },
   {
-    timestamps: true // Adds createdAt and updatedAt fields
+    timestamps: true 
   }
 );
 
-// Create and export the model
 const Report = mongoose.model<IReport>('Report', ReportSchema);
 
 export default Report;

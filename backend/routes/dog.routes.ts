@@ -5,7 +5,8 @@ import {
   getDogs,
   getDogById,
   getDogFilterOptions,
-  updateDog
+  updateDog,
+  getBreeds
 } from '../controllers/dog.controller'
 
 const router = Router()
@@ -19,4 +20,5 @@ router.put(
   upload.single('image'),
   updateDog
 );
+router.get('/breeds', getBreeds);
 export default router

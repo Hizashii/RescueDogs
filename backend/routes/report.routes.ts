@@ -3,9 +3,9 @@ import {
   getReports,
   createReport,
   getReportById,
-  updateReportStatus
+  updateReportStatus,
+  deleteReport
 } from '../controllers/report.controller'
-import { authenticateJWT } from '../middlewares/auth.middleware'
 
 const router = Router()
 
@@ -14,8 +14,8 @@ router.post('/', createReport)
 router.get('/', getReports)
 
 //  ---------- protected ----------
-router.get('/',           authenticateJWT, getReports)
-router.get('/:id',        authenticateJWT, getReportById)
-router.patch('/:id/status', authenticateJWT, updateReportStatus)
+router.get('/:id', getReportById)
+router.patch('/:id/status', updateReportStatus)
+router.delete('/:id', deleteReport)
 
-export default router       
+export default router

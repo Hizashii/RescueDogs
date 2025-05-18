@@ -127,6 +127,15 @@
         </div>
       </div>
 
+      <!-- Preview Image -->
+      <div v-if="imagePreview" class="w-full px-3 mt-4">
+        <img
+          :src="imagePreview"
+          alt="Dog picture preview"
+          class="max-w-full h-auto max-h-[200px] object-contain"
+        />
+      </div>
+
       <!-- Reporter City -->
       <div class="mb-4">
         <label
@@ -179,7 +188,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onUnmounted } from 'vue'
 import Loader from '~/components/Loader.vue'
 
 interface ReportForm {
@@ -227,6 +236,7 @@ const isSubmitting = ref(false)
 const submitSuccess = ref(false)
 const submitError = ref(false)
 const errorMessage = ref('')
+const imagePreview = ref('')
 
 const config = useRuntimeConfig()
 const apiBase = config.public.apiBase || 'http://localhost:5000'
@@ -236,27 +246,35 @@ function handleFileUpload(e: Event) {
   if (!files?.length) return
   const file = files[0]
   if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large. Maximum 32 MB.')
+    alert('File is too large. Maximum 32 MB.')
     return
   }
   dogPicture.value = file
   fileName.value = file.name
+
+  imagePreview.value = URL.createObjectURL(file)
 }
 
+onUnmounted(() => {
+  if (imagePreview.value) {
+    URL.revokeObjectURL(imagePreview.value)
+  }
+})
+
 async function submitReport() {
-  isSubmitting.value = true
-  submitError.value = false
-
-  const data = new FormData()
-  data.append('name', formData.name)
-  data.append('phone', formData.phone)
-  data.append('email', formData.email ?? '')
-  data.append('dogCity', formData.dogCity)
-  data.append('reporterCity', formData.reporterCity)
-  data.append('comments', formData.comments ?? '')
-  if (dogPicture.value) data.append('dogPicture', dogPicture.value)
-
   try {
+    isSubmitting.value = true
+    const data = new FormData()
+    data.append('name', formData.name)
+    data.append('phone', formData.phone)
+    data.append('email', formData.email ?? '')
+    data.append('dogCity', formData.dogCity)
+    data.append('reporterCity', formData.reporterCity)
+    data.append('comments', formData.comments ?? '')
+    if (dogPicture.value) {
+      data.append('dogPicture', dogPicture.value, dogPicture.value.name)
+    }
+
     const res = await fetch(`${apiBase}/api/reports`, {
       method: 'POST',
       body: data

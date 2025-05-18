@@ -118,21 +118,6 @@ function getSortIcon(key: string) {
 </script>
 <template>
   <div class="bg-yellow-50 min-h-screen">
-    <nav class="bg-green-700 text-white p-4 shadow-md">
-      <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Charity Store Management</h1>
-        <div class="flex items-center space-x-4">
-          <button class="px-3 py-1 bg-green-600  hover:bg-green-800 flex items-center">
-            <span class="mr-1">Export</span>
-          </button>
-          <div class="bg-green-800  w-8 h-8 flex items-center justify-center">
-            AD
-          </div>
-        </div>
-      </div>
-    </nav>
- 
-
     <div class="container mx-auto p-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div class="bg-white  shadow p-4 flex items-center">

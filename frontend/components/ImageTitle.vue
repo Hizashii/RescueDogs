@@ -2,29 +2,45 @@
     <div class="everything">
       <div class="hero-container lg:h-[420px] h-[200px] flex items-center justify-center bg-custom-main-blue">
         <h2 v-if="title" class="hero-title relative z-10 text-center">{{ title }}</h2> 
-        <img v-if="image" class="absolute inset-0  w-full h-full object-cover"
-      :src="image"
-      alt=""
-      loading="lazy"
-    />
-    <div class="hero-overlay absolute inset-0 bg-black" :style="{ opacity: overlayOpacity }"></div>
+        <img 
+        v-if="image" 
+        :src="getImageUrl(image)" 
+        class="absolute inset-0 w-full h-full object-cover"
+        :alt="title"
+        loading="lazy"
+      />
+        <div class="hero-overlay absolute inset-0 bg-black" :style="{ opacity: overlayOpacity }"></div>
       </div>
   
   
     </div>
   </template>
   
-  <script setup lang="ts">
-  const props = withDefaults(defineProps<{
-    title: string;
-    image: string;
-    overlayOpacity: number;
-  }>(), {
-    title: '',
-    image: '',
-    overlayOpacity: 0.2
-  });
-  </script>
+<script setup lang="ts">
+import { useRuntimeConfig } from '#app'
+
+const props = withDefaults(defineProps<{
+  title: string
+  image: string | null
+  overlayOpacity: number
+}>(), {
+  title: '',
+  image: null,
+  overlayOpacity: 0.2
+})
+const config = useRuntimeConfig()
+const getImageUrl = (image: string | null): string => {
+  if (!image) {
+    return '/img/default-hero.jpg'
+  }
+  if (/^(blob:|https?:\/\/|\/)/.test(image)) {
+    return image
+  }
+  const base = config.public.apiBase || 'http://localhost:5000'
+  return `${base}/uploads/dogs/${image}`
+}
+</script>
+
 
 <style>
 .everything {
