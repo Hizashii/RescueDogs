@@ -25,6 +25,7 @@
                         <img src="/img/doggy.png" alt="Dog Silhouette" class="w-32">
                     </div>
                     <p class="text-sm font-poppins">&copy; 2025 MancsMentő</p>
+                    <a href="https://mancsmento.hu/" class="underline text-sm font-poppins">Archived website</a>
                 </div>
             </div>
             <!------------------------------------------------------------------ RIGHT SIDE OF INFO ------------------------------------------------------------------ -->
@@ -36,10 +37,10 @@
                 
                 <div class="flex justify-center md:justify-end gap-4 mt-4">
                     <!-- TODO: Add social links -->
-                    <a href="#" class="text-white hover:text-[#FFD700] transition-colors">
+                    <a href="https://www.facebook.com/mancsmento/" class="text-white hover:text-[#FFD700] transition-colors">
                         <i class="fab fa-facebook-f text-2xl"></i>
                     </a>
-                    <a href="#" class="text-white hover:text-[#FFD700] transition-colors">
+                    <a href="https://www.instagram.com/mancsmento?igsh=MXZ2Nm02bTVsOHE2bQ==" class="text-white hover:text-[#FFD700] transition-colors">
                         <i class="fab fa-instagram text-2xl"></i>
                     </a>
                 </div>

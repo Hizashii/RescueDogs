@@ -106,8 +106,11 @@
                 "label": "Email (optional)"
               },
               "dogCity": {
-                "label": "City where dog is"
+                "label": "City you found the dog in"
               },
+              "ChooseACity":{
+                "label": "Select a city"
+              }, 
               "dogPicture": {
                 "label": "Picture of a dog",
                 "upload": "Upload",

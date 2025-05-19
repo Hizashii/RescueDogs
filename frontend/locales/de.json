@@ -115,6 +115,9 @@
               "upload": "Hochladen",
               "hint": "Max. Dateigröße: 32 MB."
             },
+            "ChooseACity":{
+              "label": "Wählen Sie die Stadt"
+            },
             "reporterCity": {
               "label": "Aus welcher Stadt stammt die Meldung?"
             },

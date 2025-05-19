@@ -110,10 +110,14 @@
             "dogCity": {
               "label": "A kutya tartózkodási városa"
             },
+            
             "dogPicture": {
               "label": "Kutyáról készült fénykép",
               "upload": "Feltöltés",
               "hint": "Max. fájlméret: 32 MB."
+            },
+            "ChooseACity":{
+              "label": "Válassza ki a várost"
             },
             "reporterCity": {
               "label": "Melyik városból érkezik a bejelentés?"
