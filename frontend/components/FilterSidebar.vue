@@ -34,6 +34,16 @@
         </span>
       </div>
     </div>
+    <div class="flex flex-col space-y-2">
+      <label class="font-bold text-center">BREED</label>
+      <input
+        type="text"
+        :value="filters.breed"
+        @input="onInput('breed', $event)"
+        class="w-full p-2 border"
+        placeholder="Enter breed"
+      />
+    </div>
     <div
       v-for="(opts, key) in selectConfig"
       :key="key"
@@ -97,10 +107,9 @@ const labels: Record<FilterKey, string> = {
 }
 
 
-type SelectKey = Exclude<FilterKey, 'name'>
+type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
 const selectConfig = computed<Record<SelectKey, string[]>>(() => ({
   location: props.locations,
-  breed:    props.breeds,
   size:     ['Small','Medium','Large'],
   age:      ['Puppy','Young','Adult','Senior'],
   gender:   ['Male','Female'],

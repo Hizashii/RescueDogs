@@ -1,4 +1,3 @@
-// src/utils/api.ts
 const API_BASE = 'http://localhost:5000/api/blogs';
 
 export async function fetchBlogs(): Promise<any[]> {

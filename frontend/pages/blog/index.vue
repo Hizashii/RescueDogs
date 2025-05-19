@@ -39,7 +39,7 @@
             />
             <div class="p-6">
               <h2 class="text-2xl font-semibold mb-4">{{ post.title }}</h2>
-              <p class="text-gray-700 mb-6">{{ post.excerpt }}</p>
+              <p class="text-gray-700 mb-6" >{{ post.excerpt }}</p>
               <NuxtLink
                 :to="`/blog/${post._id}`"
                 class="inline-block text-[#1446A0] font-medium hover:underline"
@@ -98,26 +98,18 @@
   import { ref, computed, onMounted } from 'vue'
   import BlogBar from '~/components/BlogBar.vue'
   import { fetchBlogs } from '@/utils/api'
-  
-  // raw posts and filter state
   const posts = ref<any[]>([])
   const displayedPosts = ref<any[]>([])
   const loading = ref(true)
-  
-  // pagination state
   const currentPage = ref(1)
   const perPage     = 9
-  
   const totalPages = computed(() =>
     Math.ceil(displayedPosts.value.length / perPage)
   )
-  
   const paginatedPosts = computed(() => {
     const start = (currentPage.value - 1) * perPage
     return displayedPosts.value.slice(start, start + perPage)
   })
-  
-  // pagination controls
   const paginationPages = computed(() => {
     if (totalPages.value <= 5)
       return Array.from({ length: totalPages.value }, (_, i) => i + 1)
@@ -140,24 +132,25 @@
     [totalPages.value - 1, totalPages.value]
       .filter(p => !paginationPages.value.includes(p) && p > 0)
   )
-  
   function goToPage(page: number) {
     if (page < 1 || page > totalPages.value) return
     currentPage.value = page
   }
-  
-  // filter handlers
   function clearAllFilters() {
     displayedPosts.value = [...posts.value]
     currentPage.value = 1
   }
-  function updateFilter(key: string, value: string) {
-    // implement your filtering logic here, e.g.:
-    // displayedPosts.value = posts.value.filter(p => p[key] === value || value==='Any')
-    currentPage.value = 1
-  }
-  
-  onMounted(async () => {
+function updateFilter(key: string, value: string) {
+   currentPage.value = 1
+   if (key === 'category') {
+     if (!value) {
+       displayedPosts.value = [...posts.value]
+     } else {
+       displayedPosts.value = posts.value.filter(post => post.category === value)
+     }
+   }
+ }
+ onMounted(async () => {
     try {
       const all = await fetchBlogs()
       posts.value = all
@@ -169,4 +162,3 @@
     }
   })
   </script>
-  

@@ -5,16 +5,16 @@
       <button @click="activeView = 'list'; selectedPost = null" class="px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]" :class="{ 'bg-[#3D6625]': activeView === 'list' }">
         View All Posts
       </button>
-      <button @click="createNewPost" class="px-4 py-2 bg-[#3D6625] text-white  hover:bg-[#213D12]">
+      <button @click="createNewPost" class="px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]">
         Create New Post
       </button>
     </div>
-    <div v-if="activeView === 'list'" class="bg-white  shadow p-6">
+    <div v-if="activeView === 'list'" class="bg-white shadow p-6">
       <h2 class="text-xl font-semibold mb-4">All Blog Posts</h2>
       <p v-if="loading" class="text-gray-500">Loading blog posts...</p>
       <div v-else-if="blogPosts.length === 0" class="text-center py-8">
         <p class="text-gray-500 mb-4">No blog posts yet. Create your first post!</p>
-        <button @click="createNewPost" class="px-4 py-2 bg-[#3D6625] text-white  hover:bg-[#213D12]">
+        <button @click="createNewPost" class="px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]">
           Create New Post
         </button>
       </div>
@@ -32,8 +32,12 @@
             <tr v-for="post in blogPosts" :key="post._id" class="border-b hover:bg-gray-50">
               <td class="py-3 px-4">
                 <div class="flex items-center">
-                  <div v-if="post.featuredImage" class="w-12 h-12 mr-3 bg-gray-200  overflow-hidden">
-                    <img :src="post.featuredImage" :alt="post.title" class="w-full h-full object-cover" />
+                  <div v-if="post.featuredImage" class="w-12 h-12 mr-3 bg-gray-200 overflow-hidden">
+<img
+  :src="getImageUrl(post.featuredImage)"
+  :alt="post.title"
+  class="w-full h-full object-cover"
+/>
                   </div>
                   <div v-else class="w-12 h-12 mr-3 bg-gray-200 flex items-center justify-center">
                     <span class="text-gray-400 text-xs">No image</span>
@@ -64,7 +68,7 @@
       <form @submit.prevent="savePost">
         <div class="mb-4">
           <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-          <input id="title" v-model="editingPost.title" type="text" class="w-full px-3 py-2 border  focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title" required maxlength="2400" />
+          <input id="title" v-model="editingPost.title" type="text" class="w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title" required maxlength="4000" />
           <div class="text-sm mt-1 flex justify-end">
             <span :class="{'text-red-600': editingPost.title.length > CHARACTER_LIMIT}">
               {{ editingPost.title.length }} / {{ CHARACTER_LIMIT }} characters
@@ -89,6 +93,23 @@
                 Remove
               </button>
             </div>
+            <div class="mb-4">
+  <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
+    Category
+  </label>
+  <select
+    id="category"
+    v-model="editingPost.category"
+    required
+    class="w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="" disabled>Select a category</option>
+    <option v-for="cat in categories" :key="cat" :value="cat">
+      {{ cat }}
+    </option>
+  </select>
+</div>
+
           </div>
         </div>
         <div class="mb-4">
@@ -99,7 +120,7 @@
               <button type="button" @click="applyFormatting('italic')" class="p-1 hover:bg-gray-200 mr-1" title="Italic"><em>I</em></button>
               <button type="button" @click="applyFormatting('h2')" class="p-1 hover:bg-gray-200 mr-1" title="Heading">H2</button>
               <button type="button" @click="applyFormatting('h3')" class="p-1 hover:bg-gray-200 mr-1" title="Subheading">H3</button>
-              <button type="button" @click="applyFormatting('ul')" class="p-1  hover:bg-gray-200 mr-1" title="Bullet List">• List</button>
+              <button type="button" @click="applyFormatting('ul')" class="p-1 hover:bg-gray-200 mr-1" title="Bullet List">• List</button>
               <button type="button" @click="applyFormatting('ol')" class="p-1 hover:bg-gray-200 mr-1" title="Numbered List">1. List</button>
               <button type="button" @click="insertImage" class="p-1 hover:bg-gray-200 mr-1" title="Insert Image">🖼️ Image</button>
               <button type="button" @click="insertLink" class="p-1 hover:bg-gray-200" title="Insert Link">🔗 Link</button>
@@ -119,7 +140,7 @@
         </div>
         <div class="mb-4">
           <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-1">Excerpt (Short description for previews)</label>
-          <textarea id="excerpt" v-model="editingPost.excerpt" rows="3" class="w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a short excerpt" maxlength="2400"></textarea>
+          <textarea id="excerpt" v-model="editingPost.excerpt" rows="3" class="w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a short excerpt" maxlength="4000"></textarea>
           <div class="text-sm mt-1 flex justify-end">
             <span :class="{'text-red-600': editingPost.excerpt.length > CHARACTER_LIMIT}">
               {{ editingPost.excerpt.length }} / {{ CHARACTER_LIMIT }} characters
@@ -146,7 +167,7 @@
           <button type="submit" 
             :disabled="contentCharCount > CHARACTER_LIMIT || editingPost.title.length > CHARACTER_LIMIT || editingPost.excerpt.length > CHARACTER_LIMIT" 
             class="px-4 py-2 text-white" 
-            :class="contentCharCount > CHARACTER_LIMIT || editingPost.title.length > CHARACTER_LIMIT || editingPost.excerpt.length > CHARACTER_LIMIT ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#3D6625] hover:bg-[#hover:bg-[#213D12]]'">
+            :class="contentCharCount > CHARACTER_LIMIT || editingPost.title.length > CHARACTER_LIMIT || editingPost.excerpt.length > CHARACTER_LIMIT ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#3D6625] hover:bg-[#213D12]'">
             {{ selectedPost ? 'Update Post' : 'Create Post' }}
           </button>
         </div>
@@ -187,7 +208,7 @@
       </div>
     </div>
     <div v-if="showImageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white p-6  shadow-lg max-w-md w-full">
+      <div class="bg-white p-6 shadow-lg max-w-md w-full">
         <h2 class="text-xl font-bold mb-4">Insert Image</h2>
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
@@ -199,7 +220,9 @@
         </div>
         <div class="flex justify-end space-x-4">
           <button @click="cancelImageUpload" class="px-4 py-2 border hover:bg-gray-100">Cancel</button>
-          <button @click="confirmImageUpload" class="px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]">Insert</button>
+          <button @click="confirmImageUpload" class="px-4 py-2 bg-[#3D6625] text-white hover:bg-[#213D12]" :disabled="isUploadingImage">
+            {{ isUploadingImage ? 'Uploading...' : 'Insert' }}
+          </button>
         </div>
       </div>
     </div>
@@ -224,32 +247,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-const CHARACTER_LIMIT = 2400;
-interface BlogPost {
-  _id: string;
-  title: string;
-  content: string;
-  excerpt: string;
-  featuredImage: string | null;
-  status: 'published' | 'draft';
-  createdAt: string;
-  updatedAt: string;
+import type { AxiosResponse } from 'axios'
+import { ref, reactive, computed, onMounted } from 'vue'
+import useBlogsApi from '~/composables/useBlogApi'
+import type { BlogPost } from '~/type/BlogPost'
+import { useRuntimeConfig } from '#app'
+
+const config = useRuntimeConfig()
+const API_BASE = config.public.apiBase || 'http://localhost:5000'
+
+function getImageUrl(src: string | null) {
+  if (!src) return '/img/default-hero.jpg'
+  if (/^https?:\/\//.test(src)) return src
+  return `${API_BASE}${src}`
 }
+const categories = [
+  'Adoption Stories',
+  'Volunteer Spotlights',
+  'Dog Care Tips',
+  'Training Advice',
+  'Medical Updates',
+  'Success Stories',
+  'Events & Fundraisers',
+  'Behind the Scenes',
+  'Foster Programs',
+  'Rescue Missions',
+]
+
+const { fetchAll, create, update, remove, uploadImage } = useBlogsApi()
+const isUploadingFeaturedImage = ref(false)
+const uploadProgress = ref(0)
+const CHARACTER_LIMIT = 4000
+const isAdmin = useCookie('isAdmin').value
+if (!isAdmin) navigateTo('/login')
 
 const loading = ref(true),
-  activeView = ref('list'),
-  blogPosts = ref<BlogPost[]>([]),
-  selectedPost = ref<BlogPost | null>(null),
-  showDeleteModal = ref(false),
-  postToDelete = ref<BlogPost | null>(null),
-  showImageModal = ref(false),
-  imageAltText = ref(''),
-  contentImageFile = ref<File | null>(null),
-  showLinkModal = ref(false),
-  linkUrl = ref(''),
-  linkText = ref(''),
-  editor = ref<HTMLElement | null>(null);
+      activeView = ref<'list'|'editor'|'preview'>('list'),
+      blogPosts = ref<BlogPost[]>([]),
+      selectedPost = ref<BlogPost|null>(null),
+      showDeleteModal = ref(false),
+      postToDelete = ref<BlogPost|null>(null),
+      showImageModal = ref(false),
+      imageAltText = ref(''),
+      contentImageFile = ref<File|null>(null),
+      showLinkModal = ref(false),
+      linkUrl = ref(''),
+      linkText = ref(''),
+      editor = ref<HTMLElement|null>(null),
+      isUploadingImage = ref(false)
 
 const emptyPost: BlogPost = {
   _id: '',
@@ -258,162 +303,85 @@ const emptyPost: BlogPost = {
   excerpt: '',
   featuredImage: null,
   status: 'draft',
+  category: '', 
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-};
-const editingPost = reactive<BlogPost>({ ...emptyPost });
+}
+const editingPost = reactive<BlogPost>({ ...emptyPost })
+
 function stripHtml(html: string): string {
-  const temp = document.createElement('div');
-  temp.innerHTML = html;
-  return temp.textContent || temp.innerText || '';
+  const temp = document.createElement('div')
+  temp.innerHTML = html
+  return temp.textContent || temp.innerText || ''
 }
-const contentCharCount = computed(() => {
-  return stripHtml(editingPost.content).length;
-});
+
+const contentCharCount = computed(() => stripHtml(editingPost.content).length)
+
 function formatDate(d: string) {
-  return new Date(d).toLocaleDateString();
+  return new Date(d).toLocaleDateString()
 }
-async function fetchBlogPosts() {
-  loading.value = true;
-  try {
-    const response = await fetch('http://localhost:5000/api/blog/${post._id}');
-    if (!response.ok) throw new Error('Failed to fetch');
-    blogPosts.value = await response.json();
-  } catch (e) {
-    console.error(e);
-  } finally {
-    loading.value = false;
-  }
-}
+
+onMounted(async () => {
+  loading.value = true
+  blogPosts.value = await fetchAll()
+  loading.value = false
+})
+
 function createNewPost() {
-  Object.assign(editingPost, { ...emptyPost, id: generateTempId() });
-  selectedPost.value = null;
-  activeView.value = 'editor';
+  Object.assign(editingPost, { ...emptyPost, _id: `temp-${Date.now()}` })
+  selectedPost.value = null
+  activeView.value = 'editor'
 }
+
 function editPost(post: BlogPost) {
-  Object.assign(editingPost, { ...post });
-  selectedPost.value = post;
-  activeView.value = 'editor';
+  Object.assign(editingPost, { ...post })
+  selectedPost.value = post
+  activeView.value = 'editor'
 }
-function generateTempId() {
-  return -Math.floor(Math.random() * 1000);
-}
+
 function cancelEdit() {
-  activeView.value = 'list';
+  activeView.value = 'list'
 }
-async function savePost() {
-  if (contentCharCount.value > CHARACTER_LIMIT) {
-    alert(`Content exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your content.`);
-    return;
-  }
-  
-  if (editingPost.title.length > CHARACTER_LIMIT) {
-    alert(`Title exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your title.`);
-    return;
-  }
-  
-  if (editingPost.excerpt.length > CHARACTER_LIMIT) {
-    alert(`Excerpt exceeds the ${CHARACTER_LIMIT} character limit. Please shorten your excerpt.`);
-    return;
-  }
 
-  try {
-    const isNew = !selectedPost.value;
-    editingPost.updatedAt = new Date().toISOString();
-    if (isNew) editingPost.createdAt = editingPost.updatedAt;
-
-    const url = isNew
-      ? 'http://localhost:5000/api/blogs'
-      : `http://localhost:5000/api/blogs/${editingPost._id}`;
-    const method = isNew ? 'POST' : 'PUT';
-
-    const res = await fetch(url, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(editingPost),
-    });
-    if (!res.ok) throw new Error(res.statusText);
-    const saved = await res.json();
-    if (isNew) blogPosts.value.unshift(saved);
-    else {
-      const idx = blogPosts.value.findIndex(p => p._id === saved._id);
-      if (idx > -1) blogPosts.value[idx] = saved;
-    }
-    activeView.value = 'list';
-  } catch (err) {
-    console.error(err);
-    alert(`Failed to ${selectedPost.value ? 'update' : 'create'} post.`);
-  }
-}
-function confirmDeletePost(post: BlogPost) {
-  postToDelete.value = post;
-  showDeleteModal.value = true;
-}
-async function deletePost() {
-  if (!postToDelete.value) return;
-  try {
-    blogPosts.value = blogPosts.value.filter(p => p._id !== postToDelete.value?._id);
-    showDeleteModal.value = false;
-    postToDelete.value = null;   
-  } catch (e) {
-    console.error(e);
-    alert('Failed to delete post.');
-  }
-}
-function handleImageUpload(e: Event) {
-  const input = e.target as HTMLInputElement;
-  if (input.files && input.files[0]) {
-    const file = input.files[0];
-    editingPost.featuredImage = URL.createObjectURL(file);
-    input.value = '';
-  }
-}
 function removeImage() {
-  editingPost.featuredImage = null;
+  editingPost.featuredImage = null
+}
+
+async function handleImageUpload(e: Event) {
+  const file = (e.target as HTMLInputElement).files?.[0]
+  if (!file) return
+
+  isUploadingFeaturedImage.value = true
+  uploadProgress.value = 0
+
+  try {
+    const fd = new FormData()
+    fd.append('image', file)
+    const { url } = await uploadImage(fd, pct => {
+      uploadProgress.value = pct
+    })
+    editingPost.featuredImage = url
+  } catch (err) {
+    console.error('Upload failed:', err)
+    alert('Image upload failed — please try again.')
+  } finally {
+    isUploadingFeaturedImage.value = false
+  }
 }
 function updateContent(e: Event) {
-  editingPost.content = (e.target as HTMLElement).innerHTML;
-    if (contentCharCount.value > CHARACTER_LIMIT && editor.value) {
-    const selection = window.getSelection();
-    const range = selection?.getRangeAt(0);
-    if (range) {
-      const startContainer = range.startContainer;
-      const startOffset = range.startOffset;
-      const previousText = stripHtml(editingPost.content).substring(0, CHARACTER_LIMIT);
-    }
-  }
-}
-function insertHtmlAtCaret(html: string) {
-  const sel = window.getSelection();
-  if (!sel || sel.rangeCount === 0) return;
-  const range = sel.getRangeAt(0);
-  range.deleteContents();
-  const fragment = range.createContextualFragment(html);
-  range.insertNode(fragment);
-  if (fragment.lastChild) {
-    range.setStartAfter(fragment.lastChild);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
+  editingPost.content = (e.target as HTMLElement).innerHTML
 }
 
-function wrapSelectionWithTag(tag: string) {
-  const sel = window.getSelection();
-  if (!sel || sel.rangeCount === 0) return;
-  const range = sel.getRangeAt(0);
-  const selectedText = range.toString();
-  if (!selectedText) return;
-  const wrapper = document.createElement(tag);
-  wrapper.textContent = selectedText;
-  range.deleteContents();
-  range.insertNode(wrapper);
-  range.setStartAfter(wrapper);
-  range.collapse(true);
-  sel.removeAllRanges();
-  sel.addRange(range);
+function insertHtmlAtCaret(html: string) {
+  const sel = window.getSelection()
+  if (!sel || !sel.rangeCount) return
+  const range = sel.getRangeAt(0)
+  range.deleteContents()
+  const frag = range.createContextualFragment(html)
+  range.insertNode(frag)
+  range.collapse(false)
+  sel.removeAllRanges()
+  sel.addRange(range)
 }
 
 function applyFormatting(format: string) {
@@ -447,74 +415,136 @@ function applyFormatting(format: string) {
     editingPost.content = editor.value.innerHTML;
   }
 }
-
 function insertImage() {
-  if (contentCharCount.value >= CHARACTER_LIMIT) {
-    alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
-    return;
-  }
-  
-  showImageModal.value = true;
-  imageAltText.value = '';
-  contentImageFile.value = null;
+  showImageModal.value = true
+  imageAltText.value = ''
+  contentImageFile.value = null
 }
 
 function handleContentImageUpload(e: Event) {
-  const input = e.target as HTMLInputElement;
-  if (input.files && input.files[0]) contentImageFile.value = input.files[0];
+  const file = (e.target as HTMLInputElement).files?.[0]
+  contentImageFile.value = file || null
 }
 
 function cancelImageUpload() {
-  showImageModal.value = false;
-  contentImageFile.value = null;
-  imageAltText.value = '';
+  showImageModal.value = false
+  contentImageFile.value = null
+  imageAltText.value = ''
 }
 
-function confirmImageUpload() {
+async function confirmImageUpload() {
   if (!contentImageFile.value) {
-    alert('Please select an image');
-    return;
+    alert('Please select an image')
+    return
   }
-  if (!editor.value) return;
-  const url = URL.createObjectURL(contentImageFile.value);
-  const imgHtml = `<img src="${url}" alt="${imageAltText.value}" class="max-w-full my-4 rounded" />`;
-  insertHtmlAtCaret(imgHtml);
-  editingPost.content = editor.value.innerHTML;
-  showImageModal.value = false;
-  contentImageFile.value = null;
-  imageAltText.value = '';
+  if (!editor.value) return
+
+  isUploadingImage.value = true
+  try {
+    const { url } = await uploadImage(
+      Object.assign(new FormData(), (f: { append: (arg0: string, arg1: { readonly lastModified: number; readonly name: string; readonly webkitRelativePath: string; readonly size: number; readonly type: string; arrayBuffer: { (): Promise<ArrayBuffer>; (): Promise<ArrayBuffer> }; bytes: { (): Promise<Uint8Array>; (): Promise<Uint8Array> }; slice: { (start?: number, end?: number, contentType?: string): Blob; (start?: number, end?: number, contentType?: string): Blob }; stream: { (): ReadableStream<Uint8Array>; (): ReadableStream<Uint8Array> }; text: { (): Promise<string>; (): Promise<string> } }) => any }) => f.append('image', contentImageFile.value!)),
+      pct => (uploadProgress.value = pct)
+    )
+    const imgHtml = `<img src="${url}" alt="${imageAltText.value}" class="max-w-full my-4 rounded" />`
+    insertHtmlAtCaret(imgHtml)
+    editingPost.content = editor.value.innerHTML
+  } finally {
+    isUploadingImage.value = false
+    showImageModal.value = false
+    contentImageFile.value = null
+    imageAltText.value = ''
+  }
 }
 
 function insertLink() {
-  if (contentCharCount.value >= CHARACTER_LIMIT) {
-    alert(`You've reached the ${CHARACTER_LIMIT} character limit. Cannot add more content.`);
-    return;
-  }
-  
-  const sel = window.getSelection();
-  linkText.value = sel && sel.toString() ? sel.toString() : '';
-  linkUrl.value = '';
-  showLinkModal.value = true;
+  showLinkModal.value = true
+  linkText.value = window.getSelection()?.toString() || ''
+  linkUrl.value = ''
 }
 
 function cancelLinkInsert() {
-  showLinkModal.value = false;
-  linkUrl.value = '';
-  linkText.value = '';
+  showLinkModal.value = false
+  linkUrl.value = ''
+  linkText.value = ''
 }
 
 function confirmLinkInsert() {
-  if (!linkUrl.value) {
-    alert('Please enter a URL');
-    return;
+  if (!linkUrl.value || !editor.value) return
+  const linkHtml = `<a href="${linkUrl.value}" target="_blank">${linkText.value || linkUrl.value}</a>`
+  insertHtmlAtCaret(linkHtml)
+  editingPost.content = editor.value.innerHTML
+  showLinkModal.value = false
+  linkUrl.value = ''
+  linkText.value = ''
+}
+
+async function savePost() {
+  if (
+    contentCharCount.value > CHARACTER_LIMIT ||
+    editingPost.title.length > CHARACTER_LIMIT ||
+    editingPost.excerpt.length > CHARACTER_LIMIT
+  ) {
+    alert('One of your fields exceeds the character limit.')
+    return
   }
-  if (!editor.value) return;
-  const text = linkText.value || linkUrl.value;
-  const linkHtml = `<a href="${linkUrl.value}" target="_blank">${text}</a>`;
-  insertHtmlAtCaret(linkHtml);
-  editingPost.content = editor.value.innerHTML;
-  showLinkModal.value = false;
-  linkUrl.value = '';
-  linkText.value = '';
+
+  try {
+    const isNew = !selectedPost.value?._id
+    let saved: AxiosResponse<BlogPost, any>
+
+    if (isNew) {
+      interface NewBlogPost extends Omit<BlogPost, '_id'> {}
+      saved = await create(editingPost as NewBlogPost)
+      blogPosts.value.unshift(saved.data)
+    } else {
+      saved = await update(editingPost._id, editingPost)
+      const idx = blogPosts.value.findIndex(p => p._id === saved.data._id)
+      if (idx !== -1) {
+        blogPosts.value[idx] = saved.data
+      }
+    }
+
+    activeView.value = 'list'
+  } catch (err) {
+    console.error(err)
+    alert(`Failed to ${selectedPost.value ? 'update' : 'create'} post.`)
+  }
+}
+
+
+function confirmDeletePost(post: BlogPost) {
+  postToDelete.value = post
+  showDeleteModal.value = true
+}
+
+async function deletePost() {
+  if (!postToDelete.value) return
+  try {
+    await remove(postToDelete.value._id)
+    blogPosts.value = blogPosts.value.filter(
+      p => p._id !== postToDelete.value!._id
+    )
+    showDeleteModal.value = false
+    postToDelete.value = null
+  } catch (err) {
+    console.error(err)
+    alert('Failed to delete post.')
+  }
+}
+
+
+function wrapSelectionWithTag(tag: string) {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0) return;
+  const range = sel.getRangeAt(0);
+  if (range.collapsed) return; 
+
+  const wrapper = document.createElement(tag);
+  wrapper.appendChild(range.extractContents());
+  range.insertNode(wrapper);
+  sel.removeAllRanges();
+  const newRange = document.createRange();
+  newRange.selectNodeContents(wrapper);
+  sel.addRange(newRange);
 }
 </script>
