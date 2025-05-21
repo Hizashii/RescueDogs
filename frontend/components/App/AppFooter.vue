@@ -3,7 +3,7 @@
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             <!------------------------------------------------------------------ LEFT SIDE OF INFO ------------------------------------------------------------------ -->
             <div class="text-white text-center md:text-left">
-                <h2 class="font-semibold text-xl mb-4 pt-12 md:pt-0 font-poppins">PAW RESCUE ASSOCIATION:</h2>
+                <h2 class="font-semibold text-xl mb-4 pt-12 md:pt-0 font-poppins">{{ t('footer.title') }}</h2>
                 <p class="text-base">4163 Szerep,</p>
                 <p class="text-base">Kemenyi Street 13</p>
                 <div class="mt-4">
@@ -17,8 +17,8 @@
                 </div>
             </div>
             <!------------------------------------------------------------------ YELLOW COLUMN ------------------------------------------------------------------ -->
-            <div class="bg-[#FFD700] order-first md:order-none -my-12 md:-my-12 mx-auto w-full max-w-[500px]">
-                <div class="flex flex-col items-center justify-between h-full py-8 px-4">
+            <div class="bg-[#FFD700] order-last md:order-none -my-2 md:-my-12 w-full">
+                <div class="flex flex-col items-center justify-between h-full py-8 ">
                     <div class="flex flex-col items-center">
                         <img src="/img/logo.png" alt="MancsMentő" class="w-12 mb-4">
                         <h1 class="text-2xl font-bold mb-8 font-poppins">MancsMentő</h1>
@@ -31,12 +31,12 @@
             <!------------------------------------------------------------------ RIGHT SIDE OF INFO ------------------------------------------------------------------ -->
             <div class="text-white text-center md:text-right">
                 <h2 class="font-semibold text-xl mb-4 font-poppins">CONTACT US:</h2>
-                <!-- TODO: Add mailto: to the email address and phone number-->
+                
                 <a href="mailto:info@mancsmentő.hu" class="block text-base hover:underline">info@mancsmentő.hu</a>
                 <a href="tel:+36209183117" class="block text-base hover:underline">+36 20 918 3117</a>
                 
                 <div class="flex justify-center md:justify-end gap-4 mt-4">
-                    <!-- TODO: Add social links -->
+                    
                     <a href="https://www.facebook.com/mancsmento/" class="text-white hover:text-[#FFD700] transition-colors">
                         <i class="fab fa-facebook-f text-2xl"></i>
                     </a>
@@ -54,6 +54,9 @@
 </template>
 
 <script setup>
+const { t } = useI18n({
+  useScope: 'local'
+})
 useHead({
     link: [
         {

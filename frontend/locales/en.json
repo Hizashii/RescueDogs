@@ -1,13 +1,34 @@
 {
+    "navigation":{
+      "ourDogs": "Our dogs",
+      "upAdoption": "Up for adoption",
+      "allAnimals": "All animals",
+      "supportUs": "Support us",
+      "aboutUs": "About us",
+      "blog": "Blog",
+      "reportStray": "Report a stray"
+
+    },
+    "footer":{
+      "title": "PAW RESCUE ASSOCIATION:",
+      "tax": "1% of Tax number:",
+      "support": "SUPPORT US:",
+      "archived": "Archived website",
+      "contact": "CONTACT US:",
+      "openHour": "OPENING HOURS:",
+      "hours": "Monday - Friday: 8:30 - 10:30"
+
+    },
+    
     "home": {
       "title": "MancsMentő",
       "subtitle": "Animal protection association",
       "adoptButton": "Adopt",
-      "donateButton": "Donate",
+      "reportButton": "Report a stray",
       
       "reportCard": {
         "title": "REPORT A STRAY",
-        "description": "If you see a stray dog in the 10 cities we are connected to, report them to us and we'll be on our way asap. Help us help them.",
+        "description": "If you found a stray dog in the cities we are connected to in Hajdu-Bihar county, tell us about them, and we’ll be on our way!",
         "button": "REPORT"
       },
       
@@ -70,6 +91,9 @@
         "mapAlt": "Map location of the animal shelter"
       }
     },
+        "allAnimals": {
+          "title":"All Animals"
+        },
         "adoption": {
           "title":       "Up for Adoption",
           "dogsUp":      "Dogs up for adoption",
@@ -117,7 +141,7 @@
                 "hint": "Max. file size: 32 MB."
               },
               "reporterCity": {
-                "label": "Which city is the report coming from?"
+                "label": "Which street is the report coming from?"
               },
               "comments": {
                 "label": "Further information (optional)"

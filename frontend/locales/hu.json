@@ -1,210 +1,212 @@
-{
-    "home": {
-      "title": "MancsMentő",
-      "subtitle": "Állatvédő egyesület",
-      "adoptButton": "Örökbefogadás",
-      "donateButton": "Adományozás",
-      
-      "reportCard": {
-        "title": "KÓBOR ÁLLAT BEJELENTÉSE",
-        "description": "Ha kóbor kutyát lát a 10 általunk ellátott városban, jelentse nekünk és azonnal indulunk. Segítsen, hogy segíthessünk nekik.",
-        "button": "BEJELENTÉS"
-      },
-      
-      "adoptCard": {
-        "title": "ÖRÖKBEFOGADÁS",
-        "description": "Fontolja meg egy menhelyi állat örökbefogadását és adjon nekik esélyt egy új, szerető életre! Ön lehet a kulcs egy szerető családhoz.",
-        "button": "ÖRÖKBEFOGADÁS"
-      },
-      
-      "donateCard": {
-        "title": "ADOMÁNYOZÁS",
-        "description": "Támogassa munkánkat a kóbor és más állatok megsegítésében. Gondoljon az adója 1%-ára is.",
-        "button": "ADOMÁNYOZÁS"
-      },
-      
-      "intro": {
-        "title": {
-          "part1": "Bemutatjuk a",
-          "part2": "PawsSave Állatvédő Egyesületet"
-        },
-        "description": "Egyesületünk 2021 novemberében alakult, mert bár egyénileg is segítettünk ahol tudtunk, mindig is hittük, hogy közösen hatékonyabbak lehetünk, hiszen sok kóbor/gazdátlan állat él a környéken és sokan rossz körülmények között tartják őket.",
-        "supportButton": "Támogasd munkánkat",
-        "volunteerButton": "Jelentkezz önkéntesnek"
-      },
-      
-      "stats": {
-        "title": "Gondozásunkban lévő állatok",
-        "totalDogs": "Összes kutya",
-        "adoptableDogs": "Örökbefogadható kutyák",
-        "adoptedDogs": "Örökbefogadott kutyák"
-      },
-      
-      "quote": {
-        "part1": "\"Ne csak szeresd,",
-        "part2": "védd meg őket",
-        "part3": "És mentsd meg őket a gyepmestertől.\""
-      },
-      
-      "news": {
-        "title": {
-          "part1": "NÉZD MEG A LEGÚJABB",
-          "part2": "HÍREINKET ÉS ESEMÉNYEINKET!"
-        },
-        "article1": {
-          "title": "Ingyenes ivartalanítás a városban",
-          "excerpt": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről ....."
-        },
-        "readMore": "Tovább",
-        "seeMore": "További cikkek..."
-      },
-      
-      "location": {
-        "title": "Látogass meg minket!",
-        "openingHoursLabel": "Nyitvatartás",
-        "openingHours": "Hétfő - Vasárnap: 10:00 - 14:00",
-        "addressLabel": "Szervezet székhelye",
-        "address": "4163 Hajdú-Bihar, Szerep, Keményi út 13",
-        "contactLabel": "Találkozó egyeztetése",
-        "phone": "+36 20 918 3117",
-        "mapAlt": "Az állatmenhely térképes elhelyezkedése"
-      }
-      
-    },
-    "adoption": {
-        "title":       "Örökbefogadásra várók",
-        "dogsUp":      "Örökbefogadható kutyák",
-        "error": {
-          "title":     "Nem sikerült betölteni a kutyákat",
-          "message":   "Jelenleg nem tudjuk betölteni a kutyákat. Kérjük, próbáld meg később."
-        },
-        "empty": {
-          "message":   "Nincs a kritériumaidnak megfelelő kutya.",
-          "clear":     "Szűrők törlése"
-        }
-      },
-      "donation": {
-        "title":       "Nem tudsz örökbefogadni?",
-        "subtitle":    "Támogasd adományoddal gondozásunk alatt álló állatokat."
-      },
-      
-        "report": {
-          "title": "Suttyán kutya bejelentése",
-          "success": {
-            "heading": "Köszönjük a bejelentést!",
-            "body": "Az adataidat elküldtük, csapatunk hamarosan áttekinti azokat."
-          },
-          "error": {
-            "heading": "Hiba történt a bejelentés elküldésekor."
-          },
-          "form": {
-            "name": {
-              "label": "Név"
-            },
-            "phone": {
-              "label": "Telefonszám"
-            },
-            "email": {
-              "label": "E-mail (nem kötelező)"
-            },
-            "dogCity": {
-              "label": "A kutya tartózkodási városa"
-            },
-            
-            "dogPicture": {
-              "label": "Kutyáról készült fénykép",
-              "upload": "Feltöltés",
-              "hint": "Max. fájlméret: 32 MB."
-            },
-            "ChooseACity":{
-              "label": "Válassza ki a várost"
-            },
-            "reporterCity": {
-              "label": "Melyik városból érkezik a bejelentés?"
-            },
-            "comments": {
-              "label": "További információk (nem kötelező)"
-            },
-            "submit": {
-              "default": "Bejelentés elküldése",
-              "loading": "Küldés folyamatban…"
-            }
-          }   
-        },
-        
-            "support": {
-              "pageTitle":         "TÁMOGASD A MUNKÁNKAT!",
-              "intro": {
-                "line1":           "SEGÍTS MINKET A KÓBOR KUTYÁK GONDOZÁSÁBAN,",
-                "line2":           "ORVOSI ELLÁTÁSUK, REHABILITÁCIÓ ÉS MENEDÉK BIZTOSÍTÁSÁBAN."
-              },
-              "body": {
-                "p1":              "A Mancsmentő Egyesület 14 kelet-magyarországi településről menti az utcán kóborló vagy sérült kutyákat. Fő célunk, hogy minél hamarabb szerető gazdához juttassuk őket, de az odáig vezető út gyakran hosszú, nehéz és költséges.",
-                "p2":              "A kutyáknak oltáson, féreghajtáson és ivartalanításon kell átesniük. A régió kutyáinak 70–80 %-a szívférges – a kezelés létfontosságú, de nagyon drága. Az oltások hiánya parvovírus-járványhoz vezet, amely súlyos megbetegedéseket és halálozást okoz. A balesetet szenvedett vagy bántalmazott kutyák kórházi ellátása további terhet ró ránk. Mivel nincs átvételi vagy örökbefogadási díj, folyamatos támogatásra szorulunk.",
-                "p3":              "Az utóbbi időben havonta 25–30 kutyát fogadunk be. A meglévő állományunkkal együtt igyekszünk minél többet örökbe adni – sajnos elfogytak az erőforrásaink. Segíts! Az álmunk, hogy elegendő rendszeres támogatót találjunk, hogy minden hónapban tudjuk, 1,5 millió Ft érkezik a számlánkra – ennyi kell az orvosi költségek fedezéséhez!",
-                "p4":              "Segíts, hogy az esélyteleneknek is adjunk esélyt! Adományozz most – már pár ezer forint is számít! A legnagyobb hatás a rendszeres támogatásból fakad, mert kiszámíthatóvá teszi az ellátást. Havi 2 000–3 000 Ft rendszeres adomány életet jelent!"
-              },
-              "tiers": [
-                { "amount": "2000 Ft", "description": "Egy chip vagy oltás 40 %-a" },
-                { "amount": "3000 Ft", "description": "Egy chip vagy oltás 60 %-a" },
-                { "amount": "5000 Ft", "description": "Chip és kombinált oltás ára" },
-                { "amount": "10 000 Ft", "description": "Két kombinált oltás ára" },
-                { "amount": "20 000 Ft", "description": "Egy kutya összes oltásának ára" },
-                { "amount": "Egyéni összeg", "description": "" }
-              ],
-              "tax": {
-                "imageAlt":        "Adó 1 % támogatás info",
-                "line1":           "FELAJÁNLHATOD ADÓD 1 %-ÁT, HOGY MINDEN ÁLLATOT SEGÍTHESSÜNK!",
-                "line2":           "ADÓSZÁM:",
-                "number":          "19317988-1-09"
-              },
-              "charity": {
-                "title":           "NÉZD MEG JÓTÉKONYSÁGI TÁRGYAINKAT!",
-                "button":          "Rendelés",
-                "loadMore":        "Több betöltése",
-                "loadMoreAlt":     "További termékek betöltése"
-              },
-              "other": {
-                "imageAlt":        "Kutya illusztráció",
-                "titleLine1":      "EGYÉB TÁMOGATÁSI",
-                "titleLine2":      "INFORMÁCIÓ:",
+{ 
+    "home": { 
+      "title": "MancsMentő", 
+      "subtitle": "Állatvédő Egyesület", 
+      "adoptButton": "Örökbefogadás", 
+      "donateButton":"Kóbor kutya bejelentése", 
+       
+      "reportCard": { 
+        "title": " JELENTS BE EGY KÓBOR KUTYUST ", 
+        "description": "Kóbor kutyát találtál azokban a Hajdú-Bihar vármegyei városokban, amelyekkel összeköttetésben állunk? Jelentsd be itt, és már úton is leszünk! " ,
+        "button": "BEJELENTÉS" 
+      }, 
+       
+      "adoptCard": { 
+        "title": "FOGADJ ÖRÖKBE", 
+        "description": " Szeretnél örökbe fogadni egy kutyust? Tekintsd meg itt a kutyáinkat, hátha megtalálod az álmaid kiskedvencét.' ", 
+        "button": "KUTYÁK" 
+      }, 
+       
+      "donateCard": { 
+        "title": "TÁMOGASS MINKET", 
+        "description": "Ha nem tudsz önkénteskedni vagy örökbefogadni, de szeretnél máshogy segíteni bennünket, akkor szívesen fogadjuk anyagi támogatásodat, vagy az adód 1%-át is!'", 
+        "button": "TÁMOGATÁS" 
+      }, 
+       
+      "intro": { 
+        "title": { 
+          "part1": "A Mancsmentő", 
+          "part2": "Állatvédő Egyesületről" 
+        }, 
+        "description": "Egyesületünk 2021 novemberében alakult, elsősorban egy állatotthon és kutyafuttató létrehozása céljából. Eredetileg azt szerettük volna, hogy legyen egy hely, ahol kóbor kutyákat tudunk átvenni és elhelyezni. Azonban amikor szembesültünk a környékünkön lévő gyepmesteri telepeken élő állatok bánásmódjával, valamint azzal, hogy sorra tűnnek el az ott lévő kutyák, úgy döntöttünk, hogy a saját kezünkbe vesszük az irányítást. Elhatároztuk, hogy mi magunk nyitunk és működtetünk egy ebrendészeti telepet, ahol minden állatnak megpróbáljuk a lehető legtöbbet nyújtani. Ma már 14 Hajdú-Bihar megyei – Szerep környéki – településről mentjük a kutyákat és már több száz életet sikerült megmentenünk, és jobbá tennünk.", 
+        "supportButton": "Támogasd munkánkat", 
+        "volunteerButton": "Legyél önkéntesünk" 
+      }, 
+       
+      "stats": { 
+        "title": "NÁLUNK MÁR VOLT", 
+        "totalDogs": "Kutya összesen", 
+        "adoptableDogs": "Örökbefogadható kutyák", 
+        "adoptedDogs": "Örökbefogadott kutyák" 
+      }, 
+       
+      "quote": { 
+        "part1": "\"Ne csak szeresd,", 
+        "part2": "óvd is őt.", 
+        "part3": "És mentsd meg a sintértől.\"" 
+      }, 
+       
+      "news": { 
+        "title": { 
+          "part1": "TEKINTSE MEG LEGÚJABB", 
+          "part2": "HÍREINKET ÉS ESEMÉNYEINKET!" 
+        }, 
+        "article1": { 
+          "title": "Ingyenes ivartalanítás a városban", 
+          "excerpt": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről ....." 
+        }, 
+        "readMore": "Tovább", 
+        "seeMore": "További cikkek megtekintése..." 
+      }, 
+       
+      "location": { 
+        "title": "Látogass meg minket személyesen!", 
+        "openingHoursLabel": "Nyitvatartás", 
+        "openingHours": "Hétfő - Vasárnap: 10:00 - 14:00", 
+        "addressLabel": "Telephely", 
+        "address": "4163 Hajdú-Bihar, Szerep, Keményi út 13", 
+        "contactLabel": "Telefonszámunk", 
+        "phone": "+36 20 918 3117", 
+        "mapAlt": "Az állatmenhely térképes elhelyezkedése" 
+      } 
+       
+    }, 
+    "adoption": { 
+        "title":       "Örökbefogadható kutyák", 
+        "dogsUp":      "örökbefogadható kutya", 
+        "error": { 
+          "title":     "Nem sikerült betölteni a kutyákat", 
+          "message":   "Jelenleg nem tudjuk betölteni a kutyákat. Kérjük, próbáld meg később." 
+        }, 
+        "empty": { 
+          "message":   "Nincs a kritériumaidnak megfelelő kutya.", 
+          "clear":     "Szűrők törlése" 
+        } 
+      }, 
+      "donation": { 
+        "title":       "Nem tud örökbefogadni?", 
+        "subtitle":    "Támogassa az állataink gondozását." 
+      }, 
+       
+        "report": { 
+          "title": "Kóbor kutya bejelentése", 
+          "success": { 
+            "heading": "Köszönjük a bejelentést!", 
+            "body": "Az adataidat elküldtük, csapatunk hamarosan áttekinti őkett." 
+          }, 
+          "error": { 
+            "heading": "Hiba történt a bejelentés elküldésekor." 
+          }, 
+          "form": { 
+            "name": { 
+              "label": "Bejelentő neve" 
+            }, 
+            "phone": { 
+              "label": "Telefonszám" 
+            }, 
+            "email": { 
+              "label": "E-mail" 
+            }, 
+            "dogCity": { 
+              "label": "Melyik városból érkezik a bejelentés" 
+            }, 
+             
+            "dogPicture": { 
+              "label": "Kép a kutyusról", 
+              "upload": "Feltöltés", 
+              "hint": "Max. fájlméret: 32 MB." 
+            }, 
+            "ChooseACity":{ 
+              "label": "Válassza ki a várost" 
+            }, 
+            "reporterCity": { 
+              "label": "Melyik utcáról érkezik a bejelentés?" 
+            }, 
+            "comments": { 
+              "label": "További információ, megjegyzés (nem kötelező)" 
+            }, 
+            "submit": { 
+              "default": "Bejelentés elküldése", 
+              "loading": "Küldés folyamatban…" 
+            } 
+          }    
+        }, 
+         
+            "support": { 
+              "pageTitle":         "TÁMOGASD A MUNKÁNKAT!", 
+              "intro": { 
+                "line1":           "SEGÍTS MINKET A KÓBOR KUTYÁK GONDOZÁSÁBAN,", 
+                "line2":           "ORVOSI ELLÁTÁSUK, REHABILITÁCIÓ ÉS MENEDÉK BIZTOSÍTÁSÁBAN." 
+              }, 
+              "body": { 
+                "p1":              "A Mancsmentő Egyesület 14 Kelet-Magyarországi településről  menti az utcán kóborló vagy balesetet szenvedett kutyákat. Legfőbb  célunk az, hogy minél hamarabb jó gazdákhoz juttassuk a rászoruló  állatokat, de az odáig vezető út sokszor hosszú, nehéz és költséges.", 
+                "p2":              "A kutyáknak oltáson, féreghajtáson és ivartalanításon kell átesniük. A régió kutyáinak 70–80 %-a szívférges amelynek a kezelése létfontosságú, de nagyon drága. Az oltások hiánya parvó vírus-járványhoz vezet, amely súlyos megbetegedéseket és halálozást okozhat. Mindez és a balesetet szenvedett, vagy súlyosan  bántalmazott kutyák kórházi ellátása is mind-mind óriási terheket ró az  egyesületre. Mivel nincs átvételi vagy örökbefogadási díj, folyamatos támogatásra szorulunk.", 
+                "p3":              "Az utóbbi időben havonta 25–30 kutyát fogadunk be. A meglévő állománnyal együtt próbálunk minél többet gazdásítani és közben túlélni, de sajnos eljutottunk arra a pontra, hogy nem tudjuk  finanszírozni, nincs már mit eladni. Segítségre szorulunk! Az az álmunk, hogy találunk annyi rendszeres támogatót, akik  tervezhetővé teszik a működésünket és minden hónapot úgy tudunk  elkezdeni, hogy biztosan tudjuk, hogy 1,5 millió forint beérkezik a  számlánkra. Ennyi kell az orvosi költségek kifizetéséhez!", 
+                "p4":              "Segíts, hogy együtt esélyt adjunk az esélyteleneknek! Adományozz! Akár pár ezer forint is számít! A legnagyobb segítség a rendszeres támogatás, mert  kiszámíthatóvá, tervezhetővé teszi az állatok ellátását! Havi 2000 -  3000 forint rendszeres támogatás az életet jelenti!" 
+              }, 
+              "tiers": [ 
+                { "amount": "2000 Ft", "description": "Egy chip vagy oltás 40 %-a" }, 
+                { "amount": "3000 Ft", "description": "Egy chip vagy oltás 60 %-a" }, 
+                { "amount": "5000 Ft", "description": "Chip és kombinált oltás ára" }, 
+                { "amount": "10 000 Ft", "description": "Két kombinált oltás ára" }, 
+                { "amount": "20 000 Ft", "description": "Egy kutya összes oltásának ára" }, 
+                { "amount": "Egyéni összeg", "description": "" } 
+              ], 
+              "tax": { 
+                "imageAlt":        "Adó 1 % támogatás információ", 
+                "line1":           "AJÁNLD FEL ADÓD 1 %-ÁT, HOGY MINDEN ÁLLATON SEGÍTHESSÜNK!", 
+                "line2":           "ADÓSZÁM:", 
+                "number":          "19317988-1-09" 
+              }, 
+              "charity": { 
+                "title":           "NÉZD MEG AZ AJÁNDÉKTÁRGYAINKAT!", 
+                "button":          "Rendelés", 
+                "loadMore":        "További termékek betöltése", 
+                "loadMoreAlt":     "További termékek betöltése" 
+              }, 
+              "other": { 
+                "imageAlt":        "Egy fénykép egy Husky kutyáról", 
+                "titleLine1":      "EGYÉB TÁMOGATÁSI", 
+                "titleLine2":      "MÓDSZEREK:", 
+ 
+                "bank": { 
+                  "label":       "Bankszámla adomány:", 
+                  "lines": [ 
+                    "Mancsmentő Állatvédő Egyesület", 
+                    "Számlaszám: 50436604-10003671", 
+                    "IBAN: HU42504366041000367100000000", 
+                    "SWIFT: MKKBHUHB" 
+                  ] 
+                } 
+              } 
+            }, 
+    "about": { 
+      "title": "Rólunk", 
+      "description": "Elsődleges célunk egy új állat otthon és kutyafuttató létrehozása volt,  ahol a gyepmesteri telepekről, vagy túlterhelt menhelyekről hozzánk  kerülő kutyákat szakemberek segítségével mind fizikailag mind lelkileg  rehabilitáljuk, és gondozzuk míg megfelelő gazdát nem találunk  nekik!  Időközben azonban rá jöttünk, hogy a környéken működő gyepmesteri  telepeken sorra tűnnek el a kutyák és nem kapunk időben információt  semmiről! Tehát elsőnek a gyepmesteri telep üzemeltetését kell rendbe  tenni, aminek a legjobb módja, ha át vesszük és mi üzemeltetjük!", 
+      "quote": { 
+        "line1": "\"Ne csak szeresd,", 
+        "line2": "óvd is őt.", 
+        "line3": "És mentsd meg a sintértől.\"" 
+      }, 
+      "story": { 
+        "title": "Történetünk", 
+        "paragraphs": { 
+          "p1": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről hozzánk kerülő kutyákat szakemberek segítségével mind fizikailag, mind lelkileg rehabilitálhattuk és gondozhattuk volna, míg megfelelő gazdát nem találunk nekik.", 
+          "p2": "Időközben azonban rájöttünk, hogy a környéken működő gyepmesteri telepeken sorra tűnnek el a kutyák, és nem kapunk információt semmiről IDŐBEN. A telephelyre, amit átvettünk, erősen ráfért a felújítás, emellett a körülményeket normalizálni és a férőhelyek számát is bővíteni kellett, hogy biztonságosan és megfelelő szinten tudjuk ellátni a bekerülő kutyákat. De közös erővel sikerül egyre élhetőbbé tenni telepünket.", 
+          "p3": "14 településen folyamatosan mentjük a kilátástalan helyzetben lévő kutyákat, ami nagyjából 50.000 fős lakosságot foglal magában, és már több száz életet sikerült megmenteni és jobbá tenni.", 
+          "p4": "De mindez kevés: hisszük, hogy ezeken az áldatlan állapotokon lehet és kell is változtatni, ezért a mélyszegény szegregátumok fejlesztése egyik célkitűzésünk, mert amint az állattartói kultúra változásnak és fejlődésnek indul, sokkal kevesebb kutya kerül majd gyepmesteri telepekre, és az egyre szélesebb körben elterjedő ivartalanítási programokkal az úgynevezett felesleges szaporulatok megszületését is csökkenteni lehet.", 
+          "p5": "Víziónk része, hogy egy fejlett, haladó szellemű hozzáállást tudjunk meghonosítani és befogadhatóvá tenni minél több itt élő számára, hogy az emberek mihamarabb képessé váljanak harmóniában együtt élni, létezni az őket körülvevő élővilággal, és főként állataikkal. Ennek eléréséhez a különböző hatóságokkal, önkormányzatokkal is igyekszünk kiváló kapcsolatot kiépíteni, mert hosszú távon csak közösen, együttműködve lehet IGAZI változást elérni.", 
+          "p6": "Mióta megkezdtük működésünket, rengeteg kutyus fordult meg telepünkön. A jogszabályi előírásoknak megfelelően minden bekerülőt chippel és oltással látunk el, majd bent tartózkodásuk hosszától függően szívféregtesztelésen és ivartalanításon is átesnek. Amennyiben kimutatható a szívférgesség, az előírt kezelést természetesen megkezdjük, és folytatjuk, ameddig csak szükséges.", 
+          "p7": "Sok olyan kutyánk van, akik rossz egészségi állapotban, sérülten, alultápláltan kerültek és kerülnek be telepünkre, rengeteg kölyökkutya érkezik immunizálás nélkül, és legtöbbjük nálunk és velünk tapasztalja meg először a szeretetet, a törődést, a reményt.", 
+          "p8": "Ezen kívül segítünk más gyepmesteri telepeket is úgymond 'üríteni', hiszen nem csak mi, hanem az egész régió is ugyanezen problémákkal küzd, továbbá ivartalanítási akciókat hirdetünk a környékbeli lakosság számára, ezzel segítve az ott élő kutyák helyzetetét, és nem mellesleg saját működésünk optimalizálását is.", 
+          "p9": "Tisztában vagyunk azzal, hogy ez nem egy gyors folyamat, de összefogással, prevenciós és edukációs programokkal apránként egyre több és több emberhez juttathatjuk el üzenetünket.", 
+          "p10": "Ám védenceink megmentésével sajnos még nem érnek véget a megpróbáltatások, mivel még így is több a bekerülő, mint amennyien szabadulnak, és nincs elegendő forrás még több kennelt építeni. Habár nem célunk, hogy a kutyákat hosszú ideig kennelben tartsuk, egyelőre még szükség van rájuk.", 
+          "p11": "De mindenek ellenére a befogott állatokat minél hamarabb szeretnénk átvevő szervezethez vagy gazdához juttatni, hogy hátralevő életüket biztonságban és boldogan élhessék le.", 
+          "p12": "Hiszünk benne, hogy EGYÜTT sikerül!" 
+        } 
+      }, 
+      "support": "Támogatás" 
+    } 
+} 
 
-                "bank": {
-                  "label":       "Bankszámla adomány:",
-                  "lines": [
-                    "Mancsmentő Állatvédő Egyesület",
-                    "Számlaszám: 50436604-10003671",
-                    "IBAN: HU42504366041000367100000000",
-                    "SWIFT: MKKBHUHB"
-                  ]
-                }
-              }
-            },
-    "about": {
-      "title": "Kik vagyunk",
-      "description": "A Lorem Ipsum egyszerűen a nyomda- és szedőipar mintaszövege. A Lorem Ipsum az 1500-as évek óta az iparág standard mintaszövege, amikor egy ismeretlen nyomdász egy sor betűtípust összekevert, hogy egy mintakönyvet készítsen. Nemcsak öt évszázadot élt túl, hanem az elektronikus szedésbe való áttörést is, lényegében változatlan maradt. Az 1960-as években népszerűvé vált a Lorem Ipsum részleteket tartalmazó Letraset lapok megjelenésével, és újabban az olyan asztali kiadványszerkesztő szoftverekkel, mint az Aldus PageMaker, beleértve a Lorem Ipsum különböző verzióit is.",
-      "quote": {
-        "line1": "\"Ne csak szeresd,",
-        "line2": "védd meg őket",
-        "line3": "És mentsd meg őket a gyepmestertől.\""
-      },
-      "story": {
-        "title": "Történetünk",
-        "paragraphs": {
-          "p1": "Elsődleges célunk egy új állatotthon és kutyafuttató létrehozása volt, ahol a gyepmesteri telepekről vagy túlterhelt menhelyekről hozzánk kerülő kutyákat szakemberek segítségével mind fizikailag, mind lelkileg rehabilitálhattuk és gondozhattuk volna, míg megfelelő gazdát nem találunk nekik.",
-          "p2": "Időközben azonban rájöttünk, hogy a környéken működő gyepmesteri telepeken sorra tűnnek el a kutyák, és nem kapunk információt semmiről IDŐBEN. A telephelyre, amit átvettünk, erősen ráfért a felújítás, emellett a körülményeket normalizálni és a férőhelyek számát is bővíteni kellett, hogy biztonságosan és megfelelő szinten tudjuk ellátni a bekerülő kutyákat. De közös erővel sikerül egyre élhetőbbé tenni telepünket.",
-          "p3": "14 településen folyamatosan mentjük a kilátástalan helyzetben lévő kutyákat, ami nagyjából 50.000 fős lakosságot foglal magában, és már több száz életet sikerült megmenteni és jobbá tenni.",
-          "p4": "De mindez kevés: hisszük, hogy ezeken az áldatlan állapotokon lehet és kell is változtatni, ezért a mélyszegény szegregátumok fejlesztése egyik célkitűzésünk, mert amint az állattartói kultúra változásnak és fejlődésnek indul, sokkal kevesebb kutya kerül majd gyepmesteri telepekre, és az egyre szélesebb körben elterjedő ivartalanítási programokkal az úgynevezett felesleges szaporulatok megszületését is csökkenteni lehet.",
-          "p5": "Víziónk része, hogy egy fejlett, haladó szellemű hozzáállást tudjunk meghonosítani és befogadhatóvá tenni minél több itt élő számára, hogy az emberek mihamarabb képessé váljanak harmóniában együtt élni, létezni az őket körülvevő élővilággal, és főként állataikkal. Ennek eléréséhez a különböző hatóságokkal, önkormányzatokkal is igyekszünk kiváló kapcsolatot kiépíteni, mert hosszú távon csak közösen, együttműködve lehet IGAZI változást elérni.",
-          "p6": "Mióta megkezdtük működésünket, rengeteg kutyus fordult meg telepünkön. A jogszabályi előírásoknak megfelelően minden bekerülőt chippel és oltással látunk el, majd bent tartózkodásuk hosszától függően szívféregtesztelésen és ivartalanításon is átesnek. Amennyiben kimutatható a szívférgesség, az előírt kezelést természetesen megkezdjük, és folytatjuk, ameddig csak szükséges.",
-          "p7": "Sok olyan kutyánk van, akik rossz egészségi állapotban, sérülten, alultápláltan kerültek és kerülnek be telepünkre, rengeteg kölyökkutya érkezik immunizálás nélkül, és legtöbbjük nálunk és velünk tapasztalja meg először a szeretetet, a törődést, a reményt.",
-          "p8": "Ezen kívül segítünk más gyepmesteri telepeket is úgymond 'üríteni', hiszen nem csak mi, hanem az egész régió is ugyanezen problémákkal küzd, továbbá ivartalanítási akciókat hirdetünk a környékbeli lakosság számára, ezzel segítve az ott élő kutyák helyzetetét, és nem mellesleg saját működésünk optimalizálását is.",
-          "p9": "Tisztában vagyunk azzal, hogy ez nem egy gyors folyamat, de összefogással, prevenciós és edukációs programokkal apránként egyre több és több emberhez juttathatjuk el üzenetünket.",
-          "p10": "Ám védenceink megmentésével sajnos még nem érnek véget a megpróbáltatások, mivel még így is több a bekerülő, mint amennyien szabadulnak, és nincs elegendő forrás még több kennelt építeni. Habár nem célunk, hogy a kutyákat hosszú ideig kennelben tartsuk, egyelőre még szükség van rájuk.",
-          "p11": "De mindenek ellenére a befogott állatokat minél hamarabb szeretnénk átvevő szervezethez vagy gazdához juttatni, hogy hátralevő életüket biztonságban és boldogan élhessék le.",
-          "p12": "Hiszünk benne, hogy EGYÜTT sikerül!"
-        }
-      },
-      "support": "Támogatás"
-    }
-}
+ 

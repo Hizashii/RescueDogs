@@ -90,7 +90,7 @@
             id="dog-city"
             v-model="formData.dogCity"
             required
-            class="appearance-none w-full py-2 px-3 text-white bg-white focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-black bg-white focus:outline-none focus:shadow-outline"
           >
             <option value="" disabled>{{ $t('report.form.ChooseACity.label') }}</option>
             <option v-for="city in dogCities" :key="city" :value="city">

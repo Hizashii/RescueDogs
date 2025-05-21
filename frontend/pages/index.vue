@@ -13,18 +13,19 @@
                       before:absolute before:inset-0 before:bg-[#FFD700] before:scale-x-0 before:origin-left
                       hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
                       hover:text-[#3D4836] z-10"
+                      
               >
                 <span class="relative z-10">{{ $t('home.adoptButton') }}</span>
               </button>
             </nuxt-link>
 
-                <nuxt-link to="/support">
+                <nuxt-link to="/report-stray">
                     <button class="relative inline-block bg-white text-black font-bold text-sm md:w-52 md:min-h-14 w-40 min-h-10
                       overflow-hidden transition-colors duration-300 ease-in-out
                       before:absolute before:inset-0 before:bg-[#FFD700] before:scale-x-0 before:origin-left
                       hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
                       hover:text-[#3D4836] z-10">
-           <span class="relative z-10">{{ $t('home.donateButton') }}</span></button>
+           <span class="relative z-10">{{ $t('home.reportButton') }}</span></button>
                 </nuxt-link>
             </div>
         </div>
@@ -42,7 +43,7 @@
           <circle cx="53" cy="53" r="51.5" fill="#3D6625" stroke="#3D6625" stroke-width="3"/>
           <path d="M67.1818 35C63.14 35 60.6818 35.7631 59.2636 36.4106C57.4436 35.5319 55.3636 35 53 35C50.6364 35 48.5564 35.5319 46.7364 36.4106C45.3182 35.7631 42.86 35 38.8182 35C31.7273 35 27 53.5 27 58.125C27 60.0444 30.12 61.8019 34.4218 62.5187C35.9345 67.6987 43.0727 71.6531 51.8182 72V62.1025C50.4236 61.2469 48.2727 59.6975 48.2727 58.125C48.2727 55.8125 53 55.8125 53 55.8125C53 55.8125 57.7273 55.8125 57.7273 58.125C57.7273 59.6975 55.5764 61.2469 54.1818 62.1025V72C62.9273 71.6531 70.0655 67.6987 71.5782 62.5187C75.88 61.8019 79 60.0444 79 58.125C79 53.5 74.2727 35 67.1818 35ZM34.4455 57.8244C33.2636 57.5469 32.3418 57.2231 31.7273 56.9688C32.3182 50.5631 36.9273 40.55 38.9364 39.625C40.2127 39.625 41.1818 39.7638 42.0564 39.8794C37.0927 45.2213 35.1309 53.5925 34.4455 57.8244ZM45.9091 53.5C45.2822 53.5 44.681 53.2564 44.2377 52.8227C43.7945 52.389 43.5455 51.8008 43.5455 51.1875C43.5455 49.9387 44.6091 48.875 45.9091 48.875C46.536 48.875 47.1372 49.1186 47.5804 49.5523C48.0237 49.986 48.2727 50.5742 48.2727 51.1875C48.2727 52.4825 47.2091 53.5 45.9091 53.5ZM60.0909 53.5C59.464 53.5 58.8628 53.2564 58.4196 52.8227C57.9763 52.389 57.7273 51.8008 57.7273 51.1875C57.7273 49.9387 58.7909 48.875 60.0909 48.875C60.7178 48.875 61.319 49.1186 61.7623 49.5523C62.2055 49.986 62.4545 50.5742 62.4545 51.1875C62.4545 52.4825 61.3909 53.5 60.0909 53.5ZM71.5545 57.8244C70.8691 53.5925 68.9073 45.2213 63.9436 39.8794C64.8182 39.7638 65.7873 39.625 67.0636 39.625C69.0727 40.55 73.6818 50.5631 74.2727 56.9688C73.6818 57.2231 72.76 57.5469 71.5545 57.8244Z" fill="white"/>
           </svg>
-        <h1 class="text-2xl font-medium mb-4">{{ $t('home.reportCard.title') }}</h1>
+        <h1 class="text-2xl text-center font-medium mb-4">{{ $t('home.reportCard.title') }}</h1>
         <p class="text-sm mb-6 text-center max-w-[230px]">{{ $t('home.reportCard.description') }}</p>
         <nuxt-link to="/report-stray">
           <button class="relative text-white font-bold text-sm w-40 md:w-52 py-3 overflow-hidden 
@@ -86,7 +87,7 @@
         </svg>
         <h1 class="text-2xl font-medium mb-4">{{ $t('home.donateCard.title') }}</h1>
         <p class="text-sm mb-6 text-center max-w-[230px]">{{ $t('home.donateCard.description') }}</p>
-        <nuxt-link to="/report-stray">
+        <nuxt-link to="/support">
           <button class="relative text-white font-bold text-sm w-40 md:w-52 py-3 overflow-hidden 
                bg-[#3D6625] transition-colors duration-300 ease-in-out
                before:absolute before:inset-0 before:bg-[#213714] before:scale-x-0 before:origin-left
@@ -159,10 +160,10 @@
 
 
     <!-- ANIMALS IN OUR CARE SECTION -->
-<section class="bg-white py-16 section-animate">
+<section class="bg-white pb-64 pt-40 section-animate">
   <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
     <!-- Section Title -->
-    <h2 class="text-3xl sm:text-4xl font-bold text-[#3D4836] text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold text-[#3D4836] text-center mb-16 ">
       {{ $t('home.stats.title') }}
     </h2>
 
@@ -171,9 +172,8 @@
       
       <!-- Total Dogs -->
       <div class="flex flex-col items-center">
-        <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.08164 72.9752V38.1871L2.08464 37.1906C1.41997 36.4658 0.906365 35.6505 0.543819 34.7445C0.181273 33.8386 0 32.9327 0 32.0267C0 31.0604 0.181273 30.1399 0.543819 29.2654C0.906365 28.3885 1.41997 27.6178 2.08464 26.9535L13.958 14.995H28.4599L42.9617 0.5L50.3939 7.92871C52.9317 10.4049 54.8049 13.1977 56.0134 16.3068C57.2218 19.4184 57.8261 22.6049 57.8261 25.8663C57.8261 29.1277 57.2218 32.2985 56.0134 35.3787C54.8049 38.4589 52.9317 41.2673 50.3939 43.8039L42.9617 51.2327V72.9752H3.08164Z" fill="#FFD700"/>
-        </svg>
+        
+        <img src="/img/dog-stats-icon.png" alt="dog icon class=" class="w-16 h-16 md:w-20 md:h-20 mb-4 pl-4" />
         <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#3D6625] mt-4">4699</h3>
         <p class="text-sm sm:text-base md:text-lg font-semibold text-center mt-2">
           {{ $t('home.stats.totalDogs') }}
@@ -193,9 +193,7 @@
 
       <!-- Adopted Dogs -->
       <div class="flex flex-col items-center">
-        <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M55.1111 7.51673H48.2222V0.460938H13.7778V7.51673H6.88889C3.1 7.51673 0 10.6918 0 14.5725V18.1004C0 27.0965 6.61333 34.4346 15.1211 35.5282C17.2911 40.82 21.9411 44.8066 27.5556 45.9708V56.9072H13.7778V63.963H48.2222V56.9072H34.4444V45.9708C40.0589 44.8066 44.7089 40.82 46.8789 35.5282C55.3867 34.4346 62 27.0965 62 18.1004V14.5725C62 10.6918 58.9 7.51673 55.1111 7.51673ZM6.88889 18.1004V14.5725H13.7778V28.0491C9.78222 26.5674 6.88889 22.6867 6.88889 18.1004ZM55.1111 18.1004C55.1111 22.6867 52.2178 26.5674 48.2222 28.0491V14.5725H55.1111V18.1004Z" fill="#FFD700"/>
-        </svg>
+        <img src="/img/trophy-stats-icon.png" alt="dog icon">
         <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#3D6625] mt-4">999</h3>
         <p class="text-sm sm:text-base md:text-lg font-semibold text-center mt-2">
           {{ $t('home.stats.adoptedDogs') }}
@@ -224,7 +222,7 @@
 <!-- LATEST NEWS SECTION -->
 <section class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10 section-animate">
   <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">
-    {{ $t('home.news.title.part1') }} <span class="text-logo-yellow font-bold">{{ $t('home.news.title.part2') }}</span>
+    {{ $t('home.news.title.part1') }} <br><span class="text-logo-yellow font-bold">{{ $t('home.news.title.part2') }}</span>
   </h2>
 
   <div v-if="loading" class="text-gray-500">Loading posts…</div>

@@ -3,7 +3,7 @@
       "title": "MancsMentő",
       "subtitle": "Tierschutzverein",
       "adoptButton": "Adoptieren",
-      "donateButton": "Spenden",
+      "reportButton": "Streunenden hund melden",
       
       "reportCard": {
         "title": "STREUNENDEN HUND MELDEN",
@@ -71,6 +71,9 @@
       }
       
     },
+    "allAnimals": {
+          "title":"Alle Tiere"
+        },
     "adoption": {
         "title":       "Zur Adoption",
         "dogsUp":      "Hunde zur Adoption",
@@ -119,7 +122,7 @@
               "label": "Wählen Sie die Stadt"
             },
             "reporterCity": {
-              "label": "Aus welcher Stadt stammt die Meldung?"
+              "label": "Aus welcher Straße kommt die Meldung?"
             },
             "comments": {
               "label": "Weitere Informationen (optional)"

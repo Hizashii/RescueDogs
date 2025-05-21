@@ -1,15 +1,14 @@
 <template>
     <div class="everything">
       <div class="hero-container lg:h-[420px] h-[200px] flex items-center justify-center bg-custom-main-blue">
-        <h2 v-if="title" class="hero-title relative z-10 text-center">{{ title }}</h2> 
-        <img 
+        <h2 v-if="title" class="hero-title relative z-20 text-center">{{ title }}</h2> 
+              <img 
         v-if="image" 
         :src="getImageUrl(image)" 
-        class="absolute inset-0 w-full h-full object-cover"
-        :alt="title"
-        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover z-0"
       />
-        <div class="hero-overlay absolute inset-0 bg-black" :style="{ opacity: overlayOpacity }"></div>
+      <div class="hero-overlay absolute inset-0 bg-black z-10" :style="{ opacity: overlayOpacity }"></div>
+
       </div>
   
   

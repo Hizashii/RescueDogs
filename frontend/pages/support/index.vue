@@ -175,7 +175,6 @@ function goToItem(itemId: string) {
       </div>
     </div>
   </section>
-
   <!-- Charity Items -->
   <section class="bg-[#FFFADF] py-12 section-animate">
     <div class="container mx-auto px-4">

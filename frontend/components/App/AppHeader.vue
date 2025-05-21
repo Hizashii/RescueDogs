@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-[#FDF6E9] py-4 z-100">
+  <nav class="bg-[#FDF6E9] py-4 z-[100]">
     <div class="w-full px-4">
       <!------------------------------------- MAIN NAV BAR FOR PHONE AND DESKTOP ------------------------------------>
       <div class="flex items-center justify-between">
@@ -32,7 +32,7 @@
                 </button>
                 <div class="absolute left-0 w-full h-6 bg-transparent"></div>
                 <transition name="fade">
-                  <div class="absolute left-0 mt-2 w-48 bg-white shadow-lg -md opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+                  <div class="absolute left-0 mt-2 w-48 bg-white shadow-lg -md opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-[101]">
                     <NuxtLink
                       v-for="child in item.children"
                       :key="child.path"
@@ -58,7 +58,7 @@
   <div class="absolute right-0 w-full h-6 bg-transparent pointer-events-auto"></div>
   <transition name="fade">
     <div
-      class="absolute right-0 mt-2 w-48 bg-white shadow-lg -md z-50 opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto"
+      class="absolute right-0 mt-2 w-48 bg-white shadow-lg -md z-[101] opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto"
     >
       <button
         v-for="(flag, locale) in locales"
@@ -82,7 +82,7 @@
             <transition name="fade">
               <div
                 v-show="activeDropdown === 'lang'"
-                class="absolute right-0 mt-2 w-48 bg-white shadow-lg -md z-50"
+                class="absolute right-0 mt-2 w-48 bg-white shadow-lg -md z-[101]"
               >
                 <button
                   v-for="(flag, locale) in locales"
@@ -105,7 +105,7 @@
       <transition name="slide-fade">
         <div 
           v-show="isMobileMenuOpen"
-          class="fixed inset-0 bg-white z-50 lg:hidden"
+          class="fixed inset-0 bg-white z-[101] lg:hidden"
         >
           <div class="p-4">
             <div class="flex justify-between items-center mb-8">
