@@ -1,13 +1,13 @@
 <template>
   <div class="min-h-screen flex flex-col items-center bg-[#FFE86B]">
-    <h1 class="text-3xl font-bold mb-8 text-black mt-32">
+    <h1 class="text-3xl font-bold mb-8 text-black mt-32 title-animate">
       {{ $t('report.title') }}
     </h1>
 
     <!-- Success -->
     <div
       v-if="submitSuccess"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded message-animate"
     >
       <p class="font-bold">{{ $t('report.success.heading') }}</p>
       <p>{{ $t('report.success.body') }}</p>
@@ -16,7 +16,7 @@
     <!-- Error -->
     <div
       v-if="submitError"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded message-animate"
     >
       <p class="font-bold">{{ $t('report.error.heading') }}</p>
       <p>{{ errorMessage }}</p>
@@ -32,7 +32,7 @@
 
     <form
       v-if="!submitSuccess && !isSubmitting"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-32"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-32 form-animate"
       @submit.prevent="submitReport"
     >
       <!-- Name -->
@@ -45,7 +45,7 @@
           type="text"
           v-model="formData.name"
           required
-          class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -60,7 +60,7 @@
             type="tel"
             v-model="formData.phone"
             required
-            class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
@@ -71,7 +71,7 @@
             id="email"
             type="email"
             v-model="formData.email"
-            class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
           />
         </div>
       </div>
@@ -90,9 +90,9 @@
             id="dog-city"
             v-model="formData.dogCity"
             required
-            class="appearance-none w-full py-2 px-3 text-gray-700 bg-white focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-black bg-white focus:outline-none focus:shadow-outline"
           >
-            <option value="" disabled>{{ $t('ChooseACity') }}</option>
+            <option value="" disabled>{{ $t('report.form.ChooseACity.label') }}</option>
             <option v-for="city in dogCities" :key="city" :value="city">
               {{ city }}
             </option>
@@ -109,9 +109,13 @@
           </label>
           <div class="flex items-center space-x-4">
             <label
-              class="cursor-pointer border border-black text-[14px] font-bold py-2 px-4 w-36 text-center text-black"
+              class="relative inline-block cursor-pointer border border-black text-[14px] font-bold py-2 px-4 w-36 text-center text-black
+                    overflow-hidden transition-colors duration-300 ease-in-out
+                    before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
+                    hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
+                     z-10 hover:text-white"
             >
-              {{ $t('report.form.dogPicture.upload') }}
+              <span class="relative z-10">{{ $t('report.form.dogPicture.upload') }}</span>
               <input
                 id="dog-picture"
                 type="file"
@@ -149,7 +153,7 @@
           type="text"
           v-model="formData.reporterCity"
           required
-          class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -166,7 +170,7 @@
           v-model="formData.comments"
           :maxlength="100"
           rows="4"
-          class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline resize-none"
+          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline resize-none"
         ></textarea>
         <div class="text-right text-sm text-gray-600 mt-1">
           {{ formData.comments.length }} / 100
@@ -177,18 +181,22 @@
       <button
         type="submit"
         :disabled="isSubmitting"
-        class="border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-black"
+        class="relative inline-block border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-black
+              overflow-hidden transition-colors duration-300 ease-in-out
+              before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
+              hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
+              z-10 hover:text-white"
       >
-        {{ isSubmitting
+        <span class="relative z-10">{{ isSubmitting
           ? $t('report.form.submit.loading')
-          : $t('report.form.submit.default') }}
+          : $t('report.form.submit.default') }}</span>
       </button>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onUnmounted } from 'vue'
+import { ref, reactive } from 'vue'
 import Loader from '~/components/Loader.vue'
 
 interface ReportForm {
@@ -302,4 +310,91 @@ async function submitReport() {
     isSubmitting.value = false
   }
 }
+
+onMounted(() => {
+  //THE ANIMATION OBSERVERS======================================================================================================================================
+  const titleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up')
+          titleObserver.unobserve(entry.target)
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px'
+    }
+  )
+
+  const messageObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up')
+          messageObserver.unobserve(entry.target)
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px'
+    }
+  )
+
+  const formObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up')
+          formObserver.unobserve(entry.target)
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px'
+    }
+  )
+  // ==============================================================================================================================
+  document.querySelectorAll('.title-animate').forEach((title) => {
+    titleObserver.observe(title)
+  })
+
+
+  document.querySelectorAll('.message-animate').forEach((message) => {
+    messageObserver.observe(message)
+  })
+
+
+  document.querySelectorAll('.form-animate').forEach((form) => {
+    formObserver.observe(form)
+  })
+})
 </script>
+
+<style scoped>
+.title-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.message-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.form-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-slide-up {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+</style>
