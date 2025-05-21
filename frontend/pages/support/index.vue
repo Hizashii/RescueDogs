@@ -10,7 +10,7 @@ import type { CharityItem } from '~/types/CharityItem'
 const { t } = useI18n()
 const router = useRouter()
 
-// Donation tiers (unchanged)
+// Donation tiers
 const tiers = ref([
   { amount: '2000 Ft',  description: t('support.tiers.0.description') },
   { amount: '3000 Ft',  description: t('support.tiers.1.description') },
@@ -32,90 +32,6 @@ onMounted(async () => {
   } catch {
     rawItems.value = []
   }
-
-  // THE ANIMATION OBSERVERS============================================================================================================
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up')
-          sectionObserver.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.05,
-      rootMargin: '0px 0px -15% 0px'
-    }
-  )
-
-  const contentObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up')
-          contentObserver.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -10% 0px'
-    }
-  )
-
-  const tierObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('animate-slide-up')
-          }, index * 150)
-          tierObserver.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -10% 0px'
-    }
-  )
-
-  const itemObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('animate-slide-up')
-          }, index * 100)
-          itemObserver.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -10% 0px'
-    }
-  )
-  // ==============================================================================================================
-  document.querySelectorAll('.section-animate').forEach((section) => {
-    sectionObserver.observe(section)
-  })
-
-  
-  document.querySelectorAll('.content-animate').forEach((content) => {
-    contentObserver.observe(content)
-  })
-
- 
-  document.querySelectorAll('.tier-animate').forEach((tier) => {
-    tierObserver.observe(tier)
-  })
-
-
-  document.querySelectorAll('.item-animate').forEach((item) => {
-    itemObserver.observe(item)
-  })
 })
 function parseFt(amount: string): number {
   return parseInt(amount.replace(/\D+/g, ''), 10) || 0
@@ -136,7 +52,7 @@ function goToItem(itemId: string) {
   />
 
   <!-- Donation Tiers -->
-  <section class="bg-[#FFFADF] py-12 px-4 section-animate">
+  <section class="bg-[#FFFADF] py-12 px-4 ">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xl md:text-4xl font-semibold text-[#3D4836] mb-8 text-center md:text-start">
         {{ t('support.intro.line1') }}<br class="hidden md:block"/>
@@ -144,7 +60,7 @@ function goToItem(itemId: string) {
       </h2>
       <div class="flex flex-col md:flex-row gap-8">
         <div class="w-full md:w-1/2 space-y-4 pr-0 md:pr-8 
-                   md:border-r-2 md:border-dashed md:border-[#3D4836] content-animate">
+                   md:border-r-2 md:border-dashed md:border-[#3D4836] ">
           <p class="font-semibold">{{ t('support.body.p1') }}</p>
           <p class="font-light">{{ t('support.body.p2') }}</p>
           <p class="font-light">{{ t('support.body.p3') }}</p>
@@ -154,8 +70,7 @@ function goToItem(itemId: string) {
           <div
             v-for="(tier, i) in tiers"
             :key="i"
-            class="bg-[#FFE65E] p-6 flex items-center justify-between tier-animate"
-          >
+            class="bg-[#FFE65E] p-6 flex items-center justify-between ">
             <div>
               <h3 class="text-2xl font-bold">{{ tier.amount }}</h3>
               <p class="text-sm">{{ tier.description }}</p>
@@ -176,7 +91,7 @@ function goToItem(itemId: string) {
     </div>
   </section>
   <!-- Charity Items -->
-  <section class="bg-[#FFFADF] py-12 section-animate">
+  <section class="bg-[#FFFADF] py-12 ">
     <div class="container mx-auto px-4">
       <h2
         class="text-xl md:text-4xl font-semibold text-[#3D4836] mb-8 text-center md:text-start"
@@ -188,8 +103,7 @@ function goToItem(itemId: string) {
         <div
           v-for="(item, index) in activeItems"
           :key="item._id"
-          class="bg-[#FFE65E] p-4 flex flex-col items-center item-animate"
-        >
+          class="bg-[#FFE65E] p-4 flex flex-col items-center ">
           <img
             :src="item.imageUrl"
             :alt="item.name"
@@ -220,7 +134,7 @@ function goToItem(itemId: string) {
     </div>
   </section>
 
-  <div class="flex flex-col md:flex-row items-center justify-start md:h-[500px] h-auto pb-8 md:pb-0 section-animate">
+  <div class="flex flex-col md:flex-row items-center justify-start md:h-[500px] h-auto pb-8 md:pb-0 ">
     <img
       src="/img/doggo.png"
       alt="Dog icon"
@@ -262,6 +176,7 @@ function goToItem(itemId: string) {
 </template>
 
 <style scoped>
+/*
 .section-animate {
   opacity: 0;
   transform: translateY(30px);
@@ -290,4 +205,5 @@ function goToItem(itemId: string) {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+*/
 </style>

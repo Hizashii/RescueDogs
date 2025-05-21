@@ -8,7 +8,7 @@
 
       <div v-else-if="!dog" class="text-center text-gray-700 py-20">
         <h2 class="text-2xl font-semibold">Dog Not Found</h2>
-        <p>Sorry, we couldn’t locate that pup in our records.</p>
+        <p>Sorry, we couldn't locate that pup in our records.</p>
       </div>
 
       <div v-else class="flex flex-col md:flex-row gap-32">
@@ -85,7 +85,7 @@
 
       <div class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
         <div class="flex-1">
-          <h3 class="font-bold">Can’t adopt?</h3>
+          <h3 class="font-bold">Can't adopt?</h3>
           <p>Make a donation to support animals in our care.</p>
           <div class="flex space-x-4 mt-4">
             <button class="bg-white px-4 py-2 hover:bg-gray-100">500 Ft</button>
@@ -136,11 +136,14 @@ async function fetchDogAndList() {
   }
 }
 
-const otherDogs = computed(() =>
-  dogs.value
+const otherDogs = computed(() => {
+  if (!dogs.value || !Array.isArray(dogs.value.dogs)) {
+    return [];
+  }
+  return dogs.value.dogs
     .filter(d => String(d.id) !== String(dog.value?.id))
-    .slice(0, 4)
-)
+    .slice(0, 4);
+})
 
 onMounted(fetchDogAndList)
 </script>
