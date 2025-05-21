@@ -1,7 +1,9 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  if (to.path === '/Login') return
-
-  if (import.meta.client && !localStorage.getItem('isAdmin')) {
-    return navigateTo('/Login')
+export default defineNuxtRouteMiddleware((to) => {
+  const adminCookie = useCookie('isAdmin')
+  if (to.path !== '/login' && !adminCookie.value) {
+    return navigateTo('/login', { replace: true })
+  }
+  if (to.path === '/login' && adminCookie.value) {
+    return navigateTo('/', { replace: true })
   }
 })

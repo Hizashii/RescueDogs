@@ -1,22 +1,28 @@
 <template>
-  <div :class="{ dark: isDark }">
-    <TopNav :dark="isDark" :onToggleDark="toggleDarkMode" />
+  <div class="min-h-screen bg-gray-100">
+    <TopNav />
     <div class="flex">
       <SideNav />
-      <main class="flex-1 p-4">
-        <NuxtPage />
+      <main class="flex-1 p-8">
+        <slot />
       </main>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import TopNav from '~/components/TopNav.vue'
-import SideNav from '~/components/SideNav.vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useCookie } from '#imports'
+import TopNav from '../components/TopNav.vue'
+import SideNav from '../components/SideNav.vue'
 
-const isDark = ref(false)
-function toggleDarkMode() {
-  isDark.value = !isDark.value
+const router = useRouter()
+const currentRoute = useRoute()
+const adminCookie = useCookie('isAdmin')
+
+if (!adminCookie.value) {
+  if (currentRoute.path !== '/login') {
+    router.push('/login')
+  }
 }
 </script>

@@ -1,11 +1,11 @@
 // src/router/index.ts
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import Login       from '@/pages/Login.vue'      
-import Dashboard   from '@/pages/index.vue'     
-import Users       from '@/pages/Users.vue'
-import Blog        from '@/pages/Blog.vue'
-import Report      from '@/pages/Report.vue'
-import DogAdd      from '@/pages/dogs/add.vue'
+import Login       from '../pages/Login.vue'      
+import Dashboard   from '../pages/index.vue'     
+import Users       from '../pages/Users.vue'
+import Blog        from '../pages/Blog.vue'
+import Report      from '../pages/Report.vue'
+import DogAdd      from '../pages/dogs/add.vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/',
-    name: 'index',  // Changed from 'Dashboard' to 'index'
+    name: 'index', 
     component: Dashboard,
     meta: { requiresAuth: true }
   },

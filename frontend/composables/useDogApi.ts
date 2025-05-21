@@ -67,11 +67,10 @@ export default function useDogApi() {
         throw new Error(`API error: ${response.status}`);
       }
       
-      const dogs = await response.json();
-      const total = Math.max(dogs.length, 100); // Placeholder until proper pagination is implemented
+      const data = await response.json();
       
       return {
-        dogs: dogs.map((dog: any) => ({
+        dogs: data.dogs.map((dog: any) => ({
           id: dog._id,
           name: dog.name,
           breed: dog.breed || 'Unknown',
@@ -85,8 +84,8 @@ export default function useDogApi() {
           gender: dog.gender,
           goodWith: dog.goodWith || []
         })),
-        total: total,
-        totalPages: Math.ceil(total / limit)
+        total: data.total,
+        totalPages: data.totalPages
       };
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error fetching dogs';
@@ -167,7 +166,6 @@ export default function useDogApi() {
     };
   };
   const processDonation = async (amount: number): Promise<{success: boolean, message: string}> => {
-    console.log(`Processing donation of ${amount} Ft`);
     return {
       success: true,
       message: `Donation of ${amount} Ft processed successfully`

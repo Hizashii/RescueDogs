@@ -4,89 +4,28 @@
       <NavBar />
   
       <div class="flex flex-col md:flex-row">
-        
-        <div class="hidden md:block bg-[#FFE65E] shadow-lg">
-          <FilterSidebar
-            :filters="filters"
-            :breeds="breeds"
-            :locations="locations"
-            @update-filter="updateFilter"
-            @clear-filters="clearAllFilters"
-            class="text-left"
-          />
-        </div>
+        <!-- Sidebar Filter Component -->
+        <FilterSidebar
+          :filters="filters"
+          :breeds="breeds"
+          :locations="locations"
+          :show-status="true"
+          @update-filter="updateFilter"
+          @clear-filters="clearAllFilters"
+        />
   
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 mt-8 mb-8">
-          <h1 class="text-[#3D6625] font-bold font-poppins text-[24px] md:text-[40px] md:ml-8 max-w-[300px] ">
-            {{ $t('allAnimals.title') }}
+        <div class="flex-1 p-6">
+          <h1 class="text-[#3D6625] text-3xl font-bold">
+            {{ $t('adoption.title') }}
           </h1>
-          <div class="block md:hidden"><svg width="327" height="2" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="gold" stroke-width="2" d="M0 1h327"/></svg></div>
-       
-          <div class="flex flex-row justify-start items-start gap-4 w-full px-4 md:px-8">
-          
-            <button 
-              @click="showFilters = !showFilters"
-              class="md:hidden h-[50px] w-[130px] flex flex-row justify-center items-center border-2 border-black text-[14px] hover:bg-gray-50 transition-colors"
-            >
-              FILTERS
-              <img src="/img/icon-filter.png" alt="filter icon" class="ml-2">
-            </button>
-
-            <p class="mt-2 text-[12px] font-light">
-              {{ totalDogs.toLocaleString() }}
-              {{ $t('adoption.dogsUp') }}
-            </p>
-          </div>
-
-          
-          <transition
-            enter-active-class="transition-all duration-300 ease-out"
-            enter-from-class="opacity-0 -translate-x-full"
-            enter-to-class="opacity-100 translate-x-0"
-            leave-active-class="transition-all duration-300 ease-in"
-            leave-from-class="opacity-100 translate-x-0"
-            leave-to-class="opacity-0 -translate-x-full"
-          >
-            <div v-if="showFilters" class="md:hidden fixed inset-0 z-50">
-             
-              <div 
-                v-if="showFilters" 
-                class="fixed inset-0 bg-black bg-opacity-50"
-                @click="showFilters = false"
-              ></div>
-              
-              
-              <div class="absolute inset-y-0 left-0 w-full bg-[#FFE65E] shadow-lg overflow-y-auto">
-                <div class="flex justify-between items-center p-4 border-b border-black">
-                  <h2 class="text-lg font-bold">Filters</h2>
-                  <button 
-                    @click="showFilters = false"
-                    class="p-2 hover:bg-gray-100 rounded-full"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                <div>
-                  <FilterSidebar
-                    :filters="filters"
-                    :breeds="breeds"
-                    :locations="locations"
-                    @update-filter="updateFilter"
-                    @clear-filters="clearAllFilters"
-                    class="text-center"
-                  />
-                </div>
-              </div>
-            </div>
-          </transition>
-
+          <p class="mt-2">
+            {{ totalDogs.toLocaleString() }}
+            {{ $t('adoption.dogsUp') }}
+          </p>
+  
           <!-- Separator -->
-
-          <div class="w-full px-4">
-            <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
+          <div class="h-1 bg-[#FFD700] my-4"></div>
   
           <!-- Loading State -->
           <div v-if="loading" class="flex justify-center items-center h-64">
@@ -117,7 +56,7 @@
           </div>
   
           <!-- Empty State -->
-          <div v-else class="text-center py-12 ">
+          <div v-else class="text-center py-12">
             <p class="text-xl">{{ $t('adoption.empty.message') }}</p>
             <button
               @click="clearAllFilters"
@@ -201,7 +140,6 @@
             <div class="w-full md:w-1/3">
               <!-- optional image or graphic -->
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -380,8 +318,6 @@
         locations.value = ['Budapest', 'Debrecen', 'Szeged'];
       }
     };
-    
-    const showFilters = ref(false)
     
     onMounted(async () => {
       await loadFilterOptions();

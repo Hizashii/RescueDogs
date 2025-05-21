@@ -4,8 +4,17 @@ export default defineNuxtConfig({
 
   nitro: {
     devProxy: {
-      '/api/**': 'http://localhost:5000',
-      '/uploads/**': 'http://localhost:5000'
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+        ws: true
+      },
+      '/uploads': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
 
@@ -15,5 +24,15 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2025-05-11'
+  ssr: true,
+
+  app: {
+    pageTransition:   false,
+    layoutTransition: false,
+    head: {
+      title: 'Admin Dashboard'
+    }
+  },
+
+  compatibilityDate: '2025-05-19'
 })
