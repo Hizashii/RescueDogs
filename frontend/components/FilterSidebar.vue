@@ -1,8 +1,8 @@
 <template>
-  <div class="w-64 bg-[#FFE65E] p-4 flex flex-col space-y-6">
+  <div class="w-full md:w-64 bg-[#FFE65E] p-4 flex flex-col space-y-6 sticky top-0 h-screen overflow-y-auto">
     <button
       @click="clearFilters"
-      class="bg-white px-4 py-2 text-center text-sm font-bold hover:bg-gray-100"
+      class="bg-white px-4 py-2 text-center text-sm font-bold hover:bg-gray-100 w-full md:w-auto"
     >
       CLEAR ALL FILTERS
     </button>
@@ -13,7 +13,7 @@
           type="text"
           :value="filters.name"
           @input="onInput('name', $event)"
-          class="w-full p-2 border"
+          class="w-full p-2 border text-center md:text-left"
           placeholder="Search by name"
         />
         <span class="absolute right-2 top-2">
@@ -40,7 +40,7 @@
         type="text"
         :value="filters.breed"
         @input="onInput('breed', $event)"
-        class="w-full p-2 border"
+        class="w-full p-2 border text-center md:text-left"
         placeholder="Enter breed"
       />
     </div>
@@ -53,7 +53,7 @@
       <select
         :value="filters[key]"
         @change="onInput(key, $event)"
-        class="w-full p-2 border appearance-none"
+        class="w-full p-2 border appearance-none text-center md:text-left"
       >
         <option value="Any">Any</option>
         <option v-for="opt in opts" :key="opt" :value="opt">
