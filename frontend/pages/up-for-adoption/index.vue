@@ -9,6 +9,7 @@
         :filters="filters"
         :breeds="breeds"
         :locations="locations"
+        :show-status="false"
         @update-filter="updateFilter"
         @clear-filters="clearAllFilters"
       />

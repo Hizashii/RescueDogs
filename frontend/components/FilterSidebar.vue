@@ -75,11 +75,13 @@ type FilterKey =
   | 'age' 
   | 'gender' 
   | 'goodWith'
+  | 'status'
 
 interface Props {
   filters: Record<FilterKey, string>
   breeds: string[]
   locations: string[]
+  showStatus?: boolean
 }
 const props = defineProps<Props>()
 
@@ -103,18 +105,26 @@ const labels: Record<FilterKey, string> = {
   size:     'SIZE',
   age:      'AGE',
   gender:   'GENDER',
-  goodWith: 'GOOD WITH'
+  goodWith: 'GOOD WITH',
+  status:   'STATUS'
 }
 
-
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
-const selectConfig = computed<Record<SelectKey, string[]>>(() => ({
-  location: props.locations,
-  size:     ['Small','Medium','Large'],
-  age:      ['Puppy','Young','Adult','Senior'],
-  gender:   ['Male','Female'],
-  goodWith: ['children','dogs','cats'],
-}))
+const selectConfig = computed<Record<SelectKey, string[]>>(() => {
+  const config: Record<SelectKey, string[]> = {
+    location: props.locations,
+    size:     ['Small','Medium','Large'],
+    age:      ['Puppy','Young','Adult','Senior'],
+    gender:   ['Male','Female'],
+    goodWith: ['children','dogs','cats'],
+  }
+  
+  if (props.showStatus) {
+    config.status = ['Available', 'Under Observation', 'Adopted', 'Returned to Owner', 'Transferred', 'Deceased']
+  }
+  
+  return config
+})
 </script>
 
 <style scoped>

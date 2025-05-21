@@ -18,6 +18,24 @@ router.get(
   '/:id',
   getBlogById
 );
+
+router.put('/:id', async (req, res) => {
+  try {
+    const updated = await BlogModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updated) {
+      return res.status(404).json({ message: 'Blog not found' });
+    }
+    return res.json(updated);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await BlogModel.findByIdAndDelete(req.params.id)
@@ -30,4 +48,5 @@ router.delete('/:id', async (req, res) => {
     return res.status(500).json({ message: err.message })
   }
 })
+
 export default router;
