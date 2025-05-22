@@ -2,97 +2,98 @@
   <div class="min-h-screen flex justify-center bg-[#F8F6ED] p-4">
     <div class="bg-white shadow-lg  p-6 w-full max-w-4xl">
       <h1 class="text-2xl font-bold mb-4 text-[#3D4836]">
-        {{ isEditMode ? 'Edit Dog' : 'Add New Dog' }}
+        {{ isEditMode ? 'Kutya szerkesztése' : 'Új kutya hozzáadása' }}
       </h1>
 
       <form @submit.prevent="submitDog" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="space-y-4">
           <div>
-            <label class="block font-medium mb-1">Name</label>
+            <label class="block font-medium mb-1">Név</label>
             <input v-model="name" type="text" required
                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
-            <label class="block font-medium mb-1">Status</label>
+            <label class="block font-medium mb-1">Státusz</label>
             <select v-model="status" required
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select status</option>
+              <option disabled value="">Válasszon státuszt</option>
               <option v-for="s in statuses" :key="s">{{ s }}</option>
             </select>
           </div>
         </div>
         <div class="space-y-4">
           <div>
-            <label class="block font-medium mb-1">Breed</label>
-            <input v-model="breed" type="text" placeholder="e.g., Labrador"
+            <label class="block font-medium mb-1">Fajta</label>
+            <input v-model="breed" type="text" placeholder="pl.: Labrador"
                    class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]" />
           </div>
           <div>
-            <label class="block font-medium mb-1">Size</label>
+            <label class="block font-medium mb-1">Méret</label>
             <select v-model="size"
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select size</option>
+              <option disabled value="">Válasszon méretet</option>
               <option v-for="sz in sizes" :key="sz">{{ sz }}</option>
             </select>
           </div>
         </div>
         <div class="space-y-4">
           <div>
-            <label class="block font-medium mb-1">Image</label>
+            <label class="block font-medium mb-1">Kép feltöltése</label>
             <input type="file" @change="handleFileUpload" accept="image/*" class="w-full"/>
+            <p class="text-sm text-gray-500 mt-1">Válasszon képet</p>
           </div>
           <div>
-            <label class="block font-medium mb-1">Location</label>
+            <label class="block font-medium mb-1">Település</label>
             <select v-model="location" required
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select city</option>
+              <option disabled value="">Válasszon települést</option>
               <option v-for="c in dogCities" :key="c">{{ c }}</option>
             </select>
           </div>
         </div>
         <div class="space-y-4">
           <div>
-            <label class="block font-medium mb-1">Age</label>
+            <label class="block font-medium mb-1">Kor</label>
             <select v-model="age"
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select age</option>
+              <option disabled value="">Válasszon kort</option>
               <option v-for="a in ages" :key="a">{{ a }}</option>
             </select>
           </div>
           <div>
-            <label class="block font-medium mb-1">Gender</label>
+            <label class="block font-medium mb-1">Nem</label>
             <select v-model="gender"
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select gender</option>
+              <option disabled value="">Válasszon nemet</option>
               <option v-for="g in genders" :key="g">{{ g }}</option>
             </select>
           </div>
         </div>
         <div class="lg:col-span-2">
-          <label class="block font-medium mb-1">Description</label>
+          <label class="block font-medium mb-1">Leírás</label>
           <textarea v-model="description" rows="3" required
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0]"></textarea>
         </div>
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label class="block font-medium mb-1">Fur Length</label>
+            <label class="block font-medium mb-1">Szőrhosszúság</label>
             <select v-model="furLength"
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select fur length</option>
+              <option disabled value="">Válasszon szőrhosszt</option>
               <option v-for="f in furLengths" :key="f">{{ f }}</option>
             </select>
           </div>
           <div>
-            <label class="block font-medium mb-1">Vaccination & Chips</label>
+            <label class="block font-medium mb-1">Oltások és chip</label>
             <select v-model="vaccination"
                     class="w-full border p-2 focus:ring-2 focus:ring-[#1446A0] bg-white">
-              <option disabled value="">Select option</option>
+              <option disabled value="">Válasszon opciót</option>
               <option v-for="v in vaccinationOptions" :key="v">{{ v }}</option>
             </select>
           </div>
         </div>
         <div class="lg:col-span-2">
-          <label class="block font-medium mb-2">Good With</label>
+          <label class="block font-medium mb-2">Opcionális információ</label>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <label v-for="tag in extraTags" :key="tag" class="flex items-center">
               <input type="checkbox" :value="tag" v-model="selectedTags"
@@ -103,29 +104,29 @@
         </div>
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <label class="block font-medium mb-1">Came In</label>
+            <label class="block font-medium mb-1">Bekerülés</label>
             <input type="date" v-model="cameIn" class="w-full border p-2"/>
           </div>
           <div>
-            <label class="block font-medium mb-1">Went Out</label>
+            <label class="block font-medium mb-1">Kikerülés</label>
             <input type="date" v-model="wentOut" class="w-full border p-2"/>
           </div>
           <div>
-            <label class="block font-medium mb-1">Looking for Owner</label>
+            <label class="block font-medium mb-1">Gazdit keres</label>
             <input type="date" v-model="lookingForOwner" class="w-full border p-2"/>
           </div>
           <div class="md:col-span-2">
-            <label class="block font-medium mb-1">Adapted</label>
+            <label class="block font-medium mb-1">Örökbefogadva</label>
             <input type="date" v-model="adapted" class="w-full border p-2"/>
           </div>
           <div class="md:col-span-2">
-            <label class="block font-medium mb-1">Relation to People</label>
+            <label class="block font-medium mb-1">További információ</label>
             <input type="text" v-model="relationToPeople"
-                   class="w-full border p-2" placeholder="e.g., Friendly"/>
+                   class="w-full border p-2" placeholder="pl.: barátságos"/>
           </div>
         </div>
         <div class="lg:col-span-2">
-          <label class="block font-medium mb-1">More Info</label>
+          <label class="block font-medium mb-1">További részletek</label>
           <textarea v-model="moreInfo" rows="3"
                     class="w-full border p-2"></textarea>
         </div>
@@ -134,8 +135,8 @@
                   :disabled="isSubmitting"
                   class="bg-[#3D6625] text-white font-bold py-2 px-6 hover:bg-[#213D12]">
             {{ isSubmitting
-                ? (isEditMode ? 'Saving…' : 'Submitting…')
-                : (isEditMode ? 'Save Changes' : 'Submit') }}
+                ? (isEditMode ? 'Mentés…' : 'Küldés…')
+                : (isEditMode ? 'Változtatások mentése' : 'Beküldés') }}
           </button>
         </div>
       </form>
@@ -165,21 +166,21 @@ const dogCities = [
   'Tetétlen','Zsáka'
 ]
 const statuses = [
-  'Up for adoption','In quarantine','Adopted',
-  'Claimed by original owner','Housed by another shelter','Deceased'
+  'Örökbefogadható','Megfigyelés alatt','Örökbefogadott',
+  'Eredeti gazdája érte jött','Átvevő szervezethez került','Elhunyt'
 ]
 const sizes    = [
-  'small','bigger small','smaller mid','mid',
-  'bigger mid','smaller big','big'
+  'kicsi','nagyobb kicsi','kisebb közepes','közepes',
+  'nagyobb közepes','kisebb nagy','nagy'
 ]
-const ages     = ['Puppy','Young','Adult','Old']
-const genders  = ['Male','Female']
-const furLengths         = ['Short','Mid','Long']
-const vaccinationOptions = ['Chipped and vaccinated','In process']
+const ages     = ['Kölyök','Fiatal','Felnőtt','Idős']
+const genders  = ['Hím','Nőstény']
+const furLengths         = ['Rövid','Közepes','Hosszú']
+const vaccinationOptions = ['Chippelt és oltott','Folyamatban']
 const extraTags          = [
-  'Good with people','Good with kids', 'Good with cats', 'Good with dogs','Really friendly','Shy','Curious',
-  'Afraid of people','Afraid of other dogs','Agressive with people',
-  'Came from the streets','Heartworm positive'
+  'Emberrel kedves','Szereti a gyerekeket','Szereti a macskákat','Szereti a kutyákat',
+  'Nagyon barátságos','Félénk','Kíváncsi','Fél az emberektől','Fél más kutyáktól',
+  'Agresszív','Utcáról jött','Szívféreg pozitív'
 ]
 
 const name             = ref('')
@@ -203,7 +204,6 @@ const relationToPeople = ref('')
 const moreInfo         = ref('')
 
 const isSubmitting = ref(false)
-
 
 function handleFileUpload(event: Event) {
   const file = (event.target as HTMLInputElement).files?.[0] || null;
@@ -289,16 +289,19 @@ async function submitDog() {
   formData.append('relationToPeople', relationToPeople.value)
   formData.append('moreInfo', moreInfo.value)
 
-try {
-  if (isEditMode.value) {
-    await api(`/api/dogs/${editId.value}`, { method: 'PUT', body: formData })
-    window.alert('Changes saved successfully!')
-  } else {
-    await api('/api/dogs/upload', { method: 'POST', body: formData })
-    window.alert('Dog created successfully!')
+  try {
+    if (isEditMode.value) {
+      await api(`/api/dogs/${editId.value}`, { method: 'PUT', body: formData })
+      window.alert('Változtatások sikeresen mentve!')
+    } else {
+      await api('/api/dogs/upload', { method: 'POST', body: formData })
+      window.alert('Kutya sikeresen létrehozva!')
+    }
+    await router.push('/')
+  } catch (err) {
+    console.error('Hiba a mentés során:', err)
+  } finally {
+    isSubmitting.value = false
   }
-  await router.push('/')
-} catch (err) {
-}
 }
 </script>

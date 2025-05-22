@@ -1,106 +1,117 @@
-import { ref, onMounted, type Ref } from 'vue'
-import axios from 'axios'
-import { useRouter, useRuntimeConfig } from '#imports'
-
-interface User {
-  id: string;
-  email: string;
-  role: string;
-  name?: string;
-}
+import { ref } from 'vue'
+import { useRouter, useRuntimeConfig, useCookie } from '#imports'
 
 export function useAuth() {
-  const config = useRuntimeConfig()
-  axios.defaults.baseURL = config.public.apiBase || 'http://localhost:5000'
-
-  const token: Ref<string | null> = ref(null)
-  const user: Ref<User | null> = ref(null)
-  const isAuthenticated: Ref<boolean> = ref(false)
-  const loading: Ref<boolean> = ref(true)
   const router = useRouter()
-
-  // Set up axios interceptors for authentication
-  axios.interceptors.request.use(cfg => {
-    if (token.value) {
-      cfg.headers!['Authorization'] = `Bearer ${token.value}`
-    }
-    return cfg
-  })
-
-  // Handle authentication errors
-  axios.interceptors.response.use(
-    r => r,
-    e => {
-      if (e.response?.status === 401 || e.response?.status === 403) {
-        logout()
-        router.push('/login')
-      }
-      return Promise.reject(e)
-    }
-  )
-
-  // Check for existing session on mount
-  onMounted(() => {
-    const savedToken = localStorage.getItem('adminToken')
-    const savedUser = localStorage.getItem('adminUser')
-    
-    if (savedToken && savedUser) {
-      token.value = savedToken
-      user.value = JSON.parse(savedUser)
-      isAuthenticated.value = true
-    }
-    
-    loading.value = false
-  })
+  const config = useRuntimeConfig()
+  const isAuthenticated = ref(false)
+  const user = ref(null)
+  const loading = ref(false)
+  const error = ref('')
+  const isAdmin = useCookie('isAdmin')
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
-      const ADMIN_EMAIL = 'mancsmentoadomany@gmail.com'
-      const ADMIN_PASS = 'Kuty4M4ncsM3ntok'
+      loading.value = true
+      error.value = ''
 
-      if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
-        const mockToken = 'admin-token-' + Date.now()
-        const mockUser: User = {
-          id: '1',
-          email: ADMIN_EMAIL,
-          role: 'admin',
-          name: 'Admin'
+      const apiUrl = `${config.public.apiBase}/api/auth/login`
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
+      })
+
+      
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type')
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json()
+          error.value = data.message || 'Login failed'
+        } else {
+          const text = await response.text()
+          console.error('Non-JSON response:', text)
+          error.value = 'Server error occurred'
         }
-
-        // Set auth state
-        token.value = mockToken
-        user.value = mockUser
-        isAuthenticated.value = true
-
-        // Store in localStorage
-        localStorage.setItem('adminToken', mockToken)
-        localStorage.setItem('adminUser', JSON.stringify(mockUser))
-        localStorage.setItem('isAdmin', '1')
-
-        return true
+        return false
       }
+
+      const data = await response.json()
+      user.value = data.user
+      isAuthenticated.value = true
+      isAdmin.value = '1'
+      
+      return true
+    } catch (err) {
+      console.error('Login error:', err)
+      error.value = 'An error occurred during login'
       return false
-    } catch (error) {
-      console.error('Login error:', error)
-      return false
+    } finally {
+      loading.value = false
     }
   }
 
-  function logout() {
-    token.value = null
-    user.value = null
-    isAuthenticated.value = false
-    localStorage.removeItem('adminToken')
-    localStorage.removeItem('adminUser')
-    localStorage.removeItem('isAdmin')
+  async function logout() {
+    try {
+      const apiUrl = `${config.public.apiBase}/api/auth/logout`
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        credentials: 'include'
+      })
+      
+      if (!response.ok) {
+        console.error('Logout failed:', response.status)
+      }
+    } catch (err) {
+      console.error('Logout error:', err)
+    } finally {
+      user.value = null
+      isAuthenticated.value = false
+      isAdmin.value = null
+      router.push('/login')
+    }
+  }
+
+  async function checkAuth() {
+    try {
+      const apiUrl = `${config.public.apiBase}/api/auth/profile`
+      
+      const response = await fetch(apiUrl, {
+        credentials: 'include'
+      })
+      
+      
+      if (response.ok) {
+        const data = await response.json()
+        user.value = data
+        isAuthenticated.value = true
+        isAdmin.value = '1'
+      } else {
+        user.value = null
+        isAuthenticated.value = false
+        isAdmin.value = null
+      }
+    } catch (err) {
+      user.value = null
+      isAuthenticated.value = false
+      isAdmin.value = null
+    }
+  }
+
+  if (import.meta.client) {
+    checkAuth()
   }
 
   return {
-    token,
-    user,
     isAuthenticated,
+    user,
     loading,
+    error,
     login,
-    logout
+    logout,
+    checkAuth
   }
 }
