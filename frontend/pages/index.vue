@@ -106,29 +106,33 @@
 </section>
 <!-- END OF CARDS -->
 <!-- INTRODUCTION -->
-<section class="bg-[#FFFADF] py-12 px-4 md:py-20 md:px-8 section-animate">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+<section class="bg-[#FFFADF] section-animate flex justify-between items-center">
+  <div class=" flex flex-col md:flex-row items-center justify-center content-center md:items-start gap-8 md:gap-5">
     
     <!-- IMAGE -->
     <div class="flex-shrink-0">
       <img
         src="/img/intro-dog.png"
         alt="Dog icon"
-        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg object-contain"
+        class="w-full max-w-full md:max-w-md lg:max-w-lg object-contain"
       />
     </div>
-    
+    <div class="hidden md:block"><svg width="6" height="625" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 0v655" stroke="gold" stroke-width="5" stroke-dasharray="10 10"/></svg></div>
+
     <div
-      class="flex-1 flex flex-col items-center md:items-start text-center md:text-left space-y-6
-             md:pl-8 md:border-l-[5px] md:border-dashed md:border-[#FFD700]"
+      class="flex-1 flex flex-col text-left space-y-6 min-h-28 my-auto max-w-[700px] gap-6 mx-5"
     >
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold">
         {{ $t('home.intro.title.part1') }}
         <span class="text-[#3D4836]"> {{ $t('home.intro.title.part2') }} </span>
       </h2>
       <p class="text-base sm:text-lg md:text-xl max-w-prose">
         {{ $t('home.intro.description') }}
       </p>
+      <nuxt-link to="/about-us">
+        <p class="text-base sm:text-lg md:text-xl underline font-light hover:text-[#3D4836]"> {{ $t('home.intro.readMore') }}</p>
+      </nuxt-link>
+      
       <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
         <nuxt-link to="/support">
           <button class="relative inline-block bg-[#FFD700] text-black font-bold text-sm sm:text-base px-6 py-3

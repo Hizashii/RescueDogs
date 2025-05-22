@@ -1,6 +1,6 @@
 <template>
     <div class="everything">
-      <div class="hero-container lg:h-[420px] h-[200px] flex items-center justify-center bg-custom-main-blue">
+      <div class="hero-container lg:h-[420px] h-[200px] flex items-center justify-center bg-custom-main-blue w-screen">
         <h2 v-if="title" class="hero-title relative z-20 text-center">{{ title }}</h2> 
               <img 
         v-if="image" 

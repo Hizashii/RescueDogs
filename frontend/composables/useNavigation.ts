@@ -3,39 +3,39 @@ import path from "path";
 export default function useNavigation() {
     const navItems = [
         {
-            title: 'Our dogs',
+            titleKey: 'navigation.ourDogs',
             path: '#',
             children: [
                 {
-                    title: 'Up for adoption',
+                    titleKey: 'navigation.upAdoption',
                     path: '/up-for-adoption',
                 },
                 {
-                    title: 'All animals',
+                    titleKey: 'navigation.allAnimals',
                     path: '/all-animals',
                 },
             ]
         },
         {
-            title: 'Support us',
+            titleKey: 'navigation.supportUs',
             path: '/support',
         },
         {
-            title: 'About us',
+            titleKey: 'navigation.aboutUs',
             path: '#',
             children: [
                 {
-                    title: 'About us',
+                    titleKey: 'navigation.aboutUs',
                     path: '/about-us',
                 },
                 {
-                    title: 'Blog',
+                    titleKey: 'navigation.blog',
                     path: '/blog',
                 },
             ]
         },
         {
-            title: 'Report a stray',
+            titleKey: 'navigation.reportStray',
             path: '/report-stray',
         }
     ];

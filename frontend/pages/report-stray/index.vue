@@ -45,7 +45,7 @@
           type="text"
           v-model="formData.name"
           required
-          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -60,7 +60,7 @@
             type="tel"
             v-model="formData.phone"
             required
-            class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
@@ -71,7 +71,7 @@
             id="email"
             type="email"
             v-model="formData.email"
-            class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
           />
         </div>
       </div>
@@ -153,7 +153,7 @@
           type="text"
           v-model="formData.reporterCity"
           required
-          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -170,7 +170,7 @@
           v-model="formData.comments"
           :maxlength="100"
           rows="4"
-          class="appearance-none w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline resize-none"
+            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline resize-none"
         ></textarea>
         <div class="text-right text-sm text-gray-600 mt-1">
           {{ formData.comments.length }} / 100
