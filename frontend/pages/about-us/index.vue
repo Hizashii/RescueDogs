@@ -24,7 +24,7 @@
           {{ $t('about.description') }}
         </p>
         <p class="text-lg">
-          Check out our archived website here: <a href="https://mancsmento.hu/" class="font-bold text-lg hover:underline">Mancsmento old website</a>
+          {{ $t('about.oldWebsite') }} <a :href="$t('about.oldWebsiteName')" class="font-bold text-lg hover:underline">{{ $t('about.oldWebsiteName') }}</a>
         </p>
         <div class="">
           <div class="flex flex-row items-center gap-4 sm:gap-8">
@@ -34,7 +34,7 @@
             before:absolute before:inset-0 before:bg-[#213714] before:scale-x-0 before:origin-left
             hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
             before:z-0 z-10">
-            <span class="relative z-10">Support</span>
+            <span class="relative z-10">{{ $t('about.supportButton') }}</span>
           </button>
         </nuxt-link>
                   <a
@@ -46,7 +46,7 @@
               before:absolute before:inset-0 before:bg-[#213714] before:scale-x-0 before:origin-left
               hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
               before:z-0 z-10">
-              <span class="relative z-10">Volunteer</span>
+              <span class="relative z-10">{{ $t('about.volunteerButton') }}</span>
             </button>
           </a>
 

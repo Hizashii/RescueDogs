@@ -51,7 +51,8 @@
         },
         "description": "Our association was founded in November 2021 because we have helped individually where we could, but we have always believed that we can be more effective by working together, as there are many stray/stray animals and animals living in poor conditions in the area.",
         "supportButton": "Support our work",
-        "volunteerButton": "Apply to volunteer"
+        "volunteerButton": "Apply to volunteer",
+        "readMore": "Read more..."
       },
       
       "stats": {
@@ -200,6 +201,37 @@
               }
             }
         },
+        "checkout":{
+          "thankYou": "Thank you!",
+          "thxDonation": "THANK YOU FOR YOUR DONATION!",
+          "thxPurchase": "THANK YOU FOR YOUR PURCHASE!",
+          "iWant": "I want to:",
+          "donate":"Donate",
+          "buyItem": "Buy an item",
+          "amount": "Amount:",
+          "custom": "Custom...",
+          "item": "Item:",
+          "contactInfo": "Contact info:",
+          "shipping": "Shipping",
+          "payment": "Payment",
+          "shipFee": "* shipping fee included",
+          "otherAmount": "Other amount",
+          "fullName": "Full name*",
+          "city": "City *",
+          "postal": "Postal code *",
+          "adress": "Address *",
+          "cardholder": "Cardholder Name *",
+          "cardNumber": "Card number *",
+          "cvc": "CVC *",
+          "expDate": "Expiration date *",
+          "enterAmount": "Enter amount",
+          "enterFt": "Enter FT",
+          "phoneNumber": "Phone number*",
+          "processing": "Processing",
+          "donatebtn": "Donate",
+          "placeOrderBtn": "Place Order"
+          
+        },
         "about": {
             "title": "Who we are",
             "description": "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.",
@@ -208,6 +240,10 @@
                 "line2": "protect them",
                 "line3": "And save them from the dogcatcher.\""
             },
+            "oldWebsite": "Check out our archived website here: ",
+            "oldWebsiteName": "Mancsmento old website",
+            "supportButton": "Support",
+            "volunteerButton": "Volunteer",
             "story": {
                 "title": "Our Story",
                 "paragraphs": {

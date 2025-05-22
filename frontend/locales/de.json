@@ -30,7 +30,8 @@
         },
         "description": "Unser Verein wurde im November 2021 gegründet, weil wir zwar individuell geholfen haben, wo wir konnten, aber immer geglaubt haben, dass wir gemeinsam effektiver sein können, da es viele streunende Tiere und Tiere gibt, die in schlechten Verhältnissen in der Gegend leben.",
         "supportButton": "Unterstützen Sie unsere Arbeit",
-        "volunteerButton": "Als Freiwilliger bewerben"
+        "volunteerButton": "Als Freiwilliger bewerben",
+        "readMore": "Mehr lesen..."
       },
       
       "stats": {
@@ -181,6 +182,36 @@
           }
         }
       },
+      "checkout":{
+          "thankYou": "Danke!",
+          "thxDonation": "DANKE FÜR DEINE SPENDE!",
+          "thxPurchase": "DANKE FÜR DEINEN KAUF!",
+          "iWant": "Ich möchte:",
+          "donate": "Spenden",
+          "buyItem": "Einen Artikel kaufen",
+          "amount": "Betrag:",
+          "custom": "Benutzerdefiniert...",
+          "item": "Artikel:",
+          "contactInfo": "Kontaktinformationen:",
+          "shipping": "Versand",
+          "payment": "Zahlung",
+          "shipFee": "* Versandkosten inbegriffen",
+          "otherAmount": "Anderer Betrag",
+          "fullName": "Vollständiger Name*",
+          "city": "Stadt *",
+          "postal": "Postleitzahl *",
+          "adress": "Adresse *",
+          "cardholder": "Name des Karteninhabers *",
+          "cardNumber": "Kartennummer *",
+          "cvc": "CVC *",
+          "expDate": "Ablaufdatum *",
+          "enterAmount": "Betrag eingeben",
+          "enterFt": "FT eingeben",
+          "phoneNumber": "Telefonnummer*",
+          "processing": "Verarbeitung",
+          "donatebtn": "Spenden",
+          "placeOrderBtn": "Bestellung aufgeben"
+        },
     "about": {
         "title": "Wer wir sind",
         "description": "Lorem ipsum ist ein Blindtext der Druck- und Satzindustrie. Lorem ipsum ist seit dem 16. Jahrhundert der Standardblindtext der Branche, als ein unbekannter Drucker einen Abzug der Schriften durcheinanderbrachte, um ein Schriftmusterbuch zu erstellen. Es hat nicht nur fünf Jahrhunderte überdauert, sondern auch den Sprung in den elektronischen Schriftsatz im Wesentlichen unverändert überstanden. Es wurde in den 1960er Jahren mit der Veröffentlichung von Letraset-Bögen mit Lorem-ipsum-Abschnitten populär und in jüngerer Zeit durch Desktop-Publishing-Software wie Aldus PageMaker, die Versionen von Lorem ipsum enthält.",
@@ -189,6 +220,10 @@
             "line2": "beschütze sie",
             "line3": "Und rette sie vor dem Hundefänger.\""
         },
+        "oldWebsite": "Schauen Sie sich hier unsere archivierte Website an: ",
+        "oldWebsiteName": "Mancsmento alte Website",
+        "supportButton": "Unterstützen",
+        "volunteerButton": "Als Freiwilliger bewerben",
         "story": {
             "title": "Unsere Geschichte",
             "paragraphs": {

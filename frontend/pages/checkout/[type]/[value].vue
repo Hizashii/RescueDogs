@@ -1,25 +1,33 @@
 <template>
-  <div class="max-w-5xl mx-auto py-16 bg-white">
-    <h1 class="text-3xl font-bold mb-12 text-center">
+  <ImageTitle
+    :title="t('checkout.thankYou')"
+    image="/img/dog-placeholder.png"
+    :overlayOpacity="0.5"
+  />
+ <div class="flex justify-center items-center bg-[#FFD700]">
+  <div class="max-w-5xl mx-auto py-16 bg-white px-10">
+    
+    <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
+    <h1 class="text-3xl font-bold mb-12 text-start text-[#3D4836]">
       {{ supportType === 'donation'
-          ? 'Thank you for your donation'
-          : 'Thank you for your purchase' }}
+          ? t('checkout.thxDonation')
+          : t('checkout.thxPurchase') }}
     </h1>
 
     <!-- 1) Support type + amount/item selector -->
-    <div class="bg-yellow-200 p-6 rounded-lg mb-12 flex flex-col md:flex-row items-center gap-4">
+    <div class="bg-yellow-200 p-6 -lg mb-12 flex flex-col md:flex-row items-center gap-4">
       <div>
-        <label class="font-semibold mr-2">I want to:</label>
-        <select v-model="supportType" class="p-2 bg-white border border-black rounded">
-          <option value="donation">Donate</option>
-          <option value="item">Buy an item</option>
+        <label class="font-semibold mr-2">{{ t('checkout.iWant') }}</label>
+        <select v-model="supportType" class="p-2 bg-white border border-black ">
+          <option value="donation">{{ t('checkout.donate') }}</option>
+          <option value="item">{{ t('checkout.buyItem') }}</option>
         </select>
       </div>
 
       <!-- Donation options -->
       <div v-if="supportType === 'donation'">
-        <label class="font-semibold mr-2">Amount:</label>
-        <select v-model="supportValue" class="p-2 bg-white border border-black rounded">
+        <label class="font-semibold mr-2">{{ t('checkout.amount') }}</label>
+        <select v-model="supportValue" class="p-2 bg-white border border-black ">
           <option
             v-for="amt in donationOptions"
             :key="amt"
@@ -27,21 +35,21 @@
           >
             {{ amt.toLocaleString() }} Ft
           </option>
-          <option value="custom">Custom…</option>
+          <option value="custom">{{ t('checkout.custom') }}</option>
         </select>
         <input
           v-if="supportValue === 'custom'"
           v-model.number="customAmount"
           type="number"
-          placeholder="Enter Ft"
-          class="p-2 ml-2 w-24 bg-white border border-black rounded"
+          :placeholder="$t('checkout.enterFt')"
+          class="p-2 ml-2 w-24 bg-white border border-black "
         />
       </div>
 
       <!-- Item options -->
       <div v-else>
-        <label class="font-semibold mr-2">Item:</label>
-        <select v-model="supportValue" class="p-2 bg-white border border-black rounded">
+        <label class="font-semibold mr-2">{{ t('checkout.item') }}</label>
+        <select v-model="supportValue" class="p-2 bg-white border border-black ">
           <option
             v-for="item in itemOptions"
             :key="item.id"
@@ -59,7 +67,7 @@
       <div class="flex-1 space-y-8">
         <!-- Contact info -->
         <div>
-          <h2 class="font-semibold mb-2">Contact info</h2>
+          <h2 class="font-semibold mb-2">{{ t('checkout.contactInfo') }}</h2>
           <input
             v-model="contact.email"
             type="email"
@@ -70,37 +78,38 @@
           <input
             v-model="contact.phone"
             type="tel"
-            placeholder="Phone number"
+            :placeholder="$t('checkout.phoneNumber')"
             class="w-full p-2 mt-2 bg-yellow-50 border border-black"
           />
         </div>
 
         <!-- Shipping (items only) -->
         <div v-if="supportType === 'item'">
-          <h2 class="font-semibold mb-2">Shipping</h2>
+          <h2 class="font-semibold mb-2">{{ t('checkout.shipping') }}</h2>
           <input
             v-model="shipping.fullName"
-            placeholder="Full Name *"
+            :placeholder="$t('checkout.fullName')"
             required
             class="w-full p-2 bg-yellow-50 border border-black"
           />
+
           <div class="flex gap-4 mt-2">
             <input
               v-model="shipping.city"
-              placeholder="City *"
+              :placeholder="$t('checkout.city')"
               required
               class="flex-1 p-2 bg-yellow-50 border border-black"
             />
             <input
               v-model="shipping.postal"
-              placeholder="Postal code *"
+              :placeholder="$t('checkout.postal')"
               required
               class="w-32 p-2 bg-yellow-50 border border-black"
             />
           </div>
           <input
             v-model="shipping.address"
-            placeholder="Address *"
+            :placeholder="$t('checkout.adress')"
             required
             class="w-full p-2 mt-2 bg-yellow-50 border border-black"
           />
@@ -108,30 +117,30 @@
 
         <!-- Payment -->
         <div>
-          <h2 class="font-semibold mb-2">Payment</h2>
+          <h2 class="font-semibold mb-2">{{ t('checkout.payment') }}</h2>
           <input
             v-model="payment.cardholder"
-            placeholder="Cardholder Name *"
+            :placeholder="$t('checkout.cardholder')"
             required
             class="w-full p-2 bg-yellow-50 border border-black"
           />
           <div class="grid grid-cols-3 gap-4 mt-2">
             <input
               v-model="payment.cardNumber"
-              placeholder="Card number *"
+              :placeholder="$t('checkout.cardNumber')"
               required
               class="col-span-2 p-2 bg-yellow-50 border border-black"
             />
             <input
               v-model="payment.cvc"
-              placeholder="CVC *"
+              :placeholder="$t('checkout.cvc')"
               required
               class="p-2 bg-yellow-50 border border-black"
             />
           </div>
           <input
             v-model="payment.expiry"
-            placeholder="Expiration date *"
+            :placeholder="$t('checkout.expDate')"
             required
             class="w-full p-2 mt-2 bg-yellow-50 border border-black"
           />
@@ -140,11 +149,11 @@
         <button
           type="submit"
           :disabled="loading"
-          class="mt-4 bg-yellow-500 text-black font-bold py-2 px-6"
+          class="mt-4 bg-[#FFE65E] text-[#3D4836] font-bold py-2 px-6"
         >
           {{ loading
-            ? 'Processing…'
-            : (supportType === 'donation' ? 'Donate' : 'Place order')
+            ? t('checkout.processing')
+            : (supportType === 'donation' ? t('checkout.donatebtn') : t('checkout.placeOrderBtn'))
           }}
         </button>
         <p v-if="error" class="text-red-600 mt-2">{{ error }}</p>
@@ -159,7 +168,7 @@
             class="w-full h-48 object-cover"
           />
           <h3 class="font-semibold">{{ selectedItem.name }}</h3>
-          <p class="text-sm text-gray-600">* shipping fee included</p>
+          <p class="text-sm text-gray-600">{{ t('checkout.shipFee') }}</p>
           <p class="text-2xl font-bold">
             {{ selectedItem.priceFt.toLocaleString() }} Ft
           </p>
@@ -169,22 +178,25 @@
             {{ checkoutValue.toLocaleString() }} Ft
           </p>
           <label class="block">
-            <span class="font-semibold">Other amount</span>
+            <span class="font-semibold">{{ t('checkout.otherAmount') }}</span>
             <input
               v-model.number="customAmount"
               type="number"
-              placeholder="Enter amount"
+              :placeholder="$t('checkout.enterAmount')"
               class="w-full p-2 mt-1 bg-yellow-50 border border-black"
             />
           </label>
         </div>
       </div>
     </form>
+    <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
   </div>
+ </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
+const { t } = useI18n()
 
 /** 1) Picker state **/
 const supportType = ref<'donation'|'item'>('donation')

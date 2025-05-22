@@ -4,6 +4,7 @@
       "subtitle": "Állatvédő Egyesület", 
       "adoptButton": "Örökbefogadás", 
       "donateButton":"Kóbor kutya bejelentése", 
+      "reportButton": "Kóbor kutya belejentése",
        
       "reportCard": { 
         "title": " JELENTS BE EGY KÓBOR KUTYUST ", 
@@ -30,7 +31,8 @@
         }, 
         "description": "Egyesületünk 2021 novemberében alakult, elsősorban egy állatotthon és kutyafuttató létrehozása céljából. Eredetileg azt szerettük volna, hogy legyen egy hely, ahol kóbor kutyákat tudunk átvenni és elhelyezni. Azonban amikor szembesültünk a környékünkön lévő gyepmesteri telepeken élő állatok bánásmódjával, valamint azzal, hogy sorra tűnnek el az ott lévő kutyák, úgy döntöttünk, hogy a saját kezünkbe vesszük az irányítást. Elhatároztuk, hogy mi magunk nyitunk és működtetünk egy ebrendészeti telepet, ahol minden állatnak megpróbáljuk a lehető legtöbbet nyújtani. Ma már 14 Hajdú-Bihar megyei – Szerep környéki – településről mentjük a kutyákat és már több száz életet sikerült megmentenünk, és jobbá tennünk.", 
         "supportButton": "Támogasd munkánkat", 
-        "volunteerButton": "Legyél önkéntesünk" 
+        "volunteerButton": "Legyél önkéntesünk" ,
+        "readMore": "Bővebben..."
       }, 
        
       "stats": { 
@@ -60,7 +62,7 @@
       }, 
        
       "location": { 
-        "title": "Látogass meg minket személyesen!", 
+        "title": "Látogasson meg minket személyesen!", 
         "openingHoursLabel": "Nyitvatartás", 
         "openingHours": "Hétfő - Vasárnap: 10:00 - 14:00", 
         "addressLabel": "Telephely", 
@@ -131,7 +133,37 @@
             } 
           }    
         }, 
-         
+         "checkout":{
+          "thankYou": "Köszönjük!",
+          "thxDonation": "KÖSZÖNJÜK A TÁMOGATÁSÁT!",
+          "thxPurchase": "KÖSZÖNJÜK A VÁSÁRLÁST!",
+          "iWant": "Szeretnék:",
+          "donate":"Adományozni",
+          "buyItem": "Megrendelni egy adománytárgyat",
+          "amount": "Összeg:",
+          "custom": "Egyedi összeg...",
+          "item": "Áru:",
+          "contactInfo": "Elérhetőség:",
+          "shipping": "Szállítás",
+          "payment": "Fizetési adatok",
+          "shipFee": "* a szállítási összeg bele van számolva",
+          "otherAmount": "Egyéb összeg",
+          "fullName": "Teljes név",
+          "city": "Város",
+          "postal": "Irányítószám ",
+          "adress": "Cím",
+          "cardholder": "Kártyatulajdonos neve",
+          "cardNumber": "Kártyaszám",
+          "cvc": "CVV kód ",
+          "expDate": "Lejárati dátum",
+          "enterAmount": "Adja meg az összeget",
+          "enterFt": "Forint",
+          "phoneNumber": "Telefonszám*",
+          "processing": "Feldolgozás",
+          "donatebtn": "Adományozás",
+          "placeOrderBtn": "Rendelés Megerősítése"
+        
+        },
             "support": { 
               "pageTitle":         "TÁMOGASD A MUNKÁNKAT!", 
               "intro": { 
@@ -187,7 +219,11 @@
         "line1": "\"Ne csak szeresd,", 
         "line2": "óvd is őt.", 
         "line3": "És mentsd meg a sintértől.\"" 
-      }, 
+      },
+      "oldWebsite": "Nézd meg az archivált honlapunkat: ",
+            "oldWebsiteName": "Régi Mancsmentő honlap ",
+      "supportButton": "Támogatás",
+      "volunteerButton": "Önkéntes",
       "story": { 
         "title": "Történetünk", 
         "paragraphs": { 

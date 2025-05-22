@@ -163,9 +163,9 @@ function goToItem(itemId: string) {
             <button
               class="relative inline-block bg-white text-black font-semibold py-2 px-4
                     overflow-hidden transition-colors duration-300 ease-in-out
-                    before:absolute before:inset-0 before:bg-[#FFD700] before:scale-x-0 before:origin-left
+                    before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
                     hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
-                    hover:text-[#3D4836] z-10"
+                    hover:text-[#ffffff] z-10"
               @click="goToDonation(parseFt(tier.amount))"
             >
               <span class="relative z-10">{{ t('support') }}</span>
@@ -204,9 +204,9 @@ function goToItem(itemId: string) {
           <button
             class="relative inline-block bg-white text-black w-[115px] h-[30px] text-[13px]
                   overflow-hidden transition-colors duration-300 ease-in-out
-                  before:absolute before:inset-0 before:bg-[#FFD700] before:scale-x-0 before:origin-left
+                  before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
                   hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
-                  hover:text-[#3D4836] z-10"
+                  hover:text-[#ffffff] z-10"
             @click="goToItem(item._id)"
           >
             <span class="relative z-10">{{ t('support.charity.button') }}</span>
