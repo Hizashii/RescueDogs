@@ -3,7 +3,7 @@
     <div class="max-w-5xl mx-auto">
 
       <div v-if="loading" class="text-center py-20">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#3D6625] mx-auto"></div>
+        <div class="animate-spin  h-12 w-12 border-t-2 border-b-2 border-[#3D6625] mx-auto"></div>
       </div>
 
       <div v-else-if="!dog" class="text-center text-gray-700 py-20">
@@ -137,11 +137,11 @@ async function fetchDogAndList() {
 }
 
 const otherDogs = computed(() => {
-  if (!dogs.value || !Array.isArray(dogs.value.dogs)) {
+  if (!dogs.value || !Array.isArray(dogs.value)) {
     return [];
   }
-  return dogs.value.dogs
-    .filter(d => String(d.id) !== String(dog.value?.id))
+  return dogs.value
+    .filter((d: { id: number }) => String(d.id) !== String(dog.value?.id))
     .slice(0, 4);
 })
 

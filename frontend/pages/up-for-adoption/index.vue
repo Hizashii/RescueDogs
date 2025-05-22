@@ -4,15 +4,38 @@
     <NavBar />
 
     <div class="flex flex-col md:flex-row">
+      <!-- Mobile Filter Toggle -->
+      <button 
+        @click="showFilters = !showFilters"
+        class="md:hidden bg-[#FFE65E] p-4 flex items-center justify-center space-x-2"
+      >
+        <span class="font-bold">Filters</span>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-5 w-5" 
+          :class="{ 'transform rotate-180': showFilters }"
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
       <!-- Sidebar Filter Component -->
-      <FilterSidebar
-        :filters="filters"
-        :breeds="breeds"
-        :locations="locations"
-        :show-status="false"
-        @update-filter="updateFilter"
-        @clear-filters="clearAllFilters"
-      />
+      <div 
+        class="w-full md:w-64 transition-all duration-300 ease-in-out"
+        :class="{ 'hidden md:block': !showFilters }"
+      >
+        <FilterSidebar
+          :filters="filters"
+          :breeds="breeds"
+          :locations="locations"
+          :show-status="false"
+          @update-filter="updateFilter"
+          @clear-filters="clearAllFilters"
+        />
+      </div>
 
       <!-- Main Content Area -->
       <div class="flex-1 p-6">
@@ -30,7 +53,7 @@
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center items-center h-64">
           <div
-            class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"
+            class="animate-spin h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"
           ></div>
         </div>
 
@@ -62,7 +85,7 @@
           <p class="text-xl">{{ $t('adoption.empty.message') }}</p>
           <button
             @click="clearAllFilters"
-            class="mt-4 bg-[#3D6625] text-white px-6 py-2 rounded"
+            class="mt-4 bg-[#3D6625] text-white px-6 py-2"
           >
             {{ $t('adoption.empty.clear') }}
           </button>
@@ -195,6 +218,7 @@ interface DogFilters {
   age: string
   gender: string
   goodWith: string
+  status: string
 }
 
 const config   = useRuntimeConfig()
@@ -220,8 +244,11 @@ const filters   = ref<DogFilters>({
   size: 'Any',
   age: 'Any',
   gender: 'Any',
-  goodWith: 'Any'
+  goodWith: 'Any',
+  status: 'Any'
 })
+
+const showFilters = ref(false)
 
 const paginationPages = computed(() => {
   if (totalPages.value <= 5) return Array.from({ length: totalPages.value }, (_, i) => i+1)
@@ -251,7 +278,7 @@ async function fetchDogsData() {
 }
 
 function clearAllFilters() {
-  filters.value = { name:'', location:'Any', breed:'Any', size:'Any', age:'Any', gender:'Any', goodWith:'Any' }
+  filters.value = { name:'', location:'Any', breed:'Any', size:'Any', age:'Any', gender:'Any', goodWith:'Any', status:'Any' }
   fetchDogsData()
 }
 function updateFilter(key: keyof DogFilters, value: string) {
