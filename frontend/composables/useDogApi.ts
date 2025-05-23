@@ -259,7 +259,7 @@ export default function useDogApi() {
 
   const fetchCharityItems = async (): Promise<CharityItem[]> => {
     try {
-      const response = await apiRequest('https://rescuedogs-1.onrender.com/api/CharityItems');
+      const response = await apiRequest(`${baseUrl}/api/charityitems`);
       const items = await response.json();
 
       if (!Array.isArray(items)) {
@@ -274,7 +274,7 @@ export default function useDogApi() {
           price: typeof item.price === 'number' ? item.price : 0,
           description: item.description || '',
           imageUrl: item.imageUrl?.startsWith('/uploads')
-            ? `https://rescuedogs-1.onrender.com${item.imageUrl}`
+            ? `${baseUrl}${item.imageUrl}`
             : item.imageUrl || '',
           isActive: Boolean(item.isActive),
           category: item.category || 'General',
