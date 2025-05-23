@@ -133,7 +133,7 @@ app.use('/api/blogs', blogRoutes)
 app.use('/api/dogs', dogRoutes)
 app.use('/api/reports', reportRoutes)
 app.use('/api/filters', filterRoutes)
-app.use('/api/charity', charityRoutes)
+app.use('/api/charityitems', charityRoutes)
 app.use('/api/payments', paymentsRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))

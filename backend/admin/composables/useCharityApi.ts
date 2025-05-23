@@ -5,17 +5,18 @@ axios.defaults.baseURL = process.env.ADMIN_API_BASE || 'https://rescuedogs-1.onr
 
 export default function useCharityApi() {
   const fetchAll = (): Promise<CharityItem[]> =>
-    axios.get('/api/CharityItems').then(r => r.data)
+    axios.get('/api/charityitems').then(r => r.data)
 
   const create = (item: Omit<CharityItem,'_id'>) =>
-    axios.post<CharityItem>('/api/CharityItems', item)
+    axios.post<CharityItem>('/api/charityitems', item)
 
   const update = (id: string, item: Partial<CharityItem>) =>
-    axios.put<CharityItem>(`/api/CharityItems/${id}`, item)
+    axios.put<CharityItem>(`/api/charityitems/${id}`, item)
 
   const remove = (id: string) =>
-    axios.delete(`/api/CharityItems/${id}`)
-async function uploadImage(
+    axios.delete(`/api/charityitems/${id}`)
+
+  async function uploadImage(
     formData: FormData,
     onUploadProgress: (pct: number) => void
   ): Promise<{ url: string }> {
@@ -32,7 +33,6 @@ async function uploadImage(
     )
     return { url: axios.defaults.baseURL + res.data.path }
   }
-  
 
   return { fetchAll, create, update, remove, uploadImage }
 }

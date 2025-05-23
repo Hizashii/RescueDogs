@@ -36,8 +36,6 @@ export function useAuth() {
           const data = await response.json()
           error.value = data.message || 'Login failed'
         } else {
-          const text = await response.text()
-          console.error('Non-JSON response:', text)
           error.value = 'Server error occurred'
         }
         return false
@@ -48,15 +46,12 @@ export function useAuth() {
       isAuthenticated.value = true
       isAdmin.value = '1'
       
-      // Store the token from the response body
       if (data.token) {
         token.value = data.token
-        console.log('Token stored from response:', token.value)
       }
       
       return true
     } catch (err) {
-      console.error('Login error:', err)
       error.value = 'An error occurred during login'
       return false
     } finally {
@@ -67,7 +62,6 @@ export function useAuth() {
   async function checkAuth() {
     try {
       const apiUrl = `${config.public.apiBase}/api/auth/profile`
-      console.log('Checking auth with token:', token.value)
       
       const response = await fetch(apiUrl, {
         credentials: 'include',
@@ -77,22 +71,18 @@ export function useAuth() {
         }
       })
       
-      console.log('Auth check response status:', response.status)
-      
       if (response.ok) {
         const data = await response.json()
         user.value = data
         isAuthenticated.value = true
         isAdmin.value = '1'
       } else {
-        console.log('Auth check failed:', response.status)
         user.value = null
         isAuthenticated.value = false
         isAdmin.value = null
         token.value = null
       }
     } catch (err) {
-      console.error('Auth check error:', err)
       user.value = null
       isAuthenticated.value = false
       isAdmin.value = null
@@ -111,12 +101,8 @@ export function useAuth() {
           'Content-Type': 'application/json'
         }
       })
-      
-      if (!response.ok) {
-        console.error('Logout failed:', response.status)
-      }
     } catch (err) {
-      console.error('Logout error:', err)
+      // Ignore logout errors
     } finally {
       user.value = null
       isAuthenticated.value = false
