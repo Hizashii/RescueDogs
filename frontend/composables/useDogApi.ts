@@ -139,7 +139,7 @@ export default function useDogApi() {
           name: dog.name,
           breed: dog.breed || 'Unknown',
           image: dog.image?.startsWith('/uploads') 
-            ? `${config.public.apiBase}${dog.image}` 
+            ? `${baseUrl}${dog.image}` 
             : dog.image,
           description: dog.description,
           location: dog.location,
@@ -187,7 +187,7 @@ export default function useDogApi() {
       const dog = await response.json();
       
       if (dog.image?.startsWith('/uploads')) {
-        dog.image = `${config.public.apiBase}${dog.image}`;
+        dog.image = `${baseUrl}${dog.image}`;
       }
 
       return {
@@ -222,7 +222,7 @@ export default function useDogApi() {
 
   const fetchFilterOptions = async (): Promise<FilterOptions> => {
     try {
-      const response = await apiRequest(`${baseUrl}/dogs/filters`);
+      const response = await apiRequest(`${baseUrl}/api/dogs/filters`);
       const options = await response.json();
 
       return {
