@@ -28,9 +28,10 @@ export const login = async (req: Request, res: Response) => {
 
     res.cookie('admin_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 2 * 60 * 60 * 1000 
+      secure: true,
+      sameSite: 'none',
+      maxAge: 2 * 60 * 60 * 1000,
+      domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
     })
 
     res.json({

@@ -9,6 +9,7 @@ export function useAuth() {
   const loading = ref(false)
   const error = ref('')
   const isAdmin = useCookie('isAdmin')
+  const token = useCookie('admin_token')
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
@@ -25,7 +26,6 @@ export function useAuth() {
         credentials: 'include'
       })
 
-      
       if (!response.ok) {
         const contentType = response.headers.get('content-type')
         if (contentType && contentType.includes('application/json')) {
@@ -44,6 +44,15 @@ export function useAuth() {
       isAuthenticated.value = true
       isAdmin.value = '1'
       
+      // Store the token from the response
+      const cookies = response.headers.get('set-cookie')
+      if (cookies) {
+        const tokenMatch = cookies.match(/admin_token=([^;]+)/)
+        if (tokenMatch) {
+          token.value = tokenMatch[1]
+        }
+      }
+      
       return true
     } catch (err) {
       console.error('Login error:', err)
@@ -54,12 +63,45 @@ export function useAuth() {
     }
   }
 
+  async function checkAuth() {
+    try {
+      const apiUrl = `${config.public.apiBase}/api/auth/profile`
+      
+      const response = await fetch(apiUrl, {
+        credentials: 'include',
+        headers: {
+          'Authorization': token.value ? `Bearer ${token.value}` : ''
+        }
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        user.value = data
+        isAuthenticated.value = true
+        isAdmin.value = '1'
+      } else {
+        user.value = null
+        isAuthenticated.value = false
+        isAdmin.value = null
+        token.value = null
+      }
+    } catch (err) {
+      user.value = null
+      isAuthenticated.value = false
+      isAdmin.value = null
+      token.value = null
+    }
+  }
+
   async function logout() {
     try {
       const apiUrl = `${config.public.apiBase}/api/auth/logout`
       const response = await fetch(apiUrl, {
         method: 'POST',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'Authorization': token.value ? `Bearer ${token.value}` : ''
+        }
       })
       
       if (!response.ok) {
@@ -71,33 +113,8 @@ export function useAuth() {
       user.value = null
       isAuthenticated.value = false
       isAdmin.value = null
+      token.value = null
       router.push('/login')
-    }
-  }
-
-  async function checkAuth() {
-    try {
-      const apiUrl = `${config.public.apiBase}/api/auth/profile`
-      
-      const response = await fetch(apiUrl, {
-        credentials: 'include'
-      })
-      
-      
-      if (response.ok) {
-        const data = await response.json()
-        user.value = data
-        isAuthenticated.value = true
-        isAdmin.value = '1'
-      } else {
-        user.value = null
-        isAuthenticated.value = false
-        isAdmin.value = null
-      }
-    } catch (err) {
-      user.value = null
-      isAuthenticated.value = false
-      isAdmin.value = null
     }
   }
 
