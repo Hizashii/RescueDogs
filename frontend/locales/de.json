@@ -325,6 +325,18 @@
           "dogs": "Hunden",
           "cats": "Katzen"
         }
+      },
+      "status": {
+        "label": "STATUS",
+        "any": "Alle",
+        "options": {
+          "adoptable": "Zur Adoption verfügbar",
+          "under_observation": "Unter Beobachtung",
+          "adopted": "Adoptiert",
+          "returned_to_owner": "An Besitzer zurückgegeben",
+          "transferred_to_organization": "An Organisation übergeben",
+          "deceased": "Verstorben"
+        }
       }
     }
 }
