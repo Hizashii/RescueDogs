@@ -236,9 +236,19 @@
       :key="post._id"
       class="flex flex-col gap-4 w-full max-w-[200px] mx-auto p-4 border rounded hover:shadow"
     >
+      <img
+        v-if="post.image"
+        :src="post.image"
+        :alt="post.title || 'Blog post image'"
+        class="aspect-square w-full object-cover"
+      />
       <div
-        class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat"
-      ></div>
+        v-else
+        class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat flex items-center justify-center text-white text-center"
+      >
+        No Image Available
+      </div>
+
       <h3 class="text-base md:text-[16px] font-semibold text-start">
         {{ post.title }}
       </h3>

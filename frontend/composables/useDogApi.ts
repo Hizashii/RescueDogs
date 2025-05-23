@@ -11,13 +11,25 @@ interface Dog {
   age?: string;
   gender?: string;
   goodWith?: string[];
+  status?: string;
+  cameIn?: string;
+  wentOut?: string;
+  lookingForOwner?: string;
+  adapted?: string;
+  furLength?: string;
+  vaccination?: string;
+  relationToPeople?: string;
+  moreInfo?: string;
 }
 interface FilterOptions {
   breeds: string[];
   locations: string[];
+  statuses: string[];
   sizes: string[];
   ages: string[];
   genders: string[];
+  furLengths: string[];
+  vaccinationOptions: string[];
   goodWith: string[];
 }
 interface DogFilters {
@@ -36,7 +48,7 @@ interface PaginatedResponse {
 }
 export default function useDogApi() {
   const config = useRuntimeConfig();
-  const baseUrl = 'http://localhost:5000/api';  // Hard-coded for now
+  const baseUrl = 'http://localhost:5000/api';  // Direct backend URL
   const isLoading = ref(false);
   const error = ref<string | null>(null);
   const fetchDogs = async (
@@ -75,7 +87,7 @@ export default function useDogApi() {
           name: dog.name,
           breed: dog.breed || 'Unknown',
           image: dog.image.startsWith('/uploads') 
-            ? `http://localhost:5000${dog.image}` 
+            ? `${baseUrl.replace('/api', '')}${dog.image}` 
             : dog.image,
           description: dog.description,
           location: dog.location,
@@ -118,14 +130,23 @@ export default function useDogApi() {
         name: dog.name,
         breed: dog.breed || 'Unknown',
         image: dog.image.startsWith('/uploads') 
-          ? `http://localhost:5000${dog.image}` 
+          ? `${baseUrl.replace('/api', '')}${dog.image}` 
           : dog.image,
         description: dog.description,
         location: dog.location,
         size: dog.size,
         age: dog.age, 
         gender: dog.gender,
-        goodWith: dog.goodWith || []
+        goodWith: dog.goodWith || [],
+        status: dog.status,
+        cameIn: dog.cameIn,
+        wentOut: dog.wentOut,
+        lookingForOwner: dog.lookingForOwner,
+        adapted: dog.adapted,
+        furLength: dog.furLength,
+        vaccination: dog.vaccination,
+        relationToPeople: dog.relationToPeople,
+        moreInfo: dog.moreInfo,
       };
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : `Error fetching dog with ID ${id}`;
@@ -137,10 +158,32 @@ export default function useDogApi() {
     }
   };
   const fetchFilterOptions = async (): Promise<FilterOptions> => {
-    return {
-      breeds: [],
-      locations: [
-        'Báránd',
+    try {
+      const response = await fetch(`${baseUrl}/dogs/filters`);
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      const options = await response.json();
+      
+      return {
+        breeds: options.breeds || [],
+        locations: options.locations || [],
+        statuses: options.statuses || [],
+        sizes: options.sizes || [],
+        ages: options.ages || [],
+        genders: options.genders || [],
+        furLengths: options.furLengths || [],
+        vaccinationOptions: options.vaccinationOptions || [],
+        goodWith: options.goodWith || []
+      };
+    } catch (err) {
+      console.error('Error fetching filter options:', err);
+      // Provide fallback options in case of API error
+      return {
+        breeds: [],
+        locations: ['Báránd',
         'Bihardancsháza',
         'Biharnagybajom',
         'Hosszúhát',
@@ -157,19 +200,41 @@ export default function useDogApi() {
         'Sárrétudvari',
         'Szerep',
         'Tetétlen',
-        'Zsáka'
-      ],
-      sizes: ['Small', 'Medium', 'Large'],
-      ages: ['Puppy', 'Young', 'Adult', 'Senior'],
-      genders: ['Male', 'Female'],
-      goodWith: ['Children', 'Dogs', 'Cats']
-    };
+        'Zsáka'],
+        statuses: ['Up for adoption', 'Adopted'],
+        sizes: ['Small', 'Medium', 'Large'],
+        ages: ['Puppy', 'Young', 'Adult', 'Senior'],
+        genders: ['Male', 'Female'],
+        furLengths: ['Short', 'Medium', 'Long'],
+        vaccinationOptions: ['Done', 'In progress', 'None'],
+        goodWith: ['Children', 'Dogs', 'Cats']
+      };
+    } finally {
+      isLoading.value = false; // Assuming isLoading is used for filter options as well, or you might need a separate loading state
+    }
   };
   const processDonation = async (amount: number): Promise<{success: boolean, message: string}> => {
-    return {
-      success: true,
-      message: `Donation of ${amount} Ft processed successfully`
-    };
+    try {
+      const response = await fetch(`${baseUrl}/payments/create-donation-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amountFt: amount }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Payment session creation failed: ${response.status}`);
+      }
+
+      const { sessionUrl } = await response.json();
+      window.location.href = sessionUrl; // Redirect to Stripe Checkout
+      return { success: true, message: 'Redirecting to payment...' };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Payment processing failed';
+      console.error('Error processing donation:', errorMessage);
+      return { success: false, message: errorMessage };
+    }
   };
   
   return {

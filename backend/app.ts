@@ -129,7 +129,7 @@ app.use('/api/reports',        reportRoutes)
 app.use('/api/blogs',          blogRoutes)
 app.use('/api',                filterRoutes)
 app.use('/api/CharityItems',   charityRoutes)
-// app.use('/api/payments',       paymentsRoutes);
+app.use('/api/payments',       paymentsRoutes);
 
 // Protected routes
 app.use('/api/auth/profile', authenticateJWT, authRoutes)

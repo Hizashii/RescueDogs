@@ -79,8 +79,8 @@ type FilterKey =
 
 interface Props {
   filters: Record<FilterKey, string>
-  breeds: string[]
-  locations: string[]
+  breeds: string[] 
+  locations: string[] 
   showStatus?: boolean
 }
 const props = defineProps<Props>()
@@ -109,18 +109,30 @@ const labels: Record<FilterKey, string> = {
   status:   'STATUS'
 }
 
+const hardcodedLocations = [
+  'Báránd','Bihardancsháza','Biharnagybajom','Hosszúhát','Komádi',
+  'Körösszakál','Körösszegapáti','Magyarhomorog','Mezőpeterd','Mezősas',
+  'Nádudvar','Nagyrábé','Püspökladány','Sáp','Sárrétudvari','Szerep',
+  'Tetétlen','Zsáka'
+]
+
+const hardcodedStatuses = [
+  'Örökbefogadható','Megfigyelés alatt','Örökbefogadott',
+  'Eredeti gazdája érte jött','Átvevő szervezethez került','Elhunyt'
+]
+
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
-const selectConfig = computed<Record<SelectKey, string[]>>(() => {
-  const config: Record<SelectKey, string[]> = {
-    location: props.locations,
+const selectConfig = computed<Partial<Record<SelectKey, string[]>>>(() => {
+  const config: Partial<Record<SelectKey, string[]>> = {
+    location: hardcodedLocations, 
     size:     ['Small','Medium','Large'],
     age:      ['Puppy','Young','Adult','Senior'],
     gender:   ['Male','Female'],
-    goodWith: ['children','dogs','cats'],
+    goodWith: ['children','dogs','cats'], 
   }
   
   if (props.showStatus) {
-    config.status = ['Available', 'Under Observation', 'Adopted', 'Returned to Owner', 'Transferred', 'Deceased']
+    config.status = hardcodedStatuses 
   }
   
   return config

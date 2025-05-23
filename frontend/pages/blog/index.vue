@@ -110,7 +110,6 @@
                 />
                 <div class="p-6">
                   <h2 class="text-2xl font-semibold mb-4">{{ post.title }}</h2>
-                  <p class="text-gray-700 mb-6">{{ post.excerpt }}</p>
                   <NuxtLink
                     :to="`/blog/${post._id}`"
                     class="inline-block text-[#1446A0] font-medium hover:underline"
