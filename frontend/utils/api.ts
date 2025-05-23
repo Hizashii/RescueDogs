@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api/blogs';
+const API_BASE = 'https://rescuedogs-1.onrender.com/api/blogs';
 
 export async function fetchBlogs(): Promise<any[]> {
   const res = await fetch(`${API_BASE}?published=true`);
