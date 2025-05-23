@@ -71,7 +71,7 @@ interface PaymentResult {
 
 export default function useDogApi() {
   const config = useRuntimeConfig();
-  const baseUrl = config.public.apiBase || 'http://localhost:5000/api';
+  const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com/api';
   const isLoading = ref(false);
   const error = ref<string | null>(null);
 
@@ -259,7 +259,7 @@ export default function useDogApi() {
 
   const fetchCharityItems = async (): Promise<CharityItem[]> => {
     try {
-      const response = await apiRequest('http://localhost:5000/api/CharityItems');
+      const response = await apiRequest('https://rescuedogs-1.onrender.com/api/CharityItems');
       const items = await response.json();
 
       if (!Array.isArray(items)) {
@@ -274,7 +274,7 @@ export default function useDogApi() {
           price: typeof item.price === 'number' ? item.price : 0,
           description: item.description || '',
           imageUrl: item.imageUrl?.startsWith('/uploads')
-            ? `http://localhost:5000${item.imageUrl}`
+            ? `https://rescuedogs-1.onrender.com${item.imageUrl}`
             : item.imageUrl || '',
           isActive: Boolean(item.isActive),
           category: item.category || 'General',

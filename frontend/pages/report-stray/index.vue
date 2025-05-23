@@ -235,7 +235,7 @@ const errorMessage = ref('')
 const imagePreview = ref('')
 
 const config = useRuntimeConfig()
-const apiBase = config.public.apiBase || 'http://localhost:5000'
+const apiBase = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 
 function handleFileUpload(e: Event) {
   const files = (e.target as HTMLInputElement).files

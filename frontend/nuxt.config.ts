@@ -22,8 +22,8 @@ export default defineNuxtConfig({
 
   nitro: {
     devProxy: {
-      '/api/**':      'http://localhost:5000',
-      '/uploads/**':  'http://localhost:5000'
+      '/api/**':      'https://rescuedogs-1.onrender.com',
+      '/uploads/**':  'https://rescuedogs-1.onrender.com'
     },
     prerender: {
       failOnError: false

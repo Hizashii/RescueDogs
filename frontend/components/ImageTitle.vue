@@ -35,7 +35,7 @@ const getImageUrl = (image: string | null): string => {
   if (/^(blob:|https?:\/\/|\/)/.test(image)) {
     return image
   }
-  const base = config.public.apiBase || 'http://localhost:5000'
+  const base = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
   return `${base}/uploads/dogs/${image}`
 }
 </script>

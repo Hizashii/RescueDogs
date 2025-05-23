@@ -118,7 +118,7 @@ import InfoRow from '~/components/InfoRow.vue'
 import DogCard from '@/components/DogCard.vue'
 
 const config = useRuntimeConfig()
-const API_BASE = 'http://localhost:5000'
+const API_BASE = 'https://rescuedogs-1.onrender.com'
 
 const dogApi = useDogApi()
 const route = useRoute()

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { CharityItem } from '~/types/CharityItem'
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = 'https://rescuedogs-1.onrender.com'
 
 export default function useCharityApi() {
   const fetchAll = async (): Promise<CharityItem[]> =>
