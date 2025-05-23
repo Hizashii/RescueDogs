@@ -107,8 +107,12 @@ const hardcodedLocations = [
 ]
 
 const hardcodedStatuses = [
-  'Örökbefogadható','Megfigyelés alatt','Örökbefogadott',
-  'Eredeti gazdája érte jött','Átvevő szervezethez került','Elhunyt'
+  'adoptable',
+  'under_observation',
+  'adopted',
+  'returned_to_owner',
+  'transferred_to_organization',
+  'deceased'
 ]
 
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>

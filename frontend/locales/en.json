@@ -346,6 +346,18 @@
           "dogs": "Dogs",
           "cats": "Cats"
         }
+      },
+      "status": {
+        "label": "STATUS",
+        "any": "Any",
+        "options": {
+          "adoptable": "Available for adoption",
+          "under_observation": "Under observation",
+          "adopted": "Adopted",
+          "returned_to_owner": "Returned to owner",
+          "transferred_to_organization": "Transferred to organization",
+          "deceased": "Deceased"
+        }
       }
     }
 }

@@ -328,6 +328,18 @@
           "dogs": "Kutyákkal",
           "cats": "Macskákkal"
         }
+      },
+      "status": {
+        "label": "STÁTUSZ",
+        "any": "Mind",
+        "options": {
+          "adoptable": "Örökbefogadható",
+          "under_observation": "Megfigyelés alatt",
+          "adopted": "Örökbefogadott",
+          "returned_to_owner": "Eredeti gazdája érte jött",
+          "transferred_to_organization": "Átvevő szervezethez került",
+          "deceased": "Elhunyt"
+        }
       }
     }
 } 
