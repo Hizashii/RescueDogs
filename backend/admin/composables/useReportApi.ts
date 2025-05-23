@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { Report } from '~/type/Report'
 
-axios.defaults.baseURL = process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:5000'
+axios.defaults.baseURL = process.env.NUXT_PUBLIC_API_BASE || 'https://rescuedogs-1.onrender.com'
 
 export default function useReportApi() {
   const fetchAll = (): Promise<Report[]> =>

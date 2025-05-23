@@ -244,7 +244,7 @@ import type { BlogPost } from '~/type/BlogPost'
 import { useRuntimeConfig } from '#app'
 
 const config = useRuntimeConfig()
-const API_BASE = config.public.apiBase || 'http://localhost:5000'
+const API_BASE = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 
 function getImageUrl(src: string | null) {
   if (!src) return '/img/default-hero.jpg'

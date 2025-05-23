@@ -110,7 +110,7 @@ if (!isAdmin) {
 }
 const { fetchAll, remove } = useReportApi()
 const config = useRuntimeConfig()
-const API_BASE = config.public.apiBase || 'http://localhost:5000'
+const API_BASE = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 function getImageUrl(src: string | null): string {
   if (!src) return '';
   

@@ -1,4 +1,4 @@
 export const useApi = () => {
     return <T>(path: string, opts?: any) =>
-      $fetch<T>(`http://localhost:5000${path}`, { ...opts })
+      $fetch<T>(`https://rescuedogs-1.onrender.com${path}`, { ...opts })
   }
