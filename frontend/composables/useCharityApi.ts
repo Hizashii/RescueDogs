@@ -7,7 +7,7 @@ const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 
 export default function useCharityApi() {
   const fetchAll = async (): Promise<CharityItem[]> => {
-    const response = await axios.get<CharityItem[]>('/api/CharityItems')
+    const response = await axios.get<CharityItem[]>(`${baseUrl}/api/CharityItems`)
     return response.data.map(item => {
       let imageUrl = item.imageUrl || ''
       if (imageUrl) {
@@ -29,7 +29,7 @@ export default function useCharityApi() {
   }
 
   const create = (item: Omit<CharityItem,'_id'>) =>
-    axios.post<CharityItem>('/api/CharityItems', item)
+    axios.post<CharityItem>(`${baseUrl}/api/CharityItems`, item)
 
   return { fetchAll, create }
 }
