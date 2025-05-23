@@ -77,9 +77,13 @@ type FilterKey =
   | 'gender' 
   | 'goodWith'
   | 'status'
+  | 'status'
 
 interface Props {
   filters: Record<FilterKey, string>
+  breeds: string[] 
+  locations: string[] 
+  showStatus?: boolean
   breeds: string[] 
   locations: string[] 
   showStatus?: boolean
@@ -118,6 +122,21 @@ const hardcodedStatuses = [
 
 
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
+const selectConfig = computed<Partial<Record<SelectKey, string[]>>>(() => {
+  const config: Partial<Record<SelectKey, string[]>> = {
+    location: hardcodedLocations, 
+    size:     ['Small','Medium','Large'],
+    age:      ['Puppy','Young','Adult','Senior'],
+    gender:   ['Male','Female'],
+    goodWith: ['children','dogs','cats'], 
+  }
+  
+  if (props.showStatus) {
+    config.status = hardcodedStatuses 
+  }
+  
+  return config
+})
 const selectConfig = computed<Partial<Record<SelectKey, string[]>>>(() => {
   const config: Partial<Record<SelectKey, string[]>> = {
     location: hardcodedLocations, 

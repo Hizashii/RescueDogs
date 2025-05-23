@@ -12,6 +12,7 @@ const { t } = useI18n()
 const router = useRouter()
 
 // Donation tiers
+// Donation tiers
 const tiers = ref([
   { amount: '2000 Ft',  description: t('support.tiers.0.description') },
   { amount: '3000 Ft',  description: t('support.tiers.1.description') },
