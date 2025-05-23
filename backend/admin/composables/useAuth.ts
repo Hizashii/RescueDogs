@@ -9,7 +9,11 @@ export function useAuth() {
   const loading = ref(false)
   const error = ref('')
   const isAdmin = useCookie('isAdmin')
-  const token = useCookie('admin_token')
+  const token = useCookie('admin_token', {
+    secure: true,
+    sameSite: 'none',
+    path: '/'
+  })
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
@@ -46,10 +50,12 @@ export function useAuth() {
       
       // Store the token from the response
       const cookies = response.headers.get('set-cookie')
+      console.log('Login response cookies:', cookies)
       if (cookies) {
         const tokenMatch = cookies.match(/admin_token=([^;]+)/)
         if (tokenMatch) {
           token.value = tokenMatch[1]
+          console.log('Token stored:', token.value)
         }
       }
       
@@ -66,13 +72,17 @@ export function useAuth() {
   async function checkAuth() {
     try {
       const apiUrl = `${config.public.apiBase}/api/auth/profile`
+      console.log('Checking auth with token:', token.value)
       
       const response = await fetch(apiUrl, {
         credentials: 'include',
         headers: {
-          'Authorization': token.value ? `Bearer ${token.value}` : ''
+          'Authorization': token.value ? `Bearer ${token.value}` : '',
+          'Content-Type': 'application/json'
         }
       })
+      
+      console.log('Auth check response status:', response.status)
       
       if (response.ok) {
         const data = await response.json()
@@ -80,12 +90,14 @@ export function useAuth() {
         isAuthenticated.value = true
         isAdmin.value = '1'
       } else {
+        console.log('Auth check failed:', response.status)
         user.value = null
         isAuthenticated.value = false
         isAdmin.value = null
         token.value = null
       }
     } catch (err) {
+      console.error('Auth check error:', err)
       user.value = null
       isAuthenticated.value = false
       isAdmin.value = null
@@ -100,7 +112,8 @@ export function useAuth() {
         method: 'POST',
         credentials: 'include',
         headers: {
-          'Authorization': token.value ? `Bearer ${token.value}` : ''
+          'Authorization': token.value ? `Bearer ${token.value}` : '',
+          'Content-Type': 'application/json'
         }
       })
       
