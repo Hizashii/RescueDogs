@@ -109,7 +109,11 @@
     },
     "donation": {
       "title":       "Can't adopt?",
-      "subtitle":    "Make a donation to support animals in our care."
+      "subtitle":    "Make a donation to support animals in our care.",
+      "amount500": "500 Ft",
+      "amount1000": "1000 Ft",
+      "amount2000": "2000 Ft",
+      "amount3000": "3000 Ft"
     },
     "report": {
         "title": "Report a stray",
@@ -203,6 +207,7 @@
         }
     },
     "checkout":{
+      "thankYou": "Thank You!",
       "thankYou": "Thank you!",
       "thxDonation": "THANK YOU FOR YOUR DONATION!",
       "thxPurchase": "THANK YOU FOR YOUR PURCHASE!",
@@ -359,6 +364,58 @@
           "transferred_to_organization": "Transferred to organization",
           "deceased": "Deceased"
         }
+      }
+    },
+    "dog": {
+      "status": {
+        "Örökbefogadható": "Up for adoption",
+        "Megfigyelés alatt": "Under observation",
+        "Örökbefogadott": "Adopted",
+        "Eredeti gazdája érte jött": "Returned to owner",
+        "Átvevő szervezethez került": "Transferred to receiving organization",
+        "Elhunyt": "Deceased"
+      },
+      "size": {
+        "kicsi": "Small",
+        "nagyobb kicsi": "Larger small",
+        "kisebb közepes": "Smaller medium",
+        "közepes": "Medium",
+        "nagyobb közepes": "Larger medium",
+        "kisebb nagy": "Smaller large",
+        "nagy": "Large"
+      },
+      "age": {
+        "Kölyök": "Puppy",
+        "Fiatal": "Young",
+        "Felnőtt": "Adult",
+        "Idős": "Senior"
+      },
+      "gender": {
+        "Hím": "Male",
+        "Nőstény": "Female"
+      },
+      "furLength": {
+        "Rövid": "Short",
+        "Közepes": "Medium",
+        "Hosszú": "Long"
+      },
+      "vaccination": {
+        "Chippelt és oltott": "Chipped and vaccinated",
+        "Folyamatban": "In progress"
+      },
+      "goodWith": {
+        "Emberrel kedves": "Friendly with people",
+        "Szereti a gyerekeket": "Good with children",
+        "Szereti a macskákat": "Good with cats",
+        "Szereti a kutyákat": "Good with dogs",
+        "Nagyon barátságos": "Very friendly",
+        "Félénk": "Shy",
+        "Kíváncsi": "Curious",
+        "Fél az emberektől": "Afraid of people",
+        "Fél más kutyáktól": "Afraid of other dogs",
+        "Agresszív": "Aggressive",
+        "Utcáról jött": "Came from the street",
+        "Szívféreg pozitív": "Heartworm positive"
       }
     }
 }

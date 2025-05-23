@@ -211,7 +211,9 @@
           "phoneNumber": "Telefonnummer*",
           "processing": "Verarbeitung",
           "donatebtn": "Spenden",
-          "placeOrderBtn": "Bestellung aufgeben"
+          "placeOrderBtn": "Bestellung aufgeben",
+          "stripeNote": "Die Zahlung wird sicher über Stripe Checkout verarbeitet.",
+          "donationSummary": "Spendenübersicht"
         },
     "about": {
         "title": "Wer wir sind",

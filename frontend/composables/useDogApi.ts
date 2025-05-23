@@ -296,7 +296,7 @@ export default function useDogApi() {
     }
 
     try {
-      const response = await apiRequest(`${baseUrl}/payments/create-item-session`, {
+      const response = await apiRequest(`${baseUrl}/api/payments/create-item-session`, {
         method: 'POST',
         body: JSON.stringify({ itemId }),
       });
@@ -330,7 +330,7 @@ export default function useDogApi() {
     }
 
     try {
-      const response = await apiRequest('http://localhost:5000/api/payments/create-donation-session', {
+      const response = await apiRequest(`${baseUrl}/api/payments/create-donation-session`, {
         method: 'POST',
         body: JSON.stringify({ amountFt: Math.round(amount) }),
       });
