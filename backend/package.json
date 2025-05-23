@@ -5,7 +5,8 @@
     "main": "app.ts",
     "scripts": {
         "dev": "ts-node-dev --respawn --transpile-only app.ts",
-        "start": "ts-node-dev --respawn --transpile-only app.ts"
+        "start": "node dist/app.js",
+        "build": "tsc"
     },
     "dependencies": {
         "@types/cookie-parser": "^1.4.8",
