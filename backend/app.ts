@@ -56,7 +56,8 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:3000', 
       'http://localhost:3001',
-      'https://rescuedogs.onrender.com'
+      'https://rescuedogs.onrender.com',
+      'https://admin-panel-xvoi.onrender.com'
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -127,13 +128,13 @@ app.post(
 
 // ──────────────────────────────────────────────────────────────
 // 6️⃣ Mount your routes
-app.use('/api/auth',           authRoutes)
-app.use('/api/dogs',           dogRoutes)
-app.use('/api/reports',        reportRoutes)
-app.use('/api/blogs',          blogRoutes)
-app.use('/api',                filterRoutes)
-app.use('/api/CharityItems',   charityRoutes)
-app.use('/api/payments',       paymentsRoutes);
+app.use('/api/auth', authRoutes)
+app.use('/api/blogs', blogRoutes)
+app.use('/api/dogs', dogRoutes)
+app.use('/api/reports', reportRoutes)
+app.use('/api/filters', filterRoutes)
+app.use('/api/charity', charityRoutes)
+app.use('/api/payments', paymentsRoutes)
 
 // Protected routes
 app.use('/api/auth/profile', authenticateJWT, authRoutes)
