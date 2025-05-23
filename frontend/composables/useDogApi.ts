@@ -71,7 +71,7 @@ interface PaymentResult {
 
 export default function useDogApi() {
   const config = useRuntimeConfig();
-  const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com/api';
+  const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com';
   const isLoading = ref(false);
   const error = ref<string | null>(null);
 
