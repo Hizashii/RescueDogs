@@ -1,4 +1,3 @@
-// nuxt.config.ts  (frontend)
 import { resolve } from 'path'
 
 export default defineNuxtConfig({

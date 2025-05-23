@@ -1,4 +1,3 @@
-// routes/charityItem.routes.ts
 import { Router } from 'express'
 import {
   getAllItems,

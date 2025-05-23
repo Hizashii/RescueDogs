@@ -14,7 +14,6 @@ import { onMounted } from 'vue'
 const { isAuthenticated } = useAuth()
 
 onMounted(() => {
-  // Force redirect to login if not authenticated
   if (!isAuthenticated.value) {
     navigateTo('/login', { replace: true })
   }

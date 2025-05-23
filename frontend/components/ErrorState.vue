@@ -8,12 +8,12 @@
       <h2 class="text-xl font-bold mb-2">{{ title }}</h2>
       <p class="text-gray-600 mb-6">{{ message }}</p>
       <slot name="actions">
-        <button 
-          @click="$emit('retry')" 
-          class="bg-[#3D6625] text-white px-6 py-2 rounded hover:bg-opacity-90 transition-colors"
+        <NuxtLink
+          :to="link"
+          class="bg-[#3D6625] text-white px-6 py-2 hover:bg-opacity-90 transition-colors"
         >
           Try Again
-        </button>
+        </NuxtLink>
       </slot>
     </div>
   </template>
@@ -27,6 +27,10 @@
     message: {
       type: String,
       default: 'We encountered an error while loading the data. Please try again.'
+    },
+    link: {
+      type: String,
+      default: '/'
     }
   });
   

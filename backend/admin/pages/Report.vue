@@ -42,7 +42,7 @@
                 <img
                   :src="getImageUrl(r.dogPicture)"
                   :alt="imageLoadError.has(getImageUrl(r.dogPicture)) ? 'Default dog image' : 'Reported dog'"
-                  class="w-20 h-20 object-cover rounded cursor-pointer"
+                  class="w-20 h-20 object-cover cursor-pointer"
                   loading="lazy"
                   @error="handleImageError"
                 />
@@ -58,7 +58,7 @@
             <td class="border px-3 py-1">
               <button
                 @click="confirmDeleteReport(r)"
-                class="px-3 py-1 bg-[#3D6625] text-white hover:bg-[#213D12] rounded"
+                class="px-3 py-1 bg-[#3D6625] text-white hover:bg-[#213D12]"
               >
                 Delete
               </button>
@@ -71,7 +71,7 @@
       v-if="showDeleteModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
-      <div class="bg-white p-6 shadow-lg max-w-md w-full rounded">
+      <div class="bg-white p-6 shadow-lg max-w-md w-full">
         <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
         <p class="mb-6">
           Are you sure you want to delete this report? This action cannot be
@@ -80,13 +80,13 @@
         <div class="flex justify-end space-x-4">
           <button
             @click="showDeleteModal = false; reportToDelete = null"
-            class="px-4 py-2 border hover:bg-gray-100 rounded"
+            class="px-4 py-2 border hover:bg-gray-100"
           >
             Cancel
           </button>
           <button
             @click="deleteReport"
-            class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded"
+            class="px-4 py-2 bg-red-600 text-white hover:bg-red-700"
           >
             Delete
           </button>
@@ -114,15 +114,12 @@ const API_BASE = config.public.apiBase || 'http://localhost:5000'
 function getImageUrl(src: string | null): string {
   if (!src) return '';
   
-  // If it's already a full URL, return as is
   if (src.startsWith('http')) return src;
   
-  // If it's a relative path starting with /uploads
   if (src.startsWith('/uploads')) {
     return `${API_BASE}${src}`;
   }
   
-  // For other relative paths, assume they're in the dog-pictures folder
   return `${API_BASE}/uploads/dog-pictures/${src}`;
 }
 function formatDate(iso: string) {
@@ -136,7 +133,6 @@ function handleImageError(event: Event) {
   const img = event.target as HTMLImageElement
   const src = img.src
   
-  // Prevent infinite loop of error handling
   if (src.endsWith(defaultDogImage)) return
   
   imageLoadError.value.add(src)

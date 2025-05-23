@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* This is the main style sheet */
 html {
 	background-color: #ffffff;
 	font-family: 'Poppins', sans-serif;

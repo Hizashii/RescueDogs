@@ -7,12 +7,9 @@ import useCharityApi from '~/composables/useCharityApi'
 import type { CharityItem } from '~/types/CharityItem'
 import Ticket from '~/components/ticket.vue'
 
-// i18n + router
 const { t } = useI18n()
 const router = useRouter()
 
-// Donation tiers
-// Donation tiers
 const tiers = ref([
   { amount: '2000 Ft',  description: t('support.tiers.0.description') },
   { amount: '3000 Ft',  description: t('support.tiers.1.description') },
@@ -22,7 +19,6 @@ const tiers = ref([
   { amount: t('support.tiers.5.amount'), description: '' },
 ])
 
-// API
 const { fetchAll } = useCharityApi()
 const rawItems = ref<CharityItem[]>([])
 const activeItems = computed(() =>
@@ -53,7 +49,6 @@ function goToItem(itemId: string) {
     :overlayOpacity="0.5"
   />
 
-  <!-- Donation Tiers -->
   <section class="bg-[#FFFADF] py-12 px-4 ">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xl md:text-4xl font-semibold text-[#3D4836] mb-8 text-center md:text-start">
@@ -82,7 +77,6 @@ function goToItem(itemId: string) {
       </div>
     </div>
   </section>
-  <!-- Charity Items -->
   <section class="bg-[#FFFADF] py-12 ">
     <div class="container mx-auto px-4">
       <h2

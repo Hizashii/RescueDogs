@@ -230,8 +230,9 @@
       "phoneNumber": "Phone number*",
       "processing": "Processing",
       "donatebtn": "Donate",
-      "placeOrderBtn": "Place Order"
-      
+      "placeOrderBtn": "Place Order",
+      "stripeNote": "Payment is processed securely via Stripe Checkout.",
+      "donationSummary": "Donation Summary"
     },
     "about": {
         "title": "Who we are",

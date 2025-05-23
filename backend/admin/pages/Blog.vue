@@ -327,7 +327,6 @@ function editPost(post: BlogPost) {
   Object.assign(editingPost, { ...post })
   selectedPost.value = post
   activeView.value = 'editor'
-  // Manually set editor content after view transition
   nextTick(() => {
     if (editor.value) {
       editor.value.innerHTML = editingPost.content;
@@ -442,7 +441,7 @@ async function confirmImageUpload() {
 
   try {
     const { url } = await uploadImage(formData, pct => (uploadProgress.value = pct));
-    const imgHtml = `<img src="${url}" alt="${imageAltText.value}" class="max-w-full my-4 rounded" />`;
+    const imgHtml = `<img src="${url}" alt="${imageAltText.value}" class="max-w-full my-4" />`;
     insertHtmlAtCaret(imgHtml);
     editingPost.content = editor.value.innerHTML;
   } catch (error) {

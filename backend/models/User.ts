@@ -1,4 +1,3 @@
-// backend/models/User.ts
 import { Schema, model, Document } from 'mongoose'
 import bcrypt from 'bcrypt'
 
@@ -17,13 +16,11 @@ const userSchema = new Schema<IUser>({
   name:     { type: String }
 })
 
-// Hash password before saving
 userSchema.pre('save', async function() {
   if (!this.isModified('password')) return
   this.password = await bcrypt.hash(this.password, 10)
 })
 
-// Instance method to compare password
 userSchema.methods.comparePassword = function(candidate: string) {
   return bcrypt.compare(candidate, this.password)
 }

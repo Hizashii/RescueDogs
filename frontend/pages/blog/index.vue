@@ -54,10 +54,10 @@
                   <h2 class="text-lg font-bold">{{ $t('blog.filters.title') }}</h2>
                   <button 
                     @click="showFilters = false"
-                    class="p-2 hover:bg-gray-100 rounded-full"
+                    class="p-2 hover:bg-gray-100"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      <path stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 </div>
@@ -78,7 +78,7 @@
 
             <!-- Loading State -->
             <div v-if="loading" class="flex justify-center items-center h-64">
-              <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"></div>
+              <div class="animate-spin h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"></div>
             </div>
 
             <!-- Empty State -->
@@ -86,7 +86,7 @@
               <p class="text-xl">{{ $t('blog.empty.message') }}</p>
               <NuxtLink
                 to="/admin"
-                class="mt-4 inline-block bg-[#3D6625] text-white px-6 py-2 rounded"
+                class="mt-4 inline-block bg-[#3D6625] text-white px-6 py-2"
               >
                 {{ $t('blog.empty.adminLink') }}
               </NuxtLink>
@@ -100,7 +100,7 @@
               <div
                 v-for="post in paginatedPosts"
                 :key="post._id"
-                class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden"
+                class="bg-white shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden"
               >
                 <img
                   v-if="post.image"

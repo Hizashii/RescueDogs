@@ -1,4 +1,3 @@
-// plugins/api.js
 export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig();
     

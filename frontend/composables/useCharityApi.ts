@@ -1,4 +1,3 @@
-// frontend/src/composables/useCharityApi.ts
 import axios from 'axios'
 import type { CharityItem } from '~/types/CharityItem'
 

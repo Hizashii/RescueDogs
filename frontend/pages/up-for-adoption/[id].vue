@@ -118,7 +118,7 @@ import InfoRow from '~/components/InfoRow.vue'
 import DogCard from '@/components/DogCard.vue'
 
 const config = useRuntimeConfig()
-const API_BASE = 'http://localhost:5000'  // Direct backend URL for images
+const API_BASE = 'http://localhost:5000'
 
 const dogApi = useDogApi()
 const route = useRoute()
@@ -132,13 +132,11 @@ async function fetchDogAndList() {
   const id = route.params.id as string
 
   try {
-    // Fetch the specific dog
     const fetchedDog = await dogApi.fetchDogById(id)
     if (fetchedDog) {
       dog.value = fetchedDog
     }
 
-    // Fetch other dogs for the list
     const response = await dogApi.fetchDogs()
     otherDogs.value = response.dogs
   } catch (error) {

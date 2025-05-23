@@ -1,4 +1,3 @@
-// backend/controllers/blog.controller.ts
 import { Request, Response } from 'express';
 import { BlogModel } from '../models/Blog';
 
