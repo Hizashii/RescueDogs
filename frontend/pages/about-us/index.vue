@@ -128,8 +128,8 @@
                           overflow-hidden transition-colors duration-300 ease-in-out
                           before:absolute before:inset-0 before:bg-[#213714] before:scale-x-0 before:origin-left
                           hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
-                          before:z-0 z-10">
-                      <span class="relative z-10">Read our blog</span>
+                          before:z-0 z-10 mt-10">
+                      <span class="relative z-10">{{ $t('about.readBlog') }}</span>
                     </button>
                   </nuxt-link>
                 </div>

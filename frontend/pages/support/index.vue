@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import ImageTitle from '~/components/ImageTitle.vue'
 import useCharityApi from '~/composables/useCharityApi'
 import type { CharityItem } from '~/types/CharityItem'
+import Ticket from '~/components/ticket.vue'
 
 // i18n + router
 const { t } = useI18n()
@@ -151,26 +152,15 @@ function goToItem(itemId: string) {
           <p class="font-medium">{{ t('support.body.p4') }}</p>
         </div>
         <div class="w-full md:w-1/2 space-y-4">
-          <div
+          <Ticket
             v-for="(tier, i) in tiers"
             :key="i"
-            class="bg-[#FFE65E] p-6 flex items-center justify-between tier-animate"
-          >
-            <div>
-              <h3 class="text-2xl font-bold">{{ tier.amount }}</h3>
-              <p class="text-sm">{{ tier.description }}</p>
-            </div>
-            <button
-              class="relative inline-block bg-white text-black font-semibold py-2 px-4
-                    overflow-hidden transition-colors duration-300 ease-in-out
-                    before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
-                    hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
-                    hover:text-[#ffffff] z-10"
-              @click="goToDonation(parseFt(tier.amount))"
-            >
-              <span class="relative z-10">{{ t('support') }}</span>
-            </button>
-          </div>
+            :Amount="tier.amount"
+            :Description="tier.description"
+            :buttonText="t('support.supportBtn')"
+            @buttonClick="goToDonation(parseFt($event))"
+            class="tier-animate"
+          />
         </div>
       </div>
     </div>

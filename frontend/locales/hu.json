@@ -1,4 +1,7 @@
 { 
+    "allAnimals": {
+        "title": "Összes állat"
+    },
     "home": { 
       "title": "MancsMentő", 
       "subtitle": "Állatvédő Egyesület", 
@@ -14,7 +17,7 @@
        
       "adoptCard": { 
         "title": "FOGADJ ÖRÖKBE", 
-        "description": " Szeretnél örökbe fogadni egy kutyust? Tekintsd meg itt a kutyáinkat, hátha megtalálod az álmaid kiskedvencét.' ", 
+        "description": " Szeretnél örökbe fogadni egy kutyast? Tekintsd meg itt a kutyáinkat, hátha megtalálod az álmaid kiskedvencét.' ", 
         "button": "KUTYÁK" 
       }, 
        
@@ -165,6 +168,7 @@
         
         },
             "support": { 
+              "supportBtn": "Adományozz",
               "pageTitle":         "TÁMOGASD A MUNKÁNKAT!", 
               "intro": { 
                 "line1":           "SEGÍTS MINKET A KÓBOR KUTYÁK GONDOZÁSÁBAN,", 
@@ -224,6 +228,7 @@
             "oldWebsiteName": "Régi Mancsmentő honlap ",
       "supportButton": "Támogatás",
       "volunteerButton": "Önkéntes",
+      "readBlog": "További blogbejegyzések",
       "story": { 
         "title": "Történetünk", 
         "paragraphs": { 
@@ -242,7 +247,89 @@
         } 
       }, 
       "support": "Támogatás" 
-    } 
+    },
+    "blog": {
+      "title": "Összes blogbejegyzés",
+      "postsAvailable": "elérhető bejegyzés",
+      "loading": "Bejegyzések betöltése...",
+      "empty": {
+        "message": "Még nincsenek közzétett bejegyzések.",
+        "adminLink": "Ugrás az Admin felületre"
+      },
+      "readMore": "Tovább olvasás →",
+      "filters": {
+        "title": "Szűrők",
+        "button": "SZŰRŐK",
+        "clearAll": "Összes szűrő törlése",
+        "category": {
+          "label": "KATEGÓRIA",
+          "any": "Mind",
+          "options": {
+            "adoption_stories": "Örökbefogadási történetek",
+            "volunteer_spotlights": "Önkéntesek bemutatása",
+            "dog_care_tips": "Kutyagondozási tippek",
+            "training_advice": "Nevelési tanácsok",
+            "medical_updates": "Állatorvosi hírek",
+            "success_stories": "Sikertörténetek",
+            "events_fundraisers": "Események és adománygyűjtések",
+            "behind_the_scenes": "A kulisszák mögött",
+            "foster_programs": "Ideiglenes befogadói programok",
+            "rescue_missions": "Mentési akciók"
+          }
+        }
+      }
+    },
+    "filters": {
+      "clearAll": "ÖSSZES SZŰRŐ TÖRLÉSE",
+      "name": {
+        "label": "NÉV",
+        "placeholder": "Keresés név szerint"
+      },
+      "breed": {
+        "label": "FAJTA",
+        "placeholder": "Fajta megadása"
+      },
+      "location": {
+        "label": "HELY",
+        "any": "Mind"
+      },
+      "size": {
+        "label": "MÉRET",
+        "any": "Mind",
+        "options": {
+          "small": "Kicsi",
+          "medium": "Közepes",
+          "large": "Nagy"
+        }
+      },
+      "age": {
+        "label": "KOR",
+        "any": "Mind",
+        "options": {
+          "puppy": "Kölyök",
+          "young": "Fiatal",
+          "adult": "Felnőtt",
+          "senior": "Idős"
+        }
+      },
+      "gender": {
+        "label": "NEM",
+        "any": "Mind",
+        "options": {
+          "male": "Hím",
+          "female": "Nőstény"
+        }
+      },
+      "goodWith": {
+        "label": "KEDVES",
+        "any": "Mind",
+        "options": {
+          "children": "Gyerekekkel",
+          "dogs": "Kutyákkal",
+          "cats": "Macskákkal"
+        }
+      }
+    }
 } 
 
  

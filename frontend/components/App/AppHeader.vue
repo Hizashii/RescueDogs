@@ -275,9 +275,9 @@ watch(isMobileMenuOpen, (isOpen) => {
   },
   "hu": {
     "navigation": {
-      "ourDogs": "Kutyáink",
-      "upAdoption": "Örökbefogadásra vár",
-      "allAnimals": "Minden állat",
+      "ourDogs": "Kutyák",
+      "upAdoption": "Örökbefogadhatóak",
+      "allAnimals": "Összes kutya",
       "supportUs": "Támogatás",
       "aboutUs": "Rólunk",
       "blog": "Blog",

@@ -28,7 +28,7 @@
       
       "reportCard": {
         "title": "REPORT A STRAY",
-        "description": "If you found a stray dog in the cities we are connected to in Hajdu-Bihar county, tell us about them, and we’ll be on our way!",
+        "description": "If you found a stray dog in the cities we are connected to in Hajdu-Bihar county, tell us about them, and we'll be on our way!",
         "button": "REPORT"
       },
       
@@ -92,176 +92,260 @@
         "mapAlt": "Map location of the animal shelter"
       }
     },
-        "allAnimals": {
-          "title":"All Animals"
+    "allAnimals": {
+        "title": "All Animals"
+    },
+    "adoption": {
+      "title":       "Up for Adoption",
+      "dogsUp":      "Dogs up for adoption",
+      "error": {
+        "title":     "Failed to load dogs",
+        "message":   "We couldn't load the dogs at this time. Please try again later."
+      },
+      "empty": {
+        "message":   "No dogs found matching your criteria.",
+        "clear":     "Clear Filters"
+      }
+    },
+    "donation": {
+      "title":       "Can't adopt?",
+      "subtitle":    "Make a donation to support animals in our care."
+    },
+    "report": {
+        "title": "Report a stray",
+        "success": {
+          "heading": "Thank you for your report!",
+          "body": "Your information has been submitted and our team will review it shortly."
         },
-        "adoption": {
-          "title":       "Up for Adoption",
-          "dogsUp":      "Dogs up for adoption",
-          "error": {
-            "title":     "Failed to load dogs",
-            "message":   "We couldn't load the dogs at this time. Please try again later."
+        "error": {
+          "heading": "There was a problem submitting your report."
+        },
+        "form": {
+          "name": {
+            "label": "Name"
           },
-          "empty": {
-            "message":   "No dogs found matching your criteria.",
-            "clear":     "Clear Filters"
+          "phone": {
+            "label": "Phone"
+          },
+          "email": {
+            "label": "Email (optional)"
+          },
+          "dogCity": {
+            "label": "City you found the dog in"
+          },
+          "ChooseACity":{
+            "label": "Select a city"
+          }, 
+          "dogPicture": {
+            "label": "Picture of a dog",
+            "upload": "Upload",
+            "hint": "Max. file size: 32 MB."
+          },
+          "reporterCity": {
+            "label": "Which street is the report coming from?"
+          },
+          "comments": {
+            "label": "Further information (optional)"
+          },
+          "submit": {
+            "default": "Submit Report",
+            "loading": "Submitting..."
           }
-        },
-        "donation": {
-          "title":       "Can’t adopt?",
-          "subtitle":    "Make a donation to support animals in our care."
-        },
-        "report": {
-            "title": "Report a stray",
-            "success": {
-              "heading": "Thank you for your report!",
-              "body": "Your information has been submitted and our team will review it shortly."
-            },
-            "error": {
-              "heading": "There was a problem submitting your report."
-            },
-            "form": {
-              "name": {
-                "label": "Name"
-              },
-              "phone": {
-                "label": "Phone"
-              },
-              "email": {
-                "label": "Email (optional)"
-              },
-              "dogCity": {
-                "label": "City you found the dog in"
-              },
-              "ChooseACity":{
-                "label": "Select a city"
-              }, 
-              "dogPicture": {
-                "label": "Picture of a dog",
-                "upload": "Upload",
-                "hint": "Max. file size: 32 MB."
-              },
-              "reporterCity": {
-                "label": "Which street is the report coming from?"
-              },
-              "comments": {
-                "label": "Further information (optional)"
-              },
-              "submit": {
-                "default": "Submit Report",
-                "loading": "Submitting..."
-              }
-            }
-        },
-        "support": {
-            "pageTitle":         "SUPPORT OUR WORK!",
-            "intro": {
-              "line1":           "HELP US TAKE CARE OF STRAY DOGS, SUPPORT THEIR",
-              "line2":           "MEDICAL CARE, REHABILITATION AND SHELTER."
-            },
-            "body": {
-              "p1":              "The Mancsmentő Association rescues stray or injured dogs from 14 towns in Eastern Hungary. Our goal is to find them good homes as quickly as possible, but the journey is often long, difficult, and costly.",
-              "p2":              "Dogs must go through vaccination, de-worming, and spay/neuter programs. 70–80% of the region’s dogs suffer from heartworm—treatment is vital but expensive. Parvovirus is rampant without vaccinations, causing severe illness and death. Hospital care for injured or abused dogs adds further strain. Since we charge no intake or adoption fees, we rely heavily on ongoing support.",
-              "p3":              "Recently we intake 25–30 dogs per month. Alongside our existing residents, we strive to place as many as possible—but funds have run dry and we’re out of resources to sell. We need help! Our dream is to secure enough regular supporters so we can plan each month knowing 1.5 million HUF arrives in our account—enough to cover medical bills!",
-              "p4":              "Help us give the hopeless a chance! Donate now—every few thousand forints counts! The greatest impact comes from regular support, making care predictable. A monthly gift of 2,000–3,000 HUF means life!"
-            },
-            "tiers": [
-              { "amount": "2000 Ft", "description": "40% of the price of a chip or vaccine" },
-              { "amount": "3000 Ft", "description": "60% of the price of a chip or vaccine" },
-              { "amount": "5000 Ft", "description": "The price of a chip and combined vaccine" },
-              { "amount": "10 000 Ft", "description": "The price of two combined vaccines" },
-              { "amount": "20 000 Ft", "description": "The price for all of the vaccines of a dog" },
-              { "amount": "Custom amount", "description": "" }
-            ],
-            "tax": {
-              "imageAlt":        "Tax donation info",
-              "line1":           "OFFER 1% OF YOUR TAX, SO THAT WE CAN HELP EVERY ANIMAL IN NEED!",
-              "line2":           "TAX NUMBER:",
-              "number":          "19317988-1-09"
-            },
-            "charity": {
-              "title":           "CHECK OUT OUR CHARITY ITEMS!",
-              "button":          "Order",
-              "loadMore":        "Load more",
-              "loadMoreAlt":     "Load more items"
-            },
-            "other": {
-              "imageAlt":        "Dog illustration",
-              "titleLine1":      "OTHER SUPPORT",
-              "titleLine2":      "INFORMATION:",
-
-              "bank": {
-                "label":       "Bank donation:",
-                "lines": [
-                  "Mancsmentő Állatvédő Egyesület",
-                  "Account: 50436604-10003671",
-                  "IBAN: HU42504366041000367100000000",
-                  "SWIFT: MKKBHUHB"
-                ]
-              }
-            }
-        },
-        "checkout":{
-          "thankYou": "Thank you!",
-          "thxDonation": "THANK YOU FOR YOUR DONATION!",
-          "thxPurchase": "THANK YOU FOR YOUR PURCHASE!",
-          "iWant": "I want to:",
-          "donate":"Donate",
-          "buyItem": "Buy an item",
-          "amount": "Amount:",
-          "custom": "Custom...",
-          "item": "Item:",
-          "contactInfo": "Contact info:",
-          "shipping": "Shipping",
-          "payment": "Payment",
-          "shipFee": "* shipping fee included",
-          "otherAmount": "Other amount",
-          "fullName": "Full name*",
-          "city": "City *",
-          "postal": "Postal code *",
-          "adress": "Address *",
-          "cardholder": "Cardholder Name *",
-          "cardNumber": "Card number *",
-          "cvc": "CVC *",
-          "expDate": "Expiration date *",
-          "enterAmount": "Enter amount",
-          "enterFt": "Enter FT",
-          "phoneNumber": "Phone number*",
-          "processing": "Processing",
-          "donatebtn": "Donate",
-          "placeOrderBtn": "Place Order"
-          
-        },
-        "about": {
-            "title": "Who we are",
-            "description": "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.",
-            "quote": {
-                "line1": "\"Don't just love,",
-                "line2": "protect them",
-                "line3": "And save them from the dogcatcher.\""
-            },
-            "oldWebsite": "Check out our archived website here: ",
-            "oldWebsiteName": "Mancsmento old website",
-            "supportButton": "Support",
-            "volunteerButton": "Volunteer",
-            "story": {
-                "title": "Our Story",
-                "paragraphs": {
-                    "p1": "Our primary goal was to create a new animal shelter and dog run where we could rehabilitate and care for dogs that come to us from dogcatcher sites or overcrowded shelters, both physically and mentally, with the help of professionals, until we find them suitable owners.",
-                    "p2": "Meanwhile, we realized that dogs are disappearing one after another from the dogcatcher sites operating in the area, and we don't receive any information about it in TIME. The site we took over needed significant renovation, and we also had to normalize conditions and increase the number of spaces to safely and adequately care for incoming dogs. But with joint effort, we are making our site more livable.",
-                    "p3": "We continuously rescue dogs in hopeless situations from 14 settlements, which covers approximately 50,000 people, and we have already managed to save and improve the lives of hundreds.",
-                    "p4": "But this is not enough: we believe that these unfortunate conditions can and must be changed, which is why one of our goals is the development of deeply impoverished segregated areas, because as animal care culture begins to change and develop, far fewer dogs will end up in dogcatcher sites, and with increasingly widespread sterilization programs, the birth of so-called unnecessary litters can also be reduced.",
-                    "p5": "Part of our vision is to establish and make acceptable a progressive, advanced-minded approach for as many local residents as possible, so that people can become capable of living in harmony with the living world around them, especially with their animals, as soon as possible. To achieve this, we strive to build excellent relationships with various authorities and local governments, because in the long run, REAL change can only be achieved together, through cooperation.",
-                    "p6": "Since we started our operations, many dogs have passed through our site. In accordance with legal requirements, we provide every incoming dog with a chip and vaccinations, and depending on the length of their stay, they also undergo heartworm testing and sterilization. If heartworm is detectable, we naturally begin and continue the prescribed treatment as long as necessary.",
-                    "p7": "We have many dogs who arrived and continue to arrive at our site in poor health, injured, and undernourished, many puppies arrive without immunization, and most of them experience love, care, and hope for the first time with us.",
-                    "p8": "In addition, we help 'empty' other dogcatcher sites, since not only we but the entire region struggles with the same problems, and we also announce sterilization campaigns for the local population, thereby helping the situation of dogs living there, and not least, optimizing our own operations.",
-                    "p9": "We are aware that this is not a quick process, but through cooperation, prevention, and educational programs, we can gradually reach more and more people with our message.",
-                    "p10": "However, the trials do not end with the rescue of our charges, as there are still more incoming than outgoing dogs, and there are not enough resources to build more kennels. Although it is not our goal to keep dogs in kennels for a long time, we still need them for now.",
-                    "p11": "But despite everything, we want to get the rescued animals to a receiving organization or owner as soon as possible, so they can spend the rest of their lives safely and happily.",
-                    "p12": "We believe that TOGETHER we will succeed!"
-                }
-            },
-            "support": "Support"
-
         }
-  }
+    },
+    "support": {  
+        "supportBtn": "Support",
+        "pageTitle":         "SUPPORT OUR WORK!",
+        "intro": {
+          "line1":           "HELP US TAKE CARE OF STRAY DOGS, SUPPORT THEIR",
+          "line2":           "MEDICAL CARE, REHABILITATION AND SHELTER."
+        },
+        "body": {
+          "p1":              "The Mancsmentő Association rescues stray or injured dogs from 14 towns in Eastern Hungary. Our goal is to find them good homes as quickly as possible, but the journey is often long, difficult, and costly.",
+          "p2":              "Dogs must go through vaccination, de-worming, and spay/neuter programs. 70–80% of the region's dogs suffer from heartworm—treatment is vital but expensive. Parvovirus is rampant without vaccinations, causing severe illness and death. Hospital care for injured or abused dogs adds further strain. Since we charge no intake or adoption fees, we rely heavily on ongoing support.",
+          "p3":              "Recently we intake 25–30 dogs per month. Alongside our existing residents, we strive to place as many as possible—but funds have run dry and we're out of resources to sell. We need help! Our dream is to secure enough regular supporters so we can plan each month knowing 1.5 million HUF arrives in our account—enough to cover medical bills!",
+          "p4":              "Help us give the hopeless a chance! Donate now—every few thousand forints counts! The greatest impact comes from regular support, making care predictable. A monthly gift of 2,000–3,000 HUF means life!"
+        },
+        "tiers": [
+          { "amount": "2000 Ft", "description": "40% of the price of a chip or vaccine" },
+          { "amount": "3000 Ft", "description": "60% of the price of a chip or vaccine" },
+          { "amount": "5000 Ft", "description": "The price of a chip and combined vaccine" },
+          { "amount": "10 000 Ft", "description": "The price of two combined vaccines" },
+          { "amount": "20 000 Ft", "description": "The price for all of the vaccines of a dog" },
+          { "amount": "Custom amount", "description": "" }
+        ],
+        "tax": {
+          "imageAlt":        "Tax donation info",
+          "line1":           "OFFER 1% OF YOUR TAX, SO THAT WE CAN HELP EVERY ANIMAL IN NEED!",
+          "line2":           "TAX NUMBER:",
+          "number":          "19317988-1-09"
+        },
+        "charity": {
+          "title":           "CHECK OUT OUR CHARITY ITEMS!",
+          "button":          "Order",
+          "loadMore":        "Load more",
+          "loadMoreAlt":     "Load more items"
+        },
+        "other": {
+          "imageAlt":        "Dog illustration",
+          "titleLine1":      "OTHER SUPPORT",
+          "titleLine2":      "INFORMATION:",
+
+          "bank": {
+            "label":       "Bank donation:",
+            "lines": [
+              "Mancsmentő Állatvédő Egyesület",
+              "Account: 50436604-10003671",
+              "IBAN: HU42504366041000367100000000",
+              "SWIFT: MKKBHUHB"
+            ]
+          }
+        }
+    },
+    "checkout":{
+      "thankYou": "Thank you!",
+      "thxDonation": "THANK YOU FOR YOUR DONATION!",
+      "thxPurchase": "THANK YOU FOR YOUR PURCHASE!",
+      "iWant": "I want to:",
+      "donate":"Donate",
+      "buyItem": "Buy an item",
+      "amount": "Amount:",
+      "custom": "Custom...",
+      "item": "Item:",
+      "contactInfo": "Contact info:",
+      "shipping": "Shipping",
+      "payment": "Payment",
+      "shipFee": "* shipping fee included",
+      "otherAmount": "Other amount",
+      "fullName": "Full name*",
+      "city": "City *",
+      "postal": "Postal code *",
+      "adress": "Address *",
+      "cardholder": "Cardholder Name *",
+      "cardNumber": "Card number *",
+      "cvc": "CVC *",
+      "expDate": "Expiration date *",
+      "enterAmount": "Enter amount",
+      "enterFt": "Enter FT",
+      "phoneNumber": "Phone number*",
+      "processing": "Processing",
+      "donatebtn": "Donate",
+      "placeOrderBtn": "Place Order"
+      
+    },
+    "about": {
+        "title": "Who we are",
+        "description": "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.",
+        "quote": {
+            "line1": "\"Don't just love,",
+            "line2": "protect them",
+            "line3": "And save them from the dogcatcher.\""
+        },
+        "oldWebsite": "Check out our archived website here: ",
+        "oldWebsiteName": "Mancsmento old website",
+        "supportButton": "Support",
+        "volunteerButton": "Volunteer",
+        "readBlog": "Read our blog",
+        "story": {
+            "title": "Our Story",
+            "paragraphs": {
+                "p1": "Our primary goal was to create a new animal shelter and dog run where we could rehabilitate and care for dogs that come to us from dogcatcher sites or overcrowded shelters, both physically and mentally, with the help of professionals, until we find them suitable owners.",
+                "p2": "Meanwhile, we realized that dogs are disappearing one after another from the dogcatcher sites operating in the area, and we don't receive any information about it in TIME. The site we took over needed significant renovation, and we also had to normalize conditions and increase the number of spaces to safely and adequately care for incoming dogs. But with joint effort, we are making our site more livable.",
+                "p3": "We continuously rescue dogs in hopeless situations from 14 settlements, which covers approximately 50,000 people, and we have already managed to save and improve the lives of hundreds.",
+                "p4": "But this is not enough: we believe that these unfortunate conditions can and must be changed, which is why one of our goals is the development of deeply impoverished segregated areas, because as animal care culture begins to change and develop, far fewer dogs will end up in dogcatcher sites, and with increasingly widespread sterilization programs, the birth of so-called unnecessary litters can also be reduced.",
+                "p5": "Part of our vision is to establish and make acceptable a progressive, advanced-minded approach for as many local residents as possible, so that people can become capable of living in harmony with the living world around them, especially with their animals, as soon as possible. To achieve this, we strive to build excellent relationships with various authorities and local governments, because in the long run, REAL change can only be achieved together, through cooperation.",
+                "p6": "Since we started our operations, many dogs have passed through our site. In accordance with legal requirements, we provide every incoming dog with a chip and vaccinations, and depending on the length of their stay, they also undergo heartworm testing and sterilization. If heartworm is detectable, we naturally begin and continue the prescribed treatment as long as necessary.",
+                "p7": "We have many dogs who arrived and continue to arrive at our site in poor health, injured, and undernourished, many puppies arrive without immunization, and most of them experience love, care, and hope for the first time with us.",
+                "p8": "In addition, we help 'empty' other dogcatcher sites, since not only we but the entire region struggles with the same problems, and we also announce sterilization campaigns for the local population, thereby helping the situation of dogs living there, and not least, optimizing our own operations.",
+                "p9": "We are aware that this is not a quick process, but through cooperation, prevention, and educational programs, we can gradually reach more and more people with our message.",
+                "p10": "However, the trials do not end with the rescue of our charges, as there are still more incoming than outgoing dogs, and there are not enough resources to build more kennels. Although it is not our goal to keep dogs in kennels for a long time, we still need them for now.",
+                "p11": "But despite everything, we want to get the rescued animals to a receiving organization or owner as soon as possible, so they can spend the rest of their lives safely and happily.",
+                "p12": "We believe that TOGETHER we will succeed!"
+            }
+        },
+        "support": "Support"
+
+    },
+    "blog": {
+      "title": "All Blog Posts",
+      "postsAvailable": "posts available",
+      "loading": "Loading posts...",
+      "empty": {
+        "message": "No posts published yet.",
+        "adminLink": "Go to Admin"
+      },
+      "readMore": "Read more →",
+      "filters": {
+        "title": "Filters",
+        "button": "FILTERS",
+        "clearAll": "Clear All Filters",
+        "category": {
+          "label": "CATEGORY",
+          "any": "Any",
+          "options": {
+            "adoption_stories": "Adoption Stories",
+            "volunteer_spotlights": "Volunteer Spotlights",
+            "dog_care_tips": "Dog Care Tips",
+            "training_advice": "Training Advice",
+            "medical_updates": "Medical Updates",
+            "success_stories": "Success Stories",
+            "events_fundraisers": "Events & Fundraisers",
+            "behind_the_scenes": "Behind the Scenes",
+            "foster_programs": "Foster Programs",
+            "rescue_missions": "Rescue Missions"
+          }
+        }
+      }
+    },
+    "filters": {
+      "clearAll": "CLEAR ALL FILTERS",
+      "name": {
+        "label": "NAME",
+        "placeholder": "Search by name"
+      },
+      "breed": {
+        "label": "BREED",
+        "placeholder": "Enter breed"
+      },
+      "location": {
+        "label": "LOCATION",
+        "any": "Any"
+      },
+      "size": {
+        "label": "SIZE",
+        "any": "Any",
+        "options": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        }
+      },
+      "age": {
+        "label": "AGE",
+        "any": "Any",
+        "options": {
+          "puppy": "Puppy",
+          "young": "Young",
+          "adult": "Adult",
+          "senior": "Senior"
+        }
+      },
+      "gender": {
+        "label": "GENDER",
+        "any": "Any",
+        "options": {
+          "male": "Male",
+          "female": "Female"
+        }
+      },
+      "goodWith": {
+        "label": "GOOD WITH",
+        "any": "Any",
+        "options": {
+          "children": "Children",
+          "dogs": "Dogs",
+          "cats": "Cats"
+        }
+      }
+    }
+}

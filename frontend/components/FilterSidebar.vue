@@ -4,17 +4,17 @@
       @click="clearFilters"
       class="bg-white px-4 py-2 text-center text-sm font-bold hover:bg-gray-100 w-full md:w-auto"
     >
-      CLEAR ALL FILTERS
+      {{ $t('filters.clearAll') }}
     </button>
     <div class="flex flex-col space-y-2">
-      <label class="font-bold text-center">NAME</label>
+      <label class="font-bold text-center">{{ $t('filters.name.label') }}</label>
       <div class="relative">
         <input
           type="text"
           :value="filters.name"
           @input="onInput('name', $event)"
           class="w-full p-2 border text-center md:text-left"
-          placeholder="Search by name"
+          :placeholder="$t('filters.name.placeholder')"
         />
         <span class="absolute right-2 top-2">
           <svg
@@ -35,13 +35,13 @@
       </div>
     </div>
     <div class="flex flex-col space-y-2">
-      <label class="font-bold text-center">BREED</label>
+      <label class="font-bold text-center">{{ $t('filters.breed.label') }}</label>
       <input
         type="text"
         :value="filters.breed"
         @input="onInput('breed', $event)"
         class="w-full p-2 border text-center md:text-left"
-        placeholder="Enter breed"
+        :placeholder="$t('filters.breed.placeholder')"
       />
     </div>
     <div
@@ -49,15 +49,15 @@
       :key="key"
       class="flex flex-col space-y-2"
     >
-      <label class="font-bold text-center">{{ labels[key] }}</label>
+      <label class="font-bold text-center">{{ $t(`filters.${key}.label`) }}</label>
       <select
         :value="filters[key]"
         @change="onInput(key, $event)"
         class="w-full p-2 border appearance-none text-center md:text-left"
       >
-        <option value="Any">Any</option>
+        <option value="Any">{{ $t(`filters.${key}.any`) }}</option>
         <option v-for="opt in opts" :key="opt" :value="opt">
-          {{ opt }}
+          {{ key === 'location' ? opt : $t(`filters.${key}.options.${opt.toLowerCase()}`) }}
         </option>
       </select>
     </div>
@@ -66,6 +66,7 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 type FilterKey = 
   | 'name' 
@@ -96,16 +97,17 @@ function clearFilters() {
   emit('clear-filters')
 }
 
-const labels: Record<FilterKey, string> = {
-  name:     'NAME',
-  location: 'LOCATION',
-  breed:    'BREED',
-  size:     'SIZE',
-  age:      'AGE',
-  gender:   'GENDER',
-  goodWith: 'GOOD WITH'
-}
+const { t } = useI18n()
 
+const labels: Record<FilterKey, string> = {
+  name:     t('filters.name.label'),
+  location: t('filters.location.label'),
+  breed:    t('filters.breed.label'),
+  size:     t('filters.size.label'),
+  age:      t('filters.age.label'),
+  gender:   t('filters.gender.label'),
+  goodWith: t('filters.goodWith.label')
+}
 
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
 const selectConfig = computed<Record<SelectKey, string[]>>(() => ({
