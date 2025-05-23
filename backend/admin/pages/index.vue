@@ -8,16 +8,20 @@ if (!isAdmin) {
 }
 const dogs = ref<any[]>([])
 const loading = ref(true)
+const apiError = ref(false)
 const { public: { apiBase } } = useRuntimeConfig()
 
 async function fetchDogs() {
   loading.value = true
+  apiError.value = false
   try {
     const res = await fetch(`${apiBase}/api/dogs`)
     if (!res.ok) throw new Error('Failed to fetch dogs')
-    dogs.value = await res.json()
+    const data = await res.json()
+    dogs.value = data.dogs
   } catch (err) {
     console.error(err)
+    apiError.value = true
   } finally {
     loading.value = false
   }
@@ -32,6 +36,10 @@ onMounted(fetchDogs)
 
     <div v-if="loading" class="text-[#3D4836] text-lg font-medium py-4">
       Loading dogs...
+    </div>
+
+    <div v-else-if="apiError" class="text-center text-red-600 font-medium py-4">
+      Error loading dogs. Please try again.
     </div>
 
     <div v-else-if="!dogs.length" class="font-medium py-4">

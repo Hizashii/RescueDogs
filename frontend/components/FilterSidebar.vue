@@ -76,11 +76,13 @@ type FilterKey =
   | 'age' 
   | 'gender' 
   | 'goodWith'
+  | 'status'
 
 interface Props {
   filters: Record<FilterKey, string>
-  breeds: string[]
-  locations: string[]
+  breeds: string[] 
+  locations: string[] 
+  showStatus?: boolean
 }
 const props = defineProps<Props>()
 
@@ -97,26 +99,40 @@ function clearFilters() {
   emit('clear-filters')
 }
 
+
 const { t } = useI18n()
 
-const labels: Record<FilterKey, string> = {
-  name:     t('filters.name.label'),
-  location: t('filters.location.label'),
-  breed:    t('filters.breed.label'),
-  size:     t('filters.size.label'),
-  age:      t('filters.age.label'),
-  gender:   t('filters.gender.label'),
-  goodWith: t('filters.goodWith.label')
-}
+
+
+const hardcodedLocations = [
+  'Báránd','Bihardancsháza','Biharnagybajom','Hosszúhát','Komádi',
+  'Körösszakál','Körösszegapáti','Magyarhomorog','Mezőpeterd','Mezősas',
+  'Nádudvar','Nagyrábé','Püspökladány','Sáp','Sárrétudvari','Szerep',
+  'Tetétlen','Zsáka'
+]
+
+const hardcodedStatuses = [
+  'Örökbefogadható','Megfigyelés alatt','Örökbefogadott',
+  'Eredeti gazdája érte jött','Átvevő szervezethez került','Elhunyt'
+]
+
 
 type SelectKey = Exclude<FilterKey, 'name' | 'breed'>
-const selectConfig = computed<Record<SelectKey, string[]>>(() => ({
-  location: props.locations,
-  size:     ['Small','Medium','Large'],
-  age:      ['Puppy','Young','Adult','Senior'],
-  gender:   ['Male','Female'],
-  goodWith: ['children','dogs','cats'],
-}))
+const selectConfig = computed<Partial<Record<SelectKey, string[]>>>(() => {
+  const config: Partial<Record<SelectKey, string[]>> = {
+    location: hardcodedLocations, 
+    size:     ['Small','Medium','Large'],
+    age:      ['Puppy','Young','Adult','Senior'],
+    gender:   ['Male','Female'],
+    goodWith: ['children','dogs','cats'], 
+  }
+  
+  if (props.showStatus) {
+    config.status = hardcodedStatuses 
+  }
+  
+  return config
+})
 </script>
 
 <style scoped>

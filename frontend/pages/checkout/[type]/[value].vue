@@ -249,29 +249,15 @@ async function handleSubmit() {
   error.value = ''
 
   try {
-    const body: any = {
-      email: contact.email,
-      phone: contact.phone,
+    const { processDonation } = useDogApi()
+    const result = await processDonation(checkoutValue.value)
+    
+    if (!result.success) {
+      error.value = result.message
     }
-    let endpoint = ''
-
-    if (supportType.value === 'item') {
-      endpoint = '/api/payments/create-item-session'
-      body.itemId = supportValue.value
-      body.shipping = { ...shipping }
-    } else {
-      endpoint = '/api/payments/create-donation-session'
-      body.amountFt = checkoutValue.value
-    }
-
-    const { sessionUrl } = await $fetch<{ sessionUrl: string }>(endpoint, {
-      method: 'POST',
-      body,
-    })
-
-    window.location.href = sessionUrl
-  } catch (e: any) {
-    error.value = e.message || 'Failed to initiate payment.'
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'An error occurred'
+  } finally {
     loading.value = false
   }
 }

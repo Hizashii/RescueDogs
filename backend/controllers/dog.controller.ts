@@ -36,17 +36,31 @@ export const getDogs = async (req: Request, res: Response) => {
     if (req.query.size)       query.size       = req.query.size;
     if (req.query.age)        query.age        = req.query.age;
     if (req.query.gender)     query.gender     = req.query.gender;
-    if (req.query.status)        query.status      = req.query.status;
-    if (req.query.furLength)     query.furLength   = req.query.furLength;
-    if (req.query.vaccination)   query.vaccination = req.query.vaccination;
+    if (req.query.status)     query.status     = req.query.status;
+    if (req.query.furLength)  query.furLength  = req.query.furLength;
+    if (req.query.vaccination) query.vaccination = req.query.vaccination;
     if (req.query.goodWith) {
       const gw = Array.isArray(req.query.goodWith)
         ? req.query.goodWith
         : [req.query.goodWith];
       query.goodWith = { $all: gw };
     }
-    const dogs = await Dog.find(query);
-    res.status(200).json(dogs);
+
+    const total = await Dog.countDocuments(query);
+    
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 12;
+    const skip = (page - 1) * limit;
+    
+    const dogs = await Dog.find(query)
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      dogs,
+      total,
+      totalPages: Math.ceil(total / limit)
+    });
   } catch (error) {
     console.error('Error fetching dogs:', error);
     res.status(500).json({ error: 'Failed to fetch dogs.' });
