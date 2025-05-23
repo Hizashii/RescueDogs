@@ -5,7 +5,7 @@
             <div class="text-white text-center md:text-left px-4 md:px-0">
                 <h2 class="font-semibold text-xl mb-4 pt-12 md:pt-0 font-poppins">{{ t('footer.title') }}</h2>
                 <p class="text-base">4163 Szerep,</p>
-                <p class="text-base">Kemenyi Street 13</p>
+                <p class="text-base">{{ t('footer.street') }}</p>
                 <div class="mt-4">
                     <p class="text-base">{{ t('footer.tax') }}</p>
                     <p class="text-base">19317988-1-09</p>
@@ -77,7 +77,8 @@ useHead({
       "archived": "Archived website",
       "contact": "CONTACT US:",
       "openHour": "OPENING HOURS:",
-      "hours": "Monday - Friday: 8:30 - 10:30"
+      "hours": "Monday - Friday: 8:30 - 10:30",
+      "street": "Kemenyi Street 13"
     }
   },
   "hu": {
@@ -88,7 +89,8 @@ useHead({
       "archived": "Archivált honlap",
       "contact": "Kapcsolat:",
       "openHour": "Nyitvatartás:",
-      "hours": "Hétfő - Péntek: 8:30 - 10:30"
+      "hours": "Hétfő - Péntek: 8:30 - 10:30",
+      "street": "Keményi utca 13"
     }
   },
   "de": {
@@ -99,7 +101,8 @@ useHead({
       "archived": "Archivierte Website",
       "contact": "Kontakt:",
       "openHour": "Öffnungszeiten:",
-      "hours": "Montag - Freitag: 8:30 - 10:30"
+      "hours": "Montag - Freitag: 8:30 - 10:30",
+      "street": "Kemenyi Straße 13"
     }
   }
 }

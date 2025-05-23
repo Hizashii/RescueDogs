@@ -4,23 +4,23 @@
       @click="onClear"
       class="w-full bg-white text-black font-semibold py-2 rounded"
     >
-      Clear All Filters
+      {{ $t('blog.filters.clearAll') }}
     </button>
 
     <div>
-      <label class="block mb-1 text-black font-semibold">CATEGORY</label>
+      <label class="block mb-1 text-black font-semibold">{{ $t('blog.filters.category.label') }}</label>
       <select
         v-model="selectedCategory"
         @change="e => onFilterChange('category', selectedCategory)"
         class="w-full p-2 rounded border border-gray-300"
       >
-        <option value="">Any</option>
+        <option value="">{{ $t('blog.filters.category.any') }}</option>
         <option
           v-for="category in categories"
-          :key="category"
-          :value="category"
+          :key="category.key"
+          :value="category.key"
         >
-          {{ category }}
+          {{ $t(`blog.filters.category.options.${category.key}`) }}
         </option>
       </select>
     </div>
@@ -36,16 +36,16 @@ const emit = defineEmits<{
 }>()
 
 const categories = [
-  'Adoption Stories',
-  'Volunteer Spotlights',
-  'Dog Care Tips',
-  'Training Advice',
-  'Medical Updates',
-  'Success Stories',
-  'Events & Fundraisers',
-  'Behind the Scenes',
-  'Foster Programs',
-  'Rescue Missions',
+  { key: 'adoption_stories', label: 'Adoption Stories' },
+  { key: 'volunteer_spotlights', label: 'Volunteer Spotlights' },
+  { key: 'dog_care_tips', label: 'Dog Care Tips' },
+  { key: 'training_advice', label: 'Training Advice' },
+  { key: 'medical_updates', label: 'Medical Updates' },
+  { key: 'success_stories', label: 'Success Stories' },
+  { key: 'events_fundraisers', label: 'Events & Fundraisers' },
+  { key: 'behind_the_scenes', label: 'Behind the Scenes' },
+  { key: 'foster_programs', label: 'Foster Programs' },
+  { key: 'rescue_missions', label: 'Rescue Missions' }
 ]
 
 const selectedCategory = ref<string>('')

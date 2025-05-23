@@ -135,6 +135,7 @@
           } 
      },
      "support": {
+       "supportBtn": "Unterstützung",
         "pageTitle":         "UNTERSTÜTZE UNSERE ARBEIT!",
         "intro": {
           "line1":           "UNTERSTÜTZE UNS BEI DER VERSORGUNG VON STREUNERHUNDEN,",
@@ -224,6 +225,7 @@
         "oldWebsiteName": "Mancsmento alte Website",
         "supportButton": "Unterstützen",
         "volunteerButton": "Als Freiwilliger bewerben",
+        "readBlog": "Read our blog",
         "story": {
             "title": "Unsere Geschichte",
             "paragraphs": {
@@ -242,5 +244,87 @@
             }
         },
         "support": "Unterstützen"
+    },
+    "blog": {
+      "title": "Alle Blogbeiträge",
+      "postsAvailable": "Beiträge verfügbar",
+      "loading": "Beiträge werden geladen...",
+      "empty": {
+        "message": "Noch keine Beiträge veröffentlicht.",
+        "adminLink": "Zum Admin-Bereich"
+      },
+      "readMore": "Weiterlesen →",
+      "filters": {
+        "title": "Filter",
+        "button": "FILTER",
+        "clearAll": "Alle Filter löschen",
+        "category": {
+          "label": "KATEGORIE",
+          "any": "Alle",
+          "options": {
+            "adoption_stories": "Adoptionsgeschichten",
+            "volunteer_spotlights": "Freiwilligenporträts",
+            "dog_care_tips": "Hundepflege-Tipps",
+            "training_advice": "Erziehungstipps",
+            "medical_updates": "Medizinische Updates",
+            "success_stories": "Erfolgsgeschichten",
+            "events_fundraisers": "Veranstaltungen & Spendenaktionen",
+            "behind_the_scenes": "Hinter den Kulissen",
+            "foster_programs": "Pflegeprogramme",
+            "rescue_missions": "Rettungseinsätze"
+          }
+        }
+      }
+    },
+    "filters": {
+      "clearAll": "ALLE FILTER LÖSCHEN",
+      "name": {
+        "label": "NAME",
+        "placeholder": "Nach Namen suchen"
+      },
+      "breed": {
+        "label": "RASSE",
+        "placeholder": "Rasse eingeben"
+      },
+      "location": {
+        "label": "STANDORT",
+        "any": "Alle"
+      },
+      "size": {
+        "label": "GRÖSSE",
+        "any": "Alle",
+        "options": {
+          "small": "Klein",
+          "medium": "Mittel",
+          "large": "Groß"
+        }
+      },
+      "age": {
+        "label": "ALTER",
+        "any": "Alle",
+        "options": {
+          "puppy": "Welpe",
+          "young": "Jung",
+          "adult": "Erwachsen",
+          "senior": "Senior"
+        }
+      },
+      "gender": {
+        "label": "GESCHLECHT",
+        "any": "Alle",
+        "options": {
+          "male": "Männlich",
+          "female": "Weiblich"
+        }
+      },
+      "goodWith": {
+        "label": "VERTRÄGLICH MIT",
+        "any": "Alle",
+        "options": {
+          "children": "Kindern",
+          "dogs": "Hunden",
+          "cats": "Katzen"
+        }
+      }
     }
 }
