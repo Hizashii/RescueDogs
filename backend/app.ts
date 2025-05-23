@@ -136,9 +136,6 @@ app.use('/api/filters', filterRoutes)
 app.use('/api/charity', charityRoutes)
 app.use('/api/payments', paymentsRoutes)
 
-// Protected routes
-app.use('/api/auth/profile', authenticateJWT, authRoutes)
-
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
 // ──────────────────────────────────────────────────────────────

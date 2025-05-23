@@ -48,15 +48,10 @@ export function useAuth() {
       isAuthenticated.value = true
       isAdmin.value = '1'
       
-      // Store the token from the response
-      const cookies = response.headers.get('set-cookie')
-      console.log('Login response cookies:', cookies)
-      if (cookies) {
-        const tokenMatch = cookies.match(/admin_token=([^;]+)/)
-        if (tokenMatch) {
-          token.value = tokenMatch[1]
-          console.log('Token stored:', token.value)
-        }
+      // Store the token from the response body
+      if (data.token) {
+        token.value = data.token
+        console.log('Token stored from response:', token.value)
       }
       
       return true
