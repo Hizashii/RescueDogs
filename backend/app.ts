@@ -57,7 +57,8 @@ app.use(cors({
       'http://localhost:3000', 
       'http://localhost:3001',
       'https://rescuedogs.onrender.com',
-      'https://admin-panel-xvoi.onrender.com'
+      'https://admin-panel-xvoi.onrender.com',
+      'https://mancsmentoallatvedok.onrender.com'
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
