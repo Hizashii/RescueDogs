@@ -3,9 +3,30 @@ import type { CharityItem } from '../type/CharityItem'
 
 axios.defaults.baseURL = process.env.ADMIN_API_BASE || 'https://rescuedogs-1.onrender.com'
 
+interface FetchItemsParams {
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  sortDirection?: 'asc' | 'desc';
+  isActive?: boolean;
+  category?: string;
+  name?: string;
+}
+
+interface PaginatedItemsResponse {
+  items: CharityItem[];
+  total: number;
+  totalPages: number;
+}
+
 export default function useCharityApi() {
   const fetchAll = (): Promise<CharityItem[]> =>
     axios.get('/api/charityitems').then(r => r.data)
+
+  const fetchItems = (params: FetchItemsParams): Promise<PaginatedItemsResponse> => {
+    const queryParams = new URLSearchParams(params as any).toString();
+    return axios.get(`/api/charityitems?${queryParams}`).then(r => r.data);
+  };
 
   const create = (item: Omit<CharityItem,'_id'>) =>
     axios.post<CharityItem>('/api/charityitems', item)
@@ -34,5 +55,5 @@ export default function useCharityApi() {
     return { url: axios.defaults.baseURL + res.data.path }
   }
 
-  return { fetchAll, create, update, remove, uploadImage }
+  return { fetchAll, fetchItems, create, update, remove, uploadImage }
 }

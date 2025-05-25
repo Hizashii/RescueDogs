@@ -13,6 +13,7 @@
         :alt="dog.name" 
         class="w-full h-48 object-cover" 
         @error="handleImageError"
+        loading="lazy"
       />
       <div class="p-4">
         <div class="flex justify-between items-center">

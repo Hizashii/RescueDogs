@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import useCharityApi from '../../../backend/admin/composables/useCharityApi'
 import type { CharityItem } from '../../../backend/admin/type/CharityItem'
 
@@ -8,7 +8,7 @@ if (!isAdmin) {
   navigateTo('/login')
 }
 
-const { fetchAll, create, update, remove, uploadImage } = useCharityApi() as any
+const { fetchItems, create, update, remove, uploadImage } = useCharityApi() as any
 const items = ref<CharityItem[]>([])
 const showModal = ref(false)
 const form = ref<Partial<CharityItem>>({
@@ -29,8 +29,15 @@ const categoryFilter = ref('')
 const activeFilter = ref<'all'|'active'|'inactive'>('all')
 const sortConfig = ref({ key: 'name', direction: 'asc' })
 
+const currentPage = ref(1)
+const itemsPerPage = ref(10)
+const totalItems = ref(0)
+const totalPages = ref(1)
+
+const loading = ref(false)
+
 const dashboardStats = computed(() => ({
-  totalItems: items.value.length,
+  totalItems: totalItems.value,
   activeItems: items.value.filter(i => i.isActive).length,
   totalValue: items.value.reduce((sum, i) => sum + (i.price * i.stock), 0),
   lowStock: items.value.filter(i => i.stock < 10).length
@@ -38,29 +45,33 @@ const dashboardStats = computed(() => ({
 
 const categories = computed(() => [...new Set(items.value.map(i => i.category))])
 
-const filteredItems = computed(() =>
-  items.value
-    .filter(i =>
-      i.name.toLowerCase().includes(filter.value.toLowerCase()) ||
-      i.description.toLowerCase().includes(filter.value.toLowerCase())
-    )
-    .filter(i => categoryFilter.value ? i.category === categoryFilter.value : true)
-    .filter(i => {
-      if (activeFilter.value === 'all') return true
-      return activeFilter.value === 'active' ? i.isActive : !i.isActive
-    })
-    .sort((a,b) => {
-      const dir = sortConfig.value.direction === 'asc' ? 1 : -1
-      // @ts-ignore
-      if (a[sortConfig.value.key] < b[sortConfig.value.key]) return -1 * dir
-      // @ts-ignore
-      if (a[sortConfig.value.key] > b[sortConfig.value.key]) return  1 * dir
-      return 0
-    })
-)
+async function fetchAndFilterItems() {
+  loading.value = true
+  try {
+    const params: any = {
+      page: currentPage.value,
+      limit: itemsPerPage.value,
+      sortBy: sortConfig.value.key,
+      sortDirection: sortConfig.value.direction,
+    }
+    if (filter.value) params.name = filter.value
+    if (categoryFilter.value) params.category = categoryFilter.value
+    if (activeFilter.value !== 'all') params.isActive = activeFilter.value === 'active'
+
+    const response = await fetchItems(params)
+    items.value = response.items
+    totalItems.value = response.total
+    totalPages.value = response.totalPages
+
+  } catch (e) {
+    console.error('Error fetching charity items:', e)
+  } finally {
+    loading.value = false
+  }
+}
 
 onMounted(async () => {
-  items.value = await fetchAll()
+  await fetchAndFilterItems()
 })
 
 function openForm(item?: CharityItem) {
@@ -97,7 +108,7 @@ async function saveItem() {
     } else {
       await create(form.value as Omit<CharityItem,'_id'>)
     }
-    items.value = await fetchAll()
+    await fetchAndFilterItems()
     showModal.value = false
   } catch (e) {
     console.error('Hiba a mentés során:', e)
@@ -108,7 +119,7 @@ async function saveItem() {
 async function deleteItem(id: string) {
   if (!confirm('Biztosan törölni szeretné ezt a terméket?')) return
   await remove(id)
-  items.value = await fetchAll()
+  await fetchAndFilterItems()
 }
 
 function handleSort(key: string) {
@@ -122,6 +133,18 @@ function getSortIcon(key: string) {
   if (sortConfig.value.key !== key) return ''
   return sortConfig.value.direction === 'asc' ? '▲' : '▼'
 }
+
+function goToPage(page: number) {
+  if (page >= 1 && page <= totalPages.value && page !== currentPage.value) {
+    currentPage.value = page
+    fetchAndFilterItems()
+  }
+}
+
+watch([filter, categoryFilter, activeFilter, sortConfig], () => {
+  currentPage.value = 1
+  fetchAndFilterItems()
+}, { deep: true })
 </script>
 
 <template>
@@ -136,7 +159,7 @@ function getSortIcon(key: string) {
           </div>
           <div>
             <p class="text-gray-500 text-sm">Összes termék</p>
-            <p class="text-xl font-bold text-green-700">{{ dashboardStats.totalItems }}</p>
+            <p class="text-xl font-bold text-green-700">{{ totalItems.toLocaleString() }}</p>
           </div>
         </div>
         <div class="bg-white shadow p-4 flex items-center">
@@ -144,7 +167,7 @@ function getSortIcon(key: string) {
             <span class="text-green-600">✓</span>
           </div>
           <div>
-            <p class="text-gray-500 text-sm">Aktív termékek</p>
+            <p class="text-gray-500 text-sm">Aktív termékek (aktuális oldalon)</p>
             <p class="text-xl font-bold text-green-700">{{ dashboardStats.activeItems }}</p>
           </div>
         </div>
@@ -153,7 +176,7 @@ function getSortIcon(key: string) {
             <span class="text-green-600">💰</span>
           </div>
           <div>
-            <p class="text-gray-500 text-sm">Eddigi összeg</p>
+            <p class="text-gray-500 text-sm">Eddigi összeg (aktuális oldalon)</p>
             <p class="text-xl font-bold text-green-700">{{ dashboardStats.totalValue.toLocaleString() }} Ft</p>
           </div>
         </div>
@@ -162,7 +185,7 @@ function getSortIcon(key: string) {
             <span class="text-red-600">⚠️</span>
           </div>
           <div>
-            <p class="text-gray-500 text-sm">Alacsony készleti termékek</p>
+            <p class="text-gray-500 text-sm">Alacsony készleti termékek (aktuális oldalon)</p>
             <p class="text-xl font-bold text-red-600">{{ dashboardStats.lowStock }}</p>
           </div>
         </div>
@@ -237,98 +260,131 @@ function getSortIcon(key: string) {
 
         <!-- Products Table -->
         <div class="overflow-x-auto">
-          <table class="min-w-full">
-            <thead class="bg-yellow-50 border-b">
-              <tr>
-                <th
-                  @click="handleSort('name')"
-                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
-                >
-                  Termék neve {{ getSortIcon('name') }}
-                </th>
-                <th
-                  @click="handleSort('category')"
-                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
-                >
-                  Kategória {{ getSortIcon('category') }}
-                </th>
-                <th
-                  @click="handleSort('price')"
-                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
-                >
-                  Ár (Ft) {{ getSortIcon('price') }}
-                </th>
-                <th
-                  @click="handleSort('stock')"
-                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
-                >
-                  Mennyiség {{ getSortIcon('stock') }}
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
-                  Kép
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
-                  Státusz
-                </th>
-                <th class="px-6 py-3 text-right text-xs font-medium text-green-700 uppercase tracking-wider">
-                  Műveletek
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="item in filteredItems" :key="item._id" class="hover:bg-yellow-50">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="font-medium text-gray-900">{{ item.name }}</div>
-                  <div class="text-sm text-gray-500 truncate max-w-xs">{{ item.description }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-green-700">
-                    {{ item.category }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                  {{ item.price.toLocaleString() }} Ft
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span
-                    class="px-2 py-1 text-xs font-medium"
-                    :class="{
-                      'bg-red-100 text-red-800': item.stock < 10,
-                      'bg-yellow-100 text-green-800': item.stock >= 10 && item.stock < 20,
-                      'bg-green-100 text-green-800': item.stock >= 20
-                    }"
-                  >
-                    {{ item.stock }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <img :src="item.imageUrl" :alt="item.name" class="h-12 w-12 object-cover" />
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span
-                    class="px-2 py-1 text-xs font-medium"
-                    :class="{
-                      'bg-green-100 text-green-800': item.isActive,
-                      'bg-red-100 text-red-800': !item.isActive
-                    }"
-                  >
-                    {{ item.isActive ? 'Aktív' : 'Inaktív' }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button @click="openForm(item)" class="text-green-600 hover:text-green-900 mr-3">
-                    Szerkesztés
-                  </button>
-                  <button @click="deleteItem(item._id)" class="text-red-600 hover:text-red-900">
-                    Törlés
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div v-if="filteredItems.length === 0" class="text-center py-8 text-gray-500">
-            Nem találhatók ilyen elemek
+          <div v-if="loading" class="text-center py-8">
+            Betöltés...
           </div>
+          <template v-else>
+            <table class="min-w-full">
+              <thead class="bg-yellow-50 border-b">
+                <tr>
+                  <th
+                    @click="handleSort('name')"
+                    class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                  >
+                    Termék neve {{ getSortIcon('name') }}
+                  </th>
+                  <th
+                    @click="handleSort('category')"
+                    class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                  >
+                    Kategória {{ getSortIcon('category') }}
+                  </th>
+                  <th
+                    @click="handleSort('price')"
+                    class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                  >
+                    Ár (Ft) {{ getSortIcon('price') }}
+                  </th>
+                  <th
+                    @click="handleSort('stock')"
+                    class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider cursor-pointer"
+                  >
+                    Mennyiség {{ getSortIcon('stock') }}
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
+                    Kép
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider">
+                    Státusz
+                  </th>
+                  <th class="px-6 py-4 text-right text-xs font-medium text-green-700 uppercase tracking-wider">
+                    Műveletek
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="item in items" :key="item._id" class="hover:bg-yellow-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="font-medium text-gray-900">{{ item.name }}</div>
+                    <div class="text-sm text-gray-500 truncate max-w-xs">{{ item.description }}</div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-green-700">
+                      {{ item.category }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                    {{ item.price.toLocaleString() }} Ft
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 py-1 text-xs font-medium"
+                      :class="{
+                        'bg-red-100 text-red-800': item.stock < 10,
+                        'bg-yellow-100 text-green-800': item.stock >= 10 && item.stock < 20,
+                        'bg-green-100 text-green-800': item.stock >= 20
+                      }"
+                    >
+                      {{ item.stock }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <img :src="item.imageUrl" :alt="item.name" class="h-12 w-12 object-cover" loading="lazy"/>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 py-1 text-xs font-medium"
+                      :class="{
+                        'bg-green-100 text-green-800': item.isActive,
+                        'bg-red-100 text-red-800': !item.isActive
+                      }"
+                    >
+                      {{ item.isActive ? 'Aktív' : 'Inaktív' }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button @click="openForm(item)" class="text-green-600 hover:text-green-900 mr-3">
+                      Szerkesztés
+                    </button>
+                    <button @click="deleteItem(item._id)" class="text-red-600 hover:text-red-900">
+                      Törlés
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="!items.length && !loading" class="text-center py-8 text-gray-500">
+              Nem találhatók ilyen elemek
+            </div>
+          </template>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div v-if="totalPages > 1" class="flex justify-center mt-8 space-x-2">
+          <button
+            @click="goToPage(currentPage - 1)"
+            :disabled="currentPage === 1"
+            :class="[currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
+          >
+            Előző
+          </button>
+
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            @click="goToPage(page)"
+            :class="['px-3 py-1 border', currentPage === page ? 'bg-yellow-100 text-green-700' : '']"
+          >
+            {{ page }}
+          </button>
+
+          <button
+            @click="goToPage(currentPage + 1)"
+            :disabled="currentPage === totalPages"
+            :class="[currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : '', 'px-3 py-1 border']"
+          >
+            Következő
+          </button>
         </div>
       </div>
     </div>
