@@ -9,6 +9,11 @@ export function useAuth() {
   const loading = ref(false)
   const error = ref('')
   const isAdmin = useCookie('isAdmin')
+  const token = useCookie('admin_token', {
+    secure: true,
+    sameSite: 'none',
+    path: '/'
+  })
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
@@ -25,15 +30,12 @@ export function useAuth() {
         credentials: 'include'
       })
 
-      
       if (!response.ok) {
         const contentType = response.headers.get('content-type')
         if (contentType && contentType.includes('application/json')) {
           const data = await response.json()
           error.value = data.message || 'Login failed'
         } else {
-          const text = await response.text()
-          console.error('Non-JSON response:', text)
           error.value = 'Server error occurred'
         }
         return false
@@ -44,34 +46,16 @@ export function useAuth() {
       isAuthenticated.value = true
       isAdmin.value = '1'
       
+      if (data.token) {
+        token.value = data.token
+      }
+      
       return true
     } catch (err) {
-      console.error('Login error:', err)
       error.value = 'An error occurred during login'
       return false
     } finally {
       loading.value = false
-    }
-  }
-
-  async function logout() {
-    try {
-      const apiUrl = `${config.public.apiBase}/api/auth/logout`
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        credentials: 'include'
-      })
-      
-      if (!response.ok) {
-        console.error('Logout failed:', response.status)
-      }
-    } catch (err) {
-      console.error('Logout error:', err)
-    } finally {
-      user.value = null
-      isAuthenticated.value = false
-      isAdmin.value = null
-      router.push('/login')
     }
   }
 
@@ -80,9 +64,12 @@ export function useAuth() {
       const apiUrl = `${config.public.apiBase}/api/auth/profile`
       
       const response = await fetch(apiUrl, {
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'Authorization': token.value ? `Bearer ${token.value}` : '',
+          'Content-Type': 'application/json'
+        }
       })
-      
       
       if (response.ok) {
         const data = await response.json()
@@ -93,11 +80,35 @@ export function useAuth() {
         user.value = null
         isAuthenticated.value = false
         isAdmin.value = null
+        token.value = null
       }
     } catch (err) {
       user.value = null
       isAuthenticated.value = false
       isAdmin.value = null
+      token.value = null
+    }
+  }
+
+  async function logout() {
+    try {
+      const apiUrl = `${config.public.apiBase}/api/auth/logout`
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Authorization': token.value ? `Bearer ${token.value}` : '',
+          'Content-Type': 'application/json'
+        }
+      })
+    } catch (err) {
+      // Ignore logout errors
+    } finally {
+      user.value = null
+      isAuthenticated.value = false
+      isAdmin.value = null
+      token.value = null
+      router.push('/login')
     }
   }
 

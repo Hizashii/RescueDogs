@@ -1,10 +1,8 @@
 <template>
- <!-- WHO WE ARE -->
  <section class="bg-[#FFE86B] py-12 px-4 md:py-20 md:px-0 section-animate">
     <div
       class=" mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
     >
-      <!-- IMAGE (left) -->
       <div class="flex-shrink-0 md:w-1/2 align-start image-animate">
         <img
           src="/img/eyes.jpg"
@@ -13,7 +11,6 @@
         />
       </div>
 
-      <!-- TEXT (right) -->
       <div
         class="flex-1 flex flex-col md:items-start md:text-left space-y-4 content-animate"
       >
@@ -57,7 +54,6 @@
     </div>
   </section>
 
-  <!-- QUOTE -->
   <section class="bg-white py-12 px-4 md:py-20 md:px-8 section-animate">
     <div class="max-w-6xl mx-auto flex flex-col items-center space-y-8">
       <div class="flex flex-col sm:flex-row items-center gap-6 quote-animate">
@@ -165,7 +161,6 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   handleScroll() 
 
-  //THE OBSERVERS===========================================================
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -225,7 +220,6 @@ onMounted(() => {
       rootMargin: '0px 0px -10% 0px'
     }
   )
-//========================================================================================================
 
   document.querySelectorAll('.section-animate').forEach((section) => {
     sectionObserver.observe(section)

@@ -2,7 +2,7 @@
   <div class="bg-[#FFDC20] p-4 space-y-6 w-full md:w-64">
     <button
       @click="onClear"
-      class="w-full bg-white text-black font-semibold py-2 rounded"
+      class="w-full bg-white text-black font-semibold py-2"
     >
       {{ $t('blog.filters.clearAll') }}
     </button>
@@ -24,11 +24,20 @@
         </option>
       </select>
     </div>
+
+    <input
+      type="text"
+      :placeholder="t('blog.filters.category.label')"
+      class="w-full p-2 border border-gray-300"
+    />
  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
   (e: 'clear-filters'): void
@@ -59,7 +68,6 @@ function onFilterChange(key: string, value: string) {
   emit('update-filter', key, value)
 }
 
-// (Optional) auto-emit on mount/change
 watch(selectedCategory, val => {
   emit('update-filter', 'category', val)
 })

@@ -3,37 +3,30 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import Report from '../models/Report';
-// Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, '../../uploads/dog-pictures'))
   },
   filename: (req, file, cb) => {
-    // Create unique filename
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, uniqueSuffix + path.extname(file.originalname))
   }
 });
 
-// Create multer upload instance
-export const upload = multer({ storage }).single('dogPicture');  // 'dogPicture' matches the FormData field name
+export const upload = multer({ storage }).single('dogPicture');
 
-// Handle report creation with file upload
 export const createReport = async (req: Request, res: Response) => {
   try {
-    // Handle file upload
     upload(req, res, async (err) => {
       if (err) {
         return res.status(400).json({ message: err.message });
       }
 
-      // Create report object
       const reportData = {
         ...req.body,
         dogPicture: req.file ? `/uploads/dog-pictures/${req.file.filename}` : null
       }
 
-      // Save to database
       const report = new Report(reportData);
       await report.save();
 

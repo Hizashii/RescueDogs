@@ -164,7 +164,9 @@
           "phoneNumber": "Telefonszám*",
           "processing": "Feldolgozás",
           "donatebtn": "Adományozás",
-          "placeOrderBtn": "Rendelés Megerősítése"
+          "placeOrderBtn": "Rendelés Megerősítése",
+          "stripeNote": "A fizetés biztonságosan történik a Stripe Checkout rendszerén keresztül.",
+          "donationSummary": "Adomány összeg"
         
         },
             "support": { 
@@ -198,7 +200,8 @@
                 "title":           "NÉZD MEG AZ AJÁNDÉKTÁRGYAINKAT!", 
                 "button":          "Rendelés", 
                 "loadMore":        "További termékek betöltése", 
-                "loadMoreAlt":     "További termékek betöltése" 
+                "loadMoreAlt":     "További termékek betöltése",
+                "empty": "Nincsenek adománytárgyak."
               }, 
               "other": { 
                 "imageAlt":        "Egy fénykép egy Husky kutyáról", 
@@ -340,6 +343,58 @@
           "transferred_to_organization": "Átvevő szervezethez került",
           "deceased": "Elhunyt"
         }
+      }
+    },
+    "dog": {
+      "status": {
+        "Örökbefogadható": "Örökbefogadható",
+        "Megfigyelés alatt": "Megfigyelés alatt",
+        "Örökbefogadott": "Örökbefogadott",
+        "Eredeti gazdája érte jött": "Eredeti gazdája érte jött",
+        "Átvevő szervezethez került": "Átvevő szervezethez került",
+        "Elhunyt": "Elhunyt"
+      },
+      "size": {
+        "kicsi": "kicsi",
+        "nagyobb kicsi": "nagyobb kicsi",
+        "kisebb közepes": "kisebb közepes",
+        "közepes": "közepes",
+        "nagyobb közepes": "nagyobb közepes",
+        "kisebb nagy": "kisebb nagy",
+        "nagy": "nagy"
+      },
+      "age": {
+        "Kölyök": "Kölyök",
+        "Fiatal": "Fiatal",
+        "Felnőtt": "Felnőtt",
+        "Idős": "Idős"
+      },
+      "gender": {
+        "Hím": "Hím",
+        "Nőstény": "Nőstény"
+      },
+      "furLength": {
+        "Rövid": "Rövid",
+        "Közepes": "Közepes",
+        "Hosszú": "Hosszú"
+      },
+      "vaccination": {
+        "Chippelt és oltott": "Chippelt és oltott",
+        "Folyamatban": "Folyamatban"
+      },
+      "goodWith": {
+        "Emberrel kedves": "Emberrel kedves",
+        "Szereti a gyerekeket": "Szereti a gyerekeket",
+        "Szereti a macskákat": "Szereti a macskákat",
+        "Szereti a kutyákat": "Szereti a kutyákat",
+        "Nagyon barátságos": "Nagyon barátságos",
+        "Félénk": "Félénk",
+        "Kíváncsi": "Kíváncsi",
+        "Fél az emberektől": "Fél az emberektől",
+        "Fél más kutyáktól": "Fél más kutyáktól",
+        "Agresszív": "Agresszív",
+        "Utcáról jött": "Utcáról jött",
+        "Szívféreg pozitív": "Szívféreg pozitív"
       }
     }
 } 

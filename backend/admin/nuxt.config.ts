@@ -1,26 +1,25 @@
-// backend/admin/nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
 
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://rescuedogs-1.onrender.com',
         changeOrigin: true,
-        secure: false,
+        secure: true,
         ws: true
       },
       '/uploads': {
-        target: 'http://localhost:5000',
+        target: 'https://rescuedogs-1.onrender.com',
         changeOrigin: true,
-        secure: false
+        secure: true
       }
     }
   },
 
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:5000'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://rescuedogs-1.onrender.com'
     }
   },
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { BlogPost } from '../type/BlogPost'
-axios.defaults.baseURL = process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:5000'
+axios.defaults.baseURL = process.env.NUXT_PUBLIC_API_BASE || 'https://rescuedogs-1.onrender.com'
 export default function useBlogApi() {
   const fetchAll = (): Promise<BlogPost[]> =>
     axios.get('/api/blogs').then(r => r.data)

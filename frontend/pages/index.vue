@@ -1,5 +1,7 @@
 <template>
+
     <div class="bg-[url('/img/dogbg.jpg')] bg-cover bg-center bg-no-repeat md:h-screen h-[60vh] w-full ">
+
         <div class="flex flex-col items-center justify-center md:h-full h-full">
             <img src="/img/logo_white.png" alt="Mancsmento logo" class="md:w-24 w-16 h-auto">
             <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">{{ $t('home.title') }}</h1>
@@ -28,15 +30,12 @@
                 </nuxt-link>
             </div>
         </div>
-        <!-- END OF LANDING PAGE BUTTONS AND TEXT -->
     </div>
 
- <!-- CARDS -->
 <section class="bg-[#FFE65E] px-4 py-16 section-animate">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 -mt-12 md:-mt-24">
 
-      <!-- REPORT CARD -->
       <div ref="reportCard" class="flex flex-col items-center opacity-0 justify-between bg-white p-6 min-h-[420px] shadow-dropdown card-animate">
         <div class="flex flex-col items-center">
           <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
@@ -57,7 +56,6 @@
         </nuxt-link>
       </div>
 
-      <!-- ADOPT CARD -->
       <div ref="adoptCard" class="flex flex-col items-center opacity-0 justify-between bg-white p-6 min-h-[420px] shadow-dropdown card-animate">
         <div class="flex flex-col items-center">
           <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
@@ -78,7 +76,6 @@
         </nuxt-link>
       </div>
 
-      <!-- DONATE CARD -->
       <div ref="donateCard" class="flex flex-col items-center opacity-0 justify-between bg-white p-6 min-h-[420px] shadow-dropdown card-animate">
         <div class="flex flex-col items-center">
           <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
@@ -104,12 +101,9 @@
     </div>
   </div>
 </section>
-<!-- END OF CARDS -->
-<!-- INTRODUCTION -->
 <section class="bg-[#FFFADF] section-animate flex justify-between items-center">
   <div class=" flex flex-col md:flex-row items-center justify-center content-center md:items-start gap-8 md:gap-5">
     
-    <!-- IMAGE -->
     <div class="flex-shrink-0">
       <img
         src="/img/introduction.jpg"
@@ -160,21 +154,16 @@
 
   </div>
 </section>
-<!-- END OF INTRODUCTION -->
 
 
-    <!-- ANIMALS IN OUR CARE SECTION -->
 <section class="bg-white pb-64 pt-40 section-animate">
   <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
-    <!-- Section Title -->
     <h2 class="text-3xl sm:text-4xl font-bold text-[#3D4836] text-center mb-16 ">
       {{ $t('home.stats.title') }}
     </h2>
 
-    <!-- Stats Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 w-full">
       
-      <!-- Total Dogs -->
       <div class="flex flex-col items-center">
         <img src="/img/dog-stats-icon.png" alt="dog icon" class="w-16 h-16 md:w-20 md:h-20 mb-4 pl-4" />
         <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#3D6625] mt-4">4699</h3>
@@ -183,7 +172,6 @@
         </p>
       </div>
 
-      <!-- Adoptable Dogs -->
       <div class="flex flex-col items-center">
         <div class="w-16 h-16 md:w-20 md:h-20 mb-4 flex items-center justify-center">
           <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -196,7 +184,6 @@
         </p>
       </div>
 
-      <!-- Adopted Dogs -->
       <div class="flex flex-col items-center">
         <div class="w-16 h-16 md:w-20 md:h-20 mb-4 flex items-center justify-center">
           <img src="/img/trophy-stats-icon.png" alt="trophy icon" class="w-full h-full object-contain">
@@ -210,10 +197,8 @@
     </div>
   </div>
 </section>
-<!-- END OF ANIMALS IN OUR CARE SECTION -->
 
 
-    <!-- QUOTE -->
     <section class="bg-[#FFE86B] h-[400px] w-full flex flex-row items-center md:justify-around justify-between gap-4 md:gap-8 py-8 md:py-0 section-animate">
         <div class="md:hidden block mt-[-450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
         <div class="hidden md:block mt-[-400px] z-[1000px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
@@ -224,9 +209,7 @@
         <div class="hidden md:block mt-[400px]"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="298" fill="none"><path fill="#3D6625" d="M6 0v298H0V0z"/></svg></div>
         <div class="md:hidden block mt-[450px]"><svg xmlns="http://www.w3.org/2000/svg" width="76" height="6" fill="none"><path fill="#3D6625" d="M76 6H0V0h76z"/></svg></div>
     </section>
-    <!-- END OF QUOTE -->
 
-<!-- LATEST NEWS SECTION -->
 <section class="w-full bg-white flex flex-col items-center justify-center py-16 md:py-0 h-auto md:h-screen gap-10 section-animate">
   <h2 class="text-2xl md:text-[32px] font-semibold text-center md:text-start w-[90%] md:w-[1000px]">
     {{ $t('home.news.title.part1') }} <br><span class="text-logo-yellow font-bold">{{ $t('home.news.title.part2') }}</span>
@@ -237,7 +220,7 @@
     <div
       v-for="post in posts"
       :key="post._id"
-      class="flex flex-col gap-4 w-full max-w-[200px] mx-auto p-4 border rounded hover:shadow"
+      class="flex flex-col gap-4 w-full max-w-[200px] mx-auto p-4 border hover:shadow"
     >
       <img
         v-if="post.image"
@@ -268,13 +251,10 @@
     {{ $t('home.news.seeMore') }}
   </nuxt-link>
 </section>
-<!-- END OF LATEST NEWS SECTION -->
-<!-- LOCATION AND MAP SECTION -->
 <section class="bg-[#FAF8ED] py-16 px-4 md:px-0 section-animate">
   <div class="max-w-6xl mx-auto">
     <div class="flex flex-col md:flex-row items-stretch justify-between gap-8">
       
-      <!-- Address & Info -->
       <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6">
         <h2 class="text-2xl md:text-3xl font-bold text-[#3D4836] uppercase tracking-wide">
           {{ $t('home.location.title') }}
@@ -307,9 +287,8 @@
         </div>
       </div>
 
-      <!-- Responsive Google Map -->
       <div class="w-full md:w-1/2">
-        <div class="relative w-full aspect-[4/3] rounded overflow-hidden">
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2709.4730821709195!2d21.133788776207794!3d47.226891471157586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4746e7e7274d56f1%3A0x53424dcd350fdf03!2sSzerep%2C%20Kem%C3%A9nyi%20%C3%BAt%2013%2C%204163%20Hungary!5e0!3m2!1sen!2sdk!4v1746647443179!5m2!1sen!2sdk"
             class="absolute inset-0 w-full h-full border-0"
@@ -323,7 +302,6 @@
     </div>
   </div>
 </section>
-<!-- END OF LOCATION AND MAP SECTION -->
 
 </template>
 
@@ -348,7 +326,6 @@ onMounted(async () => {
     loading.value = false
   }
 
-  // THE ANIMATION OBSERVERS=========================================================================================================================
   const cardObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, index) => {
@@ -369,7 +346,6 @@ onMounted(async () => {
     }
   )
 
-  // THE SECTION OBSERVER==============================================================================================================
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

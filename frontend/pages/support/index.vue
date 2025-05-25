@@ -3,16 +3,13 @@ import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import ImageTitle from '~/components/ImageTitle.vue'
-import useCharityApi from '~/composables/useCharityApi'
+import useDogApi from '~/composables/useDogApi'
 import type { CharityItem } from '~/types/CharityItem'
 import Ticket from '~/components/ticket.vue'
 
-// i18n + router
 const { t } = useI18n()
 const router = useRouter()
 
-// Donation tiers
-// Donation tiers
 const tiers = ref([
   { amount: '2000 Ft',  description: t('support.tiers.0.description') },
   { amount: '3000 Ft',  description: t('support.tiers.1.description') },
@@ -22,19 +19,19 @@ const tiers = ref([
   { amount: t('support.tiers.5.amount'), description: '' },
 ])
 
-// API
-const { fetchAll } = useCharityApi()
-const rawItems = ref<CharityItem[]>([])
-const activeItems = computed(() =>
-  rawItems.value.filter(i => i.isActive)
-)
+const { fetchCharityItems } = useDogApi() as any
+const items = ref<CharityItem[]>([])
+
 onMounted(async () => {
   try {
-    rawItems.value = await fetchAll()
-  } catch {
-    rawItems.value = []
+    const response = await fetchCharityItems(true);
+    items.value = response;
+  } catch (e) {
+    console.error('Error fetching active charity items:', e);
+    items.value = [];
   }
 })
+
 function parseFt(amount: string): number {
   return parseInt(amount.replace(/\D+/g, ''), 10) || 0
 }
@@ -53,7 +50,6 @@ function goToItem(itemId: string) {
     :overlayOpacity="0.5"
   />
 
-  <!-- Donation Tiers -->
   <section class="bg-[#FFFADF] py-12 px-4 ">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xl md:text-4xl font-semibold text-[#3D4836] mb-8 text-center md:text-start">
@@ -82,7 +78,6 @@ function goToItem(itemId: string) {
       </div>
     </div>
   </section>
-  <!-- Charity Items -->
   <section class="bg-[#FFFADF] py-12 ">
     <div class="container mx-auto px-4">
       <h2
@@ -93,13 +88,13 @@ function goToItem(itemId: string) {
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div
-          v-for="(item, index) in activeItems"
+          v-for="(item, index) in items"
           :key="item._id"
           class="bg-[#FFE65E] p-4 flex flex-col items-center ">
           <img
             :src="item.imageUrl"
             :alt="item.name"
-            class="h-40 w-full object-cover mb-2"
+            class="h-[200px] w-[200px] object-cover mb-2"
             loading="lazy"
           />
           <h3 class="font-semibold text-[#3D4836]">{{ item.name }}</h3>
@@ -120,7 +115,7 @@ function goToItem(itemId: string) {
         </div>
       </div>
 
-      <div v-if="activeItems.length === 0" class="text-center py-8 text-gray-500">
+      <div v-if="items.length === 0" class="text-center py-8 text-gray-500">
         {{ t('support.charity.empty') }}
       </div>
     </div>

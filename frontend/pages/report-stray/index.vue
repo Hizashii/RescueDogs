@@ -4,25 +4,25 @@
       {{ $t('report.title') }}
     </h1>
 
-    <!-- Success -->
     <div
       v-if="submitSuccess"
       class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 bg-green-100 border border-green-400 text-green-700 px-3 md:px-4 py-2 md:py-3 message-animate"
+
     >
       <p class="font-bold">{{ $t('report.success.heading') }}</p>
       <p>{{ $t('report.success.body') }}</p>
     </div>
 
-    <!-- Error -->
     <div
       v-if="submitError"
+
       class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 bg-red-100 border border-red-400 text-red-700 px-3 md:px-4 py-2 md:py-3 message-animate"
+
     >
       <p class="font-bold">{{ $t('report.error.heading') }}</p>
       <p>{{ errorMessage }}</p>
     </div>
 
-    <!-- Loading -->
     <div
       v-if="isSubmitting"
       class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 flex justify-center"
@@ -35,8 +35,10 @@
       class="w-full max-w-[400px] md:max-w-[700px] mb-16 md:mb-32 form-animate"
       @submit.prevent="submitReport"
     >
+
       <div class="mb-3 md:mb-4">
         <label for="name" class="block text-base md:text-xl font-bold mb-1 md:mb-2">
+
           {{ $t('report.form.name.label') }}
         </label>
         <input
@@ -48,9 +50,11 @@
         />
       </div>
 
+
       <div class="flex flex-col md:flex-row md:flex-wrap -mx-2 md:-mx-3 mb-3 md:mb-4">
         <div class="w-full md:w-1/2 px-2 md:px-3 mb-3 md:mb-0">
           <label for="phone" class="block text-base md:text-xl font-bold mb-1 md:mb-2">
+
             {{ $t('report.form.phone.label') }}
           </label>
           <input
@@ -74,8 +78,10 @@
         </div>
       </div>
 
+
       <div class="flex flex-col md:flex-row md:flex-wrap -mx-2 md:-mx-3 mb-3 md:mb-4">
         <div class="w-full md:w-1/2 px-2 md:px-3 mb-3 md:mb-0">
+
           <label
             for="dog-city"
             class="block text-base md:text-xl font-bold mb-1 md:mb-2"
@@ -95,7 +101,9 @@
           </select>
         </div>
 
+
         <div class="w-full md:w-1/2 px-2 md:px-3">
+
           <label
             for="dog-picture"
             class="block text-base md:text-xl font-bold mb-1 md:mb-2"
@@ -127,6 +135,7 @@
       </div>
 
       <div v-if="imagePreview" class="w-full px-2 md:px-3 mt-3 md:mt-4">
+
         <img
           :src="imagePreview"
           alt="Dog picture preview"
@@ -134,7 +143,9 @@
         />
       </div>
 
+
       <div class="mb-3 md:mb-4">
+
         <label
           for="reporter-city"
           class="block text-base md:text-xl font-bold mb-1 md:mb-2"
@@ -151,6 +162,7 @@
       </div>
 
       <div class="mb-4 md:mb-6">
+
         <label
           for="comments"
           class="block text-base md:text-xl font-bold mb-1 md:mb-2"
@@ -169,7 +181,6 @@
         </div>
       </div>
 
-      <!-- Submit -->
       <button
         type="submit"
         :disabled="isSubmitting"
@@ -239,7 +250,7 @@ const errorMessage = ref('')
 const imagePreview = ref('')
 
 const config = useRuntimeConfig()
-const apiBase = config.public.apiBase || 'http://localhost:5000'
+const apiBase = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 
 function handleFileUpload(e: Event) {
   const files = (e.target as HTMLInputElement).files
@@ -304,7 +315,6 @@ async function submitReport() {
 }
 
 onMounted(() => {
-  //THE ANIMATION OBSERVERS======================================================================================================================================
   const titleObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -349,7 +359,6 @@ onMounted(() => {
       rootMargin: '0px 0px -10% 0px'
     }
   )
-  // ==============================================================================================================================
   document.querySelectorAll('.title-animate').forEach((title) => {
     titleObserver.observe(title)
   })

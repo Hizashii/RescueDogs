@@ -1,11 +1,9 @@
 <template>
   <div>
-    <!-- NavBar -->
     <NavBar />
 
     <div class="flex flex-col md:flex-row">
       
-      <!-- Desktop Filter Sidebar -->
       <div class="hidden md:block bg-[#FFE65E] shadow-lg">
         <FilterSidebar
           :filters="filters"
@@ -25,7 +23,6 @@
         />
       </div>
 
-      <!-- Mobile Filter Toggle and Info -->
       <div class="flex flex-row justify-between items-center w-full px-4 md:hidden">
         <button 
           @click="showFilters = !showFilters"
@@ -40,7 +37,6 @@
         </p>
       </div>
 
-      <!-- Mobile Filter Sidebar (shown as overlay) -->
       <transition
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="opacity-0 -translate-x-full"
@@ -61,7 +57,7 @@
               <h2 class="text-lg font-bold">Filters</h2>
               <button 
                 @click="showFilters = false"
-                class="p-2 hover:bg-gray-100 rounded-full"
+                class="p-2 hover:bg-gray-100"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -90,7 +86,6 @@
         </div>
       </transition>
 
-      <!-- Main Content Area -->
       <div class="flex-1 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 mt-8 mb-8">
         <h1 class="text-[#3D6625] font-bold font-poppins text-[24px] md:text-[40px] md:ml-8 max-w-[300px]">
           {{ $t('allAnimals.title') }}
@@ -104,18 +99,15 @@
           </p>
         </div>
 
-        <!-- Separator -->
         <div class="w-full px-4">
           <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
 
-          <!-- Loading State -->
           <div v-if="loading" class="flex justify-center items-center h-64">
             <div
-              class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"
+              class="animate-spin h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"
             ></div>
           </div>
 
-          <!-- Error State -->
           <ErrorState
             v-else-if="apiError"
             :title="$t('adoption.error.title')"
@@ -123,7 +115,6 @@
             @retry="fetchDogsData"
           />
 
-          <!-- Dog Grid -->
           <div
             v-else-if="dogs.length > 0"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6"
@@ -138,18 +129,16 @@
             </NuxtLink>
           </div>
 
-          <!-- Empty State -->
           <div v-else class="text-center py-12">
             <p class="text-xl">{{ $t('adoption.empty.message') }}</p>
             <button
               @click="clearAllFilters"
-              class="mt-4 bg-[#3D6625] text-white px-6 py-2 rounded"
+              class="mt-4 bg-[#3D6625] text-white px-6 py-2"
             >
               {{ $t('adoption.empty.clear') }}
             </button>
           </div>
 
-          <!-- Pagination -->
           <div
             v-if="!loading && dogs.length > 0"
             class="flex justify-center mt-8 space-x-2"
@@ -192,7 +181,6 @@
             </button>
           </div>
 
-          <!-- Donation Section -->
           <div
             class="bg-[#FFE65E] p-6 mt-12 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4"
           >
@@ -221,7 +209,6 @@
               </div>
             </div>
             <div class="w-full md:w-1/3">
-              <!-- optional image or graphic -->
             </div>
           </div>
         </div>
@@ -286,7 +273,6 @@ const totalDogs = ref(0)
 const currentPage = ref(1)
 const totalPages = ref(1)
 
-// Hardcoded filter options based on admin panel
 const hardcodedLocations = [
   'Báránd','Bihardancsháza','Biharnagybajom','Hosszúhát','Komádi',
   'Körösszakál','Körösszegapáti','Magyarhomorog','Mezőpeterd','Mezősas',
@@ -311,7 +297,7 @@ const hardcodedGoodWith = [
   'Agresszív','Utcáról jött','Szívféreg pozitív'
 ]
 
-const breeds = ref<string[]>([]) // Still fetching breeds dynamically
+const breeds = ref<string[]>([])
 const locations = ref<string[]>(hardcodedLocations)
 const statuses = ref<string[]>(hardcodedStatuses)
 const sizes = ref<string[]>(hardcodedSizes)
@@ -393,18 +379,16 @@ async function makeDonation(amount: number) {
 }
 
 async function loadFilterOptions() {
-  // Only fetch breeds dynamically, others are hardcoded
   try {
     const opts = await fetchFilterOptions()
     breeds.value = opts.breeds
   } catch {
-    // Fallback breeds if fetching fails
     breeds.value = ['Husky','German Shepherd','Terrier','Mix']
   }
 }
 
 onMounted(async () => {
-  await loadFilterOptions() // Still load breeds
+  await loadFilterOptions()
   const p = parseInt(route.query.page as string) || 1
   currentPage.value = p
   await fetchDogsData()
@@ -419,6 +403,5 @@ watch(() => route.query.page, (p) => {
 })
 
 watch(() => filters.value, () => {
-  // Optionally add logic here if you want to do something when filters change
 }, { deep: true });
 </script>

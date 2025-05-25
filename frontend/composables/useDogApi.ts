@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue';
+import { useRuntimeConfig } from '#app';
 
 interface Dog {
   id: string;
@@ -21,6 +22,7 @@ interface Dog {
   relationToPeople?: string;
   moreInfo?: string;
 }
+
 interface FilterOptions {
   breeds: string[];
   locations: string[];
@@ -32,6 +34,7 @@ interface FilterOptions {
   vaccinationOptions: string[];
   goodWith: string[];
 }
+
 interface DogFilters {
   name?: string;
   location?: string;
@@ -41,16 +44,68 @@ interface DogFilters {
   gender?: string;
   goodWith?: string;
 }
+
 interface PaginatedResponse {
   dogs: Dog[];
   total: number;
   totalPages: number;
 }
+
+interface CharityItem {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  isActive: boolean;
+  category: string;
+  stock: number;
+  priceFt: number;
+}
+
+interface PaymentResult {
+  success: boolean;
+  message: string;
+  sessionUrl?: string;
+}
+
 export default function useDogApi() {
   const config = useRuntimeConfig();
-  const baseUrl = 'http://localhost:5000/api';  // Direct backend URL
+  const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com';
   const isLoading = ref(false);
   const error = ref<string | null>(null);
+
+  const handleApiError = (error: any, context: string): string => {
+    console.error(`${context}:`, error);
+    
+    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      return 'Network error. Please check your connection.';
+    }
+    
+    if (error.response) {
+      return `Server error: ${error.response.status}`;
+    }
+    
+    return error.message || `Unknown error in ${context}`;
+  };
+
+  const apiRequest = async (url: string, options: RequestInit = {}): Promise<Response> => {
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    return response;
+  };
+
   const fetchDogs = async (
     filters: DogFilters = {}, 
     page: number = 1, 
@@ -61,24 +116,21 @@ export default function useDogApi() {
     
     try {
       const params = new URLSearchParams();
-      if (filters.name) params.append('name', filters.name);
-      if (filters.location && filters.location !== 'Any') params.append('location', filters.location);
-      if (filters.breed && filters.breed !== 'Any') params.append('breed', filters.breed);
-      if (filters.size && filters.size !== 'Any') params.append('size', filters.size.toLowerCase());
-      if (filters.age && filters.age !== 'Any') params.append('age', filters.age.toLowerCase());
-      if (filters.gender && filters.gender !== 'Any') params.append('gender', filters.gender.toLowerCase());
-      if (filters.goodWith && filters.goodWith !== 'Any') {
-        params.append('goodWith', filters.goodWith.toLowerCase());
-      }
+      
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value && value !== 'Any') {
+          if (key === 'size' || key === 'age' || key === 'gender' || key === 'goodWith') {
+            params.append(key, value.toLowerCase());
+          } else {
+            params.append(key, value);
+          }
+        }
+      });
+      
       params.append('page', page.toString());
       params.append('limit', limit.toString());
       
-      const response = await fetch(`${baseUrl}/dogs?${params.toString()}`);
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-      
+      const response = await apiRequest(`${baseUrl}/api/dogs?${params.toString()}`);
       const data = await response.json();
       
       return {
@@ -86,23 +138,31 @@ export default function useDogApi() {
           id: dog._id,
           name: dog.name,
           breed: dog.breed || 'Unknown',
-          image: dog.image.startsWith('/uploads') 
-            ? `${baseUrl.replace('/api', '')}${dog.image}` 
+          image: dog.image?.startsWith('/uploads') 
+            ? `${baseUrl}${dog.image}` 
             : dog.image,
           description: dog.description,
           location: dog.location,
           size: dog.size,
-          age: dog.age, 
+          age: dog.age,
           gender: dog.gender,
-          goodWith: dog.goodWith || []
+          goodWith: Array.isArray(dog.goodWith) ? dog.goodWith : [],
+          status: dog.status,
+          cameIn: dog.cameIn,
+          wentOut: dog.wentOut,
+          lookingForOwner: dog.lookingForOwner,
+          adapted: dog.adapted,
+          furLength: dog.furLength,
+          vaccination: dog.vaccination,
+          relationToPeople: dog.relationToPeople,
+          moreInfo: dog.moreInfo,
         })),
-        total: data.total,
-        totalPages: data.totalPages
+        total: data.total || 0,
+        totalPages: data.totalPages || 1
       };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error fetching dogs';
+      const errorMessage = handleApiError(err, 'fetchDogs');
       error.value = errorMessage;
-      console.error('Error fetching dogs:', errorMessage);
       return {
         dogs: [],
         total: 0,
@@ -112,32 +172,35 @@ export default function useDogApi() {
       isLoading.value = false;
     }
   };
+
   const fetchDogById = async (id: string): Promise<Dog | null> => {
+    if (!id) {
+      error.value = 'Dog ID is required';
+      return null;
+    }
+
     isLoading.value = true;
     error.value = null;
     
     try {
-      const response = await fetch(`${baseUrl}/dogs/${id}`);
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-      
+      const response = await apiRequest(`${baseUrl}/api/dogs/${id}`);
       const dog = await response.json();
       
+      if (dog.image?.startsWith('/uploads')) {
+        dog.image = `${baseUrl}${dog.image}`;
+      }
+
       return {
         id: dog._id,
         name: dog.name,
         breed: dog.breed || 'Unknown',
-        image: dog.image.startsWith('/uploads') 
-          ? `${baseUrl.replace('/api', '')}${dog.image}` 
-          : dog.image,
+        image: dog.image,
         description: dog.description,
         location: dog.location,
         size: dog.size,
-        age: dog.age, 
+        age: dog.age,
         gender: dog.gender,
-        goodWith: dog.goodWith || [],
+        goodWith: Array.isArray(dog.goodWith) ? dog.goodWith : [],
         status: dog.status,
         cameIn: dog.cameIn,
         wentOut: dog.wentOut,
@@ -149,58 +212,40 @@ export default function useDogApi() {
         moreInfo: dog.moreInfo,
       };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : `Error fetching dog with ID ${id}`;
+      const errorMessage = handleApiError(err, `fetchDogById(${id})`);
       error.value = errorMessage;
-      console.error(errorMessage);
       return null;
     } finally {
       isLoading.value = false;
     }
   };
+
   const fetchFilterOptions = async (): Promise<FilterOptions> => {
     try {
-      const response = await fetch(`${baseUrl}/dogs/filters`);
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-      
+      const response = await apiRequest(`${baseUrl}/api/dogs/filters`);
       const options = await response.json();
-      
+
       return {
-        breeds: options.breeds || [],
-        locations: options.locations || [],
-        statuses: options.statuses || [],
-        sizes: options.sizes || [],
-        ages: options.ages || [],
-        genders: options.genders || [],
-        furLengths: options.furLengths || [],
-        vaccinationOptions: options.vaccinationOptions || [],
-        goodWith: options.goodWith || []
+        breeds: Array.isArray(options.breeds) ? options.breeds : [],
+        locations: Array.isArray(options.locations) ? options.locations : [],
+        statuses: Array.isArray(options.statuses) ? options.statuses : [],
+        sizes: Array.isArray(options.sizes) ? options.sizes : [],
+        ages: Array.isArray(options.ages) ? options.ages : [],
+        genders: Array.isArray(options.genders) ? options.genders : [],
+        furLengths: Array.isArray(options.furLengths) ? options.furLengths : [],
+        vaccinationOptions: Array.isArray(options.vaccinationOptions) ? options.vaccinationOptions : [],
+        goodWith: Array.isArray(options.goodWith) ? options.goodWith : []
       };
     } catch (err) {
       console.error('Error fetching filter options:', err);
-      // Provide fallback options in case of API error
       return {
         breeds: [],
-        locations: ['Báránd',
-        'Bihardancsháza',
-        'Biharnagybajom',
-        'Hosszúhát',
-        'Komádi',
-        'Körösszakál',
-        'Körösszegapáti',
-        'Magyarhomorog',
-        'Mezőpeterd',
-        'Mezősas',
-        'Nádudvar',
-        'Nagyrábé',
-        'Püspökladány',
-        'Sáp',
-        'Sárrétudvari',
-        'Szerep',
-        'Tetétlen',
-        'Zsáka'],
+        locations: [
+          'Báránd', 'Bihardancsháza', 'Biharnagybajom', 'Hosszúhát', 'Komádi',
+          'Körösszakál', 'Körösszegapáti', 'Magyarhomorog', 'Mezőpeterd',
+          'Mezősas', 'Nádudvar', 'Nagyrábé', 'Püspökladány', 'Sáp',
+          'Sárrétudvari', 'Szerep', 'Tetétlen', 'Zsáka'
+        ],
         statuses: ['Up for adoption', 'Adopted'],
         sizes: ['Small', 'Medium', 'Large'],
         ages: ['Puppy', 'Young', 'Adult', 'Senior'],
@@ -209,40 +254,123 @@ export default function useDogApi() {
         vaccinationOptions: ['Done', 'In progress', 'None'],
         goodWith: ['Children', 'Dogs', 'Cats']
       };
-    } finally {
-      isLoading.value = false; // Assuming isLoading is used for filter options as well, or you might need a separate loading state
     }
   };
-  const processDonation = async (amount: number): Promise<{success: boolean, message: string}> => {
+
+  const fetchCharityItems = async (isActive?: boolean): Promise<CharityItem[]> => {
+    isLoading.value = true;
+    error.value = null;
+    
     try {
-      const response = await fetch(`${baseUrl}/payments/create-donation-session`, {
+      const params = new URLSearchParams();
+      if (isActive !== undefined) {
+        params.append('isActive', isActive.toString());
+      }
+      
+      const response = await apiRequest(`${baseUrl}/api/charityitems?${params.toString()}`);
+      const items = await response.json();
+      
+      // Map backend fields to frontend structure if necessary
+      return items.items ? items.items.map((item: any) => ({
+        _id: item._id,
+        name: item.name,
+        price: item.price,
+        description: item.description,
+        imageUrl: item.imageUrl?.startsWith('/uploads') 
+            ? `${baseUrl}${item.imageUrl}` 
+            : item.imageUrl,
+        isActive: item.isActive,
+        category: item.category,
+        stock: item.stock,
+        priceFt: item.price // Assuming price is already in Ft
+      })) : [];
+
+    } catch (err) {
+      const errorMessage = handleApiError(err, 'fetchCharityItems');
+      error.value = errorMessage;
+      return [];
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  const processItemPurchase = async (itemId: string): Promise<PaymentResult> => {
+    if (!itemId || typeof itemId !== 'string') {
+      return {
+        success: false,
+        message: 'Invalid item ID provided'
+      };
+    }
+
+    try {
+      const response = await apiRequest(`${baseUrl}/api/payments/create-item-session`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amountFt: amount }),
+        body: JSON.stringify({ itemId }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Payment session creation failed: ${response.status}`);
+      const data = await response.json();
+
+      if (!data.sessionUrl) {
+        throw new Error('No session URL received from server');
       }
 
-      const { sessionUrl } = await response.json();
-      window.location.href = sessionUrl; // Redirect to Stripe Checkout
-      return { success: true, message: 'Redirecting to payment...' };
+      return {
+        success: true,
+        message: 'Redirecting to payment...',
+        sessionUrl: data.sessionUrl
+      };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Payment processing failed';
-      console.error('Error processing donation:', errorMessage);
-      return { success: false, message: errorMessage };
+      const errorMessage = handleApiError(err, 'processItemPurchase');
+      return {
+        success: false,
+        message: errorMessage
+      };
     }
   };
-  
+
+  const processDonation = async (amount: number): Promise<PaymentResult> => {
+    if (!amount || typeof amount !== 'number' || amount <= 0) {
+      return {
+        success: false,
+        message: 'Invalid donation amount. Must be a positive number.'
+      };
+    }
+
+    try {
+      const response = await apiRequest(`${baseUrl}/api/payments/create-donation-session`, {
+        method: 'POST',
+        body: JSON.stringify({ amountFt: Math.round(amount) }),
+      });
+
+      const data = await response.json();
+
+      if (!data.sessionUrl) {
+        throw new Error('No session URL received from server');
+      }
+
+      return {
+        success: true,
+        message: 'Redirecting to payment...',
+        sessionUrl: data.sessionUrl
+      };
+    } catch (err) {
+      const errorMessage = handleApiError(err, 'processDonation');
+      return {
+        success: false,
+        message: errorMessage
+      };
+    }
+  };
+
   return {
     fetchDogs,
     fetchDogById,
     fetchFilterOptions,
+    fetchCharityItems,
+    processItemPurchase,
     processDonation,
-    isLoading,
-    error
+
+    isLoading: computed(() => isLoading.value),
+    error: computed(() => error.value)
   };
 }

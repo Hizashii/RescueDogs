@@ -53,7 +53,13 @@ const app = express()
 
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+    const allowedOrigins = [
+      'http://localhost:3000', 
+      'http://localhost:3001',
+      'https://rescuedogs.onrender.com',
+      'https://admin-panel-xvoi.onrender.com',
+      'https://mancsmentoallatvedok.onrender.com'
+    ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -105,11 +111,14 @@ app.post(
 
       // Process and resize the image using sharp
       await sharp(req.file.buffer)
-        .resize(100, 100, { // Resize to 100x100 pixels
+        .resize(200, 200, { // Resize to 200x200 pixels
           fit: sharp.fit.cover, // Use 'cover' to maintain aspect ratio and cover the area
-          withoutEnlargement: true // Do not enlarge images smaller than 100x100
+          withoutEnlargement: true // Do not enlarge images smaller than 200x200
         })
-        .toFormat('jpeg', { quality: 80 }) // Convert to jpeg with 80% quality
+        .toFormat('jpeg', { 
+          quality: 90, // Increased quality
+          mozjpeg: true // Use mozjpeg for better compression
+        })
         .toFile(outputPath); // Save the processed image to the uploads directory
 
       // Return the public URL for the uploaded image
@@ -123,16 +132,13 @@ app.post(
 
 // ──────────────────────────────────────────────────────────────
 // 6️⃣ Mount your routes
-app.use('/api/auth',           authRoutes)
-app.use('/api/dogs',           dogRoutes)
-app.use('/api/reports',        reportRoutes)
-app.use('/api/blogs',          blogRoutes)
-app.use('/api',                filterRoutes)
-app.use('/api/CharityItems',   charityRoutes)
-app.use('/api/payments',       paymentsRoutes);
-
-// Protected routes
-app.use('/api/auth/profile', authenticateJWT, authRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/blogs', blogRoutes)
+app.use('/api/dogs', dogRoutes)
+app.use('/api/reports', reportRoutes)
+app.use('/api/filters', filterRoutes)
+app.use('/api/charityitems', charityRoutes)
+app.use('/api/payments', paymentsRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 

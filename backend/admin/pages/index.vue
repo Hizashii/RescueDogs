@@ -47,7 +47,7 @@ onMounted(fetchDogs)
     </div>
 
     <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div v-for="dog in dogs" :key="dog._id" class="bg-white rounded-lg shadow">
+      <div v-for="dog in dogs" :key="dog._id" class="bg-white shadow">
         <img
           :src="`${apiBase}${dog.image}`"
           :alt="dog.name"
@@ -71,7 +71,7 @@ onMounted(fetchDogs)
           <div class="flex justify-end mt-4">
             <NuxtLink
               :to="{ path: '/dogs/add', query: { id: dog._id } }"
-              class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+              class="px-4 py-2 bg-green-500 text-white hover:bg-green-600"
             >
               Edit
             </NuxtLink>

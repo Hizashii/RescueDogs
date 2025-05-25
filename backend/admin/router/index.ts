@@ -1,4 +1,3 @@
-// src/router/index.ts
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import Login       from '../pages/Login.vue'      
 import Dashboard   from '../pages/index.vue'     

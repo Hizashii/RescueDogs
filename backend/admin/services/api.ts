@@ -1,4 +1,3 @@
-// services/api.ts
 import axios from 'axios';
 
 const api = axios.create({
@@ -16,7 +15,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.code === 'ERR_NETWORK') {
-      console.error('Network error - backend server might be down at http://localhost:5000');
+      console.error('Network error - backend server might be down at https://rescuedogs-1.onrender.com');
     }
     return Promise.reject(error);
   }

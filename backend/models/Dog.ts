@@ -35,23 +35,23 @@ const ThumbnailSchema = new Schema({
 
 const DogSchema = new Schema<IDog>(
   {
-    name:        { type: String, required: true },
+    name:        { type: String, required: true, index: true },
     description: { type: String, required: true },
     image:       { type: String, required: true },
 
 
-    adopted:     { type: Boolean, default: false },
-    location:    { type: String },
-    breed:       { type: String },
-    size:        { type: String },
-    age:         { type: String },
-    gender:      { type: String },
+    adopted:     { type: Boolean, default: false, index: true },
+    location:    { type: String, index: true },
+    breed:       { type: String, index: true },
+    size:        { type: String, index: true },
+    age:         { type: String, index: true },
+    gender:      { type: String, index: true },
     goodWith:    [String],
 
 
-    status:       { type: String }, 
-    furLength:    { type: String },
-    vaccination:  { type: String },
+    status:       { type: String, index: true },
+    furLength:    { type: String, index: true },
+    vaccination:  { type: String, index: true },
 
     cameIn:             String,
     lookingForOwner:    String,
@@ -63,5 +63,8 @@ const DogSchema = new Schema<IDog>(
   },
   { timestamps: true }
 );
+
+// Add compound index for goodWith if queries often combine goodWith with other fields
+// DogSchema.index({ goodWith: 1, location: 1 }); // Example compound index
 
 export default model<IDog>('Dog', DogSchema);

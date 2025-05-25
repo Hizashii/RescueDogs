@@ -1,6 +1,6 @@
 <template>
     <div 
-      class="bg-white overflow-hidden rounded-md shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" 
+      class="bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" 
       @click="$emit('click', dog.id)"
     >
       <!-- Use a fallback div if image fails to load -->
@@ -13,6 +13,7 @@
         :alt="dog.name" 
         class="w-full h-48 object-cover" 
         @error="handleImageError"
+        loading="lazy"
       />
       <div class="p-4">
         <div class="flex justify-between items-center">

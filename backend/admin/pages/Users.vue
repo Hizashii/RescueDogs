@@ -11,5 +11,3 @@ if (!isAdmin) {
   navigateTo('/login')
 }  </script>
 
-
-//this page might be used if I have time to set it up.

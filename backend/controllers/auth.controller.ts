@@ -26,20 +26,26 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: jwtConfig.expiresIn }
     )
 
+    console.log('Setting cookie with token:', token)
+
     res.cookie('admin_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 2 * 60 * 60 * 1000 
+      secure: true,
+      sameSite: 'none',
+      maxAge: 2 * 60 * 60 * 1000,
+      path: '/',
+      domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
     })
 
+    // Also send the token in the response body for the frontend to store
     res.json({
       user: {
         id: user._id,
         email: user.email,
         name: user.name,
         role: user.role
-      }
+      },
+      token
     })
   } catch (error) {
     console.error('Login error:', error)
@@ -48,12 +54,22 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const logout = (req: Request, res: Response) => {
-  res.clearCookie('admin_token')
+  res.clearCookie('admin_token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+    domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
+  })
   res.json({ message: 'Logged out successfully' })
 }
 
 export const getProfile = async (req: Request, res: Response) => {
   try {
+    console.log('Profile request user:', req.user)
+    console.log('Profile request cookies:', req.cookies)
+    console.log('Profile request headers:', req.headers)
+
     if (!req.user?.sub) {
       return res.status(401).json({ message: 'Not authenticated' })
     }
@@ -70,6 +86,7 @@ export const getProfile = async (req: Request, res: Response) => {
       role: user.role
     })
   } catch (error) {
+    console.error('Profile error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }
 }
