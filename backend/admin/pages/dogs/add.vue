@@ -266,42 +266,81 @@ onMounted(async () => {
 })
 
 async function submitDog() {
-  isSubmitting.value = true
-  const formData = new FormData()
-
-  formData.append('name', name.value)
-  formData.append('status', status.value)
-  formData.append('breed', breed.value)
-  formData.append('size', size.value)
-  formData.append('age', age.value)
-  formData.append('gender', gender.value)
-  formData.append('furLength', furLength.value)
-  formData.append('vaccination', vaccination.value)
-  formData.append('location', location.value)
-  formData.append('description', description.value)
-  if (imageFile.value) formData.append('image', imageFile.value)
-  selectedTags.value.forEach(tag => formData.append('goodWith', tag))
-
-  formData.append('cameIn', cameIn.value)
-  formData.append('wentOut', wentOut.value)
-  formData.append('lookingForOwner', lookingForOwner.value)
-  formData.append('adapted', adapted.value)
-  formData.append('relationToPeople', relationToPeople.value)
-  formData.append('moreInfo', moreInfo.value)
+  isSubmitting.value = true;
+  let dogData: any = {};
+  let imageUrl = null;
 
   try {
-    if (isEditMode.value) {
-      await api(`/api/dogs/${editId.value}`, { method: 'PUT', body: formData })
-      window.alert('Változtatások sikeresen mentve!')
-    } else {
-      await api('/api/dogs/upload', { method: 'POST', body: formData })
-      window.alert('Kutya sikeresen létrehozva!')
+    if (imageFile.value) {
+      const uploadFormData = new FormData();
+      uploadFormData.append('image', imageFile.value);
+
+      try {
+        const uploadResponse: { path: string } = await api('/api/upload', {
+          method: 'POST',
+          body: uploadFormData,
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        imageUrl = uploadResponse.path;
+      } catch (uploadError) {
+        console.error('Error uploading image:', uploadError);
+        isSubmitting.value = false;
+        return;
+      }
+    } else if (isEditMode.value) {
+      try {
+        const existingDog: any = await api(`/api/dogs/${editId.value}`);
+        imageUrl = existingDog.image;
+      } catch (fetchError) {
+        console.error('Error fetching existing dog data:', fetchError);
+        isSubmitting.value = false;
+        return;
+      }
     }
-    await router.push('/')
-  } catch (err) {
-    console.error('Hiba a mentés során:', err)
+
+    dogData = {
+      name: name.value,
+      status: status.value,
+      breed: breed.value,
+      size: size.value,
+      age: age.value,
+      gender: gender.value,
+      furLength: furLength.value,
+      vaccination: vaccination.value,
+      location: location.value,
+      description: description.value,
+      goodWith: selectedTags.value,
+      cameIn: cameIn.value,
+      wentOut: wentOut.value,
+      lookingForOwner: lookingForOwner.value,
+      adapted: adapted.value,
+      relationToPeople: relationToPeople.value,
+      moreInfo: moreInfo.value,
+      image: imageUrl,
+    };
+
+    let response;
+    if (isEditMode.value) {
+      response = await api(`/api/dogs/${editId.value}`, {
+        method: 'PUT',
+        body: JSON.stringify(dogData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } else {
+      response = await api('/api/dogs', {
+        method: 'POST',
+        body: JSON.stringify(dogData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    console.log('Dog saved successfully:', response);
+    router.push('/admin/dogs');
+
+  } catch (error) {
+    console.error('Submit dog error:', error);
   } finally {
-    isSubmitting.value = false
+    isSubmitting.value = false;
   }
 }
 </script>

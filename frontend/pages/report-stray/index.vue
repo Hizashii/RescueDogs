@@ -201,6 +201,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import Loader from '~/components/Loader.vue'
+import axios from 'axios'
 
 interface ReportForm {
   name: string
@@ -274,43 +275,56 @@ onUnmounted(() => {
 
 async function submitReport() {
   try {
-    isSubmitting.value = true
-    const data = new FormData()
-    data.append('name', formData.name)
-    data.append('phone', formData.phone)
-    data.append('email', formData.email ?? '')
-    data.append('dogCity', formData.dogCity)
-    data.append('reporterCity', formData.reporterCity)
-    data.append('comments', formData.comments ?? '')
+    isSubmitting.value = true;
+    let uploadedImageUrl = null;
+
     if (dogPicture.value) {
-      data.append('dogPicture', dogPicture.value, dogPicture.value.name)
+      const formData = new FormData();
+      formData.append('image', dogPicture.value);
+
+      try {
+        const uploadResponse = await axios.post<{ path: string }>(`${apiBase}/api/upload`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        uploadedImageUrl = uploadResponse.data.path;
+      } catch (uploadError) {
+        console.error('Error uploading image:', uploadError);
+        errorMessage.value = 'Failed to upload image.';
+        submitError.value = true;
+        isSubmitting.value = false;
+        return;
+      }
     }
 
-    const res = await fetch(`${apiBase}/api/reports`, {
-      method: 'POST',
-      body: data
-    })
-    if (!res.ok) {
-      const err = await res.json().catch(() => null)
-      throw new Error(err?.message || 'Failed to submit report')
+    const reportData: any = {
+      ...formData,
+    };
+
+    const finalReportData = new FormData();
+    finalReportData.append('name', formData.name);
+    finalReportData.append('phone', formData.phone);
+    finalReportData.append('email', formData.email ?? '');
+    finalReportData.append('dogCity', formData.dogCity);
+    finalReportData.append('reporterCity', formData.reporterCity);
+    finalReportData.append('comments', formData.comments ?? '');
+
+    if (uploadedImageUrl) {
+      finalReportData.append('dogPictureUrl', uploadedImageUrl);
     }
-    submitSuccess.value = true
-    Object.assign(formData, {
-      name: '',
-      phone: '',
-      email: '',
-      dogCity: '',
-      reporterCity: '',
-      comments: ''
-    })
-    dogPicture.value = null
-    fileName.value = ''
-  } catch (err: any) {
-    submitError.value = true
-    errorMessage.value = err.message || 'Unknown error'
-    console.error('Error submitting report:', err)
+
+    await axios.post(`${apiBase}/api/reports`, finalReportData);
+
+    submitSuccess.value = true;
+    submitError.value = false;
+    errorMessage.value = '';
+
+  } catch (error) {
+    console.error('Submit report error:', error);
+    errorMessage.value = 'Failed to submit report.';
+    submitError.value = true;
+    submitSuccess.value = false;
   } finally {
-    isSubmitting.value = false
+    isSubmitting.value = false;
   }
 }
 

@@ -1,107 +1,74 @@
-import { Request, Response } from 'express';
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-import Report from '../models/Report';
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../uploads/dog-pictures'))
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, uniqueSuffix + path.extname(file.originalname))
-  }
-});
 
-export const upload = multer({ storage }).single('dogPicture');
+import { Request, Response } from 'express';
+import Report from '../models/Report';
+
 
 export const createReport = async (req: Request, res: Response) => {
   try {
-    upload(req, res, async (err) => {
-      if (err) {
-        return res.status(400).json({ message: err.message });
-      }
+    const { dogPictureUrl, ...reportData } = req.body;
 
-      const reportData = {
-        ...req.body,
-        dogPicture: req.file ? `/uploads/dog-pictures/${req.file.filename}` : null
-      }
-
-      const report = new Report(reportData);
-      await report.save();
-
-      res.status(201).json(report);
+    const report = new Report({
+      ...reportData,
+      dogPicture: dogPictureUrl
     });
+
+    await report.save();
+
+    res.status(201).json(report);
+
   } catch (error) {
     console.error('Create report error:', error);
     res.status(500).json({ message: 'Failed to create report' });
   }
 };
 
-export const getReports = async (req: Request, res: Response) => {
+export const getReports = async (_req: Request, res: Response) => {
   try {
-    const reports = await Report.find()
-      .sort({ createdAt: -1 }) 
-      .exec();
-    
-    res.json(reports);
+    const reports = await Report.find();
+    res.status(200).json(reports);
   } catch (error) {
-    console.error('Error fetching reports:', error);
-    res.status(500).json({ message: 'Failed to fetch reports' });
+    console.error('Get reports error:', error);
+    res.status(500).json({ message: 'Failed to retrieve reports' });
   }
 };
+
 export const getReportById = async (req: Request, res: Response) => {
   try {
     const report = await Report.findById(req.params.id);
-    
     if (!report) {
       return res.status(404).json({ message: 'Report not found' });
     }
-    
-    res.json(report);
+    res.status(200).json(report);
   } catch (error) {
-    console.error('Error fetching report:', error);
-    res.status(500).json({ message: 'Failed to fetch report' });
+    console.error('Get report by ID error:', error);
+    res.status(500).json({ message: 'Failed to retrieve report' });
   }
 };
+
 export const updateReportStatus = async (req: Request, res: Response) => {
   try {
     const { status } = req.body;
-    
-    if (!status) {
-      return res.status(400).json({ message: 'Status is required' });
-    }
-    const report = await Report.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true }
-    );
-    if (!report) {
+    const updatedReport = await Report.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    if (!updatedReport) {
       return res.status(404).json({ message: 'Report not found' });
     }
-    res.json(report);
+    res.status(200).json(updatedReport);
   } catch (error) {
-    console.error('Error updating report:', error);
-    res.status(500).json({ message: 'Failed to update report' });
+    console.error('Update report status error:', error);
+    res.status(500).json({ message: 'Failed to update report status' });
   }
 };
+
 export const deleteReport = async (req: Request, res: Response) => {
   try {
     const report = await Report.findById(req.params.id);
-    
     if (!report) {
       return res.status(404).json({ message: 'Report not found' });
     }
-    if (report.dogPicture) {
-      const imagePath = path.join(__dirname, '../..', report.dogPicture);
-      if (fs.existsSync(imagePath)) {
-        fs.unlinkSync(imagePath);
-      }
-    }
     await Report.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Report deleted successfully' });
+    res.status(200).json({ message: 'Report deleted successfully' });
   } catch (error) {
-    console.error('Error deleting report:', error);
+    console.error('Delete report error:', error);
     res.status(500).json({ message: 'Failed to delete report' });
   }
 };

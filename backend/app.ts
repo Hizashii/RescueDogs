@@ -74,8 +74,6 @@ app.use(cookieParser())
 
 // Serve static uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-// one is for the backend, one is for the frontend
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
 // ──────────────────────────────────────────────────────────────
 // 5️⃣ Set up Multer for handling multipart/form-data (images)

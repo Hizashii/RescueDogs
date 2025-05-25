@@ -1,19 +1,6 @@
 import { Request, Response } from 'express';
 import Dog from '../models/Dog';
-import multer, { FileFilterCallback } from 'multer';
-import path from 'path';
-import fs from 'fs';
-const uploadDir = path.resolve(__dirname, '../uploads/dogs')
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
-const fileFilter: multer.Options['fileFilter'] = (req, file, cb) => {
-  if (['image/png','image/jpeg'].includes(file.mimetype)) cb(null, true)
-  else cb(new Error('Only PNG & JPEG allowed') as any, false)
-}
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename: (_req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
-})
-export const upload = multer({ storage, fileFilter })
+
 export const getDogById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -25,6 +12,7 @@ export const getDogById = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 export const getDogs = async (req: Request, res: Response) => {
   try {
     const query: any = {};
@@ -66,52 +54,24 @@ export const getDogs = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch dogs.' });
   }
 };
+
 export const createDogWithImage = async (req: Request, res: Response) => {
   try {
-    const {
-      name,
-      description,
-      location,
-      breed,
-      size,
-      age,
-      gender,
-      status,
-      furLength,
-      vaccination,
-      goodWith,
-    } = req.body;
-    if (!req.file) {
-      return res.status(400).json({ message: 'Image file is required.' });
-    }
-    let goodWithArray: string[] = [];
-    if (Array.isArray(goodWith)) {
-      goodWithArray = goodWith;
-    } else if (typeof goodWith === 'string') {
-      goodWithArray = [goodWith];
-    }
+    const { imageUrl, ...dogData } = req.body;
+
     const newDog = new Dog({
-      name,
-      description,
-      image: `/uploads/dogs/${req.file.filename}`,
-      adopted: false,  
-      location,
-      breed,
-      size,
-      age,
-      gender,
-      goodWith: goodWithArray,
-      status,
-      furLength,
-      vaccination
+      ...dogData,
+      image: imageUrl
     });
-    const savedDog = await newDog.save();
-    res.status(201).json(savedDog);
+
+    await newDog.save();
+    res.status(201).json(newDog);
   } catch (error) {
-    console.error('Error creating dog:', error);
-    res.status(500).json({ error: 'Failed to create dog.' });
+    console.error('Create dog with image error:', error);
+    res.status(500).json({ message: 'Failed to create dog' });
   }
 };
+
 export const getDogFilterOptions = async (_req: Request, res: Response) => {
   try {
     const [
@@ -152,37 +112,28 @@ export const getDogFilterOptions = async (_req: Request, res: Response) => {
     res.status(500).json({ message: 'Could not load filter options.' });
   }
 };
+
 export const updateDog = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const {
-      name, description, status, breed, size, age,
-      gender, furLength, vaccination, location,
-      goodWith, cameIn, lookingForOwner, wentOut,
-      adapted, relationToPeople, moreInfo
-    } = req.body;
-    const update: any = {
-      name, description, status, breed, size, age,
-      gender, furLength, vaccination, location,
-      cameIn, lookingForOwner, wentOut,
-      adapted, relationToPeople, moreInfo
-    };
-    if (goodWith !== undefined) {
-      update.goodWith = Array.isArray(goodWith) ? goodWith : [goodWith];
-    }
-    if (req.file) {
-      update.image = `/uploads/dogs/${req.file.filename}`;
+    const dogId = req.params.id;
+    const { imageUrl, ...updateData } = req.body;
+
+    const updatedDog = await Dog.findByIdAndUpdate(dogId, {
+      ...updateData,
+      image: imageUrl
+    }, { new: true });
+
+    if (!updatedDog) {
+      return res.status(404).json({ message: 'Dog not found' });
     }
 
-    const updated = await Dog.findByIdAndUpdate(id, update, { new: true }).lean();
-    if (!updated) return res.status(404).json({ message: 'Dog not found' });
-    res.json(updated);
-
-  } catch (err) {
-    console.error('Error updating dog:', err);
-    res.status(500).json({ message: 'Failed to update dog.' });
+    res.status(200).json(updatedDog);
+  } catch (error) {
+    console.error('Update dog error:', error);
+    res.status(500).json({ message: 'Failed to update dog' });
   }
 };
+
 export const getBreeds = async (req: Request, res: Response) => {
   try {
     const breeds = await Dog.distinct('breed');
