@@ -24,12 +24,6 @@
         </option>
       </select>
     </div>
-
-    <input
-      type="text"
-      :placeholder="t('blog.filters.category.label')"
-      class="w-full p-2 border border-gray-300"
-    />
  </div>
 </template>
 

@@ -212,17 +212,6 @@ function clearAllFilters() {
   currentPage.value = 1
 }
 
-function updateFilter(key: string, value: string) {
-  currentPage.value = 1
-  if (key === 'category') {
-    if (!value) {
-      displayedPosts.value = [...posts.value]
-    } else {
-      displayedPosts.value = posts.value.filter(post => post.category === value)
-    }
-  }
-}
-
 onMounted(async () => {
   try {
     const all = await fetchBlogs()
