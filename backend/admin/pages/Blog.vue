@@ -34,7 +34,7 @@
                 <div class="flex items-center">
                   <div v-if="post.featuredImage" class="w-12 h-12 mr-3 bg-gray-200 overflow-hidden">
                     <img
-                      :src="getImageUrl(post.featuredImage)"
+                      :src="post.featuredImage"
                       :alt="post.title"
                       class="w-full h-full object-cover"
                     />
@@ -246,11 +246,6 @@ import { useRuntimeConfig } from '#app'
 const config = useRuntimeConfig()
 const API_BASE = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 
-function getImageUrl(src: string | null) {
-  if (!src) return '/img/default-hero.jpg'
-  if (/^https?:\/\//.test(src)) return src
-  return `${API_BASE}${src}`
-}
 const categories = [
   'Adoption Stories',
   'Volunteer Spotlights',

@@ -138,9 +138,7 @@ export default function useDogApi() {
           id: dog._id,
           name: dog.name,
           breed: dog.breed || 'Unknown',
-          image: dog.image?.startsWith('/uploads') 
-            ? `${baseUrl}${dog.image}` 
-            : dog.image,
+          image: dog.image,
           description: dog.description,
           location: dog.location,
           size: dog.size,
@@ -186,10 +184,6 @@ export default function useDogApi() {
       const response = await apiRequest(`${baseUrl}/api/dogs/${id}`);
       const dog = await response.json();
       
-      if (dog.image?.startsWith('/uploads')) {
-        dog.image = `${baseUrl}${dog.image}`;
-      }
-
       return {
         id: dog._id,
         name: dog.name,
@@ -276,9 +270,7 @@ export default function useDogApi() {
         name: item.name,
         price: item.price,
         description: item.description,
-        imageUrl: item.imageUrl?.startsWith('/uploads') 
-            ? `${baseUrl}${item.imageUrl}` 
-            : item.imageUrl,
+        imageUrl: item.imageUrl,
         isActive: item.isActive,
         category: item.category,
         stock: item.stock,
