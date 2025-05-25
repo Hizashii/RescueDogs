@@ -223,8 +223,8 @@
       class="flex flex-col gap-4 w-full max-w-[200px] mx-auto p-4 border hover:shadow"
     >
       <img
-        v-if="post.image"
-        :src="post.image"
+        v-if="post.featuredImage"
+        :src="post.featuredImage"
         :alt="post.title || 'Blog post image'"
         class="aspect-square w-full object-cover"
       />
