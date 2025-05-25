@@ -116,11 +116,11 @@ export const getDogFilterOptions = async (_req: Request, res: Response) => {
 export const updateDog = async (req: Request, res: Response) => {
   try {
     const dogId = req.params.id;
-    const { imageUrl, ...updateData } = req.body;
+    const { image, ...updateData } = req.body;
 
     const updatedDog = await Dog.findByIdAndUpdate(dogId, {
       ...updateData,
-      image: imageUrl
+      image: image
     }, { new: true });
 
     if (!updatedDog) {
