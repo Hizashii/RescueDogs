@@ -283,9 +283,7 @@ async function submitReport() {
       formData.append('image', dogPicture.value);
 
       try {
-        const uploadResponse = await axios.post<{ path: string }>(`${apiBase}/api/upload`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        const uploadResponse = await axios.post<{ path: string }>(`${apiBase}/api/upload`, formData);
         uploadedImageUrl = uploadResponse.data.path;
       } catch (uploadError) {
         console.error('Error uploading image:', uploadError);

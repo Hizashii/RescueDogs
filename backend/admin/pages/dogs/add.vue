@@ -279,7 +279,6 @@ async function submitDog() {
         const uploadResponse: { path: string } = await api('/api/upload', {
           method: 'POST',
           body: uploadFormData,
-          headers: { 'Content-Type': 'multipart/form-data' },
         });
         imageUrl = uploadResponse.path;
       } catch (uploadError) {
