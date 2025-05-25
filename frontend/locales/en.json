@@ -119,7 +119,7 @@
         "title": "Report a stray",
         "success": {
           "heading": "Thank you for your report!",
-          "body": "Your information has been submitted and our team will review it shortly."
+          "body": "Your information has been successfully submitted. Our team will review your report shortly and contact you. Thank you for helping us save stray dogs!"
         },
         "error": {
           "heading": "There was a problem submitting your report."

@@ -97,7 +97,7 @@
           "title": "Kóbor kutya bejelentése", 
           "success": { 
             "heading": "Köszönjük a bejelentést!", 
-            "body": "Az adataidat elküldtük, csapatunk hamarosan áttekinti őkett." 
+            "body": "Az adataidat sikeresen elküldtük. Csapatunk hamarosan áttekinti a bejelentést és felveszi veled a kapcsolatot. Köszönjük, hogy segítesz nekünk a kóbor kutyák megmentésében!"
           }, 
           "error": { 
             "heading": "Hiba történt a bejelentés elküldésekor." 

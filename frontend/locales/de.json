@@ -96,7 +96,7 @@
           "title": "Melde einen Streuner",
           "success": {
             "heading": "Danke für deine Meldung!",
-            "body": "Deine Angaben wurden übermittelt und unser Team prüft sie in Kürze."
+            "body": "Deine Angaben wurden erfolgreich übermittelt. Unser Team wird deine Meldung in Kürze prüfen und dich kontaktieren. Vielen Dank, dass du uns hilfst, streunende Hunde zu retten!"
           },
           "error": {
             "heading": "Beim Absenden der Meldung ist ein Fehler aufgetreten."
