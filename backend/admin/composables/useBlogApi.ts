@@ -24,7 +24,7 @@ export default function useBlogApi() {
         }
       }
     )
-    return { url: axios.defaults.baseURL + res.data.path }
+    return { url: res.data.path }
   }
   return { fetchAll, create, update, remove, uploadImage }
 }

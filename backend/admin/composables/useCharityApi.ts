@@ -52,7 +52,7 @@ export default function useCharityApi() {
         }
       }
     )
-    return { url: axios.defaults.baseURL + res.data.path }
+    return { url: res.data.path }
   }
 
   return { fetchAll, fetchItems, create, update, remove, uploadImage }

@@ -1,4 +1,6 @@
 export const useApi = () => {
-    return <T>(path: string, opts?: any) =>
-      $fetch<T>(`https://rescuedogs-1.onrender.com${path}`, { ...opts })
+    const runtimeConfig = useRuntimeConfig()
+    const apiBase = runtimeConfig.public.apiBase || 'https://rescuedogs-1.onrender.com'
+    return <T>(url: string, opts?: any) =>
+      $fetch<T>(url, { baseURL: apiBase, ...opts })
   }
