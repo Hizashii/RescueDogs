@@ -6,8 +6,7 @@ import mongoose from 'mongoose'
 import { promises as dns } from 'dns'
 import multer from 'multer'
 import cookieParser from 'cookie-parser'
-import sharp from 'sharp';
-import fs from 'fs/promises';
+import { v2 as cloudinary } from 'cloudinary';
 
 import authRoutes    from './routes/auth.routes'
 import blogRoutes    from './routes/blog.routes'
@@ -17,6 +16,15 @@ import filterRoutes  from './routes/filterRoutes'
 import charityRoutes from './routes/charityItem.routes'
 import paymentsRoutes from './routes/payments.routes';
 import { authenticateJWT } from './middlewares/auth.middleware'
+
+// ──────────────────────────────────────────────────────────────
+// Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key:    process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure:     true // Use secure URLs (https)
+});
 
 // ──────────────────────────────────────────────────────────────
 // 1️⃣ Monkey-patch the DNS TXT lookup to suppress ESERVFAIL
@@ -72,15 +80,15 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-// Serve static uploads folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+// Serve static uploads folder - No longer needed with Cloudinary for user uploads
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // ──────────────────────────────────────────────────────────────
 // 5️⃣ Set up Multer for handling multipart/form-data (images)
-// Configure Multer to store files in memory so sharp can access the buffer
+// Configure Multer to store files in memory so cloudinary can access the buffer
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, 
+  limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
@@ -99,27 +107,25 @@ app.post(
       return res.status(400).json({ message: 'No file uploaded.' })
     }
 
-    const uploadDir = path.join(__dirname, 'uploads');
-    const filename = `${Date.now()}-${req.file.originalname}`;
-    const outputPath = path.join(uploadDir, filename);
-
     try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      await sharp(req.file.buffer)
-        .resize(200, 200, { 
-          fit: sharp.fit.cover, 
-          withoutEnlargement: true
-        })
-        .toFormat('jpeg', { 
-          quality: 90, 
-          mozjpeg: true
-        })
-        .toFile(outputPath); 
+      // Upload image to Cloudinary
+      const result = await cloudinary.uploader.upload(
+        `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`,
+        { 
+          folder: 'rescuedogs', // Optional: specify a folder in Cloudinary
+          transformation: [ // Optional: apply transformations on upload
+            { width: 800, height: 600, crop: 'limit' }, // Example: resize
+            { quality: 'auto' }, // Example: auto quality
+            { fetch_format: 'auto' } // Example: auto format
+          ]
+        }
+      );
 
-      res.json({ path: `/uploads/${filename}` });
+      // Return the secure Cloudinary URL
+      res.json({ path: result.secure_url });
     } catch (error) {
-      console.error('Error processing or saving image:', error);
-      res.status(500).json({ message: 'Failed to process and save image.' });
+      console.error('Error uploading to Cloudinary:', error);
+      res.status(500).json({ message: 'Failed to upload image to Cloudinary.' });
     }
   }
 )
