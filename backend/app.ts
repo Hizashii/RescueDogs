@@ -82,7 +82,7 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 // Configure Multer to store files in memory so sharp can access the buffer
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
+  limits: { fileSize: 10 * 1024 * 1024 }, 
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
@@ -106,22 +106,18 @@ app.post(
     const outputPath = path.join(uploadDir, filename);
 
     try {
-      // Ensure upload directory exists
       await fs.mkdir(uploadDir, { recursive: true });
-
-      // Process and resize the image using sharp
       await sharp(req.file.buffer)
-        .resize(200, 200, { // Resize to 200x200 pixels
-          fit: sharp.fit.cover, // Use 'cover' to maintain aspect ratio and cover the area
-          withoutEnlargement: true // Do not enlarge images smaller than 200x200
+        .resize(200, 200, { 
+          fit: sharp.fit.cover, 
+          withoutEnlargement: true
         })
         .toFormat('jpeg', { 
-          quality: 90, // Increased quality
-          mozjpeg: true // Use mozjpeg for better compression
+          quality: 90, 
+          mozjpeg: true
         })
-        .toFile(outputPath); // Save the processed image to the uploads directory
+        .toFile(outputPath); 
 
-      // Return the public URL for the uploaded image
       res.json({ path: `/uploads/${filename}` });
     } catch (error) {
       console.error('Error processing or saving image:', error);
@@ -145,6 +141,6 @@ app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 // ──────────────────────────────────────────────────────────────
 // 7️⃣ Start the server on the correct port
 const portNum = parseInt(PORT, 10)
-app.listen(portNum, () => {
-  console.log(`🚀  Backend listening on http://localhost:${portNum}`)
+app.listen(portNum, '0.0.0.0', () => {
+  console.log(`🚀  Backend listening on http://0.0.0.0:${portNum}`)
 })
