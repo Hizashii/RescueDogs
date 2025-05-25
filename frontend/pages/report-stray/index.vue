@@ -294,23 +294,21 @@ async function submitReport() {
       }
     }
 
-    const reportData: any = {
-      ...formData,
+    const reportData = {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email || '',
+      dogCity: formData.dogCity,
+      reporterCity: formData.reporterCity,
+      comments: formData.comments || '',
+      dogPictureUrl: uploadedImageUrl
     };
 
-    const finalReportData = new FormData();
-    finalReportData.append('name', formData.name);
-    finalReportData.append('phone', formData.phone);
-    finalReportData.append('email', formData.email ?? '');
-    finalReportData.append('dogCity', formData.dogCity);
-    finalReportData.append('reporterCity', formData.reporterCity);
-    finalReportData.append('comments', formData.comments ?? '');
-
-    if (uploadedImageUrl) {
-      finalReportData.append('dogPictureUrl', uploadedImageUrl);
-    }
-
-    await axios.post(`${apiBase}/api/reports`, finalReportData);
+    await axios.post(`${apiBase}/api/reports`, reportData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
     submitSuccess.value = true;
     submitError.value = false;
