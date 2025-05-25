@@ -5,20 +5,20 @@
     :overlayOpacity="0.5"
   />
   <div class="flex justify-center items-center bg-[#FFD700]">
-    <div class="max-w-5xl mx-auto py-16 bg-white px-10">
+    <div class="max-w-5xl mx-auto py-8 md:py-16 bg-white px-4 md:px-10">
       
       <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
-      <h1 class="text-3xl font-bold mb-12 text-start text-[#3D4836]">
+      <h1 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center md:text-start text-[#3D4836]">
         {{ supportType === 'donation'
             ? t('checkout.thxDonation')
             : t('checkout.thxPurchase') }}
       </h1>
 
       <!-- 1) Support type + amount/item selector -->
-      <div class="bg-yellow-200 p-6 mb-12 flex flex-col md:flex-row items-center gap-4">
+      <div class="bg-yellow-200 p-4 md:p-6 mb-8 md:mb-12 flex flex-col md:flex-row items-center gap-4">
         <div>
-          <label class="font-semibold mr-2">{{ t('checkout.iWant') }}</label>
-          <select v-model="supportType" class="p-2 bg-white border border-black">
+          <label class="font-semibold mr-2 text-sm">{{ t('checkout.iWant') }}</label>
+          <select v-model="supportType" class="p-1 md:p-2 bg-white border border-black text-sm">
             <option value="donation">{{ t('checkout.donate') }}</option>
             <option value="item">{{ t('checkout.buyItem') }}</option>
           </select>
@@ -27,8 +27,8 @@
         <!-- Donation options -->
         <div v-if="supportType === 'donation'" class="flex flex-col md:flex-row gap-4">
           <div>
-            <label class="font-semibold mr-2">{{ t('checkout.amount') }}</label>
-            <select v-model="selectedDonationAmount" class="p-2 bg-white border border-black">
+            <label class="font-semibold mr-2 text-sm">{{ t('checkout.amount') }}</label>
+            <select v-model="selectedDonationAmount" class="p-1 md:p-2 bg-white border border-black text-sm">
               <option
                 v-for="amt in donationOptions"
                 :key="amt"
@@ -45,17 +45,17 @@
               type="number"
               min="100"
               :placeholder="$t('checkout.enterFt')"
-              class="p-2 w-32 bg-white border border-black"
+              class="p-1 md:p-2 w-full md:w-32 bg-white border border-black text-sm"
             />
           </div>
         </div>
 
         <!-- Item options -->
         <div v-else-if="supportType === 'item'">
-          <label class="font-semibold mr-2">{{ t('checkout.item') }}</label>
+          <label class="font-semibold mr-2 text-sm">{{ t('checkout.item') }}</label>
           <select 
             v-model="selectedItemId" 
-            class="p-2 bg-white border border-black" 
+            class="p-1 md:p-2 bg-white border border-black text-sm" 
             :disabled="loadingItems || charityItems.length === 0"
           >
             <option value="" disabled>
@@ -81,7 +81,7 @@
         <div class="flex-1 space-y-4 md:space-y-8">
           <!-- Contact info -->
           <div>
-            <h2 class="font-semibold mb-2">{{ t('checkout.contactInfo') }}</h2>
+            <h2 class="font-semibold mb-2 text-base">{{ t('checkout.contactInfo') }}</h2>
             <input
               v-model="contact.email"
               type="email"
@@ -99,7 +99,7 @@
 
           <!-- Shipping (items only) -->
           <div v-if="supportType === 'item'">
-            <h2 class="font-semibold mb-2">{{ t('checkout.shipping') }}</h2>
+            <h2 class="font-semibold mb-2 text-base">{{ t('checkout.shipping') }}</h2>
             <input
               v-model="shipping.fullName"
               :placeholder="$t('checkout.fullName')"
@@ -131,7 +131,7 @@
 
           <!-- Payment -->
           <div>
-            <h2 class="font-semibold mb-2">{{ t('checkout.payment') }}</h2>
+            <h2 class="font-semibold mb-2 text-base">{{ t('checkout.payment') }}</h2>
             <p class="text-sm text-gray-600">{{ $t('checkout.stripeNote') }}</p>
           </div>
 
@@ -154,7 +154,7 @@
             <img
               :src="selectedItem.imageUrl"
               :alt="selectedItem.name || 'Charity item image'"
-              class="w-full h-48 object-cover"
+              class="w-full h-40 object-cover"
             />
             <h3 class="font-semibold text-base">{{ selectedItem.name }}</h3>
             <p class="text-sm text-gray-600">{{ selectedItem.description }}</p>
