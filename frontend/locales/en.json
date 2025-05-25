@@ -188,7 +188,8 @@
           "title":           "CHECK OUT OUR CHARITY ITEMS!",
           "button":          "Order",
           "loadMore":        "Load more",
-          "loadMoreAlt":     "Load more items"
+          "loadMoreAlt":     "Load more items",
+          "empty":           "No charity items available."
         },
         "other": {
           "imageAlt":        "Dog illustration",

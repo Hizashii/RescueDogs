@@ -200,7 +200,8 @@
                 "title":           "NÉZD MEG AZ AJÁNDÉKTÁRGYAINKAT!", 
                 "button":          "Rendelés", 
                 "loadMore":        "További termékek betöltése", 
-                "loadMoreAlt":     "További termékek betöltése" 
+                "loadMoreAlt":     "További termékek betöltése",
+                "empty": "Nincsenek adománytárgyak."
               }, 
               "other": { 
                 "imageAlt":        "Egy fénykép egy Husky kutyáról", 

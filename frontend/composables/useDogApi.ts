@@ -257,49 +257,40 @@ export default function useDogApi() {
     }
   };
 
-  const fetchCharityItems = async (): Promise<CharityItem[]> => {
+  const fetchCharityItems = async (isActive?: boolean): Promise<CharityItem[]> => {
+    isLoading.value = true;
+    error.value = null;
+    
     try {
-      const response = await apiRequest(`${baseUrl}/api/charityitems`);
-      const items = await response.json();
-
-      if (!Array.isArray(items)) {
-        throw new Error('Invalid response format: expected array of items');
+      const params = new URLSearchParams();
+      if (isActive !== undefined) {
+        params.append('isActive', isActive.toString());
       }
+      
+      const response = await apiRequest(`${baseUrl}/api/charityitems?${params.toString()}`);
+      const items = await response.json();
+      
+      // Map backend fields to frontend structure if necessary
+      return items.items ? items.items.map((item: any) => ({
+        _id: item._id,
+        name: item.name,
+        price: item.price,
+        description: item.description,
+        imageUrl: item.imageUrl?.startsWith('/uploads') 
+            ? `${baseUrl}${item.imageUrl}` 
+            : item.imageUrl,
+        isActive: item.isActive,
+        category: item.category,
+        stock: item.stock,
+        priceFt: item.price // Assuming price is already in Ft
+      })) : [];
 
-      return items
-        .filter((item: any) => item.isActive && item.stock > 0)
-        .map((item: any) => {
-          let imageUrl = item.imageUrl || '';
-          if (imageUrl) {
-            try {
-              // If it's a full URL, extract just the path
-              const url = new URL(imageUrl);
-              imageUrl = url.pathname;
-            } catch {
-              // If it's already a path, use it as is
-              if (!imageUrl.startsWith('/')) {
-                imageUrl = '/' + imageUrl;
-              }
-            }
-            // Prepend the base URL
-            imageUrl = `${baseUrl}${imageUrl}`;
-          }
-
-          return {
-            _id: item._id,
-            name: item.name || 'Unnamed Item',
-            price: typeof item.price === 'number' ? item.price : 0,
-            description: item.description || '',
-            imageUrl,
-            isActive: Boolean(item.isActive),
-            category: item.category || 'General',
-            stock: typeof item.stock === 'number' ? item.stock : 0,
-            priceFt: typeof item.price === 'number' ? item.price : 0,
-          };
-        });
     } catch (err) {
-      console.error('Error fetching charity items:', err);
-      throw new Error(handleApiError(err, 'fetchCharityItems'));
+      const errorMessage = handleApiError(err, 'fetchCharityItems');
+      error.value = errorMessage;
+      return [];
+    } finally {
+      isLoading.value = false;
     }
   };
 

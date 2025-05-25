@@ -19,18 +19,19 @@ const tiers = ref([
   { amount: t('support.tiers.5.amount'), description: '' },
 ])
 
-const { fetchAll } = useCharityApi()
-const rawItems = ref<CharityItem[]>([])
-const activeItems = computed(() =>
-  rawItems.value.filter(i => i.isActive)
-)
+const { fetchCharityItems } = useCharityApi() as any
+const items = ref<CharityItem[]>([])
+
 onMounted(async () => {
   try {
-    rawItems.value = await fetchAll()
-  } catch {
-    rawItems.value = []
+    const response = await fetchCharityItems({ isActive: true });
+    items.value = response.items;
+  } catch (e) {
+    console.error('Error fetching active charity items:', e);
+    items.value = [];
   }
 })
+
 function parseFt(amount: string): number {
   return parseInt(amount.replace(/\D+/g, ''), 10) || 0
 }
@@ -87,7 +88,7 @@ function goToItem(itemId: string) {
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div
-          v-for="(item, index) in activeItems"
+          v-for="(item, index) in items"
           :key="item._id"
           class="bg-[#FFE65E] p-4 flex flex-col items-center ">
           <img
@@ -114,7 +115,7 @@ function goToItem(itemId: string) {
         </div>
       </div>
 
-      <div v-if="activeItems.length === 0" class="text-center py-8 text-gray-500">
+      <div v-if="items.length === 0" class="text-center py-8 text-gray-500">
         {{ t('support.charity.empty') }}
       </div>
     </div>

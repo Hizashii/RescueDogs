@@ -165,7 +165,8 @@
           "title":           "UNSERE WOHLTÄTIGEN ARTIKEL!",
           "button":          "Bestellen",
           "loadMore":        "Mehr laden",
-          "loadMoreAlt":     "Weitere Artikel laden"
+          "loadMoreAlt":     "Weitere Artikel laden",
+          "empty": "Keine Wohltätigkeitsartikel verfügbar."
         },
         "other": {
           "imageAlt":        "Hund Illustration",
