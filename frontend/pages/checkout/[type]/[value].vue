@@ -5,7 +5,7 @@
     :overlayOpacity="0.5"
   />
   <div class="flex justify-center items-center bg-[#FFD700]">
-    <div class="max-w-5xl mx-auto py-8 md:py-16 bg-white px-4 md:px-10">
+    <div class="max-w-5xl mx-auto py-8 md:py-16 bg-white px-4 md:px-10 w-full">
       
       <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
       <h1 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center md:text-start text-[#3D4836]">
@@ -25,10 +25,10 @@
         </div>
 
         <!-- Donation options -->
-        <div v-if="supportType === 'donation'" class="flex flex-col md:flex-row gap-4">
-          <div>
+        <div v-if="supportType === 'donation'" class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+          <div class="w-full md:w-auto">
             <label class="font-semibold mr-2 text-sm">{{ t('checkout.amount') }}</label>
-            <select v-model="selectedDonationAmount" class="p-1 md:p-2 bg-white border border-black text-sm">
+            <select v-model="selectedDonationAmount" class="p-1 md:p-2 bg-white border border-black text-sm w-full">
               <option
                 v-for="amt in donationOptions"
                 :key="amt"
@@ -39,23 +39,23 @@
               <option value="custom">{{ t('checkout.custom') }}</option>
             </select>
           </div>
-          <div v-if="selectedDonationAmount === 'custom'">
+          <div v-if="selectedDonationAmount === 'custom'" class="w-full md:w-auto">
             <input
               v-model.number="customAmount"
               type="number"
               min="100"
               :placeholder="$t('checkout.enterFt')"
-              class="p-1 md:p-2 w-full md:w-32 bg-white border border-black text-sm"
+              class="p-1 md:p-2 w-full bg-white border border-black text-sm"
             />
           </div>
         </div>
 
         <!-- Item options -->
-        <div v-else-if="supportType === 'item'">
+        <div v-else-if="supportType === 'item'" class="w-full md:w-auto">
           <label class="font-semibold mr-2 text-sm">{{ t('checkout.item') }}</label>
           <select 
             v-model="selectedItemId" 
-            class="p-1 md:p-2 bg-white border border-black text-sm" 
+            class="p-1 md:p-2 bg-white border border-black text-sm w-full" 
             :disabled="loadingItems || charityItems.length === 0"
           >
             <option value="" disabled>
@@ -76,11 +76,11 @@
       </div>
 
       <!-- 2) Full checkout form + summary -->
-      <form @submit.prevent="handleSubmit" class="flex flex-col md:flex-row gap-4 md:gap-8">
+      <form @submit.prevent="handleSubmit" class="flex flex-col md:flex-row gap-8 md:gap-8">
         <!-- Left column -->
-        <div class="flex-1 space-y-4 md:space-y-8">
+        <div class="flex-1 space-y-6 md:space-y-8">
           <!-- Contact info -->
-          <div>
+          <div class="space-y-3">
             <h2 class="font-semibold mb-2 text-base">{{ t('checkout.contactInfo') }}</h2>
             <input
               v-model="contact.email"
@@ -93,12 +93,12 @@
               v-model="contact.phone"
               type="tel"
               :placeholder="$t('checkout.phoneNumber')"
-              class="w-full p-2 mt-2 bg-yellow-50 border border-black text-sm"
+              class="w-full p-2 bg-yellow-50 border border-black text-sm"
             />
           </div>
 
           <!-- Shipping (items only) -->
-          <div v-if="supportType === 'item'">
+          <div v-if="supportType === 'item'" class="space-y-3">
             <h2 class="font-semibold mb-2 text-base">{{ t('checkout.shipping') }}</h2>
             <input
               v-model="shipping.fullName"
@@ -107,7 +107,7 @@
               class="w-full p-2 bg-yellow-50 border border-black text-sm"
             />
 
-            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2">
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
               <input
                 v-model="shipping.city"
                 :placeholder="$t('checkout.city')"
@@ -125,12 +125,12 @@
               v-model="shipping.address"
               :placeholder="$t('checkout.adress')"
               required
-              class="w-full p-2 mt-2 bg-yellow-50 border border-black text-sm"
+              class="w-full p-2 bg-yellow-50 border border-black text-sm"
             />
           </div>
 
           <!-- Payment -->
-          <div>
+          <div class="space-y-3">
             <h2 class="font-semibold mb-2 text-base">{{ t('checkout.payment') }}</h2>
             <p class="text-sm text-gray-600">{{ $t('checkout.stripeNote') }}</p>
           </div>
@@ -138,7 +138,7 @@
           <button
             type="submit"
             :disabled="!canSubmit || loading"
-            class="mt-4 bg-[#FFE65E] text-[#3D4836] font-bold py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            class="mt-4 bg-[#FFE65E] text-[#3D4836] font-bold py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed text-sm w-full"
           >
             {{ loading
               ? t('checkout.processing')
