@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: '../locales',
     strategy: 'prefix_except_default',
-    defaultLocale: 'en-GB',
+    defaultLocale: 'hu',
     locales: [
       { code: 'hu', iso: 'hu-HU', file: 'hu.json' },
       { code: 'de', iso: 'de-DE', file: 'de.json' },

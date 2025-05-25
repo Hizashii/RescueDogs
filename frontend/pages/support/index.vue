@@ -128,7 +128,7 @@ function goToItem(itemId: string) {
 
   <div class="flex flex-col md:flex-row items-center justify-start md:h-[500px] h-auto pb-8 md:pb-0 ">
     <img
-      src="/img/doggo.png"
+      src="/img/doggo.jpg"
       alt="Dog icon"
       class="w-auto md:h-[500px] h-[300px] object-contain"
     />
