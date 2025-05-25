@@ -3,7 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import ImageTitle from '~/components/ImageTitle.vue'
-import useCharityApi from '~/composables/useCharityApi'
+import useDogApi from '~/composables/useDogApi'
 import type { CharityItem } from '~/types/CharityItem'
 import Ticket from '~/components/ticket.vue'
 
@@ -19,7 +19,7 @@ const tiers = ref([
   { amount: t('support.tiers.5.amount'), description: '' },
 ])
 
-const { fetchCharityItems } = useCharityApi() as any
+const { fetchCharityItems } = useDogApi() as any
 const items = ref<CharityItem[]>([])
 
 onMounted(async () => {
