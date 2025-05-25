@@ -8,24 +8,7 @@ const baseUrl = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
 export default function useCharityApi() {
   const fetchAll = async (): Promise<CharityItem[]> => {
     const response = await axios.get<CharityItem[]>(`${baseUrl}/api/CharityItems`)
-    return response.data.map(item => {
-      let imageUrl = item.imageUrl || ''
-      if (imageUrl) {
-        try {
-          // If it's a full URL, extract just the path
-          const url = new URL(imageUrl)
-          imageUrl = url.pathname
-        } catch {
-          // If it's already a path, use it as is
-          if (!imageUrl.startsWith('/')) {
-            imageUrl = '/' + imageUrl
-          }
-        }
-        // Prepend the base URL
-        imageUrl = `${baseUrl}${imageUrl}`
-      }
-      return { ...item, imageUrl }
-    })
+    return response.data
   }
 
   const create = (item: Omit<CharityItem,'_id'>) =>

@@ -32,11 +32,7 @@ const getImageUrl = (image: string | null): string => {
   if (!image) {
     return '/img/default-hero.jpg'
   }
-  if (/^(blob:|https?:\/\/|\/)/.test(image)) {
-    return image
-  }
-  const base = config.public.apiBase || 'https://rescuedogs-1.onrender.com'
-  return `${base}/uploads/dogs/${image}`
+  return image
 }
 </script>
 
