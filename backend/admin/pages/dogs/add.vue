@@ -261,7 +261,6 @@ onMounted(async () => {
     relationToPeople.value  = dogData.relationToPeople
     moreInfo.value          = dogData.moreInfo
   } catch (err) {
-    console.error('Failed to load dog:', err)
   }
 })
 
@@ -282,7 +281,6 @@ async function submitDog() {
         });
         imageUrl = uploadResponse.path;
       } catch (uploadError) {
-        console.error('Error uploading image:', uploadError);
         isSubmitting.value = false;
         return;
       }
@@ -291,7 +289,6 @@ async function submitDog() {
         const existingDog: any = await api(`/api/dogs/${editId.value}`);
         imageUrl = existingDog.image;
       } catch (fetchError) {
-        console.error('Error fetching existing dog data:', fetchError);
         isSubmitting.value = false;
         return;
       }
@@ -333,11 +330,9 @@ async function submitDog() {
       });
     }
 
-    console.log('Dog saved successfully:', response);
-    router.push('/admin/dogs');
+    router.push('/admin');
 
   } catch (error) {
-    console.error('Submit dog error:', error);
   } finally {
     isSubmitting.value = false;
   }

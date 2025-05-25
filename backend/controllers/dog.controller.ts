@@ -8,7 +8,6 @@ export const getDogById = async (req: Request, res: Response) => {
     if (!dog) return res.status(404).json({ message: 'Dog not found' });
     res.json(dog);
   } catch (err) {
-    console.error('Error fetching dog by ID:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -50,7 +49,6 @@ export const getDogs = async (req: Request, res: Response) => {
       totalPages: Math.ceil(total / limit)
     });
   } catch (error) {
-    console.error('Error fetching dogs:', error);
     res.status(500).json({ error: 'Failed to fetch dogs.' });
   }
 };
@@ -67,7 +65,6 @@ export const createDogWithImage = async (req: Request, res: Response) => {
     await newDog.save();
     res.status(201).json(newDog);
   } catch (error) {
-    console.error('Create dog with image error:', error);
     res.status(500).json({ message: 'Failed to create dog' });
   }
 };
@@ -108,7 +105,6 @@ export const getDogFilterOptions = async (_req: Request, res: Response) => {
       goodWith:       goodWithChoices.filter(Boolean),
     });
   } catch (err) {
-    console.error('Error fetching filter options:', err);
     res.status(500).json({ message: 'Could not load filter options.' });
   }
 };
@@ -129,7 +125,6 @@ export const updateDog = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedDog);
   } catch (error) {
-    console.error('Update dog error:', error);
     res.status(500).json({ message: 'Failed to update dog' });
   }
 };
@@ -144,7 +139,6 @@ export const getBreeds = async (req: Request, res: Response) => {
     
     res.json(validBreeds);
   } catch (error) {
-    console.error('Error fetching breeds:', error);
     res.status(500).json({ message: 'Failed to fetch breeds' });
   }
 };

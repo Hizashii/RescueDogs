@@ -1,4 +1,3 @@
-<!-- src/pages/blog/[id].vue -->
 <template>
   <div class="flex flex-col items-center justify-center bg-[#FFF9D6]">
     <ImageTitle 
@@ -53,7 +52,6 @@ onMounted(async () => {
     }
     post.value = data
   } catch (err) {
-    console.error('Failed to load post', err)
   } finally {
     loading.value = false
   }

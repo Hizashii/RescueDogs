@@ -1,10 +1,8 @@
 <template>
     <div>
-      <!-- NavBar -->
       <NavBar />
   
       <div class="flex flex-col md:flex-row">
-        <!-- Sidebar Filters -->
         <div class="hidden md:block bg-[#FFE65E] shadow-lg">
           <BlogBar
             class="w-full md:w-64 flex-shrink-0"
@@ -13,7 +11,6 @@
           />
         </div>
   
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 mt-8 mb-8">
           <h1 class="text-[#3D6625] font-bold font-poppins text-[24px] md:text-[40px] md:ml-8 max-w-[300px]">
             {{ $t('blog.title') }}
@@ -72,16 +69,13 @@
             </div>
           </transition>
 
-          <!-- Separator -->
           <div class="w-full px-4">
             <div class="md:block hidden h-1 bg-[#FFD700] my-4"></div>
 
-            <!-- Loading State -->
             <div v-if="loading" class="flex justify-center items-center h-64">
               <div class="animate-spin h-16 w-16 border-t-2 border-b-2 border-[#3D6625]"></div>
             </div>
 
-            <!-- Empty State -->
             <div v-else-if="!loading && displayedPosts.length === 0" class="text-center py-12">
               <p class="text-xl">{{ $t('blog.empty.message') }}</p>
               <NuxtLink
@@ -92,7 +86,6 @@
               </NuxtLink>
             </div>
 
-            <!-- Posts Grid -->
             <div
               v-else
               class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6"
@@ -120,7 +113,6 @@
               </div>
             </div>
 
-            <!-- Pagination -->
             <div
               v-if="!loading && totalPages > 1"
               class="flex justify-center mt-8 space-x-2"
@@ -169,7 +161,7 @@ const posts = ref<any[]>([])
 const displayedPosts = ref<any[]>([])
 const loading = ref(true)
 const currentPage = ref(1)
-const perPage = 12 // Updated to match all-animals page
+const perPage = 12
 const showFilters = ref(false)
 
 const totalPages = computed(() =>
@@ -242,7 +234,6 @@ onMounted(async () => {
     posts.value = all
     displayedPosts.value = all
   } catch (err) {
-    console.error('Failed to load posts', err)
   } finally {
     loading.value = false
   }

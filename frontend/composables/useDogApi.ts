@@ -76,7 +76,6 @@ export default function useDogApi() {
   const error = ref<string | null>(null);
 
   const handleApiError = (error: any, context: string): string => {
-    console.error(`${context}:`, error);
     
     if (error.name === 'TypeError' && error.message.includes('fetch')) {
       return 'Network error. Please check your connection.';
@@ -231,7 +230,6 @@ export default function useDogApi() {
         goodWith: Array.isArray(options.goodWith) ? options.goodWith : []
       };
     } catch (err) {
-      console.error('Error fetching filter options:', err);
       return {
         breeds: [],
         locations: [
@@ -264,7 +262,6 @@ export default function useDogApi() {
       const response = await apiRequest(`${baseUrl}/api/charityitems?${params.toString()}`);
       const items = await response.json();
       
-      // Map backend fields to frontend structure if necessary
       return items.items ? items.items.map((item: any) => ({
         _id: item._id,
         name: item.name,
@@ -274,7 +271,7 @@ export default function useDogApi() {
         isActive: item.isActive,
         category: item.category,
         stock: item.stock,
-        priceFt: item.price // Assuming price is already in Ft
+        priceFt: item.price
       })) : [];
 
     } catch (err) {
