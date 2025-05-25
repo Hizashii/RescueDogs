@@ -76,9 +76,9 @@
       </div>
 
       <!-- 2) Full checkout form + summary -->
-      <form @submit.prevent="handleSubmit" class="flex flex-col md:flex-row gap-8">
+      <form @submit.prevent="handleSubmit" class="flex flex-col md:flex-row gap-4 md:gap-8">
         <!-- Left column -->
-        <div class="flex-1 space-y-8">
+        <div class="flex-1 space-y-4 md:space-y-8">
           <!-- Contact info -->
           <div>
             <h2 class="font-semibold mb-2">{{ t('checkout.contactInfo') }}</h2>
@@ -87,13 +87,13 @@
               type="email"
               placeholder="Email *"
               required
-              class="w-full p-2 bg-yellow-50 border border-black "
+              class="w-full p-2 bg-yellow-50 border border-black text-sm"
             />
             <input
               v-model="contact.phone"
               type="tel"
               :placeholder="$t('checkout.phoneNumber')"
-              class="w-full p-2 mt-2 bg-yellow-50 border border-black "
+              class="w-full p-2 mt-2 bg-yellow-50 border border-black text-sm"
             />
           </div>
 
@@ -104,28 +104,28 @@
               v-model="shipping.fullName"
               :placeholder="$t('checkout.fullName')"
               required
-              class="w-full p-2 bg-yellow-50 border border-black "
+              class="w-full p-2 bg-yellow-50 border border-black text-sm"
             />
 
-            <div class="flex gap-4 mt-2">
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2">
               <input
                 v-model="shipping.city"
                 :placeholder="$t('checkout.city')"
                 required
-                class="flex-1 p-2 bg-yellow-50 border border-black "
+                class="flex-1 p-2 bg-yellow-50 border border-black text-sm"
               />
               <input
                 v-model="shipping.postal"
                 :placeholder="$t('checkout.postal')"
                 required
-                class="w-32 p-2 bg-yellow-50 border border-black "
+                class="w-full sm:w-32 p-2 bg-yellow-50 border border-black text-sm"
               />
             </div>
             <input
               v-model="shipping.address"
               :placeholder="$t('checkout.adress')"
               required
-              class="w-full p-2 mt-2 bg-yellow-50 border border-black "
+              class="w-full p-2 mt-2 bg-yellow-50 border border-black text-sm"
             />
           </div>
 
@@ -138,44 +138,44 @@
           <button
             type="submit"
             :disabled="!canSubmit || loading"
-            class="mt-4 bg-[#FFE65E] text-[#3D4836] font-bold py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="mt-4 bg-[#FFE65E] text-[#3D4836] font-bold py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
             {{ loading
               ? t('checkout.processing')
               : (supportType === 'donation' ? t('checkout.donatebtn') : t('checkout.placeOrderBtn'))
             }}
           </button>
-          <p v-if="error" class="text-red-600 mt-2">{{ error }}</p>
+          <p v-if="error" class="text-red-600 mt-2 text-sm">{{ error }}</p>
         </div>
 
         <!-- Right column: summary -->
-        <div class="flex-1 border-l-2 border-dashed border-yellow-300 pl-8">
+        <div class="flex-1 md:border-l-2 border-dashed border-yellow-300 md:pl-8 pt-8 md:pt-0 border-t-2 md:border-t-0">
           <div v-if="supportType === 'item' && selectedItem" class="space-y-4">
             <img
               :src="selectedItem.imageUrl"
               :alt="selectedItem.name || 'Charity item image'"
               class="w-full h-48 object-cover"
             />
-            <h3 class="font-semibold">{{ selectedItem.name }}</h3>
+            <h3 class="font-semibold text-base">{{ selectedItem.name }}</h3>
             <p class="text-sm text-gray-600">{{ selectedItem.description }}</p>
             <p class="text-sm text-gray-600">{{ t('checkout.shipFee') }}</p>
-            <p class="text-2xl font-bold">
+            <p class="text-xl font-bold">
               {{ selectedItem.price?.toLocaleString() }} Ft
             </p>
           </div>
           <div v-else-if="supportType === 'donation'" class="space-y-4">
-            <div class="text-center p-8 ">
-              <h3 class="font-semibold mb-2">{{ t('checkout.donationSummary') }}</h3>
-              <p class="text-2xl font-bold text-black-500">
+            <div class="text-center p-4 ">
+              <h3 class="font-semibold mb-2 text-base">{{ t('checkout.donationSummary') }}</h3>
+              <p class="text-xl font-bold text-black-500">
                 {{ finalDonationAmount.toLocaleString() }} Ft
               </p>
             </div>
           </div>
           <div v-else-if="loadingItems">
-            <p>Loading item details...</p>
+            <p class="text-sm">Loading item details…</p>
           </div>
           <div v-else>
-            <p>Select an item to see details.</p>
+            <p class="text-sm">Select an item to see details.</p>
           </div>
         </div>
       </form>

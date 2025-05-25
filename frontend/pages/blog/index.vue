@@ -5,13 +5,7 @@
   
       <div class="flex flex-col md:flex-row">
         <!-- Sidebar Filters -->
-        <div class="hidden md:block bg-[#FFE65E] shadow-lg">
-          <BlogBar
-            class="w-full md:w-64 flex-shrink-0"
-            @clear-filters="clearAllFilters"
-            @update-filter="updateFilter"
-          />
-        </div>
+        
   
         <!-- Main Content -->
         <div class="flex-1 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 mt-8 mb-8">
@@ -61,13 +55,7 @@
                     </svg>
                   </button>
                 </div>
-                <div>
-                  <BlogBar
-                    @update-filter="updateFilter"
-                    @clear-filters="clearAllFilters"
-                    class="text-center"
-                  />
-                </div>
+                
               </div>
             </div>
           </transition>
@@ -162,7 +150,6 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import BlogBar from '~/components/BlogBar.vue'
 import { fetchBlogs } from '@/utils/api'
 
 const posts = ref<any[]>([])
