@@ -52,7 +52,7 @@
         <!------------------------------------- LANGUAGE SELECTOR FOR DESKTOP ------------------------------------>
         <div class="hidden lg:block relative group">
           <button class="p-2 flex items-center">
-            <img src="/img/lang.png" alt="Language" class="h-8 w-8">
+            <svg width="40" height="38" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29 5.684v17.053h-4.353L24.65 27l-7.25-4.263h-5.8V5.684H29ZM17.4 0v4.263h-7.25v13.642l-5.8 3.41.003-4.262H0V0h17.4Zm3.752 9.947h-1.695l-3.217 8.527h1.529l.89-2.443h3.266l.897 2.443h1.62l-3.29-8.527Zm-.86 1.426c.132.432.272.862.421 1.288l.064.18.73 2.022H19.07l.731-2.021a23.12 23.12 0 0 0 .491-1.469ZM7.954 2.301h-1.45v.71H2.88v1.421h5.413c-.087 1.21-.4 2.3-.94 3.277A7.012 7.012 0 0 1 6.14 5.058l-.014-.064-1.418.298.106.434A8.395 8.395 0 0 0 6.483 8.93c-.855.905-2.08 1.539-3.7 1.9l-.06.014.314 1.387.432-.102c1.69-.43 3.038-1.156 4.027-2.18.694.586 1.553 1.14 2.579 1.665l.075.038v-1.618a10.905 10.905 0 0 1-1.775-1.22c.8-1.273 1.254-2.713 1.365-4.309l.005-.073h.405v-1.42H7.954V2.3Z" fill="#000"/></svg>
             <span class="ml-1 transform transition-transform duration-300 group-hover:rotate-90">›</span>
           </button>
           <div class="absolute right-0 w-full h-6 bg-transparent pointer-events-auto"></div>
@@ -76,7 +76,7 @@
         <div class="flex items-center gap-4 lg:hidden">
           <div class="relative">
             <button @click="toggleDropdown('lang')" class="p-2">
-              <img src="/img/lang.png" alt="Language" class="h-8 w-auto">
+              <svg width="35" height="33" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29 5.684v17.053h-4.353L24.65 27l-7.25-4.263h-5.8V5.684H29ZM17.4 0v4.263h-7.25v13.642l-5.8 3.41.003-4.262H0V0h17.4Zm3.752 9.947h-1.695l-3.217 8.527h1.529l.89-2.443h3.266l.897 2.443h1.62l-3.29-8.527Zm-.86 1.426c.132.432.272.862.421 1.288l.064.18.73 2.022H19.07l.731-2.021a23.12 23.12 0 0 0 .491-1.469ZM7.954 2.301h-1.45v.71H2.88v1.421h5.413c-.087 1.21-.4 2.3-.94 3.277A7.012 7.012 0 0 1 6.14 5.058l-.014-.064-1.418.298.106.434A8.395 8.395 0 0 0 6.483 8.93c-.855.905-2.08 1.539-3.7 1.9l-.06.014.314 1.387.432-.102c1.69-.43 3.038-1.156 4.027-2.18.694.586 1.553 1.14 2.579 1.665l.075.038v-1.618a10.905 10.905 0 0 1-1.775-1.22c.8-1.273 1.254-2.713 1.365-4.309l.005-.073h.405v-1.42H7.954V2.3Z" fill="#000"/></svg>
             </button>
             <transition name="fade">
               <div
@@ -94,8 +94,8 @@
               </div>
             </transition>
           </div>
-          <button @click="isMobileMenuOpen = !isMobileMenuOpen">
-            <img src="/img/burger.png" alt="Menu" class="h-8 w-8">
+          <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="p-2">
+            <svg width="45" height="45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.125 30.75v-3.417h30.75v3.417H5.125Zm0-8.542v-3.416h30.75v3.416H5.125Zm0-8.541V10.25h30.75v3.417H5.125Z" fill="#1D1B20"/></svg>
           </button>
         </div>
       </div>

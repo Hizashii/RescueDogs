@@ -1,12 +1,13 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center bg-[#FFE86B]">
-    <h1 class="text-3xl font-bold mb-8 text-black mt-32 title-animate">
+  <div class="min-h-screen flex flex-col items-center bg-[#FFE86B] px-4">
+    <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-8 text-black mt-16 md:mt-32 title-animate">
       {{ $t('report.title') }}
     </h1>
 
     <div
       v-if="submitSuccess"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 message-animate"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 bg-green-100 border border-green-400 text-green-700 px-3 md:px-4 py-2 md:py-3 message-animate"
+
     >
       <p class="font-bold">{{ $t('report.success.heading') }}</p>
       <p>{{ $t('report.success.body') }}</p>
@@ -14,7 +15,9 @@
 
     <div
       v-if="submitError"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 message-animate"
+
+      class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 bg-red-100 border border-red-400 text-red-700 px-3 md:px-4 py-2 md:py-3 message-animate"
+
     >
       <p class="font-bold">{{ $t('report.error.heading') }}</p>
       <p>{{ errorMessage }}</p>
@@ -22,18 +25,20 @@
 
     <div
       v-if="isSubmitting"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-8 flex justify-center"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-4 md:mb-8 flex justify-center"
     >
       <Loader />
     </div>
 
     <form
       v-if="!submitSuccess && !isSubmitting"
-      class="w-full max-w-[400px] md:max-w-[700px] mb-32 form-animate"
+      class="w-full max-w-[400px] md:max-w-[700px] mb-16 md:mb-32 form-animate"
       @submit.prevent="submitReport"
     >
-      <div class="mb-4">
-        <label for="name" class="block md:text-xl text-base font-bold mb-2">
+
+      <div class="mb-3 md:mb-4">
+        <label for="name" class="block text-base md:text-xl font-bold mb-1 md:mb-2">
+
           {{ $t('report.form.name.label') }}
         </label>
         <input
@@ -41,13 +46,15 @@
           type="text"
           v-model="formData.name"
           required
-          class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black focus:outline-none focus:shadow-outline"
         />
       </div>
 
-      <div class="flex flex-wrap -mx-3 mb-4">
-        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label for="phone" class="block md:text-xl text-base font-bold mb-2">
+
+      <div class="flex flex-col md:flex-row md:flex-wrap -mx-2 md:-mx-3 mb-3 md:mb-4">
+        <div class="w-full md:w-1/2 px-2 md:px-3 mb-3 md:mb-0">
+          <label for="phone" class="block text-base md:text-xl font-bold mb-1 md:mb-2">
+
             {{ $t('report.form.phone.label') }}
           </label>
           <input
@@ -55,27 +62,29 @@
             type="tel"
             v-model="formData.phone"
             required
-            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div class="w-full md:w-1/2 px-3">
-          <label for="email" class="block md:text-xl text-base font-bold mb-2">
+        <div class="w-full md:w-1/2 px-2 md:px-3">
+          <label for="email" class="block text-base md:text-xl font-bold mb-1 md:mb-2">
             {{ $t('report.form.email.label') }}
           </label>
           <input
             id="email"
             type="email"
             v-model="formData.email"
-            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black focus:outline-none focus:shadow-outline"
           />
         </div>
       </div>
 
-      <div class="flex flex-wrap -mx-3 mb-4">
-        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+
+      <div class="flex flex-col md:flex-row md:flex-wrap -mx-2 md:-mx-3 mb-3 md:mb-4">
+        <div class="w-full md:w-1/2 px-2 md:px-3 mb-3 md:mb-0">
+
           <label
             for="dog-city"
-            class="block md:text-xl text-base font-bold mb-2"
+            class="block text-base md:text-xl font-bold mb-1 md:mb-2"
           >
             {{ $t('report.form.dogCity.label') }}
           </label>
@@ -83,7 +92,7 @@
             id="dog-city"
             v-model="formData.dogCity"
             required
-            class="appearance-none w-full py-2 px-3 text-black bg-white focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black bg-white focus:outline-none focus:shadow-outline"
           >
             <option value="" disabled>{{ $t('report.form.ChooseACity.label') }}</option>
             <option v-for="city in dogCities" :key="city" :value="city">
@@ -92,16 +101,18 @@
           </select>
         </div>
 
-        <div class="w-full md:w-1/2 px-3">
+
+        <div class="w-full md:w-1/2 px-2 md:px-3">
+
           <label
             for="dog-picture"
-            class="block md:text-xl text-base font-bold mb-2"
+            class="block text-base md:text-xl font-bold mb-1 md:mb-2"
           >
             {{ $t('report.form.dogPicture.label') }}
           </label>
-          <div class="flex items-center space-x-4">
+          <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
             <label
-              class="relative inline-block cursor-pointer border border-black text-[14px] font-bold py-2 px-4 w-36 text-center text-black
+              class="relative inline-block cursor-pointer border border-black text-[14px] font-bold py-1.5 md:py-2 px-3 md:px-4 w-32 md:w-36 text-center text-black
                     overflow-hidden transition-colors duration-300 ease-in-out
                     before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
                     hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out
@@ -123,18 +134,21 @@
         </div>
       </div>
 
-      <div v-if="imagePreview" class="w-full px-3 mt-4">
+      <div v-if="imagePreview" class="w-full px-2 md:px-3 mt-3 md:mt-4">
+
         <img
           :src="imagePreview"
           alt="Dog picture preview"
-          class="max-w-full h-auto max-h-[200px] object-contain"
+          class="max-w-full h-auto max-h-[150px] md:max-h-[200px] object-contain"
         />
       </div>
 
-      <div class="mb-4">
+
+      <div class="mb-3 md:mb-4">
+
         <label
           for="reporter-city"
-          class="block md:text-xl text-base font-bold mb-2"
+          class="block text-base md:text-xl font-bold mb-1 md:mb-2"
         >
           {{ $t('report.form.reporterCity.label') }}
         </label>
@@ -143,14 +157,15 @@
           type="text"
           v-model="formData.reporterCity"
           required
-          class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline"
+          class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black focus:outline-none focus:shadow-outline"
         />
       </div>
 
-      <div class="mb-6">
+      <div class="mb-4 md:mb-6">
+
         <label
           for="comments"
-          class="block md:text-xl text-base font-bold mb-2"
+          class="block text-base md:text-xl font-bold mb-1 md:mb-2"
         >
           {{ $t('report.form.comments.label') }}
         </label>
@@ -159,9 +174,9 @@
           v-model="formData.comments"
           :maxlength="100"
           rows="4"
-            class="appearance-none w-full py-2 px-3 text-black focus:outline-none focus:shadow-outline resize-none"
+          class="appearance-none w-full py-1.5 md:py-2 px-2 md:px-3 text-black focus:outline-none focus:shadow-outline resize-none"
         ></textarea>
-        <div class="text-right text-sm text-gray-600 mt-1">
+        <div class="text-right text-xs md:text-sm text-gray-600 mt-1">
           {{ formData.comments.length }} / 100
         </div>
       </div>
@@ -169,7 +184,7 @@
       <button
         type="submit"
         :disabled="isSubmitting"
-        class="relative inline-block border border-black border-4 text-[14px] font-bold py-2 px-4 w-36 text-black
+        class="relative inline-block border border-black border-4 text-[14px] font-bold py-1.5 md:py-2 px-3 md:px-4 w-32 md:w-36 text-black
               overflow-hidden transition-colors duration-300 ease-in-out
               before:absolute before:inset-0 before:bg-[#213D12] before:scale-x-0 before:origin-left
               hover:before:scale-x-100 before:transition-transform before:duration-300 before:ease-in-out

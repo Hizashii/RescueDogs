@@ -5,9 +5,9 @@
     >
       <div class="flex-shrink-0 md:w-1/2 align-start image-animate">
         <img
-          src="/img/dogbg.png"
+          src="/img/eyes.jpg"
           alt="dog picture"
-          class="w-auto h-[500px] max-h-96 object-cover drop-shadow-[20px_20px_0_rgba(255,255,255,1)]"
+          class="w-[700px] h-[500px] max-h-96 object-cover drop-shadow-[20px_20px_0_rgba(255,255,255,1)]"
         />
       </div>
 

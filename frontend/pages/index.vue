@@ -1,5 +1,7 @@
 <template>
-    <div class="bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat md:h-screen h-[60vh] w-full">
+
+    <div class="bg-[url('/img/dogbg.jpg')] bg-cover bg-center bg-no-repeat md:h-screen h-[60vh] w-full ">
+
         <div class="flex flex-col items-center justify-center md:h-full h-full">
             <img src="/img/logo_white.png" alt="Mancsmento logo" class="md:w-24 w-16 h-auto">
             <h1 class="md:text-6xl text-3xl font-bold text-white md:pt-4 pt-2">{{ $t('home.title') }}</h1>
@@ -104,9 +106,9 @@
     
     <div class="flex-shrink-0">
       <img
-        src="/img/intro-dog.png"
+        src="/img/introduction.jpg"
         alt="Dog icon"
-        class="w-full max-w-full md:max-w-md lg:max-w-lg object-contain"
+        class="w-[530px] h-[623px] object-cover"
       />
     </div>
     <div class="hidden md:block"><svg width="6" height="625" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 0v655" stroke="gold" stroke-width="5" stroke-dasharray="10 10"/></svg></div>
@@ -228,7 +230,7 @@
       />
       <div
         v-else
-        class="aspect-square w-full bg-[url('/img/dogbg.png')] bg-cover bg-center bg-no-repeat flex items-center justify-center text-white text-center"
+        class="aspect-square w-full bg-[url('/img/dogbg.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center text-white text-center"
       >
         No Image Available
       </div>

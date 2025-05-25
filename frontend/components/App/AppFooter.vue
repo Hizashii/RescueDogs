@@ -22,7 +22,7 @@
                     <div class="flex flex-col items-center">
                         <img src="/img/logo.png" alt="MancsMentő" class="w-12 mb-4">
                         <h1 class="text-2xl font-bold mb-8 font-poppins">MancsMentő</h1>
-                        <img src="/img/doggy.png" alt="Dog Silhouette" class="w-32">
+                        <img src="/img/black-dog.png" alt="Dog Silhouette" class="w-32">
                     </div>
                     <p class="text-sm font-poppins">&copy; 2025 MancsMentő</p>
                     <a href="https://mancsmento.hu/" class="underline text-sm font-poppins">{{ t('footer.archived') }}</a>
