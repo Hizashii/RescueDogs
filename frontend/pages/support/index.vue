@@ -94,7 +94,7 @@ function goToItem(itemId: string) {
           <img
             :src="item.imageUrl"
             :alt="item.name"
-            class="h-40 w-full object-cover mb-2"
+            class="h-[200px] w-[200px] object-cover mb-2"
             loading="lazy"
           />
           <h3 class="font-semibold text-[#3D4836]">{{ item.name }}</h3>
