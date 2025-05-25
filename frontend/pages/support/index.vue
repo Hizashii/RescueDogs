@@ -25,7 +25,7 @@ const items = ref<CharityItem[]>([])
 onMounted(async () => {
   try {
     const response = await fetchCharityItems({ isActive: true });
-    items.value = response.items;
+    items.value = response;
   } catch (e) {
     console.error('Error fetching active charity items:', e);
     items.value = [];
