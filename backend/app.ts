@@ -114,9 +114,9 @@ app.post(
         { 
           folder: 'rescuedogs', // Optional: specify a folder in Cloudinary
           transformation: [ // Optional: apply transformations on upload
-            { width: 800, height: 600, crop: 'limit' }, // Example: resize
-            { quality: 'auto' }, // Example: auto quality
-            { fetch_format: 'auto' } // Example: auto format
+            { width: 400, height: 400, crop: 'fill' }, // Set exact dimensions
+            { quality: 'auto:good' }, // Ensure good quality
+            { fetch_format: 'auto' } // Auto format for best compression
           ]
         }
       );
